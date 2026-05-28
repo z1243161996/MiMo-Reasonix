@@ -1,8 +1,8 @@
 # dsnix
 
-Short alias for [`reasonix`](https://www.npmjs.com/package/reasonix) — the DeepSeek-native coding agent.
+Short alias for [`mimo-reasonix`](https://www.npmjs.com/package/mimo-reasonix) — the MiMo-native coding agent.
 
-This package is a thin shim. Installing or running `dsnix` resolves to the same `reasonix` CLI, just under a shorter command name.
+This package is a thin shim. Installing or running `dsnix` resolves to the same `mimo-reasonix` CLI, just under a shorter command name.
 
 ## Use
 
@@ -18,11 +18,11 @@ npx dsnix@latest code my-project
 Equivalent to:
 
 ```bash
-npx reasonix@latest code my-project
+npx mimo-reasonix@latest code my-project
 ```
 
 ## Why a separate package?
 
-`reasonix` is the canonical package; `dsnix` exists purely so users can type a shorter command and run `npx dsnix@latest` without typing nine letters. Version numbers track `reasonix` 1-to-1.
+`mimo-reasonix` is the canonical package; `dsnix` exists purely so users can type a shorter command and run `npx dsnix@latest` without typing nine letters. Version numbers track `mimo-reasonix` 1-to-1.
 
-For docs, config, slash commands, and everything else, see the [main Reasonix README](https://github.com/esengine/DeepSeek-Reasonix#readme).
+For docs, config, slash commands, and everything else, see the [main MiMo-Reasonix README](https://github.com/z1243161996/MiMo-Reasonix#readme).

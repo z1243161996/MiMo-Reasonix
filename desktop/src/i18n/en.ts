@@ -35,7 +35,7 @@ export const en = {
   },
   about: {
     sidebarLabel: "About",
-    tagline: "DeepSeek-native coding agent",
+    tagline: "MiMo-native coding agent",
     version: "Version",
     repo: "Repository",
     checkUpdates: "Check for updates",
@@ -66,7 +66,7 @@ export const en = {
     copiedMd: "Conversation copied as Markdown",
     newSession: "Started a new session",
     cleared: "UI cleared",
-    aboutLine: "Reasonix v{version} · cache-first DeepSeek agent",
+    aboutLine: "Reasonix v{version} · cache-first MiMo agent",
   },
   composer: {
     busy: "reasonix is thinking…",
@@ -110,7 +110,7 @@ export const en = {
     costCurrency: "Cost currency",
     costCurrencyHint:
       "Display only. Internal cost is computed in USD-equiv per token, converted at fixed 7.2 FX.",
-    cnyDesc: "matches DeepSeek dashboard",
+    cnyDesc: "matches MiMo dashboard",
     usdDesc: "matches per-token reference rates",
     theme: "Theme",
     themeHint: "Local to this device, not synced with TUI.",
@@ -186,7 +186,7 @@ export const en = {
       brave: "Brave API key",
       ollama: "Ollama API key",
     },
-    baseUrl: "DeepSeek base URL",
+    baseUrl: "MiMo base URL",
     baseUrlHint: "Override only if using a proxy. Empty = official endpoint. Restart required.",
     workspace: "Workspace",
     workspaceHint:
@@ -200,7 +200,7 @@ export const en = {
     editorPlaceholder: 'e.g. "code", "subl", or full path to executable',
     editorDefault: "(default)",
     apiKey: "API key",
-    apiKeyHint: "DeepSeek key — saved to ~/.reasonix/config.json (0600).",
+    apiKeyHint: "MiMo key — saved to ~/.reasonix/config.json (0600).",
     apiKeyNotSet: "(not set)",
     apiKeyCancel: "Cancel",
     apiKeySave: "Save",
@@ -229,7 +229,7 @@ export const en = {
     appearanceSection: "Appearance",
     workspaceSection: "Workspace",
     behaviorSection: "Behavior",
-    apiSection: "DeepSeek API",
+    apiSection: "MiMo API",
     qqSection: "QQ Channel",
     qqTitle: "QQ bot integration",
     qqConnected: "Connected",
@@ -360,7 +360,7 @@ export const en = {
     lowDesc: "fastest — minimal reasoning",
     mediumDesc: "balanced",
     highDesc: "default — safe for vLLM / Azure",
-    maxDesc: "DeepSeek extension; rejected by stock OpenAI / vLLM",
+    maxDesc: "MiMo extension; rejected by stock OpenAI / vLLM",
   },
   checkpoint: {
     title: "Step complete",
@@ -440,7 +440,7 @@ export const en = {
     warningLabel: "Warning",
     dismissError: "Dismiss",
     jumpToBottom: "Jump to bottom",
-    splashSubtitle: "DeepSeek Agents",
+    splashSubtitle: "MiMo Agents",
     connecting: "Connecting to reasonix core…",
     startupFailedTitle: "Reasonix could not start",
     startupFailedMessage: "The desktop backend failed before opening a workspace.",
@@ -490,7 +490,7 @@ export const en = {
     setup: {
       welcome: "Welcome to Reasonix",
       description:
-        "First-time setup requires a DeepSeek API Key and workspace directory. The key is stored locally only.",
+        "First-time setup requires a MiMo API Key and workspace directory. The key is stored locally only.",
       workspace: "Workspace",
       notSelected: "Not selected",
       choose: "Choose…",

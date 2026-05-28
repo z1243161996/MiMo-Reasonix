@@ -6,8 +6,6 @@
   <a href="./README.en.md">English</a>
   &nbsp;·&nbsp;
   <strong>简体中文</strong>
-  &nbsp;·&nbsp;
-  <a href="./README.ja-JP.md">日本語</a>
 </p>
 
 <br/>

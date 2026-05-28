@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const { spawn } = require("node:child_process");
 
-const entry = require.resolve("reasonix/dist/cli/index.js");
+const entry = require.resolve("mimo-reasonix/dist/cli/index.js");
 const child = spawn(process.execPath, [entry, ...process.argv.slice(2)], {
   stdio: "inherit",
 });

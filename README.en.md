@@ -7,8 +7,6 @@
   &nbsp;·&nbsp;
   <a href="./README.md">简体中文</a>
   &nbsp;·&nbsp;
-  <a href="./README.ja-JP.md">日本語</a>
-  &nbsp;·&nbsp;
   <a href="https://github.com/z1243161996/MiMo-Reasonix">Website</a>
   &nbsp;·&nbsp;
   <a href="https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/CLI-REFERENCE.md">Guide</a>
