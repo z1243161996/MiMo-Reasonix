@@ -9,7 +9,7 @@ export type PathAccessRequiredEvent = {
   toolName: string;
   sandboxRoot: string;
   allowPrefix: string;
-  prompt?: import("@reasonix/core-utils").ApprovalPrompt;
+  prompt?: import("@mimo-reasonix/core-utils").ApprovalPrompt;
 };
 
 export type ConfirmRequiredEvent = {
@@ -17,7 +17,7 @@ export type ConfirmRequiredEvent = {
   id: number;
   kind: "run_command" | "run_background";
   command: string;
-  prompt?: import("@reasonix/core-utils").ApprovalPrompt;
+  prompt?: import("@mimo-reasonix/core-utils").ApprovalPrompt;
 };
 
 export type ConfirmationChoice =

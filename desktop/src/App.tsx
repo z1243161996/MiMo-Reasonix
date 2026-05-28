@@ -157,7 +157,7 @@ export type PendingConfirm = {
   id: number;
   kind: "run_command" | "run_background";
   command: string;
-  prompt: import("@reasonix/core-utils").ApprovalPrompt;
+  prompt: import("@mimo-reasonix/core-utils").ApprovalPrompt;
 };
 
 export type PendingPathAccess = {
@@ -167,7 +167,7 @@ export type PendingPathAccess = {
   toolName: string;
   sandboxRoot: string;
   allowPrefix: string;
-  prompt: import("@reasonix/core-utils").ApprovalPrompt;
+  prompt: import("@mimo-reasonix/core-utils").ApprovalPrompt;
 };
 
 export type PendingChoice = {

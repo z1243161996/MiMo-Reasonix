@@ -1,4 +1,4 @@
-import { isCompactionSummary, stripCompactionMarker } from "@reasonix/core-utils";
+import { isCompactionSummary, stripCompactionMarker } from "@mimo-reasonix/core-utils";
 import type { ChatMessage } from "../../../types.js";
 import { extractToolExitCode } from "../tool-summary.js";
 import { elideHydratedCards } from "./card-elision.js";

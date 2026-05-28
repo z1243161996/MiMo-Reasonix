@@ -9,9 +9,9 @@
   &nbsp;·&nbsp;
   <strong>日本語</strong>
   &nbsp;·&nbsp;
-  <a href="https://esengine.github.io/DeepSeek-Reasonix/">公式サイト</a>
+  <a href="https://esengine.github.io/MiMo-Reasonix/">公式サイト</a>
   &nbsp;·&nbsp;
-  <a href="https://esengine.github.io/DeepSeek-Reasonix/configuration.html">ガイド</a>
+  <a href="https://esengine.github.io/MiMo-Reasonix/configuration.html">ガイド</a>
   &nbsp;·&nbsp;
   <a href="./docs/ARCHITECTURE.md">アーキテクチャ</a>
   &nbsp;·&nbsp;
@@ -27,7 +27,7 @@
   <a href="https://www.npmjs.com/package/reasonix"><img src="https://img.shields.io/npm/dm/reasonix.svg?style=flat-square&color=3fb950&labelColor=161b22&label=downloads" alt="downloads"/></a>
   <a href="./package.json"><img src="https://img.shields.io/node/v/reasonix.svg?style=flat-square&color=5fa04e&labelColor=161b22&logo=nodedotjs&logoColor=white" alt="node"/></a>
   <a href="https://github.com/esengine/reasonix/stargazers"><img src="https://img.shields.io/github/stars/esengine/reasonix.svg?style=flat-square&color=dbab09&labelColor=161b22&logo=github&logoColor=white" alt="GitHub stars"/></a>
-  <a href="https://atomgit.com/esengine/DeepSeek-Reasonix"><img src="https://atomgit.com/esengine/DeepSeek-Reasonix/star/badge.svg" alt="AtomGit stars"/></a>
+  <a href="https://atomgit.com/esengine/MiMo-Reasonix"><img src="https://atomgit.com/esengine/MiMo-Reasonix/star/badge.svg" alt="AtomGit stars"/></a>
   <a href="https://github.com/esengine/reasonix/graphs/contributors"><img src="https://img.shields.io/github/contributors/esengine/reasonix.svg?style=flat-square&color=bc8cff&labelColor=161b22&logo=github&logoColor=white" alt="contributors"/></a>
   <a href="https://github.com/esengine/reasonix/discussions"><img src="https://img.shields.io/github/discussions/esengine/reasonix.svg?style=flat-square&color=58a6ff&labelColor=161b22&logo=github&logoColor=white" alt="Discussions"/></a>
   <a href="https://discord.gg/XF78rEME2D"><img src="https://img.shields.io/badge/discord-join-5865F2.svg?style=flat-square&labelColor=161b22&logo=discord&logoColor=white" alt="Discord"/></a>
@@ -70,18 +70,18 @@ Node ≥ 22 が必要です。macOS · Linux · Windows（PowerShell · Git Bash
 `reasonix` コマンドを `PATH` 上で使えるようにしたい場合は、Reasonix をグローバルにインストールします:
 
 ~~~bash
-npm install -g reasonix
-reasonix code my-project   # 初回実行時に DeepSeek API キーを貼り付け。以降は保存される
+npm install -g mimo-reasonix
+mimo-reasonix code my-project   # 初回実行時に DeepSeek API キーを貼り付け。以降は保存される
 ~~~
 
 または、グローバルインストールせずに一度だけ実行することもできます:
 
 ~~~bash
 cd my-project
-npx reasonix code          # デフォルトでは常に最新のパッケージを使用
+npx mimo-mimo-reasonix code          # デフォルトでは常に最新のパッケージを使用
 ~~~
 
-[DeepSeek API キーを取得 →](https://platform.deepseek.com/api_keys) · フラグは `reasonix code --help` を参照。
+[DeepSeek API キーを取得 →](https://platform.deepseek.com/api_keys) · フラグは `mimo-reasonix code --help` を参照。
 
 Reasonix を毎日使うなら、グローバルインストールが最もシンプルな方法です。とりあえず試してみたいだけなら `npx` を使ってください。
 
@@ -92,19 +92,19 @@ npm install -g dsnix       # PATH 上に `dsnix` を公開。reasonix に依存
 npx dsnix@latest code      # より短いコマンドで一度だけ実行
 ~~~
 
-`npm install -g reasonix` でグローバルインストールすると `dsnix` のシムも PATH 上に配置されるため、2つは相互に置き換え可能です。
+`npm install -g mimo-reasonix` でグローバルインストールすると `dsnix` のシムも PATH 上に配置されるため、2つは相互に置き換え可能です。
 
-サブコマンドなしの `reasonix`（裸の `reasonix`）はカレントディレクトリで `code` を起動します — `reasonix` と入力するのは `reasonix code` と等価です。
+サブコマンドなしの `reasonix`（裸の `reasonix`）はカレントディレクトリで `code` を起動します — `reasonix` と入力するのは `mimo-reasonix code` と等価です。
 
 | コマンド | 用途 |
 |---|---|
-| `reasonix` / `reasonix code [dir]` | コーディングエージェント。**ここから始めてください。** |
-| `reasonix chat` | プレーンなチャット — ファイルシステムやシェルのツールなし。 |
+| `reasonix` / `mimo-reasonix code [dir]` | コーディングエージェント。**ここから始めてください。** |
+| `mimo-reasonix chat` | プレーンなチャット — ファイルシステムやシェルのツールなし。 |
 | `reasonix run "task"` | 一度だけ実行し、stdout にストリーミング。パイプ向き。 |
 | `reasonix doctor` | ヘルスチェック: Node、API キー、MCP の配線。 |
 | `reasonix update` | Reasonix 自体をアップグレード。 |
 
-その他のサブコマンド（`replay` · `diff` · `events` · `stats` · `index` · `mcp` · `prune-sessions`）は `reasonix --help` と [CLI リファレンス](https://esengine.github.io/DeepSeek-Reasonix/#cli)にあります。
+その他のサブコマンド（`replay` · `diff` · `events` · `stats` · `index` · `mcp` · `prune-sessions`）は `reasonix --help` と [CLI リファレンス](https://esengine.github.io/MiMo-Reasonix/#cli)にあります。
 
 ### QQ チャンネル
 
@@ -121,7 +121,7 @@ QQ は既存の `chat`、`code`、またはデスクトップのセッション�
 
 同じループの GUI が欲しいユーザー向けのネイティブ Tauri クライアント。マルチタブ対応で、右パネルにはこのセッションでエージェントが読み取り・編集したファイルが表示され、下部には同じコスト / キャッシュ / トークンのメーターがリアルタイムで表示されます。同じ DeepSeek API キー、同じ `~/.reasonix` 設定を使い、デスクトップ版は独自の Node ランタイムを同梱するため、別途 `npm install` する必要はありません。
 
-各プラットフォームのインストーラーは [GitHub Releases](https://github.com/esengine/DeepSeek-Reasonix/releases) からダウンロードできます。デスクトップ版は **プレリリース** として提供されます: ループとプロトコルは CLI と同じですが、UI はまだ磨き込み中で、インストーラーはまだコード署名されていません。
+各プラットフォームのインストーラーは [GitHub Releases](https://github.com/esengine/MiMo-Reasonix/releases) からダウンロードできます。デスクトップ版は **プレリリース** として提供されます: ループとプロトコルは CLI と同じですが、UI はまだ磨き込み中で、インストーラーはまだコード署名されていません。
 
 - **macOS** — 初回起動時に Gatekeeper に引っかかります。一度きりの対処: `xattr -dr com.apple.quarantine /Applications/Reasonix.app`（または右クリック → 開く → 確認）。
 - **Windows** — SmartScreen が「不明な発行元」と警告します。**詳細情報 → 実行** をクリックしてください。
@@ -135,7 +135,7 @@ CLI が引き続き正規のインターフェースです。CLI に入った機
 **別のフォルダで作業する。** Reasonix はファイルシステムツールを起動ディレクトリにスコープします。対象を変えるには `--dir` を渡してください。セッション途中での切り替えは設計上サポートされていません（メモリのパスが古いルートと絡まってしまうため）— 一度終了して再起動してください。
 
 ~~~bash
-npx reasonix code --dir /path/to/project
+npx mimo-mimo-reasonix code --dir /path/to/project
 ~~~
 
 **`chat` と `code` の選び方。** `code` がデフォルトであり、ファイルシステム / シェルツールと SEARCH/REPLACE レビューを備えた唯一のモードです。`chat` はより軽量でツールをオフにしたシェルです — MCP は接続しつつディスクアクセスのない思考のパートナーが欲しいときに使ってください。
@@ -173,17 +173,17 @@ npx openspec init --tools claude    # .claude/skills/openspec-*/SKILL.md を書�
 
 `~/.reasonix/config.json` の1つの JSON ファイルと、`<project>/.reasonix/` 配下のプロジェクトごとのオーバーライドで設定します。すべてのキー、すべてのスラッシュコマンド、スキル / メモリ / フックのオンディスク構造を網羅した完全なバイリンガルリファレンスはこちら:
 
-> 📘 **[設定ガイド](https://esengine.github.io/DeepSeek-Reasonix/configuration.html)** · [中文](https://esengine.github.io/DeepSeek-Reasonix/configuration.html?lang=zh)
+> 📘 **[設定ガイド](https://esengine.github.io/MiMo-Reasonix/configuration.html)** · [中文](https://esengine.github.io/MiMo-Reasonix/configuration.html?lang=zh)
 
 | トピック | 概要 |
 |---|---|
-| [MCP サーバー](https://esengine.github.io/DeepSeek-Reasonix/configuration.html#mcp) | stdio · SSE · Streamable HTTP。1つの仕様形式が `config.json` と `--mcp` の両方で動作。 |
-| [スキル](https://esengine.github.io/DeepSeek-Reasonix/configuration.html#skills) | モデルが呼び出せる Markdown のプレイブック。`inline` または `subagent` モード。 |
-| [メモリ](https://esengine.github.io/DeepSeek-Reasonix/configuration.html#memory) | プレフィックスにピン留めされるユーザー専用の知識。`user` / `feedback` / `project` / `reference` の型。 |
-| [フック](https://esengine.github.io/DeepSeek-Reasonix/configuration.html#hooks) | ライフサイクルイベント時のシェルコマンド。`PreToolUse`（ゲート） · `PostToolUse` · `UserPromptSubmit` · `Stop`。 |
-| [権限](https://esengine.github.io/DeepSeek-Reasonix/configuration.html#permissions) | ワークスペースごとのシェル許可リスト。完全な前方一致。 |
-| [ウェブ検索](https://esengine.github.io/DeepSeek-Reasonix/configuration.html#search) | デフォルトは Mojeek。`/search-engine` でセルフホストの SearXNG や Metaso に切り替え可能。 |
-| [セマンティックインデックス](https://esengine.github.io/DeepSeek-Reasonix/configuration.html#index) | `reasonix index` — ローカルの Ollama または任意の OpenAI 互換の埋め込みエンドポイント。 |
+| [MCP サーバー](https://esengine.github.io/MiMo-Reasonix/configuration.html#mcp) | stdio · SSE · Streamable HTTP。1つの仕様形式が `config.json` と `--mcp` の両方で動作。 |
+| [スキル](https://esengine.github.io/MiMo-Reasonix/configuration.html#skills) | モデルが呼び出せる Markdown のプレイブック。`inline` または `subagent` モード。 |
+| [メモリ](https://esengine.github.io/MiMo-Reasonix/configuration.html#memory) | プレフィックスにピン留めされるユーザー専用の知識。`user` / `feedback` / `project` / `reference` の型。 |
+| [フック](https://esengine.github.io/MiMo-Reasonix/configuration.html#hooks) | ライフサイクルイベント時のシェルコマンド。`PreToolUse`（ゲート） · `PostToolUse` · `UserPromptSubmit` · `Stop`。 |
+| [権限](https://esengine.github.io/MiMo-Reasonix/configuration.html#permissions) | ワークスペースごとのシェル許可リスト。完全な前方一致。 |
+| [ウェブ検索](https://esengine.github.io/MiMo-Reasonix/configuration.html#search) | デフォルトは Mojeek。`/search-engine` でセルフホストの SearXNG や Metaso に切り替え可能。 |
+| [セマンティックインデックス](https://esengine.github.io/MiMo-Reasonix/configuration.html#index) | `reasonix index` — ローカルの Ollama または任意の OpenAI 互換の埋め込みエンドポイント。 |
 
 <br/>
 
@@ -232,7 +232,7 @@ npx openspec init --tools claude    # .claude/skills/openspec-*/SKILL.md を書�
 - [**CLI リファレンス**](./docs/CLI-REFERENCE.md) — すべてのシェルサブコマンド、すべてのスラッシュコマンド、すべてのキーバインド
 - [**QQ チャンネルのセットアップ**](./docs/qq-connect.md) — CLI の初回接続フロー、デスクトップのエントリ、QQ Open Platform の認証情報
 - [**ベンチマーク**](./benchmarks/) — τ-bench-lite ハーネス、トランスクリプト、コスト算出手法
-- [**公式サイト**](https://esengine.github.io/DeepSeek-Reasonix/) — はじめに、ダッシュボードのモックアップ、TUI のモックアップ
+- [**公式サイト**](https://esengine.github.io/MiMo-Reasonix/) — はじめに、ダッシュボードのモックアップ、TUI のモックアップ
 - [**コントリビューション**](./CONTRIBUTING.md) — コメントポリシー、エラーハンドリングのルール、自作よりライブラリを優先
 - [**行動規範**](./CODE_OF_CONDUCT.md) · [**セキュリティポリシー**](./SECURITY.md)
 
@@ -248,7 +248,7 @@ npx openspec init --tools claude    # .claude/skills/openspec-*/SKILL.md を書�
 **オープンな Discussions — 意見募集中:**
 
 - [#20 · CLI / TUI デザイン](https://github.com/esengine/reasonix/discussions/20) — 何が壊れていて、何が足りず、何を変えますか？
-- [#21 · ダッシュボードデザイン](https://github.com/esengine/reasonix/discussions/21) — [提案中のモックアップ](https://esengine.github.io/DeepSeek-Reasonix/design/agent-dashboard.html)への反応をどうぞ
+- [#21 · ダッシュボードデザイン](https://github.com/esengine/reasonix/discussions/21) — [提案中のモックアップ](https://esengine.github.io/MiMo-Reasonix/design/agent-dashboard.html)への反応をどうぞ
 - [#22 · 今後の機能ウィッシュリスト](https://github.com/esengine/reasonix/discussions/22) — 次に Reasonix に組み込みたいものは？
 
 **すでに Reasonix を使っていて、他の人に広める手伝いをしてもいい？** ブログ記事、記事、スクリーンショット、講演、動画を [**Show and tell**](https://github.com/esengine/reasonix/discussions/categories/show-and-tell) に公開してください。このプロジェクトにはマーケティング予算がありません — 新しいユーザーは口コミで見つけてくれます。継続的に応援してくれる人は、以下のバッジを獲得でき、付与されるとコントリビューターウォールの横に表示されます:
@@ -277,11 +277,11 @@ npx openspec init --tools claude    # .claude/skills/openspec-*/SKILL.md を書�
 
 ## スター履歴
 
-<a href="https://www.star-history.com/?repos=esengine%2FDeepSeek-Reasonix&type=date&legend=top-left">
+<a href="https://www.star-history.com/?repos=esengine%2FMiMo-Reasonix&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=esengine/DeepSeek-Reasonix&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=esengine/DeepSeek-Reasonix&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=esengine/DeepSeek-Reasonix&type=date&legend=top-left" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=esengine/MiMo-Reasonix&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=esengine/MiMo-Reasonix&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=esengine/MiMo-Reasonix&type=date&legend=top-left" />
  </picture>
 </a>
 
@@ -303,7 +303,7 @@ Reasonix が役に立って、お礼を言いたいと思ったらどうぞ。�
 ## 謝辞
 
 Reasonix を最も形づくってくれた人々の小さなリストです — コミット数とコード量の両方で測っています。**重要度の順位付けはなく、アルファベット順に記載しています。** 完全なコントリビューターグラフは
-[GitHub](https://github.com/esengine/DeepSeek-Reasonix/graphs/contributors) にあります。
+[GitHub](https://github.com/esengine/MiMo-Reasonix/graphs/contributors) にあります。
 
 - [**ctharvey**](https://github.com/ctharvey)
 - [**dimasd-angga**](https://github.com/dimasd-angga) (Dimas D. Angga)
@@ -318,8 +318,8 @@ Reasonix を最も形づくってくれた人々の小さなリストです — 
 また、プロジェクトのロゴをデザインしてくれた [**Bernardxu123**](https://github.com/Bernardxu123)（[`docs/brand/`](./docs/brand/) を参照）と、小紅書（XiaoHongShu）でプロジェクトを宣伝してくれた [AIGC Link](https://xhslink.com/m/80ngts127cA) にも別途感謝します。
 
 <p align="center">
-  <a href="https://github.com/esengine/DeepSeek-Reasonix/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=esengine/DeepSeek-Reasonix&max=100&columns=12" alt="Contributors to esengine/DeepSeek-Reasonix" width="860"/>
+  <a href="https://github.com/esengine/MiMo-Reasonix/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=esengine/MiMo-Reasonix&max=100&columns=12" alt="Contributors to esengine/MiMo-Reasonix" width="860"/>
   </a>
 </p>
 
@@ -330,5 +330,5 @@ Reasonix を最も形づくってくれた人々の小さなリストです — 
 <p align="center">
   <sub>MIT — <a href="./LICENSE">LICENSE</a> を参照</sub>
   <br/>
-  <sub><a href="https://github.com/esengine/DeepSeek-Reasonix/graphs/contributors">esengine/DeepSeek-Reasonix</a> のコミュニティによって構築</sub>
+  <sub><a href="https://github.com/esengine/MiMo-Reasonix/graphs/contributors">esengine/MiMo-Reasonix</a> のコミュニティによって構築</sub>
 </p>

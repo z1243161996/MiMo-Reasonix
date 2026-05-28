@@ -54,7 +54,7 @@ export const ru: TranslationSchema = {
     ...EN.sessions,
     emptyHint:
       "ещё нет сохранённых сессий — запусти `reasonix chat` (сессии авто-сохраняются, если не указан --no-session).",
-    listHeader: "Сохранённые сессии (~/.reasonix/sessions/):",
+    listHeader: "Сохранённые сессии (~/.mimo-reasonix/sessions/):",
     inspectHint: "Просмотр:  reasonix sessions <имя>",
     resumeHint: "Возобновить: reasonix chat --session <имя>",
     noSession: 'нет сессии "{name}" (или она пуста).',
@@ -76,14 +76,14 @@ export const ru: TranslationSchema = {
     newHint: "принудительно начать новую сессию (игнорировать --session / --continue)",
     transcriptHint: "путь для записи JSONL-транскрипта",
     budgetHint: "лимит сессии в USD — предупреждение на 80%, отказ на 100%",
-    modelIdHint: "ID модели DeepSeek (напр. deepseek-v4-flash)",
+    modelIdHint: "ID модели MiMo/DeepSeek (напр. mimo-v2.5)",
     systemPromptHint: "переопределить стандартный системный промпт",
     effortHint: "уровень рассуждений — низкий|средний|высокий|макс",
     sessionNameHint: "имя сессии (по умолч.: 'default')",
     ephemeralHint: "отключить сохранение сессии для этого запуска",
     mcpSpecHint: "спецификация MCP-сервера (можно повторять)",
     mcpPrefixHint: "добавить этот префикс к именам MCP-инструментов",
-    noConfigHint: "игнорировать ~/.reasonix/config.json для этого запуска",
+    noConfigHint: "игнорировать ~/.mimo-reasonix/config.json для этого запуска",
     effortHintShort: "уровень рассуждений — низ|сред|выс|макс",
     budgetHintShort: "лимит сессии в USD",
     transcriptHintShort: "путь к JSONL-транскрипту",
@@ -125,11 +125,11 @@ export const ru: TranslationSchema = {
     mcpMaxPagesHint: "максимум страниц при поиске (по умолч. 20)",
     jsonHintCatalog: "вывод в JSON",
     jsonHintReport: "вывести отчёт проверки в JSON",
-    modelOverrideFlash: "переопределить модель (по умолч.: deepseek-v4-flash)",
+    modelOverrideFlash: "переопределить модель (по умолч.: mimo-v2.5)",
     skipConfirmHint: "пропустить запрос подтверждения",
     welcome: "Запускай `reasonix` в любое время — настройки сохраняются.",
-    taglineChat: "Нативный агент DeepSeek",
-    taglineCode: "Нативный кодинг-агент DeepSeek",
+    taglineChat: "Нативный агент MiMo",
+    taglineCode: "Нативный кодинг-агент MiMo",
     taglineSub: "кэш-первый · flash-первый",
     startSessionHint: "напиши сообщение для начала сессии",
     inputPlaceholder: "Спроси что угодно... (/ для команд, @ для файлов)",
@@ -211,7 +211,7 @@ export const ru: TranslationSchema = {
     },
     memory: {
       ...EN.slash.memory,
-      description: "показать / управлять закреплённой памятью (REASONIX.md + ~/.reasonix/memory)",
+      description: "показать / управлять закреплённой памятью (REASONIX.md + ~/.mimo-reasonix/memory)",
       argsHint: "[list|show <имя>|forget <имя>|clear <область> confirm]",
     },
     skill: {
@@ -222,12 +222,12 @@ export const ru: TranslationSchema = {
     hooks: {
       ...EN.slash.hooks,
       description:
-        "список активных хуков (settings.json в .reasonix/) · reload перечитывает с диска",
+        "список активных хуков (settings.json в .mimo-reasonix/) · reload перечитывает с диска",
     },
     permissions: {
       ...EN.slash.permissions,
       description:
-        "показать / редактировать белый список команд (встроенные только для чтения · на проект: ~/.reasonix/config.json)",
+        "показать / редактировать белый список команд (встроенные только для чтения · на проект: ~/.mimo-reasonix/config.json)",
     },
     dashboard: {
       ...EN.slash.dashboard,
@@ -546,7 +546,7 @@ export const ru: TranslationSchema = {
   webErrors: {
     ...EN.webErrors,
     braveMissingKey:
-      "web_search: Для работы Brave Search требуется ключ API — задайте переменную среды BRAVE_SEARCH_API_KEY (или BRAVE_API_KEY) или параметр `braveApiKey` в файле ~/.reasonix/config.json; бесплатная регистрация с лимитом 2000 запросов в месяц на сайте https://brave.com/search/api/",
+      "web_search: Для работы Brave Search требуется ключ API — задайте переменную среды BRAVE_SEARCH_API_KEY (или BRAVE_API_KEY) или параметр `braveApiKey` в файле ~/.mimo-reasonix/config.json; бесплатная регистрация с лимитом 2000 запросов в месяц на сайте https://brave.com/search/api/",
     braveUnauthorized:
       "web_search: Ключ API Brave Search отклонен — проверьте значение BRAVE_SEARCH_API_KEY или получите новый ключ на сайте https://brave.com/search/api/",
     braveRateLimit:
@@ -556,7 +556,7 @@ export const ru: TranslationSchema = {
     braveParseError:
       "web_search: Brave Search вернул неразборчивый ответ (HTTP {status}) — попробуйте позже",
     ollamaMissingKey:
-      "web_search: Для Ollama требуется ключ API — задайте переменную среды OLLAMA_API_KEY или параметр `ollamaApiKey` в ~/.reasonix/config.json; получить ключ можно на https://ollama.com/settings/keys",
+      "web_search: Для Ollama требуется ключ API — задайте переменную среды OLLAMA_API_KEY или параметр `ollamaApiKey` в ~/.mimo-reasonix/config.json; получить ключ можно на https://ollama.com/settings/keys",
     ollamaUnauthorized:
       "web_search: Ключ API Ollama отклонён — проверьте OLLAMA_API_KEY или получите новый на https://ollama.com/settings/keys",
     ollamaRateLimit:

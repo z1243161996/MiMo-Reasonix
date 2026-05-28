@@ -15,7 +15,7 @@ import {
 } from "./store.js";
 import type { IndexEntry, IndexIdentity, IndexMismatch, SearchHit } from "./store.js";
 
-export const INDEX_DIR_NAME = path.join(".reasonix", "semantic");
+export const INDEX_DIR_NAME = path.join(".mimo-reasonix", "semantic");
 
 type BuildOptions = {
   provider?: "ollama" | "openai-compat";

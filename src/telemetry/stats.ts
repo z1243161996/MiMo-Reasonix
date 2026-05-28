@@ -6,6 +6,11 @@ export const DEEPSEEK_PRICING: Record<
   string,
   { inputCacheHit: number; inputCacheMiss: number; output: number }
 > = {
+  "mimo-v2.5-pro": { inputCacheHit: 0.0002, inputCacheMiss: 0.002, output: 0.004 },
+  "mimo-v2.5": { inputCacheHit: 0.0001, inputCacheMiss: 0.001, output: 0.002 },
+  "mimo-v2-pro": { inputCacheHit: 0.0002, inputCacheMiss: 0.002, output: 0.004 },
+  "mimo-v2-flash": { inputCacheHit: 0.00001, inputCacheMiss: 0.0001, output: 0.0004 },
+  "mimo-v2-omni": { inputCacheHit: 0.00008, inputCacheMiss: 0.0004, output: 0.002 },
   "deepseek-v4-flash": { inputCacheHit: 0.0028, inputCacheMiss: 0.14, output: 0.28 },
   "deepseek-v4-pro": { inputCacheHit: 0.003625, inputCacheMiss: 0.435, output: 0.87 },
   // Compat aliases — priced as v4-flash per the deprecation notice.
@@ -35,6 +40,11 @@ export const CLAUDE_SONNET_PRICING = { input: 3.0, output: 15.0 };
 
 /** Prompt-side window only; completion caps live server-side and don't affect this gauge. */
 export const DEEPSEEK_CONTEXT_TOKENS: Record<string, number> = {
+  "mimo-v2.5-pro": 1_000_000,
+  "mimo-v2.5": 1_000_000,
+  "mimo-v2-pro": 1_000_000,
+  "mimo-v2-flash": 262_144,
+  "mimo-v2-omni": 262_144,
   "deepseek-v4-flash": 1_000_000,
   "deepseek-v4-pro": 1_000_000,
   "deepseek-chat": 1_000_000,

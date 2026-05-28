@@ -48,7 +48,7 @@ const OUTLINE_HEAD_LINES = 80;
 // user skills live at `<root>/.reasonix/skills/` (and `~/.reasonix/skills/`) and
 // must stay reachable to read_file / search_files / search_content (#1357).
 const SKIP_DIR_NAMES: ReadonlySet<string> = new Set(
-  DEFAULT_INDEX_EXCLUDES.dirs.filter((d) => d !== ".reasonix"),
+  DEFAULT_INDEX_EXCLUDES.dirs.filter((d) => d !== ".mimo-reasonix"),
 );
 
 /** First line of binary defense; NUL-byte sniff is the second (catches mislabeled `.txt`). */

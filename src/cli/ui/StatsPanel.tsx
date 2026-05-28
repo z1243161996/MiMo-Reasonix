@@ -120,7 +120,7 @@ function ChromeRow({
         {"◈ "}
       </Text>
       <Text color={COLOR.brand} bold>
-        reasonix
+        mimo-reasonix
       </Text>
       {projectName ? (
         <>

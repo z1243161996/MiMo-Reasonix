@@ -40,7 +40,7 @@ function sanitizeRoot(rootDir: string): string {
 }
 
 function storeRoot(rootDir: string): string {
-  return join(homedir(), ".reasonix", "sessions", sanitizeRoot(rootDir), "checkpoints");
+  return join(homedir(), ".mimo-reasonix", "sessions", sanitizeRoot(rootDir), "checkpoints");
 }
 
 function indexPath(rootDir: string): string {

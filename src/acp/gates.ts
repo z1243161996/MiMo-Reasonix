@@ -1,6 +1,6 @@
 /** Bridges Reasonix's internal `PauseGate` requests onto ACP `session/request_permission` round-trips. */
 
-import { resolveApprovalPrompt, toApprovalPrompt } from "@reasonix/core-utils";
+import { resolveApprovalPrompt, toApprovalPrompt } from "@mimo-reasonix/core-utils";
 import type { PauseRequest } from "../core/pause-gate.js";
 import type {
   PermissionOption,
@@ -48,11 +48,11 @@ export async function requestPermissionForGate(
   sessionId: string,
   req: PauseRequest,
 ): Promise<
-  | import("@reasonix/core-utils").ConfirmationChoice
-  | import("@reasonix/core-utils").PlanVerdict
-  | import("@reasonix/core-utils").CheckpointVerdict
-  | import("@reasonix/core-utils").RevisionVerdict
-  | import("@reasonix/core-utils").ChoiceVerdict
+  | import("@mimo-reasonix/core-utils").ConfirmationChoice
+  | import("@mimo-reasonix/core-utils").PlanVerdict
+  | import("@mimo-reasonix/core-utils").CheckpointVerdict
+  | import("@mimo-reasonix/core-utils").RevisionVerdict
+  | import("@mimo-reasonix/core-utils").ChoiceVerdict
 > {
   const prompt = toApprovalPrompt(req);
 

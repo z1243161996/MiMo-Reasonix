@@ -779,7 +779,7 @@ export function useQQChannel({
       "pro",
       ...((models && models.length > 0
         ? models
-        : ["deepseek-v4-flash", "deepseek-v4-pro"]) as string[]),
+        : ["mimo-v2.5", "mimo-v2-flash", "deepseek-v4-flash", "deepseek-v4-pro"]) as string[]),
     ],
     [],
   );

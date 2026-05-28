@@ -18,22 +18,22 @@
 
     <link
       rel="canonical"
-      href="https://esengine.github.io/DeepSeek-Reasonix/architecture.html"
+      href="https://esengine.github.io/MiMo-Reasonix/architecture.html"
     />
     <link
       rel="alternate"
       hreflang="en"
-      href="https://esengine.github.io/DeepSeek-Reasonix/architecture.html?lang=en"
+      href="https://esengine.github.io/MiMo-Reasonix/architecture.html?lang=en"
     />
     <link
       rel="alternate"
       hreflang="zh-CN"
-      href="https://esengine.github.io/DeepSeek-Reasonix/architecture.html?lang=zh"
+      href="https://esengine.github.io/MiMo-Reasonix/architecture.html?lang=zh"
     />
     <link
       rel="alternate"
       hreflang="x-default"
-      href="https://esengine.github.io/DeepSeek-Reasonix/architecture.html"
+      href="https://esengine.github.io/MiMo-Reasonix/architecture.html"
     />
 
     <meta property="og:type" content="article" />
@@ -45,7 +45,7 @@
     />
     <meta
       property="og:url"
-      content="https://esengine.github.io/DeepSeek-Reasonix/architecture.html"
+      content="https://esengine.github.io/MiMo-Reasonix/architecture.html"
     />
     <meta
       property="og:image"
@@ -72,7 +72,7 @@
         "@type": "TechArticle",
         "headline": "Reasonix Architecture",
         "description": "Cache-first loop, tool-call repair pipeline, cost control, and module layout.",
-        "url": "https://esengine.github.io/DeepSeek-Reasonix/architecture.html",
+        "url": "https://esengine.github.io/MiMo-Reasonix/architecture.html",
         "inLanguage": ["en", "zh-CN"],
         "author": {
           "@type": "Organization",
@@ -82,7 +82,7 @@
         "isPartOf": {
           "@type": "WebSite",
           "name": "Reasonix",
-          "url": "https://esengine.github.io/DeepSeek-Reasonix/"
+          "url": "https://esengine.github.io/MiMo-Reasonix/"
         },
         "about": {
           "@type": "SoftwareApplication",
@@ -99,13 +99,13 @@
             "@type": "ListItem",
             "position": 1,
             "name": "Reasonix",
-            "item": "https://esengine.github.io/DeepSeek-Reasonix/"
+            "item": "https://esengine.github.io/MiMo-Reasonix/"
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": "Architecture",
-            "item": "https://esengine.github.io/DeepSeek-Reasonix/architecture.html"
+            "item": "https://esengine.github.io/MiMo-Reasonix/architecture.html"
           }
         ]
       }
@@ -138,7 +138,7 @@
             <button data-lang-btn="en" type="button" aria-pressed="true">EN</button>
             <button data-lang-btn="zh" type="button" aria-pressed="false">中文</button>
           </div>
-          <a class="btn btn-ghost btn-sm" href="https://github.com/esengine/DeepSeek-Reasonix" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn btn-ghost btn-sm" href="https://github.com/esengine/MiMo-Reasonix" target="_blank" rel="noopener">GitHub</a>
           <a class="btn btn-primary btn-sm" href="download.html">Download →</a>
         </div>
       </div>
@@ -424,7 +424,7 @@
 │   ├── truncation.ts
 │   └── storm.ts
 ├── prompt-fragments.ts     <span class="hash"># TUI_FORMATTING_RULES, NEGATIVE_CLAIM_RULE</span>
-├── code/prompt.ts          <span class="hash"># reasonix code main system prompt</span>
+├── code/prompt.ts          <span class="hash"># mimo-reasonix code main system prompt</span>
 ├── tools/                  <span class="hash"># Tool implementations</span>
 │   ├── filesystem.ts       <span class="hash"># read / list / search / edit / write</span>
 │   ├── shell.ts            <span class="hash"># run_command + run_background (JobRegistry)</span>
@@ -484,7 +484,7 @@
               <li><strong>v0.0.x</strong> — Pillar 1 end-to-end, repair pipeline complete, Ink TUI scaffold.</li>
               <li><strong>v0.1</strong> — τ-bench numbers published, streaming polish, transcript replay.</li>
               <li><strong>v0.3</strong> — MCP client (stdio + SSE), session persistence.</li>
-              <li><strong>v0.4.x</strong> — <code>reasonix code</code> with SEARCH/REPLACE edits, review/auto gate, background jobs, hooks.</li>
+              <li><strong>v0.4.x</strong> — <code>mimo-reasonix code</code> with SEARCH/REPLACE edits, review/auto gate, background jobs, hooks.</li>
               <li><strong>v0.5.x</strong> — V4 model support, skills, memory, subagents, actionable error messages.</li>
               <li>
                 <strong>v0.6</strong> —
@@ -518,14 +518,14 @@
         <div>
           <a class="brand" href="index.html" style="text-decoration:none; color:inherit">
             <span class="brand-mark"></span>
-            <span class="brand-name"><b>DeepSeek-Reasonix</b></span>
+            <span class="brand-name"><b>MiMo-Reasonix</b></span>
           </a>
           <p style="color:var(--cream-mute); font-size:13px; margin-top:14px; line-height:1.65; max-width:340px">
-            DeepSeek-native AI coding agent for your terminal. Engineered around prefix-cache stability — leave it running.
+            MiMo-native AI coding agent for your terminal. Engineered around prefix-cache stability — leave it running.
           </p>
           <div style="display:flex; gap:10px; margin-top:18px">
-            <a class="btn btn-ghost btn-sm" href="https://github.com/esengine/DeepSeek-Reasonix" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
-            <a class="btn btn-ghost btn-sm" href="https://github.com/esengine/DeepSeek-Reasonix/discussions" target="_blank" rel="noopener">Discussions</a>
+            <a class="btn btn-ghost btn-sm" href="https://github.com/esengine/MiMo-Reasonix" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
+            <a class="btn btn-ghost btn-sm" href="https://github.com/esengine/MiMo-Reasonix/discussions" target="_blank" rel="noopener">Discussions</a>
           </div>
         </div>
         <div>
@@ -540,18 +540,18 @@
         <div>
           <h5>Community</h5>
           <ul>
-            <li><a href="https://github.com/esengine/DeepSeek-Reasonix" target="_blank" rel="noopener">GitHub</a></li>
-            <li><a href="https://github.com/esengine/DeepSeek-Reasonix/discussions" target="_blank" rel="noopener">Discussions</a></li>
-            <li><a href="https://github.com/esengine/DeepSeek-Reasonix/issues" target="_blank" rel="noopener">Issues</a></li>
-            <li><a href="https://github.com/esengine/DeepSeek-Reasonix/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+            <li><a href="https://github.com/esengine/MiMo-Reasonix" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://github.com/esengine/MiMo-Reasonix/discussions" target="_blank" rel="noopener">Discussions</a></li>
+            <li><a href="https://github.com/esengine/MiMo-Reasonix/issues" target="_blank" rel="noopener">Issues</a></li>
+            <li><a href="https://github.com/esengine/MiMo-Reasonix/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
           </ul>
         </div>
         <div>
           <h5>Resources</h5>
           <ul>
-            <li><a href="https://github.com/esengine/DeepSeek-Reasonix#readme" target="_blank" rel="noopener">README</a></li>
+            <li><a href="https://github.com/esengine/MiMo-Reasonix#readme" target="_blank" rel="noopener">README</a></li>
             <li><a href="index.html#roadmap">Roadmap</a></li>
-            <li><a href="https://github.com/esengine/DeepSeek-Reasonix/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog</a></li>
+            <li><a href="https://github.com/esengine/MiMo-Reasonix/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog</a></li>
             <li><a href="https://platform.deepseek.com" target="_blank" rel="noopener">DeepSeek Platform</a></li>
           </ul>
         </div>

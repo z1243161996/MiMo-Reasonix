@@ -24,11 +24,17 @@ import {
 /** Single trust dial: review queues edits + gates shell; auto applies + gates shell; yolo skips both gates; plan blocks every non-readonly tool (write_file / edit_file / multi_edit / run_command) at dispatch. */
 export type EditMode = "review" | "auto" | "yolo" | "plan";
 
-export const DEFAULT_MODEL = "deepseek-v4-flash";
+export const DEFAULT_MODEL = "mimo-v2.5";
 
-/** Models the official api.deepseek.com endpoint currently accepts. v3-era
+/** Models the official endpoints accept. DeepSeek models target api.deepseek.com;
+ *  MiMo models target token-plan-cn.xiaomimimo.com. v3-era
  *  `deepseek-chat`/`deepseek-reasoner` are gone — sending them produces a 400. */
 export const SUPPORTED_OFFICIAL_MODELS: readonly string[] = [
+  "mimo-v2.5",
+  "mimo-v2.5-pro",
+  "mimo-v2-pro",
+  "mimo-v2-flash",
+  "mimo-v2-omni",
   "deepseek-v4-flash",
   "deepseek-v4-pro",
 ];
@@ -403,7 +409,7 @@ const DEFAULT_TIMEOUT_MS = 180_000;
 const DEFAULT_BATCH_SIZE = 10;
 
 export function defaultConfigPath(): string {
-  return join(homedir(), ".reasonix", "config.json");
+  return join(homedir(), ".mimo-reasonix", "config.json");
 }
 
 const STRING_ARRAY_FIELDS: Array<readonly string[]> = [

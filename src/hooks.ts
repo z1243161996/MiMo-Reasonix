@@ -81,7 +81,7 @@ export interface HookReport {
 }
 
 export const HOOK_SETTINGS_FILENAME = "settings.json";
-export const HOOK_SETTINGS_DIRNAME = ".reasonix";
+export const HOOK_SETTINGS_DIRNAME = ".mimo-reasonix";
 
 /** Where the global settings.json lives. Equivalent to `~/.reasonix/settings.json`. */
 export function globalSettingsPath(homeDirOverride?: string): string {

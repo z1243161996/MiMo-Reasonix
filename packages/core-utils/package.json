@@ -1,5 +1,5 @@
 {
-  "name": "@reasonix/core-utils",
+  "name": "@mimo-reasonix/core-utils",
   "version": "0.1.0",
   "private": true,
   "description": "Shared utilities duplicated across CLI, Desktop, Dashboard, and ACP surfaces.",

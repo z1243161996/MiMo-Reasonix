@@ -156,16 +156,16 @@ function resolveDashboardToken(noConfig: boolean): string | undefined {
 
 const program = new Command();
 program
-  .name("reasonix")
+  .name("mimo-reasonix")
   .description(t("cli.description"))
   .version(VERSION)
   .option("-c, --continue", t("cli.continue"))
   .option("--no-mouse", t("ui.noMouseHint"))
   .option("--no-proxy", t("ui.noProxyHint"));
 
-// `reasonix` with no subcommand → setup wizard on first run, otherwise `code`
+// `mimo-reasonix` with no subcommand → setup wizard on first run, otherwise `code`
 // in the current directory. Filesystem-less chat stays reachable via
-// `reasonix chat`.
+// `mimo-reasonix chat`.
 program.action(async (opts: { continue?: boolean; mouse?: boolean }) => {
   const cfg = readConfig();
   const mode = resolveBareCommandMode(cfg);

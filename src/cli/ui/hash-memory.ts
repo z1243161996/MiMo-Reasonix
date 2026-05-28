@@ -64,7 +64,7 @@ export function appendProjectMemory(rootDir: string, note: string): AppendMemory
   return appendBulletToFile(resolveProjectMemoryWritePath(rootDir), note, PROJECT_HEADER);
 }
 
-export const GLOBAL_MEMORY_DIR = ".reasonix";
+export const GLOBAL_MEMORY_DIR = ".mimo-reasonix";
 export const GLOBAL_MEMORY_FILE = "REASONIX.md";
 
 export function globalMemoryPath(homeDir: string = homedir()): string {

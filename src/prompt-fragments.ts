@@ -10,7 +10,7 @@ export const TUI_FORMATTING_RULES = `Formatting (rendered in a TUI with a real m
 
 /** Pro is the top tier — escalation is a no-op for it; flash + others get the full ladder. */
 export function escalationContract(modelId: string): string {
-  if (modelId === "deepseek-v4-pro") {
+  if (modelId === "deepseek-v4-pro" || modelId === "mimo-v2.5-pro") {
     return `Cost-aware escalation note: you are running on \`${modelId}\` — the escalation tier. There is no higher tier to escalate to, so the \`<<<NEEDS_PRO>>>\` marker is a no-op for you; deliver the strongest answer you can directly. If asked which model you are, answer \`${modelId}\`.`;
   }
   return `Cost-aware escalation (you are running on \`${modelId}\`):
@@ -25,7 +25,7 @@ Do NOT emit any other content in the same response when you request escalation. 
 }
 
 /** Backward-compat — pre-#582 callers (and the `CODE_SYSTEM_PROMPT` public-API const) keep the historical flash phrasing. */
-export const ESCALATION_CONTRACT = escalationContract("deepseek-v4-flash");
+export const ESCALATION_CONTRACT = escalationContract("mimo-v2.5");
 
 export const NEGATIVE_CLAIM_RULE = `Negative claims ("X is missing", "Y isn't implemented", "there's no Z") are the #1 hallucination shape. They feel safe to write because no citation seems possible — but that's exactly why you must NOT write them on instinct.
 

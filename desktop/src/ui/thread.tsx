@@ -1,6 +1,6 @@
-import type { ApprovalPrompt } from "@reasonix/core-utils";
-import { isCompactionSummary, stripCompactionMarker } from "@reasonix/core-utils/compaction";
-import { derivePrefix } from "@reasonix/core-utils/derive-prefix";
+import type { ApprovalPrompt } from "@mimo-reasonix/core-utils";
+import { isCompactionSummary, stripCompactionMarker } from "@mimo-reasonix/core-utils/compaction";
+import { derivePrefix } from "@mimo-reasonix/core-utils/derive-prefix";
 import { Copy } from "lucide-react";
 import { type ReactNode, memo, useEffect, useRef, useState } from "react";
 import type {

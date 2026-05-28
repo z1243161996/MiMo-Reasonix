@@ -10,7 +10,7 @@ import { FG } from "./theme/tokens.js";
 export type ShellConfirmChoice = "run_once" | "always_allow" | "deny";
 
 export interface ShellConfirmProps {
-  prompt: import("@reasonix/core-utils").ApprovalPrompt;
+  prompt: import("@mimo-reasonix/core-utils").ApprovalPrompt;
   onChoose: (choice: ShellConfirmChoice, denyContext?: string) => void;
 }
 

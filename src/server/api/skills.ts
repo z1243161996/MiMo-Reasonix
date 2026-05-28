@@ -39,11 +39,11 @@ function parseBody(raw: string): WriteBody {
 const SAFE_NAME = /^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$/;
 
 function globalSkillsDir(): string {
-  return join(homedir(), ".reasonix", SKILLS_DIRNAME);
+  return join(homedir(), ".mimo-reasonix", SKILLS_DIRNAME);
 }
 
 function projectSkillsDir(rootDir: string): string {
-  return join(rootDir, ".reasonix", SKILLS_DIRNAME);
+  return join(rootDir, ".mimo-reasonix", SKILLS_DIRNAME);
 }
 
 interface SkillListEntry {

@@ -16,7 +16,7 @@ export const JA: TranslationSchema = {
   },
   cli: {
     description:
-      "DeepSeekネイティブのエージェントフレームワーク — キャッシュヒットと低コストトークンのために設計。",
+      "MiMoネイティブのエージェントフレームワーク — キャッシュヒットと低コストトークンのために設計。",
     continue: "最後に使用したチャットセッションをピッカーなしで再開します。",
     setup: "対話型ウィザード — APIキー、MCPサーバー。いつでも再実行して再設定できます。",
     code: "コード編集チャット — <dir>（デフォルト: cwd）をルートとするファイルシステムツール、コーディング用システムプロンプト、v4-flash ベースライン。",
@@ -48,7 +48,7 @@ export const JA: TranslationSchema = {
   sessions: {
     emptyHint:
       "保存されたセッションはまだありません — `reasonix chat` を実行してください（--no-session を付けない限り自動保存されます）。",
-    listHeader: "保存されたセッション (~/.reasonix/sessions/):",
+    listHeader: "保存されたセッション (~/.mimo-reasonix/sessions/):",
     inspectHint: "詳細表示:  reasonix sessions <name>",
     resumeHint: "再開:   reasonix chat --session <name>",
     noSession: '"{name}" という名前のセッションはありません（または空です）。',
@@ -61,8 +61,8 @@ export const JA: TranslationSchema = {
   },
   ui: {
     welcome: "Run `reasonix` any time to start chatting — your settings are remembered.",
-    taglineChat: "DeepSeekネイティブエージェント",
-    taglineCode: "DeepSeekネイティブコーディングエージェント",
+    taglineChat: "MiMoネイティブエージェント",
+    taglineCode: "MiMoネイティブコーディングエージェント",
     taglineSub: "キャッシュファースト · フラッシュファースト",
     startSessionHint: "メッセージを入力してセッションを開始",
     inputPlaceholder: "何でも聞いてください... (/ でコマンド、@ でファイル)",
@@ -218,14 +218,14 @@ export const JA: TranslationSchema = {
     newHint: "強制的に新規セッション（--session / --continue を無視）",
     transcriptHint: "JSONLトランスクリプトの書き込み先パス",
     budgetHint: "セッションのUSD上限 — 80%で警告、100%で次のターンを拒否",
-    modelIdHint: "DeepSeekモデルID（例: deepseek-v4-flash）",
+    modelIdHint: "MiMo/DeepSeekモデルID（例: mimo-v2.5）",
     systemPromptHint: "デフォルトのシステムプロンプトを上書き",
     effortHint: "推論努力 — low|medium|high|max",
     sessionNameHint: "セッション名（デフォルト: 'default'）",
     ephemeralHint: "この実行のセッション永続化を無効化",
     mcpSpecHint: "MCPサーバー指定（繰り返し可）",
     mcpPrefixHint: "MCPツール名にこの文字列をプレフィックスとして付与",
-    noConfigHint: "この実行では ~/.reasonix/config.json を無視",
+    noConfigHint: "この実行では ~/.mimo-reasonix/config.json を無視",
     effortHintShort: "推論努力 — low|medium|high|max",
     budgetHintShort: "セッションUSD上限",
     transcriptHintShort: "JSONLトランスクリプトパス",
@@ -266,7 +266,7 @@ export const JA: TranslationSchema = {
     mcpMaxPagesHint: "検索時に走査する最大ページ数（デフォルト20）",
     jsonHintCatalog: "JSONとして出力",
     jsonHintReport: "検査レポートをJSONとして出力",
-    modelOverrideFlash: "モデルを上書き（デフォルト: deepseek-v4-flash）",
+    modelOverrideFlash: "モデルを上書き（デフォルト: mimo-v2.5）",
     skipConfirmHint: "確認プロンプトをスキップ",
     yoloHint:
       "この実行でプランチェックポイントを自動承認（editMode=yolo 相当、設定は変更しません）",
@@ -313,7 +313,7 @@ export const JA: TranslationSchema = {
       argsHint: "[name]",
     },
     memory: {
-      description: "ピン留めメモリの表示/管理 (REASONIX.md + ~/.reasonix/memory)",
+      description: "ピン留めメモリの表示/管理 (REASONIX.md + ~/.mimo-reasonix/memory)",
       argsHint: "[list|show <name>|forget <name>|clear <scope> confirm]",
     },
     skill: {
@@ -322,12 +322,12 @@ export const JA: TranslationSchema = {
     },
     hooks: {
       description:
-        "アクティブなフックを一覧 (.reasonix/ 下の settings.json) · reload でディスクから再読込",
+        "アクティブなフックを一覧 (.mimo-reasonix/ 下の settings.json) · reload でディスクから再読込",
       argsHint: "[reload]",
     },
     permissions: {
       description:
-        "シェル許可リストの表示/編集（ビルトインは読取専用 · プロジェクト毎: ~/.reasonix/config.json）",
+        "シェル許可リストの表示/編集（ビルトインは読取専用 · プロジェクト毎: ~/.mimo-reasonix/config.json）",
       argsHint: "[list|add <prefix>|remove <prefix|N>|clear confirm]",
     },
     dashboard: {
@@ -716,7 +716,7 @@ export const JA: TranslationSchema = {
       "セッション予算を使い切りました — 消費 ${spent} ≥ 上限 ${cap}。/budget <usd> で上限を引き上げるか、/budget off でクリアするか、セッションを終了してください。",
     budget80Pct:
       "▲ 予算の80%を使用 — ${spent} / ${cap}。次の1〜2ターンで上限に達する可能性があります。",
-    proArmed: "⇧ /pro 武装 — このターンは deepseek-v4-pro で実行（1回限り · ターン後に解除）",
+    proArmed: "⇧ /pro 武装 — このターンは mimo-v2.5-pro で実行（1回限り · ターン後に解除）",
     toolUploadStatus: "ツール結果をアップロードしました · 次の応答前にモデルが思考中…",
     turnStartFoldStatus: "ターン開始: コンテキストが上限に接近中、履歴を圧縮中…",
     turnStartFolded:
@@ -800,7 +800,7 @@ export const JA: TranslationSchema = {
         "  #<note>                  <note> を <project>/REASONIX.md に追記（コミット可能）。",
       helpMemoryPinEx: "                             例: #findByEmail は大文字小文字を区別しない",
       helpMemoryGlobal:
-        "  #g <note>                <note> を ~/.reasonix/REASONIX.md に追記（グローバル、コミット不可）。",
+        "  #g <note>                <note> を ~/.mimo-reasonix/REASONIX.md に追記（グローバル、コミット不可）。",
       helpMemoryGlobalEx: "                             例: #g npm ではなく pnpm を使う",
       helpMemoryPinBoth:
         "                             どちらも今後の全セッションのプレフィックスにピン留めされます。/memory より高速。",
@@ -903,7 +903,7 @@ export const JA: TranslationSchema = {
       hooksNone: "フックが設定されていません。",
       hooksDropHint: "`hooks` キーを持つ settings.json を以下のいずれかに配置してください:",
       hooksProject: "  · {path}（プロジェクト）",
-      hooksProjectFallback: "  · <project>/.reasonix/settings.json（プロジェクト）",
+      hooksProjectFallback: "  · <project>/.mimo-reasonix/settings.json（プロジェクト）",
       hooksGlobal: "  · {path}（グローバル）",
       hooksEvents: "イベント: PreToolUse, PostToolUse, UserPromptSubmit, Stop",
       hooksExitCodes: "exit 0 = 通過 · exit 2 = ブロック (Pre*) · その他 = 警告",
@@ -990,7 +990,7 @@ export const JA: TranslationSchema = {
     },
     model: {
       modelHint:
-        "deepseek-v4-flash または deepseek-v4-pro を試してください — /models で最新リストを取得",
+        "mimo-v2.5 または mimo-v2.5-pro を試してください — /models で最新リストを取得",
       modelUsage: "使い方: /model <id>   ({hint})",
       modelNotInCatalog:
         "model → {id}   （⚠ 取得済みカタログにありません: {list}。間違いの場合、次の呼び出しが400になります — /models で更新してください。）",
@@ -1012,7 +1012,7 @@ export const JA: TranslationSchema = {
     },
     permissions: {
       mutateCodeOnly:
-        "/permissions add / remove / clear は `reasonix code` 内でのみ利用可能です — プロジェクトスコープの許可リストを編集します（`~/.reasonix/config.json` projects[<root>].shellAllowed）。",
+        "/permissions add / remove / clear は `reasonix code` 内でのみ利用可能です — プロジェクトスコープの許可リストを編集します（`~/.mimo-reasonix/config.json` projects[<root>].shellAllowed）。",
       addUsage:
         '使い方: /permissions add <prefix>   （複数トークン可: /permissions add "git push origin"）',
       addAlready: "▸ 既に許可済み: {prefix}",
@@ -1174,11 +1174,11 @@ export const JA: TranslationSchema = {
     },
     memory: {
       disabled:
-        "メモリが無効です（REASONIX_MEMORY=off が環境変数に設定されています）。変数を解除して再有効化してください — その間、REASONIX.md や ~/.reasonix/memory の内容はピン留めされません。",
+        "メモリが無効です（REASONIX_MEMORY=off が環境変数に設定されています）。変数を解除して再有効化してください — その間、REASONIX.md や ~/.mimo-reasonix/memory の内容はピン留めされません。",
       noRoot:
         "このセッションには作業ディレクトリがありません — `/memory` は REASONIX.md を解決するためのルートが必要です。（テストハーネスで実行中ですか？）",
       listEmpty:
-        "まだユーザーメモリがありません。モデルが `remember` を呼び出して保存するか、~/.reasonix/memory/global/ またはプロジェクトごとのサブディレクトリに手動でファイルを作成できます。",
+        "まだユーザーメモリがありません。モデルが `remember` を呼び出して保存するか、~/.mimo-reasonix/memory/global/ またはプロジェクトごとのサブディレクトリに手動でファイルを作成できます。",
       listHeader: "ユーザーメモリ ({count}):",
       listFooter: "本文表示: /memory show <name>   削除: /memory forget <name>",
       showUsage: "使い方: /memory show <name>  または  /memory show <scope>/<name>",
@@ -1196,9 +1196,9 @@ export const JA: TranslationSchema = {
       noMemory: "{root} にピン留めされたメモリはありません。",
       layers: "3つのレイヤーが利用可能です:",
       layerProject: "  1. {file} — コミット可能なチームメモリ（リポジトリ内）。",
-      layerGlobal: "  2. ~/.reasonix/memory/global/ — プロジェクト横断のプライベートメモリ。",
+      layerGlobal: "  2. ~/.mimo-reasonix/memory/global/ — プロジェクト横断のプライベートメモリ。",
       layerProjectHash:
-        "  3. ~/.reasonix/memory/<project-hash>/ — このプロジェクトのプライベートメモリ。",
+        "  3. ~/.mimo-reasonix/memory/<project-hash>/ — このプロジェクトのプライベートメモリ。",
       askModel: "モデルに `remember` を依頼するか、手動でファイルを編集してください。",
       changesNote:
         "変更は次回の /new または起動時に反映されます — プレフィックスキャッシュを保温するため、システムプロンプトはセッションごとに1回ハッシュ化されます。",
@@ -1279,7 +1279,7 @@ export const JA: TranslationSchema = {
       switchedBraveNote:
         " BRAVE_SEARCH_API_KEY (または BRAVE_API_KEY) または `braveApiKey` をconfigに設定; https://brave.com/search/api/ で月2000回無料。",
       keyNeeded:
-        '"{engine}" のAPIキーが設定されていません。\n\n  1. {envVar} 環境変数を設定\n  2. またはインラインで提供:  /search-engine {engine} <your-key>\n  3. または "{engine}ApiKey" を ~/.reasonix/config.json に追加\n\nその後 /search-engine {engine} を再試行してください。',
+        '"{engine}" のAPIキーが設定されていません。\n\n  1. {envVar} 環境変数を設定\n  2. またはインラインで提供:  /search-engine {engine} <your-key>\n  3. または "{engine}ApiKey" を ~/.mimo-reasonix/config.json に追加\n\nその後 /search-engine {engine} を再試行してください。',
       keySaved: " APIキーを設定に保存しました。",
       confirmed:
         'Web検索エンジンを "{engine}"{detail} に設定しました。次のアシスタントターンで反映されます。',
@@ -1288,9 +1288,9 @@ export const JA: TranslationSchema = {
     skill: {
       listEmpty: "スキルが見つかりません。Reasonix は以下からスキルを読み取ります:",
       listProjectScope:
-        "  · <project>/.reasonix/skills/<name>/SKILL.md  （または <name>.md） — プロジェクトスコープ",
+        "  · <project>/.mimo-reasonix/skills/<name>/SKILL.md  （または <name>.md） — プロジェクトスコープ",
       listGlobalScope:
-        "  · ~/.reasonix/skills/<name>/SKILL.md  （または <name>.md） — グローバルスコープ",
+        "  · ~/.mimo-reasonix/skills/<name>/SKILL.md  （または <name>.md） — グローバルスコープ",
       listProjectOnly: "  （プロジェクトスコープは `reasonix code` 内でのみアクティブ）",
       listFrontmatter:
         "各ファイルのフロントマターには少なくとも `name` と `description` が必要です。",
@@ -1394,7 +1394,7 @@ export const JA: TranslationSchema = {
     allowOnce: "一度だけ許可",
     allowOnceDesc: "このアクセスを許可; このセッションの残りでディレクトリを記憶",
     allowAlways: "常に許可",
-    allowAlwaysDesc: "`{prefix}` をこのプロジェクトで記憶（~/.reasonix/config.json に永続化）",
+    allowAlwaysDesc: "`{prefix}` をこのプロジェクトで記憶（~/.mimo-reasonix/config.json に永続化）",
     deny: "拒否",
     denyDesc: "Tab を押してモデルに理由を伝えるコンテキストを追加",
     pathLabel: "パス",
@@ -1622,7 +1622,7 @@ export const JA: TranslationSchema = {
     metasoApiError:
       "web_search: Metaso APIエラー (コード {code}: {message}) \u2014 後で再試行してください",
     tavilyMissingKey:
-      "web_search: TavilyバックエンドにはAPIキーが必要です \u2014 TAVILY_API_KEY 環境変数または ~/.reasonix/config.json の `tavilyApiKey` を設定してください。無料1000回/月の登録は https://tavily.com から",
+      "web_search: TavilyバックエンドにはAPIキーが必要です \u2014 TAVILY_API_KEY 環境変数または ~/.mimo-reasonix/config.json の `tavilyApiKey` を設定してください。無料1000回/月の登録は https://tavily.com から",
     tavilyUnauthorized:
       "web_search: Tavily APIキーが拒否されました \u2014 TAVILY_API_KEY を確認するか、https://tavily.com から取得してください",
     tavilyRateLimit:
@@ -1632,7 +1632,7 @@ export const JA: TranslationSchema = {
     tavilyParseError:
       "web_search: Tavilyが解析不能なレスポンスを返しました (HTTP {status}) \u2014 後で再試行してください",
     perplexityMissingKey:
-      "web_search: PerplexityバックエンドにはAPIキーが必要です \u2014 PERPLEXITY_API_KEY 環境変数または ~/.reasonix/config.json の `perplexityApiKey` を設定してください。https://perplexity.ai/settings/api から取得できます",
+      "web_search: PerplexityバックエンドにはAPIキーが必要です \u2014 PERPLEXITY_API_KEY 環境変数または ~/.mimo-reasonix/config.json の `perplexityApiKey` を設定してください。https://perplexity.ai/settings/api から取得できます",
     perplexityUnauthorized:
       "web_search: Perplexity APIキーが拒否されました \u2014 PERPLEXITY_API_KEY を確認するか、https://perplexity.ai/settings/api から取得してください",
     perplexityRateLimit:
@@ -1642,7 +1642,7 @@ export const JA: TranslationSchema = {
     perplexityParseError:
       "web_search: Perplexityが解析不能なレスポンスを返しました (HTTP {status}) \u2014 後で再試行してください",
     exaMissingKey:
-      "web_search: ExaバックエンドにはAPIキーが必要です \u2014 EXA_API_KEY 環境変数または ~/.reasonix/config.json の `exaApiKey` を設定してください。無料1000回/月の登録は https://exa.ai から",
+      "web_search: ExaバックエンドにはAPIキーが必要です \u2014 EXA_API_KEY 環境変数または ~/.mimo-reasonix/config.json の `exaApiKey` を設定してください。無料1000回/月の登録は https://exa.ai から",
     exaUnauthorized:
       "web_search: Exa APIキーが拒否されました \u2014 EXA_API_KEY を確認するか、https://exa.ai から取得してください",
     exaRateLimit:
@@ -1652,7 +1652,7 @@ export const JA: TranslationSchema = {
     exaParseError:
       "web_search: Exaが解析不能なレスポンスを返しました (HTTP {status}) \u2014 後で再試行してください",
     braveMissingKey:
-      "web_search: Brave SearchにはAPIキーが必要です \u2014 BRAVE_SEARCH_API_KEY（または BRAVE_API_KEY）環境変数、または ~/.reasonix/config.json の `braveApiKey` を設定してください。https://brave.com/search/api/ で月2000回まで無料登録できます",
+      "web_search: Brave SearchにはAPIキーが必要です \u2014 BRAVE_SEARCH_API_KEY（または BRAVE_API_KEY）環境変数、または ~/.mimo-reasonix/config.json の `braveApiKey` を設定してください。https://brave.com/search/api/ で月2000回まで無料登録できます",
     braveUnauthorized:
       "web_search: Brave Search APIキーが拒否されました \u2014 BRAVE_SEARCH_API_KEY を確認するか、https://brave.com/search/api/ から取得してください",
     braveRateLimit:
@@ -1662,7 +1662,7 @@ export const JA: TranslationSchema = {
     braveParseError:
       "web_search: Brave Searchが解析不能なレスポンスを返しました (HTTP {status}) \u2014 後で再試行してください",
     ollamaMissingKey:
-      "Ollama には API キーが必要です — OLLAMA_API_KEY 環境変数を設定するか、~/.reasonix/config.json に `ollamaApiKey` を設定してください。https://ollama.com/settings/keys で取得できます",
+      "Ollama には API キーが必要です — OLLAMA_API_KEY 環境変数を設定するか、~/.mimo-reasonix/config.json に `ollamaApiKey` を設定してください。https://ollama.com/settings/keys で取得できます",
     ollamaUnauthorized:
       "Ollama API キーが拒否されました — OLLAMA_API_KEY を確認するか、https://ollama.com/settings/keys で取得してください",
     ollamaRateLimit:
@@ -1672,7 +1672,7 @@ export const JA: TranslationSchema = {
     ollamaParseError:
       "Ollama が解析不能なレスポンスを返しました (HTTP {status}) ({url}) — 後で再試行してください",
     fetchOllamaMissingKey:
-      "web_fetch: Ollama 取得には API キーが必要です — OLLAMA_API_KEY 環境変数を設定するか、~/.reasonix/config.json に `ollamaApiKey` を設定してください。https://ollama.com/settings/keys で取得できます",
+      "web_fetch: Ollama 取得には API キーが必要です — OLLAMA_API_KEY 環境変数を設定するか、~/.mimo-reasonix/config.json に `ollamaApiKey` を設定してください。https://ollama.com/settings/keys で取得できます",
     fetchOllamaUnauthorized:
       "web_fetch: Ollama API キーが拒否されました — OLLAMA_API_KEY を確認するか、https://ollama.com/settings/keys で取得してください",
     fetchOllamaRateLimit:

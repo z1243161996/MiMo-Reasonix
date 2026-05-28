@@ -25,13 +25,13 @@ sessions/
 .turbo/
 # Local-only Claude Code settings — personal overrides, never committed.
 .claude/settings.local.json
-# Per-user Reasonix state under .reasonix/ — committable team-level
+# Per-user MiMo-Reasonix state under .mimo-reasonix/ — committable team-level
 # files (settings.json, skills/) stay tracked, but the user-private
 # bits (semantic index, sessions, opt-out markers) never should.
-.reasonix/semantic/
-.reasonix/sessions/
-.reasonix/semantic-skip
-.reasonix/truncated-results/
+.mimo-reasonix/semantic/
+.mimo-reasonix/sessions/
+.mimo-reasonix/semantic-skip
+.mimo-reasonix/truncated-results/
 # Scratch entry regenerated each time scripts/bundle-codemirror.mjs runs.
 scripts/.cm-entry.mjs
 # Personal bun lockfile — project uses npm officially.

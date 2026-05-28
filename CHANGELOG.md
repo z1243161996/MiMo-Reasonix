@@ -395,7 +395,7 @@ reduction per fold.
 ## [0.48.1] — 2026-05-21
 
 **`dsnix` — short alias.** A new `dsnix` shim package lands alongside
-`reasonix` (#1440), so `npx dsnix` is now equivalent to `npx reasonix`
+`reasonix` (#1440), so `npx dsnix` is now equivalent to `npx mimo-reasonix`
 for users who'd rather type five characters than eight. The shim is
 just a forwarding binary — same CLI, same release cadence — and ships
 on npm with the same version pinning (#1442). The root README documents
@@ -549,7 +549,7 @@ propagate into the running session (#1396).
 
 ## [0.47.2] — 2026-05-19
 
-**Hotfix — `npx reasonix@latest` install.** `0.47.1` shipped with
+**Hotfix — `npx mimo-reasonix@latest` install.** `0.47.1` shipped with
 `@reasonix/core-utils` listed under runtime `dependencies` as
 `workspace:*`. Because the workspace package is `private: true`,
 `npm publish` did not rewrite the protocol, so consumers hit
@@ -685,7 +685,7 @@ the Ink-side workarounds we'd accumulated on top of it:
 
 ## [0.44.2-rc.2] — 2026-05-17
 
-**Fix:** macOS hang on `npx reasonix@next code` — keep-alive interval
+**Fix:** macOS hang on `npx mimo-reasonix@next code` — keep-alive interval
 from rc.1 prevented Node from exiting, but the rust child was never
 actually spawned. Root cause: spawn was triggered by a React
 `useEffect` (`useSceneTrace` → `emitSceneMessage` → `trace.ts`
@@ -706,7 +706,7 @@ the integrated event callback is wired before spawn. Also:
 
 ## [0.44.2-rc.1] — 2026-05-17
 
-**Fix:** macOS `npx reasonix code` (default rust + integrated TUI) exited
+**Fix:** macOS `npx mimo-mimo-reasonix code` (default rust + integrated TUI) exited
 back to the shell prompt immediately without rendering. Root cause:
 `makeNullStdin` / `makeNullStdout` are pure-JS Node streams with no
 underlying libuv handles, so they don't keep the event loop alive. The
@@ -723,7 +723,7 @@ binary as 0.44.0; only chat.tsx changed.
 
 ## [0.44.1] — 2026-05-17
 
-**Fix:** Mac/Linux `npx reasonix@latest` failed with `EACCES` when spawning
+**Fix:** Mac/Linux `npx mimo-reasonix@latest` failed with `EACCES` when spawning
 the rust renderer (`spawn ... reasonix-render EACCES`). `actions/download-artifact@v4`
 strips Unix file modes during the release pipeline's artifact round-trip,
 so the binaries in the published 0.44.0 subpackages landed without the
@@ -741,7 +741,7 @@ correct file modes.
 
 ## [0.44.0] — 2026-05-17
 
-**Headline:** The Rust TUI is now the default TUI. `npx reasonix@latest`
+**Headline:** The Rust TUI is now the default TUI. `npx mimo-reasonix@latest`
 on any supported platform (win32-x64, linux-x64, linux-arm64, darwin-x64,
 darwin-arm64) pulls a pre-built ratatui binary as an `optionalDependencies`
 sub-package and renders the full agent loop natively — no cargo, no
@@ -753,7 +753,7 @@ TUI, **integrated mode** is the default too (rust owns keyboard + mouse +
 composer directly), which fixes the multi-press Ctrl+D + dropped preset
 clicks + Ctrl+C terminal-state leak that the split keystroke-bus path had.
 Bare `reasonix` (no subcommand) routes to `code` in the cwd instead of
-chat — explicit `reasonix chat` still works.
+chat — explicit `mimo-reasonix chat` still works.
 
 **Note:** Existing users with `REASONIX_RENDERER=rust` or
 `REASONIX_RENDERER_INTEGRATED=1` set in their shell rc will see no
@@ -771,7 +771,7 @@ opting back to the old behaviors).
   --emit-input split keystroke bus (debug only) (#1081)
 - feat(cli): bare `reasonix` (no subcommand) now launches `code` in
   the cwd. Drops the project-marker heuristic that used to route to
-  `chat` outside of project dirs; `reasonix chat` stays explicit (#1081)
+  `chat` outside of project dirs; `mimo-reasonix chat` stays explicit (#1081)
 - feat(scene): renderer-resolver picks the binary by priority chain —
   `REASONIX_RENDER_CMD` / `REASONIX_INPUT_CMD` env (full-command
   override) > `REASONIX_RENDER_BIN` env (single binary path) >
@@ -1106,7 +1106,7 @@ gaining real data.
 - chore(plan): document magic numbers + swap the hand-rolled
   ANSI-strip for the standard `strip-ansi` package. (#738)
 - chore: oosmetrics badges + weekly health-check workflow; point
-  Star History at the canonical DeepSeek-Reasonix slug. (#772, #773)
+  Star History at the canonical MiMo-Reasonix slug. (#772, #773)
 - docs(readme): badge color pass; thank AIGC Link for XiaoHongShu
   promotions. (#726)
 
@@ -1122,7 +1122,7 @@ dashboard, a shared pause-gate policy module so the desktop's
 auto-resolve rules don't drift from the CLI TUI's, plus a wave of
 field-reported fixes: the long-standing `Maximum update depth` crash
 inside CardStream is finally gone (this time for good — quantized
-window), `reasonix code` no longer boots dead when a user has only
+window), `mimo-reasonix code` no longer boots dead when a user has only
 configured their key via `reasonix setup`, and a half-dozen MCP /
 shell / stdin / scroll papercuts are gone.
 
@@ -1171,7 +1171,7 @@ shell / stdin / scroll papercuts are gone.
   which was the residual `Maximum update depth exceeded` crash inside
   `useBoxMetrics` (the #549 fix only patched one instance of the
   pattern). (#700, #702)
-- fix(code): `reasonix code` now calls `loadDotenv()` + bridges
+- fix(code): `mimo-reasonix code` now calls `loadDotenv()` + bridges
   `~/.reasonix/config.json` → `process.env.DEEPSEEK_API_KEY` like
   `chat` / `desktop` / `run` already did. Subagent's `DeepSeekClient`
   is constructed lazily so a missing key doesn't kill boot before the
@@ -1451,7 +1451,7 @@ as flash when asked.
 
 **Features:**
 
-- feat(ui): boot splash for `reasonix code` / `reasonix chat`. Cold
+- feat(ui): boot splash for `mimo-reasonix code` / `mimo-reasonix chat`. Cold
   launch used to flash the alt-screen blank for a few hundred ms
   before AppInner's first paint completed; users read that as a
   freeze. The splash holds for one whale-spout cycle (~1.4s) so the
@@ -1769,7 +1769,7 @@ instead of literal `**`/`##`/code-fences in the JSON envelope.
   args; `add_mcp_server` builds `name=…` specs for stdio / sse /
   streamable-http with `from_catalog` shortcut for bundled entries,
   runs the existing preflight, refuses name collisions. Both register
-  alongside native filesystem / shell tools in `reasonix code`.
+  alongside native filesystem / shell tools in `mimo-reasonix code`.
   (#498, closes #494)
 
 - feat(ui): `/feedback` + version badge in the status row. Slash
@@ -2028,9 +2028,9 @@ context fold. `search_content` also gains `-C N` context lines.
 The other half is cold-start surgery (#464). Stage 1 adds a zero-cost
 profiler gated behind `REASONIX_PROFILE_STARTUP=1`. Stage 2 lazy-
 imports every per-command module and the dashboard server, paying
-for the chat UI only when `reasonix code` actually runs. `reasonix
+for the chat UI only when `mimo-reasonix code` actually runs. `reasonix
 version` and `reasonix --help` drop ~290ms (~440ms → ~140ms);
-`reasonix code` is unchanged on the hot path. Critical bug fix at
+`mimo-reasonix code` is unchanged on the hot path. Critical bug fix at
 the bottom: a long-session OOM where every tool result was retained
 indefinitely in a useRef array left behind when `/tool` was deleted.
 
@@ -2078,7 +2078,7 @@ indefinitely in a useRef array left behind when `/tool` was deleted.
 - perf(cli): lazy-import every per-command module. Each
   `reasonix <subcommand>` only loads its own command's chunk. tsup
   splits, Node loads on first invocation. `reasonix version` and
-  `reasonix --help` drop ~290ms (~440ms → ~140ms); `reasonix code`
+  `reasonix --help` drop ~290ms (~440ms → ~140ms); `mimo-reasonix code`
   hot path unchanged (within noise). Stage 2 of #464. (#467)
 
 - perf(cli): lazy-import dashboard server. ~4200 LOC of HTTP / static
@@ -2475,7 +2475,7 @@ and a Getting Started callout in both READMEs.
 - feat(ui): surface `--dir` / pinned workspace for first-time users.
   WelcomeBanner shows the workspace + relaunch hint in code mode;
   `/status` adds a `workspace <path> · pinned at launch` line; the
-  filesystem sandbox-escape error points at `reasonix code --dir
+  filesystem sandbox-escape error points at `mimo-reasonix code --dir
   <path>` instead of just dropping a raw error; both READMEs gain a
   Getting Started subsection on `--dir`. No new slash command —
   mid-session retargeting is intentionally not supported (the
@@ -2485,8 +2485,8 @@ and a Getting Started callout in both READMEs.
 ## [0.30.3] — 2026-05-07
 
 **Headline:** the chat scroll rewrite lands. Ink 5.2 → 7.0.2 / React
-18.3 → 19.2, the cell-diff renderer is retired, and `reasonix code` /
-`reasonix chat` default to alt-screen with row-precision virtual
+18.3 → 19.2, the cell-diff renderer is retired, and `mimo-reasonix code` /
+`mimo-reasonix chat` default to alt-screen with row-precision virtual
 scroll. PgUp / PgDn / mouse wheel scroll history; an empty prompt + ↑
 also scrolls (Ctrl+P / Ctrl+N still recalls prompt history). When
 scrolled away from bottom, the prompt hides and a `📖 reading
@@ -2536,7 +2536,7 @@ inline at config time.
   auto-mkdir — by then the user may not remember writing the
   config. (#362, PR #379)
 - fix(readme): website URLs corrected from `/reasonix/` to
-  `/DeepSeek-Reasonix/`. (PR #375)
+  `/MiMo-Reasonix/`. (PR #375)
 
 **Chores:**
 
@@ -3146,8 +3146,8 @@ SECURITY policy.
 
 **Fixes:**
 
-- fix(code): `reasonix code` now bridges MCP servers from
-  `~/.reasonix/config.json`, matching `reasonix chat` behaviour.
+- fix(code): `mimo-reasonix code` now bridges MCP servers from
+  `~/.reasonix/config.json`, matching `mimo-reasonix chat` behaviour.
   Previously any servers defined in config were silently skipped in
   code-mode sessions. (#91)
 - fix(mcp): `NAME_PREFIX` regex in `parseMcpSpec` accepts hyphens, so
@@ -3682,8 +3682,8 @@ gnome-terminal); copy-pasteable everywhere else.
 
 ### TUI
 
-- Auto-launch the embedded dashboard when `reasonix code` /
-  `reasonix chat` mount. Failures are silent (a missing dashboard
+- Auto-launch the embedded dashboard when `mimo-reasonix code` /
+  `mimo-reasonix chat` mount. Failures are silent (a missing dashboard
   never blocks the TUI), tear-down still happens on unmount /
   `/dashboard stop`.
 - `--no-dashboard` opts out per-session (CI, hardened
@@ -4221,7 +4221,7 @@ running subagent.
   tokens) with line-boundary splitting for oversized windows and
   hard-truncation for single overlong lines. Fixes Ollama 500 "the
   input length exceeds the context length" on minified / dense files.
-- **`semantic_search` tool** — registered in `reasonix code` only when
+- **`semantic_search` tool** — registered in `mimo-reasonix code` only when
   an index exists. Tool description is now directive ("FIRST CHOICE
   for descriptive queries"); the code-mode system prompt grows a
   `# Search routing` fragment when the tool is registered, telling
@@ -4237,7 +4237,7 @@ running subagent.
   descriptions and CLI `--help` stay English on purpose (model-facing
   text aligns with training distribution; commander's --help is
   registered once at boot).
-- **Startup is silent** — no auto-prompt on `reasonix code` launch.
+- **Startup is silent** — no auto-prompt on `mimo-reasonix code` launch.
   If an index exists, the tool registers; otherwise the bootstrap
   is a no-op. Discovery happens via `/semantic` when the user is
   curious, or via the explicit `reasonix index` command.
@@ -4316,7 +4316,7 @@ drops ~6–10× in practice.
 ### ⚠ Breaking (behavior, not API)
 
 - **Default model is now `deepseek-v4-flash`**, not `deepseek-v4-pro`.
-  `reasonix code`, `reasonix chat`, and subagents all land on flash
+  `mimo-reasonix code`, `mimo-reasonix chat`, and subagents all land on flash
   by default. Users who need the frontier tier:
   `/preset max`, `/pro`, or `--model deepseek-v4-pro` on CLI.
 - **Preset defaults changed**. None of the three presets auto-enable
@@ -4429,7 +4429,7 @@ drops ~6–10× in practice.
 
 ## [0.5.24] — 2026-04-24
 
-**Headline:** `reasonix code` gets a proper review gate, background
+**Headline:** `mimo-reasonix code` gets a proper review gate, background
 process support, and aggressive context hygiene so long coding
 sessions stop bleeding money.
 
@@ -4460,7 +4460,7 @@ sessions stop bleeding money.
 - **Bottom mode status bar** — always-visible line above the prompt
   shows mode / pending count / Shift+Tab hint / running-jobs tag;
   flashes on mode change.
-- **Onboarding tip** — first `reasonix code` launch after upgrade
+- **Onboarding tip** — first `mimo-reasonix code` launch after upgrade
   posts the edit-gate keybindings once; suppressed after via the
   `editModeHintShown` flag.
 
@@ -4509,7 +4509,7 @@ sessions stop bleeding money.
 
 **Headline:** `reasonix stats` is now a cross-session cost dashboard.
 
-Every turn `reasonix chat|code|run` executes now appends one line to
+Every turn `mimo-reasonix chat|code|run` executes now appends one line to
 `~/.reasonix/usage.jsonl` carrying tokens + cost + the equivalent
 Claude Sonnet 4.6 cost. `reasonix stats` (no arg) rolls that log up
 into today / week / month / all-time windows:
@@ -4680,7 +4680,7 @@ failure (offline, firewall, registry hiccup) is silent by design.
 
 `reasonix update` is the command form: detects whether you're
 running a global install vs an ephemeral `npx` spawn, and either
-spawns `npm install -g reasonix@latest` for the former or prints a
+spawns `npm install -g mimo-reasonix@latest` for the former or prints a
 cache-refresh hint for the latter. `--dry-run` prints the plan
 without executing.
 
@@ -4761,7 +4761,7 @@ the rest of the prefix.
   `<rootDir>/.reasonix/skills/`.
 - **`run_skill` tool** (`src/tools/skills.ts`) — read-only, returns
   the full markdown body plus an optional forwarded `Arguments:` line.
-  Registered in `reasonix chat` (global only) and `reasonix code`
+  Registered in `mimo-reasonix chat` (global only) and `mimo-reasonix code`
   (project + global).
 - **`/skill` slash command** — `list` / `show <name>` / bare
   `<name> [args]` form. The bare form injects the skill body as a
@@ -4789,7 +4789,7 @@ the rest of the prefix.
   written to `~/.reasonix/config.json` but the in-memory tool still
   refused it — the next invocation re-triggered the confirmation
   modal. `ShellToolsOptions.extraAllowed` now accepts a getter in
-  addition to a static array; `reasonix code` passes
+  addition to a static array; `mimo-reasonix code` passes
   `() => loadProjectShellAllowed(rootDir)` so the allowlist is
   re-read from disk on every dispatch. Static-array callers keep
   working unchanged.
@@ -4809,7 +4809,7 @@ the rest of the prefix.
 ## [0.4.19] — 2026-04-22
 
 **Headline:** Windows shell hotfix + StormBreaker visibility.
-`reasonix code` now runs `npm`, `npx`, `tsc`, `yarn`, `pnpm`, `bun`,
+`mimo-reasonix code` now runs `npm`, `npx`, `tsc`, `yarn`, `pnpm`, `bun`,
 `pytest`, and every other `.cmd` / `.bat` wrapper on Windows — both
 under Node 18/20 (broken by missing PATHEXT resolution) and Node
 21.7.3+/24 (broken by CVE-2024-27980's prohibition on direct
@@ -4930,7 +4930,7 @@ mode toggles.
 ### Added
 
 - **`submit_plan` tool** (`src/tools/plan.ts`) — registered by default
-  in `reasonix code`. Throws `PlanProposedError` carrying the plan
+  in `mimo-reasonix code`. Throws `PlanProposedError` carrying the plan
   text via the new `toToolResult()` protocol on ToolRegistry. Fires
   the picker whether or not plan mode is active — the model is
   expected to propose plans on its own for large tasks; `/plan` is
@@ -5044,7 +5044,7 @@ cache stays warm as long as the file is stable.
   it's deliberate instructions. Re-exported from `src/index.ts` for
   library consumers.
 - **Auto-applied at every CLI entry** — top-level `reasonix`,
-  `reasonix chat`, `reasonix run`, and `reasonix code` all honor
+  `mimo-reasonix chat`, `reasonix run`, and `mimo-reasonix code` all honor
   the file. `code` resolves it against the rooted directory; the
   others against `process.cwd()` at launch.
 - **`/memory` slash command** — prints the resolved file path +
@@ -5078,13 +5078,13 @@ cache stays warm as long as the file is stable.
 its own tests and verify its work (Claude Code / Aider parity).
 3-choice picker for every unknown command — "run once", "always
 allow in this project" (persists to `~/.reasonix/config.json`), or
-"deny". Plus a session picker on startup so `reasonix code` stops
+"deny". Plus a session picker on startup so `mimo-reasonix code` stops
 silently resuming the last conversation, and a Windows backspace fix.
 
 ### Added
 
 - **`src/tools/shell.ts`** — `run_command(command, timeoutSec?)`
-  registered by default in `reasonix code`. Read-only / testing
+  registered by default in `mimo-reasonix code`. Read-only / testing
   commands (`git status`, `ls`, `cat`, `grep`, `rg`, `npm test`,
   `pytest`, `cargo test`, `cargo check`, `cargo clippy`, `go test`,
   `deno test`, `bun test`, `ruff`, `mypy`, `npx tsc --noEmit`,
@@ -5098,14 +5098,14 @@ silently resuming the last conversation, and a Windows backspace fix.
   command. Borders + color so it's impossible to miss. Arrow-key
   navigation; Enter confirms. No `y/n` hotkey — too easy to trigger
   by accident mid-typing.
-- **`src/cli/ui/SessionPicker.tsx`** — on `reasonix chat` /
-  `reasonix code` startup, if the session has prior messages, show
+- **`src/cli/ui/SessionPicker.tsx`** — on `mimo-reasonix chat` /
+  `mimo-reasonix code` startup, if the session has prior messages, show
   a 3-option picker: **New** (default, safer), **Resume** (continue
   where you left off), **Delete and start new**. Flags `--resume`
   / `--new` bypass the picker for CI / muscle-memory.
 - **Per-project persistent allowlist** — `config.projects[<abs>].shellAllowed`
   stores prefixes the user approved via "always allow". On next
-  `reasonix code` in that dir they auto-run. Helpers
+  `mimo-reasonix code` in that dir they auto-run. Helpers
   `loadProjectShellAllowed` / `addProjectShellAllowed` exported.
 
 ### Fixed
@@ -5168,7 +5168,7 @@ Backspace/Delete mid-string, multi-line ↑/↓ navigation).
 ### Added
 
 Web search + fetch tools are registered by default on `reasonix
-chat` and `reasonix code`. The model calls `web_search` /
+chat` and `mimo-reasonix code`. The model calls `web_search` /
 `web_fetch` on its own whenever a question needs fresher info than
 its training data. Backed by **Mojeek**'s public search page — no
 API key, no signup. Same Cache-First + repair + context-safety
@@ -5201,8 +5201,8 @@ fast-path scraper filter.
   boolean. Default on. Turn off with `search: false` in config or
   `REASONIX_SEARCH=off|false|0` in env. No API keys, no provider
   picker — one switch.
-- **Auto-registered in chat/code.** `reasonix chat` and
-  `reasonix code` register `web_search` + `web_fetch` by default.
+- **Auto-registered in chat/code.** `mimo-reasonix chat` and
+  `mimo-reasonix code` register `web_search` + `web_fetch` by default.
   Zero setup: after the normal wizard, the model can already reach
   the web.
 
@@ -5267,7 +5267,7 @@ explicit opt-out for the terminals where nothing else helps.
 
 ## [0.4.13] — 2026-04-22
 
-**Headline:** Two streaming-row bugs that made `reasonix code` feel
+**Headline:** Two streaming-row bugs that made `mimo-reasonix code` feel
 broken: the spinner froze for the entire duration of a large
 `edit_file` call, and multi-iteration turns displayed the previous
 iteration's body text concatenated into the next one.
@@ -5530,7 +5530,7 @@ numbers.
 ## [0.4.9] — 2026-04-22
 
 **Headline:** Three user-reported issues fixed together: Esc now
-really stops (not "after the tool finishes"), `reasonix code` drops
+really stops (not "after the tool finishes"), `mimo-reasonix code` drops
 the filesystem MCP subprocess for native tools with an R1-friendly
 `edit_file` shape, and the placeholder cursor renders in the right
 place. Plus a `slow_count` demo tool so progress bars are testable.
@@ -5555,12 +5555,12 @@ place. Plus a `slow_count` demo tool so progress bars are testable.
     `client.callTool`, so MCP tools inherit the cancellation path.
 - **Built-in filesystem tools** replace the
   `@modelcontextprotocol/server-filesystem` subprocess inside
-  `reasonix code`. Ten tools — `read_file` (head/tail), `write_file`,
+  `mimo-reasonix code`. Ten tools — `read_file` (head/tail), `write_file`,
   `edit_file` (flat SEARCH/REPLACE, not the JSON-in-string array
   shape that triggered R1 DSML hallucinations), `list_directory`,
   `directory_tree`, `search_files`, `get_file_info`,
   `create_directory`, `move_file`. Sandbox enforcement on every
-  path. New CLI output: `▸ reasonix code: … · 10 native fs tool(s)`.
+  path. New CLI output: `▸ mimo-reasonix code: … · 10 native fs tool(s)`.
   Library API: `registerFilesystemTools(registry, { rootDir })`.
   `ChatOptions` gains `seedTools: ToolRegistry` so callers can
   pre-register tools and still bridge MCP on top.
@@ -5577,7 +5577,7 @@ place. Plus a `slow_count` demo tool so progress bars are testable.
 - **`slow_count` demo tool** in `examples/mcp-server-demo.ts` that
   emits real `notifications/progress` frames (1/N, 2/N, …) with
   300 ms pauses. Progress-bar plumbing from 0.4.8 is now testable
-  end-to-end: `reasonix chat --mcp "demo=node --import tsx examples/mcp-server-demo.ts"` then ask the model to
+  end-to-end: `mimo-reasonix chat --mcp "demo=node --import tsx examples/mcp-server-demo.ts"` then ask the model to
   "please use slow_count to count to 5" → bar fills in the spinner.
 - **`ToolCallContext`** public type (`{ signal?: AbortSignal }`),
   passed to every tool's `fn`. Re-exported from `src/index.ts`.
@@ -5823,7 +5823,7 @@ claim against what the tool actually returned. Now they do.
 ## [0.4.3] — 2026-04-21
 
 **Headline:** Seven more UX improvements on top of 0.4.2. Layered in
-after live `reasonix code` sessions surfaced pain points: R1 fake
+after live `mimo-reasonix code` sessions surfaced pain points: R1 fake
 tool-call hallucinations leaking into forced summaries, no quick
 retry, /status too thin, tool errors blending in, no prompt history,
 no one-key pending-edit confirmation, and — critically — Esc
@@ -6019,7 +6019,7 @@ command dumps the full R1 reasoning for the most recent turn.
 
 ## [0.4.1] — 2026-04-21
 
-**Headline:** `reasonix code` grows `/undo`, `/commit`, `.gitignore`
+**Headline:** `mimo-reasonix code` grows `/undo`, `/commit`, `.gitignore`
 awareness — and, **critically, stops auto-writing edits to disk.** A
 real-session bug ("I asked to analyze the project, it silently edited
 a file") exposed that v0.4.0's auto-apply was the wrong default.
@@ -6101,7 +6101,7 @@ abstraction from the start.
 - **`/commit "msg"`** — `git add -A && git commit -m "msg"` inside
   the code-mode rootDir. Surfaces git's stderr on failure (hooks,
   nothing staged, detached HEAD, etc.).
-- **.gitignore awareness** — `reasonix code` reads the project's
+- **.gitignore awareness** — `mimo-reasonix code` reads the project's
   `.gitignore` on launch and injects it into the system prompt as
   "don't traverse or edit these paths unless asked". Hard-coded
   baseline ignores (`node_modules`, `dist`, `.git`, `.venv`, etc.) are
@@ -6148,7 +6148,7 @@ abstraction from the start.
 
 ## [0.4.0] — 2026-04-21
 
-**Headline:** `reasonix code` — a new subcommand that turns Reasonix
+**Headline:** `mimo-reasonix code` — a new subcommand that turns Reasonix
 into a coding assistant. Auto-bridges the filesystem MCP at your
 working directory, teaches the model to emit Aider-style
 SEARCH/REPLACE blocks, applies them to disk after each turn. The
@@ -6156,7 +6156,7 @@ SEARCH/REPLACE blocks, applies them to disk after each turn. The
 
 ### Added
 
-- **`npx reasonix code [dir]`** — opinionated wrapper around chat:
+- **`npx mimo-mimo-reasonix code [dir]`** — opinionated wrapper around chat:
   - Filesystem MCP auto-bridged at `[dir]` (default CWD). No wizard,
     no config merge. Out-of-box ready.
   - Code-specialized system prompt that teaches SEARCH/REPLACE.
@@ -6184,14 +6184,14 @@ SEARCH/REPLACE blocks, applies them to disk after each turn. The
   types `EditBlock` / `ApplyResult` / `ApplyStatus`. Anyone building
   their own code-assistant UX can compose from these.
 - **`ChatOptions.codeMode`** — opt-in flag to enable edit-block
-  processing inside the existing TUI event loop. Plain `reasonix chat`
+  processing inside the existing TUI event loop. Plain `mimo-reasonix chat`
   leaves it off.
 
 ### Why 0.4.0 (minor, not patch)
 
 This is a new user-facing primitive, not a bug fix or UX polish. The
 library exports grow; the `ChatOptions` interface gains a field.
-Nothing breaks for existing 0.3.x users — `reasonix chat` behaves
+Nothing breaks for existing 0.3.x users — `mimo-reasonix chat` behaves
 exactly as before when `codeMode` is absent. But the SemVer convention
 is: additive new surface = minor bump.
 
@@ -6238,7 +6238,7 @@ actually know the new UX exists.
   count reaches `Math.floor(maxToolIters * 0.7)`. TUI renders it
   yellow in the event log with the "Press Esc to summarize now" hint.
   The command strip under the prompt also advertises the Esc hotkey.
-- **README hero rewrite.** `npx reasonix` (no flags) is now the first
+- **README hero rewrite.** `npx mimo-reasonix` (no flags) is now the first
   code block, with the wizard story in prose; `--mcp`/`--preset`
   moved to an "Advanced — CLI subcommands and flags" section.
   What-you-get table gains *Setup wizard*, *Context safety net*
@@ -6299,7 +6299,7 @@ series graduates — `npm install reasonix@latest` now pulls this.
   repeatable `--mcp` flag with `name=` namespacing, curated catalog
   (`reasonix mcp list`), bundled demo server.
 - **`reasonix setup` wizard**: API key → preset pick → MCP multi-select
-  → per-server args → `~/.reasonix/config.json`. `npx reasonix` with
+  → per-server args → `~/.reasonix/config.json`. `npx mimo-reasonix` with
   no args launches this on first run and drops into chat afterward.
 - **Config-backed defaults**: `preset`, `mcp`, `session` persist across
   launches; CLI flags override; `--no-config` escape hatch.
@@ -6434,7 +6434,7 @@ the *only* way to turn MCP on.
   Re-run any time to reconfigure — existing selections are pre-checked.
 - **`reasonix` with no subcommand** — launches the wizard on first run,
   drops straight into chat afterwards using saved defaults. Designed
-  so a brand-new user can `npx reasonix` and be chatting in 30s
+  so a brand-new user can `npx mimo-reasonix` and be chatting in 30s
   without reading `--help`.
 - **`--preset <fast|smart|max>`** on both `chat` and `run`. Picks the
   same bundles the wizard offers. Individual flags (`--model`,
@@ -6455,7 +6455,7 @@ the *only* way to turn MCP on.
 - **`ReasonixConfig` schema** grows: `preset`, `mcp` (spec strings),
   `session`, `setupCompleted`. Previous configs (apiKey-only) still
   load; missing fields fall through to hardcoded defaults.
-- `reasonix chat` / `reasonix run`: when a flag is not passed, the
+- `mimo-reasonix chat` / `reasonix run`: when a flag is not passed, the
   value comes from `~/.reasonix/config.json`. Explicit flags still
   win. `--no-config` short-circuits this.
 - Slash handler signature: `handleSlash(cmd, args, loop, ctx?)` — the
@@ -6523,7 +6523,7 @@ an SSE stream and POSTs JSON-RPC to the endpoint the server advertises.
   with `http://` or `https://` to `SseTransport`; everything else is
   stdio as before. Both namespaced and anonymous forms work:
     ```
-    reasonix chat --mcp "kb=https://mcp.example.com/sse"
+    mimo-reasonix chat --mcp "kb=https://mcp.example.com/sse"
     reasonix run  --mcp "http://127.0.0.1:9000/sse" --task "..."
     ```
 - `McpSpec` is now a discriminated union:
@@ -6567,7 +6567,7 @@ MCP servers into one chat session, and stop guessing what servers exist
     `"cmd args..."`        → anonymous (tools keep native names)
   Example:
     ```
-    reasonix chat \
+    mimo-reasonix chat \
       --mcp "fs=npx -y @modelcontextprotocol/server-filesystem /tmp/safe" \
       --mcp "mem=npx -y @modelcontextprotocol/server-memory"
     ```
@@ -6659,7 +6659,7 @@ same token counts. Reference transcript committed at
 
 ### Added
 
-- **`reasonix chat --mcp "<cmd>"`** and **`reasonix run --mcp "<cmd>"`** —
+- **`mimo-reasonix chat --mcp "<cmd>"`** and **`reasonix run --mcp "<cmd>"`** —
   spawn an MCP server and bridge its tools into the Cache-First Loop.
   Shell-quoted command; use `--mcp-prefix` to namespace tool names when
   mixing servers.

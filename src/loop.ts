@@ -206,7 +206,7 @@ export class CacheFirstLoop {
     this.log = new AppendOnlyLog({
       sessionPath: this.sessionName ? sessionPath(this.sessionName) : undefined,
     });
-    this.model = opts.model ?? "deepseek-v4-flash";
+    this.model = opts.model ?? "mimo-v2.5";
     this.reasoningEffort = opts.reasoningEffort ?? "high";
     this.budgetUsd =
       typeof opts.budgetUsd === "number" && opts.budgetUsd > 0 ? opts.budgetUsd : null;

@@ -2,6 +2,7 @@
 export function isThinkingModeModel(model: string): boolean {
   if (model.includes("reasoner")) return true;
   if (model === "deepseek-v4-flash" || model === "deepseek-v4-pro") return true;
+  if (model.startsWith("mimo-")) return true;
   return false;
 }
 
@@ -10,6 +11,7 @@ export function thinkingModeForModel(model: string): "enabled" | "disabled" | un
   if (model === "deepseek-chat") return "disabled";
   if (model.includes("reasoner")) return "enabled";
   if (model === "deepseek-v4-flash" || model === "deepseek-v4-pro") return "enabled";
+  if (model.startsWith("mimo-")) return "enabled";
   return undefined;
 }
 

@@ -193,4 +193,4 @@ function ModelRow({
   );
 }
 
-const FALLBACK_MODELS: ReadonlyArray<string> = ["deepseek-v4-flash", "deepseek-v4-pro"];
+const FALLBACK_MODELS: ReadonlyArray<string> = ["mimo-v2.5", "mimo-v2-flash", "deepseek-v4-flash", "deepseek-v4-pro"];

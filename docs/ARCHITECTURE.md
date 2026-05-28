@@ -169,7 +169,7 @@ src/
 │   └── storm.ts
 ├── prompt-fragments.ts     # TUI_FORMATTING_RULES, NEGATIVE_CLAIM_RULE —
 │                           #   reused by main + subagent + skill prompts
-├── code/prompt.ts          # reasonix code main system prompt
+├── code/prompt.ts          # mimo-reasonix code main system prompt
 ├── tools/                  # Tool implementations
 │   ├── filesystem.ts       # read / list / search / edit / write
 │   ├── shell.ts            # run_command + run_background (JobRegistry)
@@ -229,7 +229,7 @@ means editing one handler file and one registry line.
 - **v0.0.x** — Pillar 1 end-to-end, repair pipeline complete, Ink TUI scaffold.
 - **v0.1** — τ-bench numbers published, streaming polish, transcript replay.
 - **v0.3** — MCP client (stdio + SSE), session persistence.
-- **v0.4.x** — `reasonix code` with SEARCH/REPLACE edits, review/auto
+- **v0.4.x** — `mimo-reasonix code` with SEARCH/REPLACE edits, review/auto
   gate, background jobs, hooks.
 - **v0.5.x** — V4 model support, skills, memory, subagents, actionable
   error messages.

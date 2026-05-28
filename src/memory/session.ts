@@ -82,7 +82,7 @@ export interface SessionMeta {
 }
 
 export function sessionsDir(): string {
-  return join(homedir(), ".reasonix", "sessions");
+  return join(homedir(), ".mimo-reasonix", "sessions");
 }
 
 export function sessionPath(name: string): string {

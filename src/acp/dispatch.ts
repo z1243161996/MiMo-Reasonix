@@ -1,11 +1,11 @@
 /** Map kernel events (model.delta / tool.preparing|intent|result) to ACP session/update notifications. */
 
-import { toolKindFor } from "@reasonix/core-utils";
+import { toolKindFor } from "@mimo-reasonix/core-utils";
 import type { Event as KernelEvent } from "../core/events.js";
 import type { SessionUpdateParams } from "./protocol.js";
 import type { AcpServer } from "./server.js";
-export { toolKindFor } from "@reasonix/core-utils";
-export type { AcpToolKind } from "@reasonix/core-utils";
+export { toolKindFor } from "@mimo-reasonix/core-utils";
+export type { AcpToolKind } from "@mimo-reasonix/core-utils";
 
 function tryParseJson(raw: string): unknown {
   if (!raw) return undefined;

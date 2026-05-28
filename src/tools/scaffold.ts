@@ -70,7 +70,7 @@ export function registerScaffoldTools(
         },
         model: {
           type: "string",
-          enum: ["deepseek-v4-flash", "deepseek-v4-pro"],
+          enum: ["mimo-v2.5", "mimo-v2-flash", "mimo-v2.5-pro", "deepseek-v4-flash", "deepseek-v4-pro"],
           description:
             "Subagent model override. Default flash; use pro only when the playbook needs it.",
         },

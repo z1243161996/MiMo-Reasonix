@@ -138,7 +138,7 @@ export class MemoryStore {
   private readonly projectRoot: string | undefined;
 
   constructor(opts: MemoryStoreOptions = {}) {
-    this.homeDir = opts.homeDir ?? join(homedir(), ".reasonix");
+    this.homeDir = opts.homeDir ?? join(homedir(), ".mimo-reasonix");
     this.projectRoot = opts.projectRoot ? resolve(opts.projectRoot) : undefined;
   }
 
@@ -307,7 +307,7 @@ export class MemoryStore {
 
 /** Freeform `#g` destination, distinct from MEMORY.md's curated index of named files. */
 export function readGlobalReasonixMemory(
-  homeDir: string = join(homedir(), ".reasonix"),
+  homeDir: string = join(homedir(), ".mimo-reasonix"),
 ): { path: string; content: string; originalChars: number; truncated: boolean } | null {
   const path = join(homeDir, "REASONIX.md");
   if (!existsSync(path)) return null;
@@ -332,7 +332,7 @@ export function readGlobalReasonixMemory(
 
 export function applyGlobalReasonixMemory(basePrompt: string, homeDir?: string): string {
   if (!memoryEnabled()) return basePrompt;
-  const dir = homeDir ?? join(homedir(), ".reasonix");
+  const dir = homeDir ?? join(homedir(), ".mimo-reasonix");
   const mem = readGlobalReasonixMemory(dir);
   if (!mem) return basePrompt;
   return [
@@ -465,7 +465,7 @@ export function applyMemoryStack(
   const withProject = applyProjectMemory(basePrompt, rootDir);
   const withGlobal = applyGlobalReasonixMemory(
     withProject,
-    homeDir ? join(homeDir, ".reasonix") : undefined,
+    homeDir ? join(homeDir, ".mimo-reasonix") : undefined,
   );
   const withGlobalClaude = applyGlobalClaudeMemory(withGlobal);
   const withMemory = applyUserMemory(withGlobalClaude, { projectRoot: rootDir, homeDir, cfg });

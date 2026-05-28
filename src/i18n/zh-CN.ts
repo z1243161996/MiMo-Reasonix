@@ -15,7 +15,7 @@ export const zhCN: TranslationSchema = {
     noTurns: "(暂无对话)",
   },
   cli: {
-    description: "DeepSeek 原生智能体框架 — 专为缓存命中和低成本令牌构建。",
+    description: "MiMo 原生智能体框架 — 专为缓存命中和低成本令牌构建。",
     continue: "恢复最近使用的聊天会话，不显示选择器。",
     setup: "交互式向导 — API 密钥、MCP 服务器。随时重新运行以重新配置。",
     code: "代码编辑聊天 — 以 <dir>（默认：cwd）为根的文件系统工具，编码系统提示词，v4-flash 基线。",
@@ -46,7 +46,7 @@ export const zhCN: TranslationSchema = {
   sessions: {
     emptyHint:
       "暂无已保存的会话 — 运行 `reasonix chat`（会话会自动保存，除非使用了 --no-session）。",
-    listHeader: "保存的会话 (~/.reasonix/sessions/)：",
+    listHeader: "保存的会话 (~/.mimo-reasonix/sessions/)：",
     inspectHint: "查看：reasonix sessions <name>",
     resumeHint: "恢复：reasonix chat --session <name>",
     noSession: '找不到会话 "{name}"（或为空）。',
@@ -59,8 +59,8 @@ export const zhCN: TranslationSchema = {
   },
   ui: {
     welcome: "随时运行 `reasonix` 开始聊天 — 您的设置将被记住。",
-    taglineChat: "DeepSeek 原生智能体",
-    taglineCode: "DeepSeek 原生代码智能体",
+    taglineChat: "MiMo 原生智能体",
+    taglineCode: "MiMo 原生代码智能体",
     taglineSub: "缓存优先 · Flash 优先",
     startSessionHint: "输入消息以开始您的会话",
     inputPlaceholder: "输入任何内容... (输入 / 使用命令, @ 引用文件)",
@@ -192,14 +192,14 @@ export const zhCN: TranslationSchema = {
     newHint: "强制创建新会话（忽略 --session / --continue）",
     transcriptHint: "JSONL 转录稿的写入路径",
     budgetHint: "会话美元上限 — 80% 时警告，100% 时拒绝下一轮",
-    modelIdHint: "DeepSeek 模型 ID（例如 deepseek-v4-flash）",
+    modelIdHint: "MiMo/DeepSeek 模型 ID（例如 mimo-v2.5）",
     systemPromptHint: "覆盖默认系统提示词",
     effortHint: "推理强度 — low|medium|high|max",
     sessionNameHint: "会话名称（默认：'default'）",
     ephemeralHint: "禁用本次运行的会话持久化",
     mcpSpecHint: "MCP 服务器规格（可重复）",
     mcpPrefixHint: "用此字符串为 MCP 工具名添加前缀",
-    noConfigHint: "本次运行忽略 ~/.reasonix/config.json",
+    noConfigHint: "本次运行忽略 ~/.mimo-reasonix/config.json",
     effortHintShort: "推理强度 — low|medium|high|max",
     budgetHintShort: "会话美元上限",
     transcriptHintShort: "JSONL 转录稿路径",
@@ -240,7 +240,7 @@ export const zhCN: TranslationSchema = {
     mcpMaxPagesHint: "搜索时最多走多少页（默认 20）",
     jsonHintCatalog: "以 JSON 格式输出",
     jsonHintReport: "以 JSON 格式输出检查报告",
-    modelOverrideFlash: "覆盖模型（默认：deepseek-v4-flash）",
+    modelOverrideFlash: "覆盖模型（默认：mimo-v2.5）",
     skipConfirmHint: "跳过确认提示",
     yoloHint: "自动批准本次调用的计划检查点（等同于 editMode=yolo，但不修改配置文件）",
   },
@@ -283,7 +283,7 @@ export const zhCN: TranslationSchema = {
       argsHint: "[name]",
     },
     memory: {
-      description: "显示 / 管理固定记忆（REASONIX.md + ~/.reasonix/memory）",
+      description: "显示 / 管理固定记忆（REASONIX.md + ~/.mimo-reasonix/memory）",
       argsHint: "[list|show <name>|forget <name>|clear <scope> confirm]",
     },
     skill: {
@@ -291,11 +291,11 @@ export const zhCN: TranslationSchema = {
       argsHint: "[list|paths|show <name>|<name> [args]]",
     },
     hooks: {
-      description: "列出活跃的 hooks（.reasonix/ 下的 settings.json）· reload 从磁盘重新读取",
+      description: "列出活跃的 hooks（.mimo-reasonix/ 下的 settings.json）· reload 从磁盘重新读取",
       argsHint: "[reload]",
     },
     permissions: {
-      description: "显示 / 编辑 shell 允许列表（内置只读 · 项目级：~/.reasonix/config.json）",
+      description: "显示 / 编辑 shell 允许列表（内置只读 · 项目级：~/.mimo-reasonix/config.json）",
       argsHint: "[list|add <prefix>|remove <prefix|N>|clear confirm]",
     },
     dashboard: {
@@ -659,7 +659,7 @@ export const zhCN: TranslationSchema = {
     budgetExhausted:
       "会话预算已用完 — 已花费 ${spent} ≥ 上限 ${cap}。用 /budget <usd> 提高上限，/budget off 清除上限，或结束会话。",
     budget80Pct: "▲ 预算已用 80% — ${spent} / ${cap}。下一两轮可能就触顶。",
-    proArmed: "⇧ /pro 已装备 — 本轮使用 deepseek-v4-pro（一次性 · 本轮后自动解除）",
+    proArmed: "⇧ /pro 已装备 — 本轮使用 mimo-v2.5-pro（一次性 · 本轮后自动解除）",
     toolUploadStatus: "工具结果已上传 · 模型在生成下一条响应前思考中…",
     turnStartFoldStatus: "回合开始：上下文接近上限，正在压缩历史…",
     turnStartFolded:
@@ -735,7 +735,7 @@ export const zhCN: TranslationSchema = {
         "  #<note>                  将 <note> 追加到 <project>/REASONIX.md（可提交）。",
       helpMemoryPinEx: "                             示例：#findByEmail 必须区分大小写",
       helpMemoryGlobal:
-        "  #g <note>                将 <note> 追加到 ~/.reasonix/REASONIX.md（全局，不提交）。",
+        "  #g <note>                将 <note> 追加到 ~/.mimo-reasonix/REASONIX.md（全局，不提交）。",
       helpMemoryGlobalEx: "                             示例：#g 始终使用 pnpm 而非 npm",
       helpMemoryPinBoth:
         "                             两者都固定到每个未来会话的前缀中。比 /memory 更快。",
@@ -827,7 +827,7 @@ export const zhCN: TranslationSchema = {
       hooksNone: "未配置 hooks。",
       hooksDropHint: "将包含 `hooks` 键的 settings.json 放入以下任一位置：",
       hooksProject: "  · {path}（项目）",
-      hooksProjectFallback: "  · <project>/.reasonix/settings.json（项目）",
+      hooksProjectFallback: "  · <project>/.mimo-reasonix/settings.json（项目）",
       hooksGlobal: "  · {path}（全局）",
       hooksEvents: "事件：PreToolUse, PostToolUse, UserPromptSubmit, Stop",
       hooksExitCodes: "exit 0 = 通过 · exit 2 = 阻止（Pre*）· 其他 = 警告",
@@ -898,7 +898,7 @@ export const zhCN: TranslationSchema = {
       cwdUsageNoCurrent: "用法：/cwd <path>   将工作区根目录切换到 <path>。",
     },
     model: {
-      modelHint: "尝试 deepseek-v4-flash 或 deepseek-v4-pro — 运行 /models 获取实时列表",
+      modelHint: "尝试 mimo-v2.5 或 mimo-v2.5-pro — 运行 /models 获取实时列表",
       modelUsage: "用法：/model <id>   （{hint}）",
       modelNotInCatalog:
         "model → {id}   （⚠ 不在获取的目录中：{list}。如果这是错误的，下次调用将返回 400 — 运行 /models 刷新。）",
@@ -920,7 +920,7 @@ export const zhCN: TranslationSchema = {
     },
     permissions: {
       mutateCodeOnly:
-        "/permissions add / remove / clear 仅在 `reasonix code` 中可用 — 它们编辑项目范围的允许列表（`~/.reasonix/config.json` projects[<root>].shellAllowed）。",
+        "/permissions add / remove / clear 仅在 `reasonix code` 中可用 — 它们编辑项目范围的允许列表（`~/.mimo-reasonix/config.json` projects[<root>].shellAllowed）。",
       addUsage:
         '用法：/permissions add <prefix>   （多 token 可用：/permissions add "git push origin"）',
       addAlready: "▸ 已允许：{prefix}",
@@ -1064,11 +1064,11 @@ export const zhCN: TranslationSchema = {
     },
     memory: {
       disabled:
-        "记忆已禁用（环境变量 REASONIX_MEMORY=off）。取消设置该变量以重新启用 — 此期间不会固定任何 REASONIX.md 或 ~/.reasonix/memory 内容。",
+        "记忆已禁用（环境变量 REASONIX_MEMORY=off）。取消设置该变量以重新启用 — 此期间不会固定任何 REASONIX.md 或 ~/.mimo-reasonix/memory 内容。",
       noRoot:
         "此会话无工作目录 — `/memory` 需要一个根目录来解析 REASONIX.md。（在测试环境中运行？）",
       listEmpty:
-        "尚无用户记忆。模型可以调用 `remember` 保存一个，或您可以在 ~/.reasonix/memory/global/ 或项目子目录中手动创建文件。",
+        "尚无用户记忆。模型可以调用 `remember` 保存一个，或您可以在 ~/.mimo-reasonix/memory/global/ 或项目子目录中手动创建文件。",
       listHeader: "用户记忆（{count}）：",
       listFooter: "查看正文：/memory show <name>   删除：/memory forget <name>",
       showUsage: "用法：/memory show <name>  或  /memory show <scope>/<name>",
@@ -1086,8 +1086,8 @@ export const zhCN: TranslationSchema = {
       noMemory: "在 {root} 中未固定记忆。",
       layers: "可用的三个层级：",
       layerProject: "  1. {file} — 可提交的团队记忆（在仓库中）。",
-      layerGlobal: "  2. ~/.reasonix/memory/global/ — 您的跨项目私有记忆。",
-      layerProjectHash: "  3. ~/.reasonix/memory/<project-hash>/ — 此项目的私有记忆。",
+      layerGlobal: "  2. ~/.mimo-reasonix/memory/global/ — 您的跨项目私有记忆。",
+      layerProjectHash: "  3. ~/.mimo-reasonix/memory/<project-hash>/ — 此项目的私有记忆。",
       askModel: "让模型 `remember` 某些内容，或直接手编辑文件。",
       changesNote: "更改在下次 /new 或启动时生效 — 系统提示词每会话哈希一次以保持前缀缓存热度。",
       subcommands:
@@ -1163,7 +1163,7 @@ export const zhCN: TranslationSchema = {
       switchedBraveNote:
         " 请设置环境变量 BRAVE_SEARCH_API_KEY 或 config 中的 `braveApiKey`；https://brave.com/search/api/ 每月 2000 次免费。",
       keyNeeded:
-        '未配置 "{engine}" 的 API 密钥。\n\n  1. 设置环境变量 {envVar}\n  2. 或内联提供：/search-engine {engine} <your-key>\n  3. 或在 ~/.reasonix/config.json 中添加 "{engine}ApiKey"\n\n完成后重新执行 /search-engine {engine}。',
+        '未配置 "{engine}" 的 API 密钥。\n\n  1. 设置环境变量 {envVar}\n  2. 或内联提供：/search-engine {engine} <your-key>\n  3. 或在 ~/.mimo-reasonix/config.json 中添加 "{engine}ApiKey"\n\n完成后重新执行 /search-engine {engine}。',
       keySaved: " API 密钥已保存到配置。",
       confirmed: '网页搜索引擎已设为 "{engine}"{detail}。下一轮模型调用将生效。',
       confirmedDetail: "（{endpoint}）",
@@ -1171,8 +1171,8 @@ export const zhCN: TranslationSchema = {
     skill: {
       listEmpty: "未找到技能。Reasonix 从以下位置读取技能：",
       listProjectScope:
-        "  · <project>/.reasonix/skills/<name>/SKILL.md  （或 <name>.md） — 项目范围",
-      listGlobalScope: "  · ~/.reasonix/skills/<name>/SKILL.md  （或 <name>.md） — 全局范围",
+        "  · <project>/.mimo-reasonix/skills/<name>/SKILL.md  （或 <name>.md） — 项目范围",
+      listGlobalScope: "  · ~/.mimo-reasonix/skills/<name>/SKILL.md  （或 <name>.md） — 全局范围",
       listProjectOnly: "  （项目范围仅在 `reasonix code` 中活跃）",
       listFrontmatter: "每个文件的 frontmatter 至少需要 `name` 和 `description`。",
       listInvoke: "使用 `/skill <name> [args]` 调用技能，或让模型调用 `run_skill`。",
@@ -1267,7 +1267,7 @@ export const zhCN: TranslationSchema = {
     allowOnce: "允许一次",
     allowOnceDesc: "本次允许，本会话内此目录不再询问",
     allowAlways: "始终允许",
-    allowAlwaysDesc: "记住 `{prefix}`，本项目永久允许（写入 ~/.reasonix/config.json）",
+    allowAlwaysDesc: "记住 `{prefix}`，本项目永久允许（写入 ~/.mimo-reasonix/config.json）",
     deny: "拒绝",
     denyDesc: "按 Tab 添加说明，告诉模型原因",
     pathLabel: "路径",
@@ -1487,7 +1487,7 @@ export const zhCN: TranslationSchema = {
     metasoParseError: "web_search: Metaso 返回无法解析的响应（HTTP {status}）— 稍后重试",
     metasoApiError: "web_search: Metaso API 错误（code {code}: {message}）— 稍后重试",
     tavilyMissingKey:
-      "web_search: Tavily 后端需要 API 密钥 — 设置 TAVILY_API_KEY 环境变量，或在 ~/.reasonix/config.json 中配置 `tavilyApiKey`；https://tavily.com 每月 1000 次免费",
+      "web_search: Tavily 后端需要 API 密钥 — 设置 TAVILY_API_KEY 环境变量，或在 ~/.mimo-reasonix/config.json 中配置 `tavilyApiKey`；https://tavily.com 每月 1000 次免费",
     tavilyUnauthorized:
       "web_search: Tavily API 密钥被拒绝 — 检查 TAVILY_API_KEY，或在 https://tavily.com 获取密钥",
     tavilyRateLimit:
@@ -1496,7 +1496,7 @@ export const zhCN: TranslationSchema = {
       "web_search: Tavily 服务器错误（{status}）— 稍后重试，或使用 /search-engine bing|bing-intl|searxng|metaso|tavily|perplexity|exa|brave|ollama 切换引擎",
     tavilyParseError: "web_search: Tavily 返回无法解析的响应（HTTP {status}）— 稍后重试",
     perplexityMissingKey:
-      "web_search: Perplexity 后端需要 API 密钥 — 设置 PERPLEXITY_API_KEY 环境变量，或在 ~/.reasonix/config.json 中配置 `perplexityApiKey`；在 https://perplexity.ai/settings/api 获取密钥",
+      "web_search: Perplexity 后端需要 API 密钥 — 设置 PERPLEXITY_API_KEY 环境变量，或在 ~/.mimo-reasonix/config.json 中配置 `perplexityApiKey`；在 https://perplexity.ai/settings/api 获取密钥",
     perplexityUnauthorized:
       "web_search: Perplexity API 密钥被拒绝 — 检查 PERPLEXITY_API_KEY，或在 https://perplexity.ai/settings/api 获取密钥",
     perplexityRateLimit:
@@ -1505,7 +1505,7 @@ export const zhCN: TranslationSchema = {
       "web_search: Perplexity 服务器错误（{status}）— 稍后重试，或使用 /search-engine bing|bing-intl|searxng|metaso|tavily|perplexity|exa|brave|ollama 切换引擎",
     perplexityParseError: "web_search: Perplexity 返回无法解析的响应（HTTP {status}）— 稍后重试",
     exaMissingKey:
-      "web_search: Exa 后端需要 API 密钥 — 设置 EXA_API_KEY 环境变量，或在 ~/.reasonix/config.json 中配置 `exaApiKey`；https://exa.ai 每月 1000 次免费",
+      "web_search: Exa 后端需要 API 密钥 — 设置 EXA_API_KEY 环境变量，或在 ~/.mimo-reasonix/config.json 中配置 `exaApiKey`；https://exa.ai 每月 1000 次免费",
     exaUnauthorized:
       "web_search: Exa API 密钥被拒绝 — 检查 EXA_API_KEY，或在 https://exa.ai 获取密钥",
     exaRateLimit:
@@ -1523,7 +1523,7 @@ export const zhCN: TranslationSchema = {
       "web_search: Brave Search 服务器错误（{status}）— 稍后重试，或使用 /search-engine bing|bing-intl|searxng|metaso|tavily|perplexity|exa|brave|ollama 切换引擎",
     braveParseError: "web_search: Brave Search 返回无法解析的响应（HTTP {status}）— 稍后重试",
     ollamaMissingKey:
-      "Ollama 需要 API 密钥 — 设置 OLLAMA_API_KEY 环境变量，或在 ~/.reasonix/config.json 中配置 `ollamaApiKey`；在 https://ollama.com/settings/keys 获取密钥",
+      "Ollama 需要 API 密钥 — 设置 OLLAMA_API_KEY 环境变量，或在 ~/.mimo-reasonix/config.json 中配置 `ollamaApiKey`；在 https://ollama.com/settings/keys 获取密钥",
     ollamaUnauthorized:
       "Ollama API 密钥被拒绝 — 检查 OLLAMA_API_KEY 或在 https://ollama.com/settings/keys 获取密钥",
     ollamaRateLimit:
@@ -1532,7 +1532,7 @@ export const zhCN: TranslationSchema = {
       "Ollama 服务器错误（{status}）— {url} — 稍后重试，或使用 /search-engine bing|bing-intl|searxng|metaso|tavily|perplexity|exa|brave|ollama 切换引擎",
     ollamaParseError: "Ollama 返回无法解析的响应（HTTP {status}）— {url} — 稍后重试",
     fetchOllamaMissingKey:
-      "web_fetch: Ollama 抓取需要 API 密钥 — 设置 OLLAMA_API_KEY 环境变量，或在 ~/.reasonix/config.json 中配置 `ollamaApiKey`；在 https://ollama.com/settings/keys 获取密钥",
+      "web_fetch: Ollama 抓取需要 API 密钥 — 设置 OLLAMA_API_KEY 环境变量，或在 ~/.mimo-reasonix/config.json 中配置 `ollamaApiKey`；在 https://ollama.com/settings/keys 获取密钥",
     fetchOllamaUnauthorized:
       "web_fetch: Ollama API 密钥被拒绝 — 检查 OLLAMA_API_KEY 或在 https://ollama.com/settings/keys 获取密钥",
     fetchOllamaRateLimit: "web_fetch: Ollama 抓取达到速率限制或配额用尽 — 等待后重试",

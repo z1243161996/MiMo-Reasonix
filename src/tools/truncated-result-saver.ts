@@ -28,8 +28,8 @@ function useHomeFallback(rootDir: string): boolean {
 /** Resolve the absolute storage directory for truncated results. */
 export function storageDir(rootDir: string): string {
   const base = useHomeFallback(rootDir)
-    ? join(homedir(), ".reasonix")
-    : join(resolve(rootDir), ".reasonix");
+    ? join(homedir(), ".mimo-reasonix")
+    : join(resolve(rootDir), ".mimo-reasonix");
   return join(base, TRUNCATED_DIR);
 }
 

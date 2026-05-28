@@ -13,7 +13,7 @@ vi.mock("./cards", () => ({
 
 import { ConfirmApprovalCard, PathAccessApprovalCard } from "./thread";
 
-function makeShellPrompt(command: string): import("@reasonix/core-utils").ApprovalPrompt {
+function makeShellPrompt(command: string): import("@mimo-reasonix/core-utils").ApprovalPrompt {
   return {
     id: 1,
     kind: "shell",
@@ -39,7 +39,7 @@ function makeShellPrompt(command: string): import("@reasonix/core-utils").Approv
 function makePathPrompt(
   path: string,
   intent: "read" | "write",
-): import("@reasonix/core-utils").ApprovalPrompt {
+): import("@mimo-reasonix/core-utils").ApprovalPrompt {
   return {
     id: 2,
     kind: "path",

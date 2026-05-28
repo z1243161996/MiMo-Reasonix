@@ -6,7 +6,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 /** npm registry endpoint for the `latest` dist-tag of this package. */
-const REGISTRY_URL = "https://registry.npmjs.org/reasonix/latest";
+const REGISTRY_URL = "https://registry.npmjs.org/mimo-reasonix/latest";
 
 /** TTL for the on-disk cache entry. 24h keeps noise low; users who
  * want a fresh check can run `reasonix update` which passes
@@ -16,7 +16,7 @@ export const LATEST_CACHE_TTL_MS = 24 * 60 * 60 * 1000;
 /** Network timeout. Short — we never block the UI waiting on this. */
 export const LATEST_FETCH_TIMEOUT_MS = 2_000;
 
-/** `name === "reasonix"` guard avoids picking up an outer package.json when loaded as a dep. */
+/** `name === "mimo-reasonix"` guard avoids picking up an outer package.json when loaded as a dep. */
 function readPackageVersion(): string {
   try {
     let dir = dirname(fileURLToPath(import.meta.url));
@@ -24,7 +24,7 @@ function readPackageVersion(): string {
       const p = join(dir, "package.json");
       if (existsSync(p)) {
         const pkg = JSON.parse(readFileSync(p, "utf8"));
-        if (pkg?.name === "reasonix" && typeof pkg.version === "string") {
+        if (pkg?.name === "mimo-reasonix" && typeof pkg.version === "string") {
           return pkg.version;
         }
       }
@@ -47,7 +47,7 @@ interface VersionCacheEntry {
 }
 
 function cachePath(homeDirOverride?: string): string {
-  return join(homeDirOverride ?? homedir(), ".reasonix", "version-cache.json");
+  return join(homeDirOverride ?? homedir(), ".mimo-reasonix", "version-cache.json");
 }
 
 function readCache(homeDirOverride?: string): VersionCacheEntry | null {
@@ -150,7 +150,7 @@ export function detectInstallSource(bin?: string): InstallSource {
   if (/\/\.bun\//.test(norm) || /\/bun\/install\//.test(norm)) return "bun";
   if (/\/pnpm\/global\//.test(norm) || /\/pnpm\/[^/]+\/node_modules\//.test(norm)) return "pnpm";
   if (/\/yarn\/global\//.test(norm) || /\/\.yarn\/global\//.test(norm)) return "yarn";
-  if (/\/node_modules\/reasonix(\b|\/)/.test(norm)) return "npm";
+  if (/\/node_modules\/mimo-reasonix(\b|\/)/.test(norm)) return "npm";
   return "unknown";
 }
 
@@ -164,9 +164,9 @@ export function detectNpmInstallPrefix(bin?: string): string | null {
   const raw = bin ?? process.argv[1] ?? "";
   if (!raw) return null;
   const norm = raw.replace(/\\/g, "/");
-  const posix = norm.match(/^(.+?)\/lib\/node_modules\/reasonix(?:\/|$)/i);
+  const posix = norm.match(/^(.+?)\/lib\/node_modules\/mimo-reasonix(?:\/|$)/i);
   if (posix) return posix[1] ?? null;
-  const win = norm.match(/^(.+?)\/node_modules\/reasonix(?:\/|$)/i);
+  const win = norm.match(/^(.+?)\/node_modules\/mimo-reasonix(?:\/|$)/i);
   if (win) return win[1] ?? null;
   return null;
 }

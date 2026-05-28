@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { applyMemoryStack } from "../memory/user.js";
 import { TUI_FORMATTING_RULES, escalationContract } from "../prompt-fragments.js";
 
-const DEFAULT_CODE_MODEL = "deepseek-v4-flash";
+const DEFAULT_CODE_MODEL = "mimo-v2.5";
 
 /** Built per-session against the resolved model id so the contract names the actual tier (#582). */
 export function codeSystemBase(modelId: string): string {

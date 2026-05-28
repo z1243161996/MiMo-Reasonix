@@ -17,7 +17,7 @@ export function unsupportedNodeMessage(
   version = process.versions.node,
   minMajor = MIN_NODE_MAJOR,
 ): string {
-  return `Reasonix requires Node ${minMajor}+ (current: ${version}). Install Node ${minMajor} or newer and rerun reasonix.`;
+  return `MiMo-Reasonix requires Node ${minMajor}+ (current: ${version}). Install Node ${minMajor} or newer and rerun mimo-reasonix.`;
 }
 
 export function enforceSupportedNodeVersion(

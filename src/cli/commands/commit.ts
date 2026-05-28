@@ -11,13 +11,13 @@ import { loadEndpoint } from "../../config.js";
 import { loadDotenv } from "../../env.js";
 
 export interface CommitOptions {
-  /** Override the default model (deepseek-v4-flash). */
+  /** Override the default model (mimo-v2.5). */
   model?: string;
   /** Skip the confirmation step — useful in scripts where the diff has been pre-reviewed. */
   yes?: boolean;
 }
 
-const DEFAULT_MODEL = "deepseek-v4-flash";
+const DEFAULT_MODEL = "mimo-v2.5";
 const DIFF_BYTE_CAP = 80 * 1024;
 const LOG_COUNT = 10;
 

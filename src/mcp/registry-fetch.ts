@@ -19,7 +19,7 @@ export const FETCH_TIMEOUT_MS = 10_000;
 export const CACHE_SCHEMA_VERSION = 2;
 
 export function defaultCachePath(): string {
-  return join(homedir(), ".reasonix", "mcp-registry-cache.json");
+  return join(homedir(), ".mimo-reasonix", "mcp-registry-cache.json");
 }
 
 function readCache(path: string): CacheFile | null {

@@ -66,7 +66,7 @@ export async function handleHealth(
     return { status: 405, body: { error: "GET only" } };
   }
   const home = homedir();
-  const reasonixHome = join(home, ".reasonix");
+  const reasonixHome = join(home, ".mimo-reasonix");
 
   const sessionsStat = dirSize(join(reasonixHome, "sessions"));
   const memoryStat = dirSize(join(reasonixHome, "memory"));

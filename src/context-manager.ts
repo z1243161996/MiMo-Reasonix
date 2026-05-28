@@ -1,4 +1,4 @@
-import { COMPACTION_SUMMARY_MARKER } from "@reasonix/core-utils";
+import { COMPACTION_SUMMARY_MARKER } from "@mimo-reasonix/core-utils";
 import type { DeepSeekClient } from "./client.js";
 import { Usage } from "./client.js";
 import { healLoadedMessages } from "./loop.js";
@@ -275,7 +275,7 @@ export class ContextManager {
     messagesToSummarize: ChatMessage[],
     pinnedSkillNames: string[],
   ): Promise<{ content: string; reasoningContent: string }> {
-    const summaryModel = "deepseek-v4-flash";
+    const summaryModel = "mimo-v2.5";
     const healed = healLoadedMessages(messagesToSummarize, DEFAULT_MAX_RESULT_CHARS).messages;
     const agentSystem = this.deps.getSystemPrompt();
     const fewShots = this.deps.getFewShots?.() ?? [];

@@ -394,4 +394,4 @@ export function isCommandAllowed(
   return chainAllowed(chain, (seg) => isAllowed(seg, extra, projectRoot, sensitivePathConfig));
 }
 
-export { derivePrefix } from "@reasonix/core-utils";
+export { derivePrefix } from "@mimo-reasonix/core-utils";
