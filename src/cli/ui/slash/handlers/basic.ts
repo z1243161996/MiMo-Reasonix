@@ -6,8 +6,8 @@ import { SLASH_COMMANDS, SLASH_GROUP_ORDER, orderSlashCommandsByGroup } from "..
 import type { SlashHandler } from "../dispatch.js";
 import type { SlashCommandSpec, SlashGroup } from "../types.js";
 
-const ABOUT_WEBSITE = "https://esengine.github.io/DeepSeek-Reasonix/";
-const ABOUT_REPO = "https://github.com/esengine/DeepSeek-Reasonix";
+const ABOUT_WEBSITE = "https://github.com/z1243161996/MiMo-Reasonix";
+const ABOUT_REPO = "https://github.com/z1243161996/MiMo-Reasonix";
 const ABOUT_LICENSE = "MIT";
 
 const exit: SlashHandler = () => ({ exit: true });

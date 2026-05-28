@@ -1,14 +1,14 @@
 # Contributing to Reasonix
 
 Thanks for showing up. Reasonix is a small, opinionated codebase
-maintained primarily by [@esengine](https://github.com/esengine);
+maintained primarily by [@z1243161996](https://github.com/z1243161996);
 PRs are welcome, but read this first so the round-trip is short.
 
 ## Setup
 
 ```sh
-git clone https://github.com/esengine/reasonix
-cd reasonix
+git clone https://github.com/z1243161996/MiMo-Reasonix
+cd MiMo-Reasonix
 npm install
 npm run dev          # tsx src/cli/index.ts — live source
 ```

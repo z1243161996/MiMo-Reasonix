@@ -597,9 +597,9 @@ Do not:
 
 Docs are the fallback, not the main path:
 - QQ Bot apply page: https://q.qq.com/qqbot/openclaw/login.html
-- Official config guide (zh): https://esengine.github.io/DeepSeek-Reasonix/configuration.html?lang=zh
-- QQ guide (zh): https://github.com/esengine/DeepSeek-Reasonix/blob/main/docs/qq-connect.zh-CN.md
-- Non-official fallback mirror for the QQ guide: https://cdn.jsdelivr.net/gh/esengine/DeepSeek-Reasonix@main/docs/qq-connect.zh-CN.md
+- Official config guide (zh): https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/CLI-REFERENCE.md
+- QQ guide (zh): https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/qq-connect.zh-CN.md
+- Non-official fallback mirror for the QQ guide: https://cdn.jsdelivr.net/gh/z1243161996/MiMo-Reasonix@main/docs/qq-connect.zh-CN.md
 
 Use this skill when the user needs help getting QQ working.`;
 

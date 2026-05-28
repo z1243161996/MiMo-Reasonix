@@ -27,7 +27,7 @@ export interface FeedbackDiagnosticInput {
   sessionId?: string;
 }
 
-const FEEDBACK_ISSUE_BASE = "https://github.com/esengine/DeepSeek-Reasonix/issues/new";
+const FEEDBACK_ISSUE_BASE = "https://github.com/z1243161996/MiMo-Reasonix/issues/new";
 
 /** Bare URL used as a fallback when query-pre-fill isn't possible (only really if the body somehow blew past URL limits). */
 export const FEEDBACK_ISSUE_URL = FEEDBACK_ISSUE_BASE;

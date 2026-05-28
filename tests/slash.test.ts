@@ -126,8 +126,8 @@ describe("handleSlash", () => {
   it("/about prints version, website, repo, and MIT license", () => {
     const r = handleSlash("about", [], makeLoop());
     expect(r.info).toContain(VERSION);
-    expect(r.info).toContain("https://esengine.github.io/DeepSeek-Reasonix/");
-    expect(r.info).toContain("https://github.com/esengine/DeepSeek-Reasonix");
+    expect(r.info).toContain("https://github.com/z1243161996/MiMo-Reasonix");
+    expect(r.info).toContain("https://github.com/z1243161996/MiMo-Reasonix");
     expect(r.info).toContain("MIT");
     expect(SLASH_COMMANDS.find((s) => s.cmd === "about")?.group).toBe("info");
   });
