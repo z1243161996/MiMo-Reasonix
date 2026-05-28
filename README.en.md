@@ -19,8 +19,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/esengine/MiMo-Reasonix"><img src="https://img.shields.io/github/license/esengine/MiMo-Reasonix.svg?style=flat-square&color=8b949e&labelColor=161b22" alt="license"/></a>
-  <a href="https://github.com/esengine/MiMo-Reasonix"><img src="https://img.shields.io/node/v/reasonix.svg?style=flat-square&color=5fa04e&labelColor=161b22&logo=nodedotjs&logoColor=white" alt="node"/></a>
+  <a href="https://github.com/z1243161996/MiMo-Reasonix"><img src="https://img.shields.io/github/license/z1243161996/MiMo-Reasonix.svg?style=flat-square&color=8b949e&labelColor=161b22" alt="license"/></a>
+  <a href="https://github.com/z1243161996/MiMo-Reasonix"><img src="https://img.shields.io/node/v/mimo-reasonix.svg?style=flat-square&color=5fa04e&labelColor=161b22&logo=nodedotjs&logoColor=white" alt="node"/></a>
   <a href="https://discord.gg/XF78rEME2D"><img src="https://img.shields.io/badge/discord-join-5865F2.svg?style=flat-square&labelColor=161b22&logo=discord&logoColor=white" alt="Discord"/></a>
 </p>
 
@@ -166,7 +166,7 @@ One JSON file at `~/.mimo-reasonix/config.json` plus per-project overrides under
 
 > MiMo-Reasonix is a community fork of DeepSeek-Reasonix. Original project: [esengine/DeepSeek-Reasonix](https://github.com/esengine/DeepSeek-Reasonix).
 
-Scoped starter tickets under the [`good first issue`](https://github.com/esengine/MiMo-Reasonix/labels/good%20first%20issue) label.
+Scoped starter tickets under the [`good first issue`](https://github.com/z1243161996/MiMo-Reasonix/labels/good%20first%20issue) label.
 
 <br/>
 
