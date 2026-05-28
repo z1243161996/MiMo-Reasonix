@@ -280,7 +280,7 @@ describe("chatCommand MCP startup summary states", { timeout: 30_000 }, () => {
     });
 
     expect(props.startupInfoHints).toEqual([
-      "\u2139 no MCP servers configured \u2014 try: `reasonix setup` to re-pick, or `reasonix mcp install filesystem` \u00b7 shell commands gate per-call (allow once / allow always / deny), no global allow-all",
+      "\u2139 no MCP servers configured \u2014 try: `mimo-reasonix setup` to re-pick, or `mimo-reasonix mcp install filesystem` \u00b7 shell commands gate per-call (allow once / allow always / deny), no global allow-all",
     ]);
     expect(props.startupInfoHints.join("\n")).not.toContain("/copy");
   });
@@ -301,7 +301,7 @@ describe("chatCommand MCP startup summary states", { timeout: 30_000 }, () => {
       lang: "zh-CN",
     });
     expect(props.startupInfoHints).toEqual([
-      "\u2139 未配置 MCP 服务器 —— 可尝试：`reasonix setup` 重新选择，或 `reasonix mcp install filesystem` · shell 命令按次审批（allow once / allow always / deny），无全局放行",
+      "\u2139 未配置 MCP 服务器 —— 可尝试：`mimo-reasonix setup` 重新选择，或 `mimo-mimo-reasonix mcp install filesystem` · shell 命令按次审批（allow once / allow always / deny），无全局放行",
     ]);
     expect(props.startupInfoHints.join("\n")).not.toContain("/copy");
   });

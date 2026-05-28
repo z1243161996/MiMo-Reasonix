@@ -73,7 +73,7 @@ describe("decideHeapTargetMb (issue #1011)", () => {
     ).toBeNull();
   });
 
-  it("returns null after a successful re-exec (REASONIX_HEAP_REEXEC=1 set)", () => {
+  it("returns null after a successful re-exec (MIMO_REASONIX_HEAP_REEXEC=1 set)", () => {
     expect(
       decideHeapTargetMb({
         ...base,

@@ -99,7 +99,7 @@ describe("formatLoopError", () => {
     const raw = new Error('DeepSeek 503: {"error":{"message":"Service unavailable"}}');
     const out = formatLoopError(raw);
     expect(out).toMatch(/service unavailable \(503\)/);
-    expect(out).toMatch(/DeepSeek-side problem, not Reasonix/);
+    expect(out).toMatch(/DeepSeek-side problem, not MiMo-Reasonix/);
     expect(out).toMatch(/Already retried 4×/);
     expect(out).toContain("status.deepseek.com");
     expect(out).not.toMatch(/main API answered/);

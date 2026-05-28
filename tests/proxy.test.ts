@@ -181,11 +181,11 @@ describe("installProxyIfConfigured", () => {
     expect(raws).toContain(".private.lan");
   });
 
-  it("layers REASONIX_NO_PROXY on top of system NO_PROXY (app-specific override)", () => {
+  it("layers MIMO_REASONIX_NO_PROXY on top of system NO_PROXY (app-specific override)", () => {
     const result = installProxyIfConfigured({
       HTTPS_PROXY: "http://example:8080",
       NO_PROXY: "system.corp.example",
-      REASONIX_NO_PROXY: "app.specific.example, .mimo-reasonix.lan",
+      MIMO_REASONIX_NO_PROXY: "app.specific.example, .mimo-reasonix.lan",
     });
     const raws = result?.noProxy.map((p) => p.raw) ?? [];
     expect(raws).toContain("system.corp.example");
@@ -230,10 +230,10 @@ describe("installProxyIfConfigured", () => {
     expect(raws).toContain("localhost");
   });
 
-  it("env REASONIX_PROXY_DEEPSEEK_DIRECT=0 drops deepseek even without config override (#1497)", () => {
+  it("env MIMO_REASONIX_PROXY_DEEPSEEK_DIRECT=0 drops deepseek even without config override (#1497)", () => {
     const result = installProxyIfConfigured({
       HTTPS_PROXY: "http://example:8080",
-      REASONIX_PROXY_DEEPSEEK_DIRECT: "0",
+      MIMO_REASONIX_PROXY_DEEPSEEK_DIRECT: "0",
     });
     const raws = result?.noProxy.map((p) => p.raw) ?? [];
     expect(raws).not.toContain("api.deepseek.com");
@@ -306,7 +306,7 @@ describe("resolveNoProxy", () => {
 
   it("partitions patterns by source (defaults / env / REASONIX / extra)", () => {
     const r = resolveNoProxy(
-      { NO_PROXY: "system.example", REASONIX_NO_PROXY: "app.example" },
+      { NO_PROXY: "system.example", MIMO_REASONIX_NO_PROXY: "app.example" },
       { extraNoProxy: ["config.example"] },
     );
     expect(r.defaults.map((p) => p.raw)).toContain("api.deepseek.com");
@@ -334,15 +334,15 @@ describe("resolveNoProxy", () => {
     expect(matchesNoProxy("127.0.0.1", r.all)).toBe(true);
   });
 
-  it("env REASONIX_PROXY_DEEPSEEK_DIRECT=0 drops the DeepSeek bypass (#1497)", () => {
-    const r = resolveNoProxy({ REASONIX_PROXY_DEEPSEEK_DIRECT: "0" }, {});
+  it("env MIMO_REASONIX_PROXY_DEEPSEEK_DIRECT=0 drops the DeepSeek bypass (#1497)", () => {
+    const r = resolveNoProxy({ MIMO_REASONIX_PROXY_DEEPSEEK_DIRECT: "0" }, {});
     expect(matchesNoProxy("api.deepseek.com", r.all)).toBe(false);
     expect(matchesNoProxy("127.0.0.1", r.all)).toBe(true);
   });
 
-  it("env REASONIX_PROXY_DEEPSEEK_DIRECT wins over config when set", () => {
+  it("env MIMO_REASONIX_PROXY_DEEPSEEK_DIRECT wins over config when set", () => {
     const r = resolveNoProxy(
-      { REASONIX_PROXY_DEEPSEEK_DIRECT: "1" },
+      { MIMO_REASONIX_PROXY_DEEPSEEK_DIRECT: "1" },
       { bypassDeepSeekDirect: false },
     );
     expect(matchesNoProxy("api.deepseek.com", r.all)).toBe(true);
@@ -360,24 +360,26 @@ describe("resolveBypassDeepSeekDirect (#1497)", () => {
 
   it("env false-y values flip the default off", () => {
     for (const v of ["0", "false", "no", "off", "FALSE", "Off"]) {
-      expect(resolveBypassDeepSeekDirect({ REASONIX_PROXY_DEEPSEEK_DIRECT: v }, undefined)).toBe(
-        false,
-      );
+      expect(
+        resolveBypassDeepSeekDirect({ MIMO_REASONIX_PROXY_DEEPSEEK_DIRECT: v }, undefined),
+      ).toBe(false);
     }
   });
 
   it("env truthy values force the bypass back on (override config false)", () => {
     for (const v of ["1", "true", "yes", "on", "TRUE", "Yes"]) {
-      expect(resolveBypassDeepSeekDirect({ REASONIX_PROXY_DEEPSEEK_DIRECT: v }, false)).toBe(true);
+      expect(resolveBypassDeepSeekDirect({ MIMO_REASONIX_PROXY_DEEPSEEK_DIRECT: v }, false)).toBe(
+        true,
+      );
     }
   });
 
   it("unrecognized env values fall through to config", () => {
-    expect(resolveBypassDeepSeekDirect({ REASONIX_PROXY_DEEPSEEK_DIRECT: "maybe" }, false)).toBe(
-      false,
-    );
     expect(
-      resolveBypassDeepSeekDirect({ REASONIX_PROXY_DEEPSEEK_DIRECT: "maybe" }, undefined),
+      resolveBypassDeepSeekDirect({ MIMO_REASONIX_PROXY_DEEPSEEK_DIRECT: "maybe" }, false),
+    ).toBe(false);
+    expect(
+      resolveBypassDeepSeekDirect({ MIMO_REASONIX_PROXY_DEEPSEEK_DIRECT: "maybe" }, undefined),
     ).toBe(true);
   });
 });

@@ -150,11 +150,11 @@ export interface ProxyConfig {
   disabled?: boolean;
   /** Additional NO_PROXY patterns (curl syntax). Additive on top of env NO_PROXY and the default DeepSeek-bypass whitelist. */
   noProxy?: string[];
-  /** When false, route api.deepseek.com / *.deepseek.com through the proxy too (issue #1497 — corporate firewalls that block direct egress). Default true preserves the clash/v2ray US-exit-IP 403 fix. Env `REASONIX_PROXY_DEEPSEEK_DIRECT` overrides. */
+  /** When false, route api.deepseek.com / *.deepseek.com through the proxy too (issue #1497 — corporate firewalls that block direct egress). Default true preserves the clash/v2ray US-exit-IP 403 fix. Env `MIMO_REASONIX_PROXY_DEEPSEEK_DIRECT` overrides. */
   bypassDeepSeekDirect?: boolean;
 }
 
-export interface ReasonixConfig {
+export interface MimoReasonixConfig {
   apiKey?: string;
   baseUrl?: string;
   lang?: LanguageCode;
@@ -318,7 +318,7 @@ const BUILTIN_TYPE_DOCS: Record<string, string> = {
 
 /** Resolve the merged registry of memory types — built-ins, overlaid by anything in `config.memory.customTypes`. */
 export function loadMemoryTypeRegistry(
-  cfg: ReasonixConfig = readConfig(),
+  cfg: MimoReasonixConfig = readConfig(),
 ): MemoryTypeRegistryEntry[] {
   const out: MemoryTypeRegistryEntry[] = [];
   for (const name of ["user", "feedback", "project", "reference"]) {
@@ -344,7 +344,7 @@ export function loadMemoryTypeRegistry(
 
 export function memoryTypeDefaults(
   typeName: string,
-  cfg: ReasonixConfig = readConfig(),
+  cfg: MimoReasonixConfig = readConfig(),
 ): { priority?: "low" | "medium" | "high"; expires?: "project_end" } {
   const found = loadMemoryTypeRegistry(cfg).find((e) => e.name === typeName);
   if (!found) return {};
@@ -452,7 +452,7 @@ function sanitizeStringArrayField(
   parent[leaf] = filtered;
 }
 
-export function readConfig(path: string = defaultConfigPath()): ReasonixConfig {
+export function readConfig(path: string = defaultConfigPath()): MimoReasonixConfig {
   try {
     // Strip the UTF-8 BOM if a foreign writer left one in — Windows
     // PowerShell 5's `Set-Content -Encoding UTF8` and several text
@@ -467,7 +467,7 @@ export function readConfig(path: string = defaultConfigPath()): ReasonixConfig {
       for (const segments of STRING_ARRAY_FIELDS) {
         sanitizeStringArrayField(cfg, segments, path);
       }
-      return cfg as ReasonixConfig;
+      return cfg as MimoReasonixConfig;
     }
   } catch {
     /* missing or malformed → empty config */
@@ -491,7 +491,7 @@ export function ensureDashboardToken(path: string = defaultConfigPath()): string
   const existing = cfg.dashboard?.token?.trim();
   if (existing && existing.length >= 16) return existing;
   const minted = randomBytes(32).toString("hex");
-  const next: ReasonixConfig = { ...cfg, dashboard: { ...cfg.dashboard, token: minted } };
+  const next: MimoReasonixConfig = { ...cfg, dashboard: { ...cfg.dashboard, token: minted } };
   writeConfig(next, path);
   return minted;
 }
@@ -501,7 +501,7 @@ export function saveDashboardPort(port: number, path: string = defaultConfigPath
   if (!Number.isInteger(port) || port < 1 || port > 65535) return;
   const cfg = readConfig(path);
   if (cfg.dashboard?.port === port) return;
-  const next: ReasonixConfig = { ...cfg, dashboard: { ...cfg.dashboard, port } };
+  const next: MimoReasonixConfig = { ...cfg, dashboard: { ...cfg.dashboard, port } };
   writeConfig(next, path);
 }
 
@@ -510,11 +510,11 @@ export function clearDashboardToken(path: string = defaultConfigPath()): void {
   const cfg = readConfig(path);
   if (!cfg.dashboard?.token) return;
   const { token: _drop, ...rest } = cfg.dashboard;
-  const next: ReasonixConfig = { ...cfg, dashboard: rest };
+  const next: MimoReasonixConfig = { ...cfg, dashboard: rest };
   writeConfig(next, path);
 }
 
-export function writeConfig(cfg: ReasonixConfig, path: string = defaultConfigPath()): void {
+export function writeConfig(cfg: MimoReasonixConfig, path: string = defaultConfigPath()): void {
   mkdirSync(dirname(path), { recursive: true });
   // Atomic — write to a sibling tmp then rename. A torn write (process
   // killed mid-write, or another reader catching the file before
@@ -533,7 +533,7 @@ export function loadLanguage(path: string = defaultConfigPath()): LanguageCode |
 
 export function mcpEnvFor(
   serverName: string | null | undefined,
-  cfg: ReasonixConfig,
+  cfg: MimoReasonixConfig,
 ): Record<string, string> | undefined {
   if (!serverName) return undefined;
   const entry = cfg.mcpEnv?.[serverName];
@@ -566,7 +566,10 @@ function normalizeStringRecord(value: unknown): Record<string, string> | undefin
   return Object.keys(out).length > 0 ? out : undefined;
 }
 
-export function normalizeMcpConfig(cfg: ReasonixConfig, extraLegacy?: string[]): McpServerSpec[] {
+export function normalizeMcpConfig(
+  cfg: MimoReasonixConfig,
+  extraLegacy?: string[],
+): McpServerSpec[] {
   const result: McpServerSpec[] = [];
   const seen = new Set<string>();
 
@@ -932,7 +935,7 @@ export function removeSkillPath(
 }
 
 export function searchEnabled(path: string = defaultConfigPath()): boolean {
-  const env = process.env.REASONIX_SEARCH;
+  const env = process.env.MIMO_REASONIX_SEARCH;
   if (env === "off" || env === "false" || env === "0") return false;
   const cfg = readConfig(path).search;
   if (cfg === false) return false;
@@ -940,7 +943,7 @@ export function searchEnabled(path: string = defaultConfigPath()): boolean {
 }
 
 export function loadJavaSourceEnabled(path: string = defaultConfigPath()): boolean {
-  const env = process.env.REASONIX_JAVA_SOURCE;
+  const env = process.env.MIMO_REASONIX_JAVA_SOURCE;
   if (env === "1" || env === "true") return true;
   const cfg = readConfig(path).javaSource;
   return cfg === true;
@@ -990,7 +993,7 @@ export function saveApiKey(key: string, path: string = defaultConfigPath()): voi
 }
 
 /** Windows: case-insensitive — NTFS treats `F:\Foo` and `f:\foo` as one directory (#402). */
-function findProjectKey(cfg: ReasonixConfig, rootDir: string): string | undefined {
+function findProjectKey(cfg: MimoReasonixConfig, rootDir: string): string | undefined {
   const projects = cfg.projects;
   if (!projects) return undefined;
   if (Object.hasOwn(projects, rootDir)) return rootDir;
@@ -1399,7 +1402,8 @@ export function resolveSemanticEmbeddingConfig(
   return {
     provider: "ollama",
     baseUrl: user.ollama?.baseUrl?.trim() || process.env.OLLAMA_URL || DEFAULT_OLLAMA_URL,
-    model: user.ollama?.model?.trim() || process.env.REASONIX_EMBED_MODEL || DEFAULT_EMBED_MODEL,
+    model:
+      user.ollama?.model?.trim() || process.env.MIMO_REASONIX_EMBED_MODEL || DEFAULT_EMBED_MODEL,
     timeoutMs: DEFAULT_TIMEOUT_MS,
   };
 }
@@ -1413,7 +1417,9 @@ export function redactSemanticEmbeddingConfig(
     ollama: {
       baseUrl: normalized.ollama?.baseUrl?.trim() || process.env.OLLAMA_URL || DEFAULT_OLLAMA_URL,
       model:
-        normalized.ollama?.model?.trim() || process.env.REASONIX_EMBED_MODEL || DEFAULT_EMBED_MODEL,
+        normalized.ollama?.model?.trim() ||
+        process.env.MIMO_REASONIX_EMBED_MODEL ||
+        DEFAULT_EMBED_MODEL,
     },
     openaiCompat: {
       baseUrl: normalized.openaiCompat?.baseUrl?.trim() ?? "",

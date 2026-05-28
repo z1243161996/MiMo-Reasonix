@@ -279,7 +279,7 @@ function resolveBuildEmbeddingConfig(opts: BuildOptions): ResolvedEmbeddingConfi
     return {
       provider: "ollama",
       baseUrl: opts.baseUrl ?? process.env.OLLAMA_URL ?? "http://localhost:11434",
-      model: opts.model ?? process.env.REASONIX_EMBED_MODEL ?? "nomic-embed-text",
+      model: opts.model ?? process.env.MIMO_REASONIX_EMBED_MODEL ?? "nomic-embed-text",
       timeoutMs: opts.timeoutMs ?? 30_000,
     };
   }

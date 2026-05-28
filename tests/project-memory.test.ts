@@ -1,4 +1,4 @@
-/** REASONIX.md project-memory loader — filesystem-backed tests in a temp dir. */
+/** MIMO_REASONIX.md project-memory loader — filesystem-backed tests in a temp dir. */
 
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -21,30 +21,30 @@ const BASE = "You are a test assistant.";
 
 describe("project-memory", () => {
   let root: string;
-  const originalEnv = process.env.REASONIX_MEMORY;
+  const originalEnv = process.env.MIMO_REASONIX_MEMORY;
 
   beforeEach(() => {
     root = mkdtempSync(join(tmpdir(), "reasonix-mem-"));
     // biome-ignore lint/performance/noDelete: avoid leaking "undefined" into env
-    delete process.env.REASONIX_MEMORY;
+    delete process.env.MIMO_REASONIX_MEMORY;
   });
 
   afterEach(() => {
     rmSync(root, { recursive: true, force: true });
     if (originalEnv === undefined) {
       // biome-ignore lint/performance/noDelete: same reason
-      delete process.env.REASONIX_MEMORY;
+      delete process.env.MIMO_REASONIX_MEMORY;
     } else {
-      process.env.REASONIX_MEMORY = originalEnv;
+      process.env.MIMO_REASONIX_MEMORY = originalEnv;
     }
   });
 
   describe("readProjectMemory", () => {
-    it("returns null when REASONIX.md is absent", () => {
+    it("returns null when MIMO_REASONIX.md is absent", () => {
       expect(readProjectMemory(root)).toBeNull();
     });
 
-    it("returns null when REASONIX.md is empty / whitespace-only", () => {
+    it("returns null when MIMO_REASONIX.md is empty / whitespace-only", () => {
       writeFileSync(join(root, PROJECT_MEMORY_FILE), "   \n\n\t  \n", "utf8");
       expect(readProjectMemory(root)).toBeNull();
     });
@@ -71,7 +71,7 @@ describe("project-memory", () => {
       expect(mem?.content.length).toBeLessThan(PROJECT_MEMORY_MAX_CHARS + 64);
     });
 
-    it("falls back to .claude/CLAUDE.md when REASONIX.md is absent", () => {
+    it("falls back to .claude/CLAUDE.md when MIMO_REASONIX.md is absent", () => {
       mkdirSync(join(root, ".claude"));
       writeFileSync(join(root, ".claude", "CLAUDE.md"), "claude subdir content\n", "utf8");
       const mem = readProjectMemory(root);
@@ -95,7 +95,7 @@ describe("project-memory", () => {
       expect(mem?.path).toBe(join(root, ".claude", "CLAUDE.md"));
     });
 
-    it("falls back to AGENTS.md when no REASONIX.md or CLAUDE.md exists", () => {
+    it("falls back to AGENTS.md when no MIMO_REASONIX.md or CLAUDE.md exists", () => {
       writeFileSync(join(root, "AGENTS.md"), "open-spec content\n", "utf8");
       const mem = readProjectMemory(root);
       expect(mem?.content).toBe("open-spec content");
@@ -109,8 +109,8 @@ describe("project-memory", () => {
       expect(mem?.path.endsWith("AGENT.md")).toBe(true);
     });
 
-    it("prefers REASONIX.md over CLAUDE.md candidates", () => {
-      writeFileSync(join(root, "REASONIX.md"), "reasonix wins\n", "utf8");
+    it("prefers MIMO_REASONIX.md over CLAUDE.md candidates", () => {
+      writeFileSync(join(root, "MIMO_REASONIX.md"), "reasonix wins\n", "utf8");
       mkdirSync(join(root, ".claude"));
       writeFileSync(join(root, ".claude", "CLAUDE.md"), "claude loses\n", "utf8");
       writeFileSync(join(root, "CLAUDE.md"), "root claude loses\n", "utf8");
@@ -118,12 +118,12 @@ describe("project-memory", () => {
       writeFileSync(join(root, "AGENT.md"), "agent loses too\n", "utf8");
       const mem = readProjectMemory(root);
       expect(mem?.content).toBe("reasonix wins");
-      expect(mem?.path.endsWith("REASONIX.md")).toBe(true);
+      expect(mem?.path.endsWith("MIMO_REASONIX.md")).toBe(true);
     });
 
     it("PROJECT_MEMORY_FILES priority matches the documented read order", () => {
       expect(PROJECT_MEMORY_FILES).toEqual([
-        "REASONIX.md",
+        "MIMO_REASONIX.md",
         ".claude/CLAUDE.md",
         "CLAUDE.md",
         "AGENTS.md",
@@ -147,8 +147,8 @@ describe("project-memory", () => {
   });
 
   describe("resolveProjectMemoryWritePath", () => {
-    it("returns REASONIX.md path when no candidate exists yet (fresh project)", () => {
-      expect(resolveProjectMemoryWritePath(root).endsWith("REASONIX.md")).toBe(true);
+    it("returns MIMO_REASONIX.md path when no candidate exists yet (fresh project)", () => {
+      expect(resolveProjectMemoryWritePath(root).endsWith("MIMO_REASONIX.md")).toBe(true);
     });
 
     it("writes to the existing AGENTS.md when present (don't fragment)", () => {
@@ -156,10 +156,10 @@ describe("project-memory", () => {
       expect(resolveProjectMemoryWritePath(root).endsWith("AGENTS.md")).toBe(true);
     });
 
-    it("REASONIX.md still wins as the write target when it coexists with AGENTS.md", () => {
-      writeFileSync(join(root, "REASONIX.md"), "x", "utf8");
+    it("MIMO_REASONIX.md still wins as the write target when it coexists with AGENTS.md", () => {
+      writeFileSync(join(root, "MIMO_REASONIX.md"), "x", "utf8");
       writeFileSync(join(root, "AGENTS.md"), "y", "utf8");
-      expect(resolveProjectMemoryWritePath(root).endsWith("REASONIX.md")).toBe(true);
+      expect(resolveProjectMemoryWritePath(root).endsWith("MIMO_REASONIX.md")).toBe(true);
     });
   });
 
@@ -168,14 +168,14 @@ describe("project-memory", () => {
       expect(memoryEnabled()).toBe(true);
     });
 
-    it.each(["off", "false", "0"])("returns false for REASONIX_MEMORY=%s", (val) => {
-      process.env.REASONIX_MEMORY = val;
+    it.each(["off", "false", "0"])("returns false for MIMO_REASONIX_MEMORY=%s", (val) => {
+      process.env.MIMO_REASONIX_MEMORY = val;
       expect(memoryEnabled()).toBe(false);
     });
 
     it("returns true for unrelated env values (on, 1, truthy, etc.)", () => {
       for (const val of ["on", "1", "true", "yes"]) {
-        process.env.REASONIX_MEMORY = val;
+        process.env.MIMO_REASONIX_MEMORY = val;
         expect(memoryEnabled()).toBe(true);
       }
     });
@@ -194,7 +194,7 @@ describe("project-memory", () => {
       );
       const out = applyProjectMemory(BASE, root);
       expect(out.length).toBeGreaterThan(BASE.length);
-      expect(out).toMatch(/# Project memory \(REASONIX\.md\)/);
+      expect(out).toMatch(/# Project memory \(MIMO_REASONIX\.md\)/);
       expect(out).toContain("snake_case");
       // Fenced block present.
       expect(out).toMatch(/```\n[\s\S]*```/);
@@ -204,13 +204,13 @@ describe("project-memory", () => {
       writeFileSync(join(root, "AGENTS.md"), "open-spec rules\n", "utf8");
       const out = applyProjectMemory(BASE, root);
       expect(out).toMatch(/# Project memory \(AGENTS\.md\)/);
-      expect(out).not.toMatch(/# Project memory \(REASONIX\.md\)/);
+      expect(out).not.toMatch(/# Project memory \(MIMO_REASONIX\.md\)/);
       expect(out).toContain("open-spec rules");
     });
 
-    it("no-ops when REASONIX_MEMORY=off, even with a file present", () => {
+    it("no-ops when MIMO_REASONIX_MEMORY=off, even with a file present", () => {
       writeFileSync(join(root, PROJECT_MEMORY_FILE), "content\n", "utf8");
-      process.env.REASONIX_MEMORY = "off";
+      process.env.MIMO_REASONIX_MEMORY = "off";
       expect(applyProjectMemory(BASE, root)).toBe(BASE);
     });
 

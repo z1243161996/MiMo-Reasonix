@@ -9,7 +9,7 @@ export interface ImmutablePrefixOptions {
 }
 
 export class ImmutablePrefix {
-  /** Stable across turns; rebuilt only on /new when REASONIX.md changed on disk. */
+  /** Stable across turns; rebuilt only on /new when MIMO_REASONIX.md changed on disk. */
   system: string;
   /** Each `addTool` costs one cache-miss turn — DeepSeek's prefix cache is keyed by full tool list. */
   private _toolSpecs: ToolSpec[];

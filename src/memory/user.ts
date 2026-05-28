@@ -1,4 +1,4 @@
-/** User-private memory pinned into the immutable prefix; distinct from committable REASONIX.md. */
+/** User-private memory pinned into the immutable prefix; distinct from committable MIMO_REASONIX.md. */
 
 import { createHash } from "node:crypto";
 import {
@@ -12,7 +12,7 @@ import {
 import { homedir } from "node:os";
 import { join, resolve } from "node:path";
 import {
-  type ReasonixConfig,
+  type MimoReasonixConfig,
   loadResolvedSkillPaths,
   memoryTypeDefaults,
   resolveSkillPaths,
@@ -306,10 +306,10 @@ export class MemoryStore {
 }
 
 /** Freeform `#g` destination, distinct from MEMORY.md's curated index of named files. */
-export function readGlobalReasonixMemory(
+export function readGlobalMimoReasonixMemory(
   homeDir: string = join(homedir(), ".mimo-reasonix"),
 ): { path: string; content: string; originalChars: number; truncated: boolean } | null {
-  const path = join(homeDir, "REASONIX.md");
+  const path = join(homeDir, "MIMO_REASONIX.md");
   if (!existsSync(path)) return null;
   let raw: string;
   try {
@@ -330,15 +330,15 @@ export function readGlobalReasonixMemory(
   return { path, content, originalChars, truncated };
 }
 
-export function applyGlobalReasonixMemory(basePrompt: string, homeDir?: string): string {
+export function applyGlobalMimoReasonixMemory(basePrompt: string, homeDir?: string): string {
   if (!memoryEnabled()) return basePrompt;
   const dir = homeDir ?? join(homedir(), ".mimo-reasonix");
-  const mem = readGlobalReasonixMemory(dir);
+  const mem = readGlobalMimoReasonixMemory(dir);
   if (!mem) return basePrompt;
   return [
     basePrompt,
     "",
-    "# Global memory (~/.reasonix/REASONIX.md)",
+    "# Global memory (~/.reasonix/MIMO_REASONIX.md)",
     "",
     "Cross-project notes the user pinned via the `#g` prompt prefix. Treat as authoritative — same level of trust as project memory.",
     "",
@@ -391,13 +391,13 @@ export function applyGlobalClaudeMemory(basePrompt: string): string {
 /** Effective priority: entry's own field wins, else the config default for its type, else undefined. */
 export function effectivePriority(
   entry: MemoryEntry,
-  cfg?: ReasonixConfig,
+  cfg?: MimoReasonixConfig,
 ): MemoryPriority | undefined {
   if (entry.priority) return entry.priority;
   return memoryTypeDefaults(entry.type, cfg).priority;
 }
 
-function highPriorityBlock(entries: MemoryEntry[], cfg?: ReasonixConfig): string | null {
+function highPriorityBlock(entries: MemoryEntry[], cfg?: MimoReasonixConfig): string | null {
   const high = entries.filter((e) => effectivePriority(e, cfg) === "high");
   if (high.length === 0) return null;
   const lines: string[] = [
@@ -418,7 +418,7 @@ function highPriorityBlock(entries: MemoryEntry[], cfg?: ReasonixConfig): string
 /** Empty index → omit the whole block (otherwise we'd add bytes to the prefix hash for nothing). */
 export function applyUserMemory(
   basePrompt: string,
-  opts: { homeDir?: string; projectRoot?: string; cfg?: ReasonixConfig } = {},
+  opts: { homeDir?: string; projectRoot?: string; cfg?: MimoReasonixConfig } = {},
 ): string {
   if (!memoryEnabled()) return basePrompt;
   const store = new MemoryStore(opts);
@@ -458,12 +458,12 @@ export function applyUserMemory(
 export function applyMemoryStack(
   basePrompt: string,
   rootDir: string,
-  opts: { homeDir?: string; cfg?: ReasonixConfig } = {},
+  opts: { homeDir?: string; cfg?: MimoReasonixConfig } = {},
 ): string {
   const homeDir = opts.homeDir;
   const cfg = opts.cfg;
   const withProject = applyProjectMemory(basePrompt, rootDir);
-  const withGlobal = applyGlobalReasonixMemory(
+  const withGlobal = applyGlobalMimoReasonixMemory(
     withProject,
     homeDir ? join(homeDir, ".mimo-reasonix") : undefined,
   );

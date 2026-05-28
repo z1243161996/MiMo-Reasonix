@@ -6,7 +6,7 @@ import { TextInput } from "ink";
 // biome-ignore lint/style/useImportType: JSX (jsx: "react") needs React as a value at runtime
 import React, { useEffect, useState } from "react";
 import {
-  type ReasonixConfig,
+  type MimoReasonixConfig,
   defaultConfigPath,
   isPlausibleKey,
   loadBaseUrl,
@@ -33,7 +33,7 @@ import { type ThemeName, listThemeNames } from "./theme/tokens.js";
 
 export interface WizardProps {
   /** Called once the config has been saved. */
-  onComplete: (cfg: ReasonixConfig) => void;
+  onComplete: (cfg: MimoReasonixConfig) => void;
   /** Called if the user presses Esc to abort. */
   onCancel?: () => void;
   /** Skip the API-key step if a key already exists (env or config). */
@@ -70,7 +70,6 @@ const LANGUAGE_LABELS: Record<LanguageCode, string> = {
   "zh-CN": "简体中文",
   de: "Deutsch",
   ru: "Русский",
-  ja: "日本語",
 };
 
 export function Wizard({
@@ -86,13 +85,13 @@ export function Wizard({
   useEffect(() => onLanguageChange(() => setLanguageVersion((v) => v + 1)), []);
 
   const [previewTheme, setPreviewTheme] = useState<ThemeName>(() =>
-    resolveThemePreference(initial?.theme ?? loadTheme(), process.env.REASONIX_THEME),
+    resolveThemePreference(initial?.theme ?? loadTheme(), process.env.MIMO_REASONIX_THEME),
   );
 
   const [step, setStep] = useState<Step>("language");
   const [data, setData] = useState<WizardData>(() => ({
     language: getLanguage(),
-    theme: resolveThemePreference(initial?.theme ?? loadTheme(), process.env.REASONIX_THEME),
+    theme: resolveThemePreference(initial?.theme ?? loadTheme(), process.env.MIMO_REASONIX_THEME),
     apiKey: existingApiKey ?? "",
     selectedCatalog: deriveInitialCatalog(initial?.mcp ?? []),
     catalogArgs: {},
@@ -235,7 +234,7 @@ export function Wizard({
                   buildSpec(name, data.catalogArgs),
                 );
                 const prev = readConfig();
-                const next: ReasonixConfig = {
+                const next: MimoReasonixConfig = {
                   ...prev,
                   apiKey: data.apiKey,
                   theme: data.theme,

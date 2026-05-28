@@ -55,8 +55,8 @@ same shape it would under a fully serial dispatch.
 
 | Env var | Default | Effect |
 |---|---|---|
-| `REASONIX_PARALLEL_MAX` | `3` (hard cap `16`) | Max chunk size. |
-| `REASONIX_TOOL_DISPATCH=serial` | unset | Forces serial dispatch — escape hatch. |
+| `MIMO_REASONIX_PARALLEL_MAX` | `3` (hard cap `16`) | Max chunk size. |
+| `MIMO_REASONIX_TOOL_DISPATCH=serial` | unset | Forces serial dispatch — escape hatch. |
 
 Built-in opt-ins: read-only filesystem (`read_file`, `list_directory`,
 `directory_tree`, `search_files`, `search_content`, `get_file_info`),
@@ -181,7 +181,7 @@ src/
 │   └── web.ts              # web_search, web_fetch (multi-engine: Mojeek, SearXNG or Metaso)
 ├── mcp/                    # MCP client + bridge (stdio + SSE)
 ├── memory.ts               # ImmutablePrefix / AppendOnlyLog / VolatileScratch
-├── project-memory.ts       # REASONIX.md loader
+├── project-memory.ts       # MIMO_REASONIX.md loader
 ├── user-memory.ts          # ~/.reasonix/memory/ store (project + global)
 ├── skills.ts               # built-in explore + research skills
 ├── session.ts              # JSONL session persistence

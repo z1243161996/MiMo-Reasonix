@@ -50,7 +50,7 @@ export interface ChatOptions {
   model: string;
   reasoningEffort?: ReasoningEffort;
   system: string;
-  /** Re-runs the prompt builder on /new so REASONIX.md edits don't need a restart. Should produce the same string `system` was built from. */
+  /** Re-runs the prompt builder on /new so MIMO_REASONIX.md edits don't need a restart. Should produce the same string `system` was built from. */
   rebuildSystem?: () => string;
   transcript?: string;
   /**

@@ -6,26 +6,26 @@ import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import {
   type CustomMemoryTypeConfig,
-  type ReasonixConfig,
+  type MimoReasonixConfig,
   loadMemoryTypeRegistry,
   memoryTypeDefaults,
 } from "../src/config.js";
 import { MemoryStore, applyUserMemory, effectivePriority } from "../src/memory/user.js";
 
-function cfgWith(types: CustomMemoryTypeConfig[]): ReasonixConfig {
+function cfgWith(types: CustomMemoryTypeConfig[]): MimoReasonixConfig {
   return { memory: { customTypes: types } };
 }
 
 describe("custom memory types (#709)", () => {
   let home: string;
   let projectRoot: string;
-  const originalEnv = process.env.REASONIX_MEMORY;
+  const originalEnv = process.env.MIMO_REASONIX_MEMORY;
 
   beforeEach(() => {
     home = mkdtempSync(join(tmpdir(), "reasonix-memtype-home-"));
     projectRoot = mkdtempSync(join(tmpdir(), "reasonix-memtype-proj-"));
     // biome-ignore lint/performance/noDelete: avoid leaking "undefined" into env
-    delete process.env.REASONIX_MEMORY;
+    delete process.env.MIMO_REASONIX_MEMORY;
   });
 
   afterEach(() => {
@@ -33,9 +33,9 @@ describe("custom memory types (#709)", () => {
     rmSync(projectRoot, { recursive: true, force: true });
     if (originalEnv === undefined) {
       // biome-ignore lint/performance/noDelete: same
-      delete process.env.REASONIX_MEMORY;
+      delete process.env.MIMO_REASONIX_MEMORY;
     } else {
-      process.env.REASONIX_MEMORY = originalEnv;
+      process.env.MIMO_REASONIX_MEMORY = originalEnv;
     }
   });
 

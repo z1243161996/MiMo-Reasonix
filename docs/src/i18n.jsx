@@ -4,8 +4,8 @@
 // load. Empty until the fetch resolves so consumers can render a loading
 // state instead of a stale literal — pre-empts the "docs version is wrong"
 // drift that hardcoding caused. Each release just overwrites latest.json.
-window.REASONIX_VERSION = window.REASONIX_VERSION || "";
-window.REASONIX_VERSION_STATUS = window.REASONIX_VERSION
+window.MIMO_REASONIX_VERSION = window.MIMO_REASONIX_VERSION || "";
+window.MIMO_REASONIX_VERSION_STATUS = window.MIMO_REASONIX_VERSION
   ? "ok"
   : "loading";
 
@@ -22,30 +22,30 @@ window.REASONIX_VERSION_STATUS = window.REASONIX_VERSION
     .then(function (j) {
       clearTimeout(timer);
       if (j && j.version) {
-        window.REASONIX_VERSION = String(j.version).replace(/^v/, "");
-        window.REASONIX_VERSION_STATUS = "ok";
+        window.MIMO_REASONIX_VERSION = String(j.version).replace(/^v/, "");
+        window.MIMO_REASONIX_VERSION_STATUS = "ok";
       } else {
-        window.REASONIX_VERSION_STATUS = "failed";
+        window.MIMO_REASONIX_VERSION_STATUS = "failed";
       }
       window.dispatchEvent(new Event("reasonix:version"));
     })
     .catch(function () {
       clearTimeout(timer);
-      window.REASONIX_VERSION_STATUS = "failed";
+      window.MIMO_REASONIX_VERSION_STATUS = "failed";
       window.dispatchEvent(new Event("reasonix:version"));
     });
 })();
 
 function useVersion() {
   const [v, setV] = React.useState({
-    version: window.REASONIX_VERSION,
-    status: window.REASONIX_VERSION_STATUS,
+    version: window.MIMO_REASONIX_VERSION,
+    status: window.MIMO_REASONIX_VERSION_STATUS,
   });
   React.useEffect(() => {
     const handler = () =>
       setV({
-        version: window.REASONIX_VERSION,
-        status: window.REASONIX_VERSION_STATUS,
+        version: window.MIMO_REASONIX_VERSION,
+        status: window.MIMO_REASONIX_VERSION_STATUS,
       });
     window.addEventListener("reasonix:version", handler);
     return () => window.removeEventListener("reasonix:version", handler);

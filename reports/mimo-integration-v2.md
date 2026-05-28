@@ -226,7 +226,7 @@ isThinkingModeModel(model) {
 // MiMo 可能没有此端点，返回 mock 数据或隐藏余额显示
 
 // 10. Parallel dispatch（src/loop/dispatch.ts）
-// REASONIX_PARALLEL_MAX, parallelSafe 标记
+// MIMO_REASONIX_PARALLEL_MAX, parallelSafe 标记
 // → 需确认 MiMo 是否支持并行工具调用
 
 // === 可选适配 ===

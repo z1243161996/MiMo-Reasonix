@@ -19,7 +19,7 @@ async function fetchBrowse(path: string): Promise<BrowseResult> {
     ?.getAttribute("content") ?? "";
   const params = new URLSearchParams();
   if (path) params.set("path", path);
-  if (token && token !== "__REASONIX_TOKEN__") params.set("token", token);
+  if (token && token !== "__MIMO_REASONIX_TOKEN__") params.set("token", token);
   const res = await fetch(`/api/browse?${params.toString()}`);
   if (!res.ok) {
     const text = await res.text();

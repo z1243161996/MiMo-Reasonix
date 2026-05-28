@@ -1,4 +1,4 @@
-/** REASONIX_DEBUG_MCP=1 surfaces dropped malformed lines on stderr; otherwise silent. */
+/** MIMO_REASONIX_DEBUG_MCP=1 surfaces dropped malformed lines on stderr; otherwise silent. */
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { StdioTransport } from "../src/mcp/stdio.js";
@@ -14,7 +14,7 @@ async function awaitChildExit(t: StdioTransport): Promise<void> {
   }
 }
 
-describe("StdioTransport REASONIX_DEBUG_MCP", { timeout: 5_000 }, () => {
+describe("StdioTransport MIMO_REASONIX_DEBUG_MCP", { timeout: 5_000 }, () => {
   let writeSpy: ReturnType<typeof vi.spyOn>;
 
   beforeEach(() => {
@@ -26,8 +26,8 @@ describe("StdioTransport REASONIX_DEBUG_MCP", { timeout: 5_000 }, () => {
     vi.unstubAllEnvs();
   });
 
-  it("logs the dropped line to stderr when REASONIX_DEBUG_MCP=1", async () => {
-    vi.stubEnv("REASONIX_DEBUG_MCP", "1");
+  it("logs the dropped line to stderr when MIMO_REASONIX_DEBUG_MCP=1", async () => {
+    vi.stubEnv("MIMO_REASONIX_DEBUG_MCP", "1");
     const t = new StdioTransport({
       command: "node",
       args: ["-e", GARBAGE_THEN_EXIT],
@@ -42,8 +42,8 @@ describe("StdioTransport REASONIX_DEBUG_MCP", { timeout: 5_000 }, () => {
     ).toBe(true);
   });
 
-  it("stays silent when REASONIX_DEBUG_MCP is unset", async () => {
-    vi.stubEnv("REASONIX_DEBUG_MCP", "");
+  it("stays silent when MIMO_REASONIX_DEBUG_MCP is unset", async () => {
+    vi.stubEnv("MIMO_REASONIX_DEBUG_MCP", "");
     const t = new StdioTransport({
       command: "node",
       args: ["-e", GARBAGE_THEN_EXIT],
@@ -56,8 +56,8 @@ describe("StdioTransport REASONIX_DEBUG_MCP", { timeout: 5_000 }, () => {
     expect(stderrCalls.some((s) => s.includes("[mcp-stdio] dropped malformed line"))).toBe(false);
   });
 
-  it("stays silent when REASONIX_DEBUG_MCP is set to '0'", async () => {
-    vi.stubEnv("REASONIX_DEBUG_MCP", "0");
+  it("stays silent when MIMO_REASONIX_DEBUG_MCP is set to '0'", async () => {
+    vi.stubEnv("MIMO_REASONIX_DEBUG_MCP", "0");
     const t = new StdioTransport({
       command: "node",
       args: ["-e", GARBAGE_THEN_EXIT],
@@ -70,8 +70,8 @@ describe("StdioTransport REASONIX_DEBUG_MCP", { timeout: 5_000 }, () => {
     expect(stderrCalls.some((s) => s.includes("[mcp-stdio] dropped malformed line"))).toBe(false);
   });
 
-  it("stays silent when REASONIX_DEBUG_MCP is set to a truthy non-'1' value", async () => {
-    vi.stubEnv("REASONIX_DEBUG_MCP", "true");
+  it("stays silent when MIMO_REASONIX_DEBUG_MCP is set to a truthy non-'1' value", async () => {
+    vi.stubEnv("MIMO_REASONIX_DEBUG_MCP", "true");
     const t = new StdioTransport({
       command: "node",
       args: ["-e", GARBAGE_THEN_EXIT],

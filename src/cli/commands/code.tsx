@@ -125,7 +125,7 @@ export async function codeCommand(opts: CodeOptions = {}): Promise<void> {
 
   // The rebuilder is re-invoked on `/new` and `/cwd`. `currentRoot` is the live
   // pointer; `/cwd` updates it via `onRootChange` so the rebuild picks up the
-  // new workspace's REASONIX.md / memory without restarting the loop.
+  // new workspace's MIMO_REASONIX.md / memory without restarting the loop.
   let currentRoot = rootDir;
   let semanticEnabled = semantic.enabled;
   const codeRebuildSystem = () =>

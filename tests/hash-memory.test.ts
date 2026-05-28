@@ -112,8 +112,8 @@ describe("appendProjectMemory", () => {
     }
   });
 
-  it("creates REASONIX.md with a header and the first bullet when absent", () => {
-    const path = join(dir, "REASONIX.md");
+  it("creates MIMO_REASONIX.md with a header and the first bullet when absent", () => {
+    const path = join(dir, "MIMO_REASONIX.md");
     expect(existsSync(path)).toBe(false);
     const result = appendProjectMemory(dir, "always use pnpm");
     expect(result.created).toBe(true);
@@ -123,8 +123,8 @@ describe("appendProjectMemory", () => {
     expect(content).toMatch(/- always use pnpm\n$/);
   });
 
-  it("appends to an existing REASONIX.md without disturbing earlier content", () => {
-    const path = join(dir, "REASONIX.md");
+  it("appends to an existing MIMO_REASONIX.md without disturbing earlier content", () => {
+    const path = join(dir, "MIMO_REASONIX.md");
     writeFileSync(path, "# Custom header\n\nSome existing note.\n", "utf8");
     const result = appendProjectMemory(dir, "always use pnpm");
     expect(result.created).toBe(false);
@@ -135,7 +135,7 @@ describe("appendProjectMemory", () => {
   });
 
   it("inserts a separator newline if the file lacks a trailing newline", () => {
-    const path = join(dir, "REASONIX.md");
+    const path = join(dir, "MIMO_REASONIX.md");
     writeFileSync(path, "no trailing newline", "utf8");
     appendProjectMemory(dir, "fresh note");
     const content = readFileSync(path, "utf8");
@@ -146,7 +146,7 @@ describe("appendProjectMemory", () => {
     appendProjectMemory(dir, "first");
     appendProjectMemory(dir, "second");
     appendProjectMemory(dir, "third");
-    const content = readFileSync(join(dir, "REASONIX.md"), "utf8");
+    const content = readFileSync(join(dir, "MIMO_REASONIX.md"), "utf8");
     const bullets = content.match(/- (first|second|third)/g);
     expect(bullets).toEqual(["- first", "- second", "- third"]);
   });
@@ -155,12 +155,12 @@ describe("appendProjectMemory", () => {
     expect(() => appendProjectMemory(dir, "   ")).toThrow(/cannot be empty/);
   });
 
-  it("respects nested rootDir paths (creates REASONIX.md in the given dir, not cwd)", () => {
+  it("respects nested rootDir paths (creates MIMO_REASONIX.md in the given dir, not cwd)", () => {
     const nested = join(dir, "subproject");
     mkdirSync(nested);
     const result = appendProjectMemory(nested, "scoped note");
-    expect(result.path).toBe(join(nested, "REASONIX.md"));
-    expect(existsSync(join(dir, "REASONIX.md"))).toBe(false);
+    expect(result.path).toBe(join(nested, "MIMO_REASONIX.md"));
+    expect(existsSync(join(dir, "MIMO_REASONIX.md"))).toBe(false);
   });
 });
 
@@ -179,7 +179,7 @@ describe("appendGlobalMemory", () => {
     }
   });
 
-  it("creates ~/.mimo-reasonix/REASONIX.md (with parent dir) when missing", () => {
+  it("creates ~/.mimo-reasonix/MIMO_REASONIX.md (with parent dir) when missing", () => {
     const path = globalMemoryPath(home);
     expect(existsSync(path)).toBe(false);
     const result = appendGlobalMemory("always use pnpm", home);
@@ -205,7 +205,7 @@ describe("appendGlobalMemory", () => {
     // sane. The test environment's HOME is a tmpdir from the parent
     // afterEach setup, so this won't pollute the real user home.
     const path = globalMemoryPath();
-    expect(path).toMatch(/[/\\]\.mimo-reasonix[/\\]REASONIX\.md$/);
+    expect(path).toMatch(/[/\\]\.mimo-reasonix[/\\]MIMO_REASONIX\.md$/);
   });
 
   it("rejects empty notes", () => {

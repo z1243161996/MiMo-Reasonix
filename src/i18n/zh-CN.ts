@@ -30,25 +30,26 @@ export const zhCN: TranslationSchema = {
     replay: "交互式 Ink TUI，用于浏览转录稿。",
     diff: "在分栏 Ink TUI 中比较两个转录稿。",
     mcp: "模型上下文协议 (MCP) 助手 — 发现服务器，测试您的设置。",
-    version: "打印 Reasonix 版本。",
-    update: "检查较新版本的 Reasonix 并安装。",
+    version: "打印 MiMo-Reasonix 版本。",
+    update: "检查较新版本的 MiMo-Reasonix 并安装。",
     index: "构建（或增量刷新）本地语义搜索索引。",
   },
   stats: {
-    usageHint: "运行 `reasonix chat`、`reasonix code` 或 `reasonix run <task>` — 每次对话都会记录",
-    usageDetail: "每次对话在日志中追加一行，`reasonix stats` 会将其汇总统计。",
+    usageHint:
+      "运行 `mimo-reasonix chat`、`mimo-reasonix code` 或 `mimo-reasonix run <task>` — 每次对话都会记录",
+    usageDetail: "每次对话在日志中追加一行，`mimo-reasonix stats` 会将其汇总统计。",
   },
   run: {
     missingApiKey:
       "未设置 DEEPSEEK_API_KEY 且标准输入不是 TTY（无法交互式输入）。\n" +
-      "请设置环境变量，或先运行 `reasonix chat` 交互一次以保存密钥。\n",
+      "请设置环境变量，或先运行 `mimo-reasonix chat` 交互一次以保存密钥。\n",
   },
   sessions: {
     emptyHint:
-      "暂无已保存的会话 — 运行 `reasonix chat`（会话会自动保存，除非使用了 --no-session）。",
+      "暂无已保存的会话 — 运行 `mimo-reasonix chat`（会话会自动保存，除非使用了 --no-session）。",
     listHeader: "保存的会话 (~/.mimo-reasonix/sessions/)：",
-    inspectHint: "查看：reasonix sessions <name>",
-    resumeHint: "恢复：reasonix chat --session <name>",
+    inspectHint: "查看：mimo-reasonix sessions <name>",
+    resumeHint: "恢复：mimo-reasonix chat --session <name>",
     noSession: '找不到会话 "{name}"（或为空）。',
     lookedAt: "位置：{path}",
     noIdleSessions: "没有闲置 ≥{days} 天的会话。无需清理。",
@@ -58,7 +59,7 @@ export const zhCN: TranslationSchema = {
     daysInvalid: "--days 必须是正整数（传入了 {days}）。",
   },
   ui: {
-    welcome: "随时运行 `reasonix` 开始聊天 — 您的设置将被记住。",
+    welcome: "随时运行 `mimo-reasonix` 开始聊天 — 您的设置将被记住。",
     taglineChat: "MiMo 原生智能体",
     taglineCode: "MiMo 原生代码智能体",
     taglineSub: "缓存优先 · Flash 优先",
@@ -124,7 +125,7 @@ export const zhCN: TranslationSchema = {
       footer: "运行 /keys 查看完整键盘 + 鼠标参考",
     },
     keysReference: {
-      topic: "Reasonix 键盘 + 鼠标参考",
+      topic: "MiMo-Reasonix 键盘 + 鼠标参考",
       sections: [
         {
           title: "键盘",
@@ -246,7 +247,7 @@ export const zhCN: TranslationSchema = {
   },
   code: {
     workspaceConflict:
-      "⚠ 工作区包含另一个智能体平台的文件 ({platforms})。Reasonix Code 可能会将其作为项目内容读取；如果不是您想要的，请使用 --dir <your-project> 重新启动。\n",
+      "⚠ 工作区包含另一个智能体平台的文件 ({platforms})。MiMo-Reasonix Code 可能会将其作为项目内容读取；如果不是您想要的，请使用 --dir <your-project> 重新启动。\n",
     systemAppendEmpty: "--system-append 为空 — 不会追加任何提示文本\n",
     systemAppendFileReadError: '错误：无法读取 --system-append-file "{filePath}"：{errorDetails}\n',
   },
@@ -339,7 +340,7 @@ export const zhCN: TranslationSchema = {
       description:
         "连接/查看/断开 QQ 通道，首次连接需提供 AppId + AppSecret（可选沙箱模式 sandbox）",
     },
-    setup: { description: "提醒您退出并运行 `reasonix setup`" },
+    setup: { description: "提醒您退出并运行 `mimo-reasonix setup`" },
     semantic: {
       description: "显示 semantic_search 状态 — 已构建？Ollama 已安装？如何启用",
     },
@@ -415,7 +416,7 @@ export const zhCN: TranslationSchema = {
   wizard: {
     languageTitle: "选择语言",
     languageSubtitle: "已根据系统语言自动选中。之后可用 /language 切换。",
-    welcomeTitle: "欢迎使用 Reasonix。",
+    welcomeTitle: "欢迎使用 MiMo-Reasonix。",
     apiKeyPrompt: "粘贴你的 DeepSeek API key 开始使用。",
     apiKeyGetOne: "在此获取：https://platform.deepseek.com/api_keys",
     apiKeySavedLocally: "保存在本地：{path}",
@@ -437,7 +438,7 @@ export const zhCN: TranslationSchema = {
       "high-contrast": "高对比度（无障碍）",
     },
     reviewLabelTheme: "主题",
-    mcpTitle: "Reasonix 要为你接入哪些 MCP 服务器？",
+    mcpTitle: "MiMo-Reasonix 要为你接入哪些 MCP 服务器？",
     mcpUserArgsHint: "（需要你提供 {arg}）",
     mcpFooterMulti: "[↑↓] 移动  ·  [空格] 选择  ·  [Enter] 确认  ·  [Esc] 取消  ·  全不选 = 跳过",
     mcpArgsTitle: "配置 {name}",
@@ -680,18 +681,18 @@ export const zhCN: TranslationSchema = {
   },
   errors: {
     contextOverflow:
-      "上下文溢出（DeepSeek 400）：会话历史已达 {requested}，超出模型 prompt 上限（V4：1M tokens；旧版 chat/reasoner：131k）。通常是单个工具结果太大。Reasonix 默认将新工具结果限制在 8k tokens，并在会话加载时自动修复超大历史 — 重启常能清掉。如果仍然溢出，运行 /new 重新开始，或打开 /sessions 选中后按 [d] 删除该会话。",
+      "上下文溢出（DeepSeek 400）：会话历史已达 {requested}，超出模型 prompt 上限（V4：1M tokens；旧版 chat/reasoner：131k）。通常是单个工具结果太大。MiMo-Reasonix 默认将新工具结果限制在 8k tokens，并在会话加载时自动修复超大历史 — 重启常能清掉。如果仍然溢出，运行 /new 重新开始，或打开 /sessions 选中后按 [d] 删除该会话。",
     contextOverflowTooMany: "tokens 数量过多",
     auth401:
-      "认证失败（DeepSeek 401）：{inner}。你的 API key 被拒绝。运行 `reasonix setup` 或 `export DEEPSEEK_API_KEY=sk-...` 修复。在 https://platform.deepseek.com/api_keys 获取 key。",
+      "认证失败（DeepSeek 401）：{inner}。你的 API key 被拒绝。运行 `mimo-reasonix setup` 或 `export DEEPSEEK_API_KEY=sk-...` 修复。在 https://platform.deepseek.com/api_keys 获取 key。",
     balance402:
       "余额不足（DeepSeek 402）：{inner}。在 https://platform.deepseek.com/top_up 充值 — 余额非零时面板顶栏会显示。",
     badparam422: "参数错误（DeepSeek 422）：{inner}",
     badrequest400: "请求错误（DeepSeek 400）：{inner}",
     concurrency429:
-      "DeepSeek 并发超限（429）：{inner}。账号在跑的请求超过上限（v4-pro 500、v4-flash 2500，账号下所有 API key 累加）。通常是同一账号开了多个 Reasonix 进程，或者并行 subagent 一次发太多。等几秒重试、减少并行，或在 https://platform.deepseek.com 申请扩容。",
+      "DeepSeek 并发超限（429）：{inner}。账号在跑的请求超过上限（v4-pro 500、v4-flash 2500，账号下所有 API key 累加）。通常是同一账号开了多个 MiMo-Reasonix 进程，或者并行 subagent 一次发太多。等几秒重试、减少并行，或在 https://platform.deepseek.com 申请扩容。",
     deepseek5xxHead:
-      "DeepSeek 服务不可用（{status}） — 这是 DeepSeek 服务端问题，不是 Reasonix 故障。已按指数退避重试 4 次。",
+      "DeepSeek 服务不可用（{status}） — 这是 DeepSeek 服务端问题，不是 MiMo-Reasonix 故障。已按指数退避重试 4 次。",
     deepseek5xxReachable:
       " DeepSeek 主 API 健康检查通过，但 /chat/completions 在挂 — 他们那边部分服务异常。",
     deepseek5xxUnreachable:
@@ -701,7 +702,7 @@ export const zhCN: TranslationSchema = {
     deepseek5xxActionRetry:
       " 建议：(1) 等 30 秒后重试，(2) 用 /model 切换模型，(3) 查看状态页 https://status.deepseek.com。",
     upstream5xxHead:
-      "上游服务不可用（{status}），目标地址 {host} — 你配置的 API 端点返回了服务器错误，不是 Reasonix 故障。已按指数退避重试 4 次。",
+      "上游服务不可用（{status}），目标地址 {host} — 你配置的 API 端点返回了服务器错误，不是 MiMo-Reasonix 故障。已按指数退避重试 4 次。",
     upstream5xxActionRetry:
       " 建议：(1) 确认本地/代理模型服务在线，(2) 等一会儿再重试，(3) 用 /model 切换模型。",
     innerNoMessage: "（无错误信息）",
@@ -749,8 +750,8 @@ export const zhCN: TranslationSchema = {
       helpUrlCache: "                             同一会话中相同 URL 只获取一次（内存缓存）。",
       helpUrlPunct: "                             自动剥离尾部标点符号（./,/））。",
       helpSessionsTitle: "会话（默认自动启用，命名为 'default'）：",
-      helpSessionCustom: "  reasonix chat --session <name>   使用不同的命名会话",
-      helpSessionNone: "  reasonix chat --no-session       禁用本次运行的持久化",
+      helpSessionCustom: "  mimo-reasonix chat --session <name>   使用不同的命名会话",
+      helpSessionNone: "  mimo-reasonix chat --no-session       禁用本次运行的持久化",
       retryNone: "没有可重试的内容 — 此会话日志中没有先前的用户消息。",
       retryInfo: '▸ 重试中："{preview}"',
       loopTuiOnly: "/loop 仅在交互式 TUI 中可用（不在 run/replay 中）。",
@@ -761,7 +762,7 @@ export const zhCN: TranslationSchema = {
       loopStarted:
         '▸ 循环已启动 — 每 {duration} 重新提交 "{prompt}"。输入任何内容（或 /loop stop）取消。',
       keysNeedsTui: "/keys 需要 TUI 上下文（postKeys 已连接）。",
-      aboutHeader: "Reasonix v{version} — 缓存优先的 DeepSeek 编码代理",
+      aboutHeader: "MiMo-Reasonix v{version} — 缓存优先的 DeepSeek 编码代理",
       aboutWebsiteLabel: "官网",
       aboutRepoLabel: "仓库",
       aboutLicenseLabel: "协议",
@@ -833,16 +834,16 @@ export const zhCN: TranslationSchema = {
       hooksExitCodes: "exit 0 = 通过 · exit 2 = 阻止（Pre*）· 其他 = 警告",
       hooksLoaded: "▸ 已加载 {count} 个 hook",
       hooksSources: "来源：project={project} · global={global}",
-      updateCurrent: "当前：reasonix {version}",
+      updateCurrent: "当前：mimo-reasonix {version}",
       updateLatestPending: "最新：（尚未解析 — 后台检查进行中或离线）",
       updateRetryHint: "已触发新的注册表获取 — 几秒后重试 `/update`，",
-      updateRetryHint2: "或在另一个终端运行 `reasonix update` 强制同步执行。",
-      updateLatest: "最新：reasonix {version}",
+      updateRetryHint2: "或在另一个终端运行 `mimo-reasonix update` 强制同步执行。",
+      updateLatest: "最新：mimo-reasonix {version}",
       updateUpToDate: "您已是最新版本。无需操作。",
-      updateNpxHint: "您正在通过 npx 运行 — 下次 `npx reasonix ...` 启动时将自动获取。",
+      updateNpxHint: "您正在通过 npx 运行 — 下次 `npx mimo-reasonix ...` 启动时将自动获取。",
       updateNpxForce: "要强制刷新：`npm cache clean --force`。",
       updateUpgradeHint: "要升级，请退出此会话并运行：",
-      updateUpgradeCmd1: "  reasonix update           （交互式，支持 --dry-run 预览）",
+      updateUpgradeCmd1: "  mimo-reasonix update           （交互式，支持 --dry-run 预览）",
       updateUpgradeCmd2: "  {command}   （直接安装）",
       updateInSessionDisabled: "会话内安装被刻意禁用 — 安装命令会",
       updateInSessionDisabled2: "破坏此 TUI 的渲染，且 Windows 可能锁定运行中的二进制文件。",
@@ -851,26 +852,26 @@ export const zhCN: TranslationSchema = {
       statsWillAppear: "将在您发送消息后显示在仪表板中。",
     },
     edits: {
-      undoCodeOnly: "/undo 仅在 `reasonix code` 中可用 — 聊天模式不应用编辑。",
-      historyCodeOnly: "/history 仅在 `reasonix code` 中可用。",
-      showCodeOnly: "/show 仅在 `reasonix code` 中可用。",
-      applyCodeOnly: "/apply 仅在 `reasonix code` 中可用（此处无内容可应用）。",
-      discardCodeOnly: "/discard 仅在 `reasonix code` 中可用。",
-      planCodeOnly: "/plan 仅在 `reasonix code` 中可用 — 聊天模式不限制工具写入。",
+      undoCodeOnly: "/undo 仅在 `mimo-reasonix code` 中可用 — 聊天模式不应用编辑。",
+      historyCodeOnly: "/history 仅在 `mimo-reasonix code` 中可用。",
+      showCodeOnly: "/show 仅在 `mimo-reasonix code` 中可用。",
+      applyCodeOnly: "/apply 仅在 `mimo-reasonix code` 中可用（此处无内容可应用）。",
+      discardCodeOnly: "/discard 仅在 `mimo-reasonix code` 中可用。",
+      planCodeOnly: "/plan 仅在 `mimo-reasonix code` 中可用 — 聊天模式不限制工具写入。",
       planOn:
         "▸ 计划模式开启 — 写入工具被限制；模型必须先调用 `submit_plan` 才能执行任何操作。（模型也可以在计划模式关闭时自主调用 submit_plan 处理大型任务 — 此开关是更强的显式约束。）输入 /plan off 退出。",
       planOff: "▸ 计划模式关闭 — 写入工具再次可用。模型仍可为大型任务自主提出计划。",
-      modeCodeOnly: "/mode 仅在 `reasonix code` 中可用。",
+      modeCodeOnly: "/mode 仅在 `mimo-reasonix code` 中可用。",
       modeUsage: "用法：/mode <review|auto|yolo>   （Shift+Tab 也可循环）",
       modeYolo:
         "▸ 编辑模式：YOLO — 编辑和 Shell 命令自动运行，无提示。/undo 仍可回滚编辑。请谨慎使用。",
       modeAuto:
         "▸ 编辑模式：AUTO — 编辑立即应用；在 5 秒内按 u 撤消，或稍后使用 /undo。Shell 命令仍会询问。",
       modeReview: "▸ 编辑模式：review — 编辑排队等待 /apply（或 y）/ /discard（或 n）",
-      commitCodeOnly: "/commit 仅在 `reasonix code` 中可用（需要有根的 git 仓库）。",
+      commitCodeOnly: "/commit 仅在 `mimo-reasonix code` 中可用（需要有根的 git 仓库）。",
       commitUsage: '用法：/commit "提交消息"  — 在 {root} 中运行 `git add -A && git commit -m "…"`',
-      walkCodeOnly: "/walk 仅在 `reasonix code` 中可用。",
-      checkpointCodeOnly: "/checkpoint 仅在 `reasonix code` 中可用 — 聊天模式不应用编辑。",
+      walkCodeOnly: "/walk 仅在 `mimo-reasonix code` 中可用。",
+      checkpointCodeOnly: "/checkpoint 仅在 `mimo-reasonix code` 中可用 — 聊天模式不应用编辑。",
       checkpointNone:
         "尚无检查点 — `/checkpoint <name>` 快照会话涉及的每个文件。稍后使用 `/restore <name>` 恢复。",
       checkpointHeader: "◈ 检查点 · 已存储 {count} 个",
@@ -885,14 +886,14 @@ export const zhCN: TranslationSchema = {
         '▸ 检查点 "{name}" 已保存（{id}）— 但尚未涉及任何文件，因此是空基线。此后的编辑将可撤消。',
       checkpointSaved:
         '▸ 检查点 "{name}" 已保存（{id}）— {files} 个文件，{size} KB。恢复：/restore {name}',
-      restoreCodeOnly: "/restore 仅在 `reasonix code` 中可用。",
+      restoreCodeOnly: "/restore 仅在 `mimo-reasonix code` 中可用。",
       restoreUsage: "用法：/restore <name|id>   （见 /checkpoint list 获取 ID）",
       restoreNoMatch: '▸ 未找到匹配 "{target}" 的检查点 — 尝试 /checkpoint list',
       restoreInfo: '▸ 已恢复 "{name}"（{id}），来自 {when}',
       restoreWrote: "  · 写回了 {count} 个文件",
       restoreRemoved: "  · 移除了 {count} 个文件（检查点时不存在）",
       restoreSkipped: "  ✗ 跳过了 {count} 个文件：",
-      cwdCodeOnly: "/cwd 仅在 `reasonix code` 中可用。",
+      cwdCodeOnly: "/cwd 仅在 `mimo-reasonix code` 中可用。",
       cwdUsage:
         "用法：/cwd <path>   （当前根目录：{current}）。重新指向 filesystem / shell / memory 工具到 <path>。",
       cwdUsageNoCurrent: "用法：/cwd <path>   将工作区根目录切换到 <path>。",
@@ -908,7 +909,7 @@ export const zhCN: TranslationSchema = {
       effortUsageNoMax: "用法：/effort <{list}>",
       effortSet: "effort → {effort}",
       budgetNoCap:
-        "未设置会话预算 — Reasonix 将持续运行直到您停止。使用以下方式设置：/budget <usd>   （例如 /budget 5）",
+        "未设置会话预算 — MiMo-Reasonix 将持续运行直到您停止。使用以下方式设置：/budget <usd>   （例如 /budget 5）",
       budgetStatus: "预算：${spent} / ${cap}（{pct}%）· /budget off 清除，/budget <usd> 更改",
       budgetOff: "budget → 关闭（无上限）",
       budgetUsage:
@@ -920,7 +921,7 @@ export const zhCN: TranslationSchema = {
     },
     permissions: {
       mutateCodeOnly:
-        "/permissions add / remove / clear 仅在 `reasonix code` 中可用 — 它们编辑项目范围的允许列表（`~/.mimo-reasonix/config.json` projects[<root>].shellAllowed）。",
+        "/permissions add / remove / clear 仅在 `mimo-reasonix code` 中可用 — 它们编辑项目范围的允许列表（`~/.mimo-reasonix/config.json` projects[<root>].shellAllowed）。",
       addUsage:
         '用法：/permissions add <prefix>   （多 token 可用：/permissions add "git push origin"）',
       addAlready: "▸ 已允许：{prefix}",
@@ -1011,7 +1012,7 @@ export const zhCN: TranslationSchema = {
       statusDash: "  仪表板  {url}（在浏览器中打开 · /dashboard stop）",
     },
     plans: {
-      noSession: "未附加会话 — `/plans` 是按会话的。在项目中运行 `reasonix code` 以获取会话。",
+      noSession: "未附加会话 — `/plans` 是按会话的。在项目中运行 `mimo-reasonix code` 以获取会话。",
       activePlan: "▸ 活跃计划{label} — {done}/{total} 步骤已完成 · 最后触及 {when}",
       activeNone: "▸ 活跃计划：（无）",
       noArchives: "此会话尚无归档计划 — 当每个步骤完成时自动归档",
@@ -1021,7 +1022,7 @@ export const zhCN: TranslationSchema = {
       evidenceLine: "  evidence {stepId}: {summary}",
       archivedEvidenceLine: "    evidence: {summary}",
       replayNoSession:
-        "未附加会话 — `/replay` 是按会话的。在项目中运行 `reasonix code` 以获取会话。",
+        "未附加会话 — `/replay` 是按会话的。在项目中运行 `mimo-reasonix code` 以获取会话。",
       replayNoArchives:
         "此会话尚无归档计划 — `/replay` 在计划完成后启用（每个步骤完成时自动归档）。",
       replayInvalidIndex:
@@ -1040,9 +1041,9 @@ export const zhCN: TranslationSchema = {
       doneAllOk: "▸ 已标记 {count} 个步骤为完成。",
     },
     jobs: {
-      codeOnly: "/jobs 仅在 `reasonix code` 中可用。",
-      killCodeOnly: "/kill 仅在 `reasonix code` 中可用。",
-      logsCodeOnly: "/logs 仅在 `reasonix code` 中可用。",
+      codeOnly: "/jobs 仅在 `mimo-reasonix code` 中可用。",
+      killCodeOnly: "/kill 仅在 `mimo-reasonix code` 中可用。",
+      logsCodeOnly: "/logs 仅在 `mimo-reasonix code` 中可用。",
       empty:
         "◈ 作业 · 0 运行中 · 共 0 个\n  （run_background 生成一个 — 开发服务器、监视器、长时间运行的脚本）",
       header: "◈ 作业 · {running} 运行中 · 共 {total} 个",
@@ -1097,15 +1098,16 @@ export const zhCN: TranslationSchema = {
     },
     mcp: {
       noServers:
-        '未附加 MCP 服务器。运行 `reasonix setup` 选择一些，或使用 --mcp "<spec>" 启动。`reasonix mcp list` 显示目录。注：模型发起的 shell 命令按次审批（allow once / allow always / deny），设计上没有「全局放行」开关。',
+        '未附加 MCP 服务器。运行 `mimo-reasonix setup` 选择一些，或使用 --mcp "<spec>" 启动。`mimo-reasonix mcp list` 显示目录。注：模型发起的 shell 命令按次审批（allow once / allow always / deny），设计上没有「全局放行」开关。',
       toolsLabel: "  工具     {count}",
       resourcesHint: "`/resource` 浏览+读取",
       promptsHint: "`/prompt` 浏览+获取",
       awarenessOnly: "聊天模式目前消耗工具；资源+提示在此展示供了解。",
-      catalogHint: "完整目录：`reasonix mcp list` · 深度诊断：`reasonix mcp inspect <spec>`。",
+      catalogHint:
+        "完整目录：`mimo-reasonix mcp list` · 深度诊断：`mimo-reasonix mcp inspect <spec>`。",
       fallbackServers: "MCP 服务器（{count}）：",
       fallbackTools: "注册表中的工具（{count}）：",
-      fallbackChange: "要更改此设置，请退出并运行 `reasonix setup`。",
+      fallbackChange: "要更改此设置，请退出并运行 `mimo-reasonix setup`。",
       usageDisableEnable:
         "用法：/mcp {action} <name>  ·  从 /mcp 列表中挑一个名字（匿名服务器无法按名切换）。",
       usageReconnect: "用法：/mcp reconnect <name>  ·  从 /mcp 列表中挑一个名字。",
@@ -1118,7 +1120,7 @@ export const zhCN: TranslationSchema = {
     },
     init: {
       codeOnly:
-        "/init 仅在代码模式下工作（需要文件系统工具）。\n运行 `reasonix code [path]` 启动一个以您要初始化的项目为根的会话，\n然后运行 /init。",
+        "/init 仅在代码模式下工作（需要文件系统工具）。\n运行 `mimo-reasonix code [path]` 启动一个以您要初始化的项目为根的会话，\n然后运行 /init。",
       exists: "▸ REASONIX.md 已存在于 {path}",
       existsForce: "  /init force   从头重新生成（覆盖）",
       existsEdit: "  或手动编辑 — 它只是 markdown。当前文件已",
@@ -1169,11 +1171,11 @@ export const zhCN: TranslationSchema = {
       confirmedDetail: "（{endpoint}）",
     },
     skill: {
-      listEmpty: "未找到技能。Reasonix 从以下位置读取技能：",
+      listEmpty: "未找到技能。MiMo-Reasonix 从以下位置读取技能：",
       listProjectScope:
         "  · <project>/.mimo-reasonix/skills/<name>/SKILL.md  （或 <name>.md） — 项目范围",
       listGlobalScope: "  · ~/.mimo-reasonix/skills/<name>/SKILL.md  （或 <name>.md） — 全局范围",
-      listProjectOnly: "  （项目范围仅在 `reasonix code` 中活跃）",
+      listProjectOnly: "  （项目范围仅在 `mimo-reasonix code` 中活跃）",
       listFrontmatter: "每个文件的 frontmatter 至少需要 `name` 和 `description`。",
       listInvoke: "使用 `/skill <name> [args]` 调用技能，或让模型调用 `run_skill`。",
       listHeader: "用户技能（{count}）：",
@@ -1443,7 +1445,7 @@ export const zhCN: TranslationSchema = {
   },
   startup: {
     codeRooted:
-      '▸ reasonix code：根目录 {rootDir}，会话 "{session}" · {tools} 个原生工具{semantic}',
+      '▸ mimo-reasonix code：根目录 {rootDir}，会话 "{session}" · {tools} 个原生工具{semantic}',
     ephemeral: "（临时）",
     semanticOn: " · 语义搜索已开启",
   },
@@ -1646,7 +1648,7 @@ export const zhCN: TranslationSchema = {
     verySlow: "非常慢 \u00b7 {ms}ms",
     slowToast: "\u26a0 MCP `{name}` 响应缓慢 \u00b7 P95 {seconds}s \u00b7 最近 {sampleSize} 次调用",
     emptyHint:
-      "\u2139 未配置 MCP 服务器 —— 可尝试：`reasonix setup` 重新选择，或 `reasonix mcp install filesystem` · shell 命令按次审批（allow once / allow always / deny），无全局放行",
+      "\u2139 未配置 MCP 服务器 —— 可尝试：`mimo-reasonix setup` 重新选择，或 `mimo-mimo-reasonix mcp install filesystem` · shell 命令按次审批（allow once / allow always / deny），无全局放行",
   },
   denyContextInput: {
     description: "告诉模型你为什么拒绝了。模型下次会看到你的理由作为额外的上下文。",
@@ -1687,8 +1689,8 @@ export const zhCN: TranslationSchema = {
     notInstalled: "未安装：{name}",
     bridged: "✓ 已安装 {name} — 已桥接",
     bridgeFailed: "▲ 已安装 {name} — 桥接失败：{reason}",
-    bridgeReloadFailed: "✓ 已安装 {name} — 重启 `reasonix code` 以桥接（重载失败：{message}）",
-    restartBridge: "✓ 已安装 {name} — 重启 `reasonix code` 以桥接",
+    bridgeReloadFailed: "✓ 已安装 {name} — 重启 `mimo-reasonix code` 以桥接（重载失败：{message}）",
+    restartBridge: "✓ 已安装 {name} — 重启 `mimo-reasonix code` 以桥接",
     needsEnv: "  ·  需要环境变量：{env}",
     badgeOfficial: "[官方]",
     badgeSmithery: "[三方]",
@@ -1700,7 +1702,7 @@ export const zhCN: TranslationSchema = {
   },
   mcpBrowser: {
     title: "◈ MCP 浏览器",
-    empty: "没有挂载 MCP 服务器。运行 `reasonix setup` 选择一些，或使用 --mcp 启动。",
+    empty: "没有挂载 MCP 服务器。运行 `mimo-reasonix setup` 选择一些，或使用 --mcp 启动。",
     serverCount: "{count} 个服务器",
     footer: "↑↓ 选择 · [r] 重连 · [d] 禁用 · Esc 退出",
   },
@@ -1725,8 +1727,9 @@ export const zhCN: TranslationSchema = {
     initDetail: "初始化 → tools/list → resources/list",
     reconnectDetail: "断开旧连接 · 重新握手 · 列出工具",
     disabledDetail: "通过 /mcp disable {name}",
-    failedSetupHint: "→ 运行 `reasonix setup` 移除此条目，或修复底层问题（缺少 npm 包、网络等）。",
-    failedSetupConfigHint: "→ 运行 `reasonix setup` 从已保存配置中移除损坏的条目。",
+    failedSetupHint:
+      "→ 运行 `mimo-reasonix setup` 移除此条目，或修复底层问题（缺少 npm 包、网络等）。",
+    failedSetupConfigHint: "→ 运行 `mimo-reasonix setup` 从已保存配置中移除损坏的条目。",
     abortedHint: "已中断 MCP 启动 — 跳过 {count} 个服务器。问题修复后用 /mcp 重新连接。",
     toolsReady: "工具就绪",
     warnLabel: "警告",
@@ -1749,7 +1752,7 @@ export const zhCN: TranslationSchema = {
     rejectHint: "放弃修改。模型继续按原步骤执行。",
   },
   diffApp: {
-    title: "reasonix diff",
+    title: "mimo-reasonix diff",
     turnLabel: "第 {turn} 轮（{current}/{total}）",
     turnsAligned: "{count} 轮已对齐",
     paneEmpty: "（此轮该侧无记录）",
@@ -1825,17 +1828,17 @@ export const zhCN: TranslationSchema = {
     cachedAge: "缓存，{age}",
     moreAvailable: "还有更多",
     allLoaded: "已全部加载",
-    morePagesAvailable: "▸ 还有更多页可用 — `reasonix mcp list --pages <n>` 或 --all",
-    installHint: "安装：reasonix mcp install <name>",
-    usageSearch: "用法：reasonix mcp search <query>",
-    usageInstall: "用法：reasonix mcp install <name>",
+    morePagesAvailable: "▸ 还有更多页可用 — `mimo-reasonix mcp list --pages <n>` 或 --all",
+    installHint: "安装：mimo-reasonix mcp install <name>",
+    usageSearch: "用法：mimo-reasonix mcp search <query>",
+    usageInstall: "用法：mimo-reasonix mcp install <name>",
     noMatchesFor: '未找到 "{q}" 的匹配项（已检索 {count} 条记录，来源：{source}）',
     matchCount: '在 {source} 中找到 {count} 条 "{q}" 的匹配项（已扫描 {loaded} 条记录）：',
-    moreLoaded: "… 还有 {count} 条已加载 — 使用 `reasonix mcp search <query>` 筛选",
+    moreLoaded: "… 还有 {count} 条已加载 — 使用 `mimo-mimo-reasonix mcp search <query>` 筛选",
     moreMatches: "… 还有 {count} 条匹配项",
     installed: "已安装：{spec}",
     noServerFound: '在 {source} 中遍历了 {pages} 页后未找到名为 "{target}" 的 MCP 服务器。',
-    noServerTryMore: "试试：reasonix mcp install {target} --max-pages 100",
+    noServerTryMore: "试试：mimo-reasonix mcp install {target} --max-pages 100",
     noInstallMeta: '无法为 "{name}" 获取安装元数据 — 试试 `npx -y @smithery/cli install {name}`。',
     buildSpecFailed: "无法为 {name} 构建安装 spec：{message}",
     alreadyInstalled: "已安装：{spec}",

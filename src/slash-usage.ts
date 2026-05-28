@@ -10,7 +10,7 @@ interface UsageFile {
 }
 
 export function slashUsagePath(): string {
-  const override = process.env.REASONIX_SLASH_USAGE_PATH;
+  const override = process.env.MIMO_REASONIX_SLASH_USAGE_PATH;
   if (override) return override;
   return join(homedir(), ".mimo-reasonix", "slash-usage.json");
 }

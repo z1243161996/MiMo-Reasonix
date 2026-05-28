@@ -17,7 +17,7 @@ describe("startup.codeRooted", () => {
       semantic: t("startup.semanticOn"),
     });
     expect(out).toBe(
-      '\u25b8 reasonix code: rooted at /project, session "abc" \u00b7 5 native tool(s) \u00b7 semantic_search on',
+      '\u25b8 mimo-reasonix code: rooted at /project, session "abc" \u00b7 5 native tool(s) \u00b7 semantic_search on',
     );
   });
 
@@ -30,7 +30,7 @@ describe("startup.codeRooted", () => {
       semantic: "",
     });
     expect(out).toBe(
-      '\u25b8 reasonix code: rooted at /project, session "(ephemeral)" \u00b7 0 native tool(s)',
+      '\u25b8 mimo-reasonix code: rooted at /project, session "(ephemeral)" \u00b7 0 native tool(s)',
     );
   });
 
@@ -42,6 +42,8 @@ describe("startup.codeRooted", () => {
       tools: 5,
       semantic: t("startup.semanticOn"),
     });
-    expect(out).toBe('▸ reasonix code：根目录 /项目，会话 "abc" · 5 个原生工具 · 语义搜索已开启');
+    expect(out).toBe(
+      '▸ mimo-reasonix code：根目录 /项目，会话 "abc" · 5 个原生工具 · 语义搜索已开启',
+    );
   });
 });

@@ -2011,9 +2011,9 @@ describe("CacheFirstLoop (streaming) — tool_call_delta emission", () => {
       expect(order).toEqual(["a", "b", "c"]);
     });
 
-    it("REASONIX_TOOL_DISPATCH=serial forces serial dispatch", async () => {
-      const prev = process.env.REASONIX_TOOL_DISPATCH;
-      process.env.REASONIX_TOOL_DISPATCH = "serial";
+    it("MIMO_REASONIX_TOOL_DISPATCH=serial forces serial dispatch", async () => {
+      const prev = process.env.MIMO_REASONIX_TOOL_DISPATCH;
+      process.env.MIMO_REASONIX_TOOL_DISPATCH = "serial";
       try {
         const client = makeClient([
           makeMultiToolResponse([
@@ -2048,14 +2048,14 @@ describe("CacheFirstLoop (streaming) — tool_call_delta emission", () => {
       } finally {
         if (prev === undefined) {
           // biome-ignore lint/performance/noDelete: env restore must remove the key, not stringify "undefined"
-          delete process.env.REASONIX_TOOL_DISPATCH;
-        } else process.env.REASONIX_TOOL_DISPATCH = prev;
+          delete process.env.MIMO_REASONIX_TOOL_DISPATCH;
+        } else process.env.MIMO_REASONIX_TOOL_DISPATCH = prev;
       }
     });
 
-    it("REASONIX_PARALLEL_MAX caps the chunk size", async () => {
-      const prev = process.env.REASONIX_PARALLEL_MAX;
-      process.env.REASONIX_PARALLEL_MAX = "2";
+    it("MIMO_REASONIX_PARALLEL_MAX caps the chunk size", async () => {
+      const prev = process.env.MIMO_REASONIX_PARALLEL_MAX;
+      process.env.MIMO_REASONIX_PARALLEL_MAX = "2";
       try {
         const client = makeClient([
           makeMultiToolResponse([
@@ -2093,8 +2093,8 @@ describe("CacheFirstLoop (streaming) — tool_call_delta emission", () => {
       } finally {
         if (prev === undefined) {
           // biome-ignore lint/performance/noDelete: env restore must remove the key, not stringify "undefined"
-          delete process.env.REASONIX_PARALLEL_MAX;
-        } else process.env.REASONIX_PARALLEL_MAX = prev;
+          delete process.env.MIMO_REASONIX_PARALLEL_MAX;
+        } else process.env.MIMO_REASONIX_PARALLEL_MAX = prev;
       }
     });
   });

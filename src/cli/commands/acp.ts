@@ -265,7 +265,7 @@ export async function acpCommand(opts: AcpOptions): Promise<void> {
       budgetUsd: opts.budgetUsd,
       mcpSpecs: opts.mcpSpecs,
       mcpPrefix: opts.mcpPrefix,
-      systemAppend: process.env.REASONIX_ACP_SYSTEM_APPEND || undefined,
+      systemAppend: process.env.MIMO_REASONIX_ACP_SYSTEM_APPEND || undefined,
     });
     sessions.set(session.id, session);
     return { sessionId: session.id };

@@ -1,7 +1,7 @@
 import {
   DEFAULT_MODEL,
+  type MimoReasonixConfig,
   type ReasoningEffort,
-  type ReasonixConfig,
   isReasoningEffort,
   loadModel,
   loadReasoningEffort,
@@ -30,7 +30,7 @@ export interface RawCliFlags {
 }
 
 export function resolveDefaults(flags: RawCliFlags): ResolvedDefaults {
-  const cfg: ReasonixConfig = flags.noConfig ? {} : readConfig();
+  const cfg: MimoReasonixConfig = flags.noConfig ? {} : readConfig();
   const model =
     flags.model?.trim() || (flags.noConfig ? cfg.model?.trim() : loadModel()) || DEFAULT_MODEL;
 
@@ -54,7 +54,7 @@ export function resolveDefaults(flags: RawCliFlags): ResolvedDefaults {
   return { model, reasoningEffort, mcp, session };
 }
 
-function mergeDotMcpJson(cfg: ReasonixConfig, projectRoot: string): ReasonixConfig {
+function mergeDotMcpJson(cfg: MimoReasonixConfig, projectRoot: string): MimoReasonixConfig {
   const project = loadDotMcpJson(projectRoot);
   if (!project) return cfg;
   return { ...cfg, mcpServers: { ...(cfg.mcpServers ?? {}), ...project } };
@@ -87,7 +87,7 @@ export function resolveContinueFlag(
 }
 
 export function resolveBareCommandMode(
-  cfg: Pick<ReasonixConfig, "setupCompleted">,
+  cfg: Pick<MimoReasonixConfig, "setupCompleted">,
 ): "setup" | "code" {
   if (!cfg.setupCompleted) return "setup";
   return "code";

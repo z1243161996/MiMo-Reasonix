@@ -325,7 +325,7 @@ describe("handleSlash", () => {
 
   it("/undo outside code mode says it's not available", () => {
     const r = handleSlash("undo", [], makeLoop());
-    expect(r.info).toMatch(/only available inside `reasonix code`/);
+    expect(r.info).toMatch(/only available inside `mimo-reasonix code`/);
   });
 
   it("/restore with no arg opens the checkpoint picker in code mode", () => {
@@ -343,9 +343,9 @@ describe("handleSlash", () => {
   it("/restore outside code mode is unavailable regardless of args", () => {
     const noArg = handleSlash("restore", [], makeLoop());
     expect(noArg.openCheckpointPicker).toBeUndefined();
-    expect(noArg.info).toMatch(/only available inside `reasonix code`/);
+    expect(noArg.info).toMatch(/only available inside `mimo-reasonix code`/);
     const withArg = handleSlash("restore", ["abc"], makeLoop());
-    expect(withArg.info).toMatch(/only available inside `reasonix code`/);
+    expect(withArg.info).toMatch(/only available inside `mimo-reasonix code`/);
   });
 
   it("/undo in code mode invokes the callback", () => {
@@ -379,7 +379,7 @@ describe("handleSlash", () => {
 
   it("/commit outside code mode says it's not available", () => {
     const r = handleSlash("commit", ["foo"], makeLoop());
-    expect(r.info).toMatch(/only available inside `reasonix code`/);
+    expect(r.info).toMatch(/only available inside `mimo-reasonix code`/);
   });
 
   it("/commit with no message prints usage", () => {
@@ -389,7 +389,7 @@ describe("handleSlash", () => {
 
   it("/apply outside code mode says it's not available", () => {
     const r = handleSlash("apply", [], makeLoop());
-    expect(r.info).toMatch(/only available inside `reasonix code`/);
+    expect(r.info).toMatch(/only available inside `mimo-reasonix code`/);
   });
 
   it("/apply in code mode invokes the callback", () => {
@@ -401,7 +401,7 @@ describe("handleSlash", () => {
 
   it("/discard outside code mode says it's not available", () => {
     const r = handleSlash("discard", [], makeLoop());
-    expect(r.info).toMatch(/only available inside `reasonix code`/);
+    expect(r.info).toMatch(/only available inside `mimo-reasonix code`/);
   });
 
   it("/discard in code mode invokes the callback", () => {
@@ -651,7 +651,7 @@ describe("handleSlash", () => {
   describe("/update", () => {
     it("reports pending check when latestVersion is null (offline / in flight)", () => {
       const r = handleSlash("update", [], makeLoop(), { latestVersion: null });
-      expect(r.info).toMatch(/current: reasonix/);
+      expect(r.info).toMatch(/current: mimo-reasonix/);
       expect(r.info).toMatch(/not yet resolved/);
       expect(r.info).toMatch(/reasonix update/);
     });
@@ -1290,7 +1290,7 @@ describe("handleSlash", () => {
 
   describe("/memory", () => {
     let root: string;
-    const originalEnv = process.env.REASONIX_MEMORY;
+    const originalEnv = process.env.MIMO_REASONIX_MEMORY;
     const originalHome = process.env.HOME;
     const originalUserProfile = process.env.USERPROFILE;
 
@@ -1299,15 +1299,15 @@ describe("handleSlash", () => {
       process.env.HOME = root;
       process.env.USERPROFILE = root;
       // biome-ignore lint/performance/noDelete: avoid "undefined" in env
-      delete process.env.REASONIX_MEMORY;
+      delete process.env.MIMO_REASONIX_MEMORY;
     });
     afterEach(() => {
       rmSync(root, { recursive: true, force: true });
       if (originalEnv === undefined) {
         // biome-ignore lint/performance/noDelete: same reason
-        delete process.env.REASONIX_MEMORY;
+        delete process.env.MIMO_REASONIX_MEMORY;
       } else {
-        process.env.REASONIX_MEMORY = originalEnv;
+        process.env.MIMO_REASONIX_MEMORY = originalEnv;
       }
       if (originalHome === undefined) {
         // biome-ignore lint/performance/noDelete: env restoration needs absence, not "undefined"
@@ -1323,27 +1323,27 @@ describe("handleSlash", () => {
       }
     });
 
-    it("prints a how-to when no memory (REASONIX.md or ~/.mimo-reasonix/memory) exists", () => {
+    it("prints a how-to when no memory (MIMO_REASONIX.md or ~/.mimo-reasonix/memory) exists", () => {
       const r = handleSlash("memory", [], makeLoop(), { memoryRoot: root });
       expect(r.info).toMatch(/no memory pinned/);
-      expect(r.info).toMatch(/REASONIX\.md/);
+      expect(r.info).toMatch(/MIMO_REASONIX\.md/);
     });
 
-    it("prints the REASONIX.md contents + path when present", () => {
+    it("prints the MIMO_REASONIX.md contents + path when present", () => {
       writeFileSync(
-        join(root, "REASONIX.md"),
+        join(root, "MIMO_REASONIX.md"),
         "# House rules\nSnake case only in this repo.\n",
         "utf8",
       );
       const r = handleSlash("memory", [], makeLoop(), { memoryRoot: root });
-      expect(r.info).toMatch(/▸ REASONIX\.md:/);
+      expect(r.info).toMatch(/▸ MIMO_REASONIX\.md:/);
       expect(r.info).toContain("Snake case only");
       expect(r.info).toMatch(/chars/);
     });
 
-    it("says memory is disabled when REASONIX_MEMORY=off, even with a file present", () => {
-      writeFileSync(join(root, "REASONIX.md"), "content", "utf8");
-      process.env.REASONIX_MEMORY = "off";
+    it("says memory is disabled when MIMO_REASONIX_MEMORY=off, even with a file present", () => {
+      writeFileSync(join(root, "MIMO_REASONIX.md"), "content", "utf8");
+      process.env.MIMO_REASONIX_MEMORY = "off";
       const r = handleSlash("memory", [], makeLoop(), { memoryRoot: root });
       expect(r.info).toMatch(/memory is disabled/);
     });
@@ -1357,7 +1357,7 @@ describe("handleSlash", () => {
   describe("/plan", () => {
     it("/plan replies 'only in code mode' when setPlanMode callback is missing", () => {
       const r = handleSlash("plan", [], makeLoop());
-      expect(r.info).toMatch(/only available inside `reasonix code`/);
+      expect(r.info).toMatch(/only available inside `mimo-reasonix code`/);
     });
 
     it("/plan toggles when called with no args", () => {
@@ -1494,19 +1494,19 @@ describe("handleSlash", () => {
       tempHome = mkdtempSync(join(tmpdir(), "reasonix-theme-slash-"));
       originalHome = process.env.HOME;
       originalUserProfile = process.env.USERPROFILE;
-      originalTheme = process.env.REASONIX_THEME;
+      originalTheme = process.env.MIMO_REASONIX_THEME;
       process.env.HOME = tempHome;
       process.env.USERPROFILE = tempHome;
-      process.env.REASONIX_THEME = "github-dark";
+      process.env.MIMO_REASONIX_THEME = "github-dark";
     });
 
     afterEach(() => {
       process.env.HOME = originalHome;
       process.env.USERPROFILE = originalUserProfile;
       if (originalTheme === undefined) {
-        process.env.REASONIX_THEME = undefined;
+        process.env.MIMO_REASONIX_THEME = undefined;
       } else {
-        process.env.REASONIX_THEME = originalTheme;
+        process.env.MIMO_REASONIX_THEME = originalTheme;
       }
       rmSync(tempHome, { recursive: true, force: true });
     });

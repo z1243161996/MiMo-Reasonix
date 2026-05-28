@@ -413,7 +413,7 @@ async function checkOllama(projectRoot: string): Promise<Check> {
     };
   }
   try {
-    const model = meta?.model || process.env.REASONIX_EMBED_MODEL || "nomic-embed-text";
+    const model = meta?.model || process.env.MIMO_REASONIX_EMBED_MODEL || "nomic-embed-text";
     const status = await checkOllamaStatus(model);
     if (!status.binaryFound) {
       return {
@@ -476,10 +476,17 @@ function readSemanticMeta(
 }
 
 async function checkProject(projectRoot: string): Promise<Check> {
-  // Heuristic: a "real" project has either .git, REASONIX.md, or
+  // Heuristic: a "real" project has either .git, MIMO_REASONIX.md, or
   // package.json. Lacking all three, `reasonix code` still works but
   // @-mentions and the project-memory pin won't surface much.
-  const markers = [".git", "REASONIX.md", "package.json", "pyproject.toml", "Cargo.toml", "go.mod"];
+  const markers = [
+    ".git",
+    "MIMO_REASONIX.md",
+    "package.json",
+    "pyproject.toml",
+    "Cargo.toml",
+    "go.mod",
+  ];
   const found = markers.filter((m) => existsSync(join(projectRoot, m)));
   if (found.length === 0) {
     return {

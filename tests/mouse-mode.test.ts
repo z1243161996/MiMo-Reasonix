@@ -17,10 +17,10 @@ describe("mouse-mode enable/disable", () => {
     }) as typeof process.stdout.write;
     origIsTTY = process.stdout.isTTY;
     Object.defineProperty(process.stdout, "isTTY", { value: true, configurable: true });
-    origModeEnv = process.env.REASONIX_MOUSE_MODE;
+    origModeEnv = process.env.MIMO_REASONIX_MOUSE_MODE;
     origTermProgram = process.env.TERM_PROGRAM;
     // biome-ignore lint/performance/noDelete: env restoration needs absence, not "undefined"
-    delete process.env.REASONIX_MOUSE_MODE;
+    delete process.env.MIMO_REASONIX_MOUSE_MODE;
     // biome-ignore lint/performance/noDelete: env restoration needs absence, not "undefined"
     delete process.env.TERM_PROGRAM;
     // Reset module state — disable first to clear `active` from any prior test.
@@ -34,9 +34,9 @@ describe("mouse-mode enable/disable", () => {
     Object.defineProperty(process.stdout, "isTTY", { value: origIsTTY, configurable: true });
     if (origModeEnv === undefined) {
       // biome-ignore lint/performance/noDelete: env restoration needs absence, not "undefined"
-      delete process.env.REASONIX_MOUSE_MODE;
+      delete process.env.MIMO_REASONIX_MOUSE_MODE;
     } else {
-      process.env.REASONIX_MOUSE_MODE = origModeEnv;
+      process.env.MIMO_REASONIX_MOUSE_MODE = origModeEnv;
     }
     if (origTermProgram === undefined) {
       // biome-ignore lint/performance/noDelete: env restoration needs absence, not "undefined"
@@ -66,8 +66,8 @@ describe("mouse-mode enable/disable", () => {
     expect(writes).toEqual([]);
   });
 
-  it("REASONIX_MOUSE_MODE=sgr forces ?1000h + ?1006h capture even off Windows", () => {
-    process.env.REASONIX_MOUSE_MODE = "sgr";
+  it("MIMO_REASONIX_MOUSE_MODE=sgr forces ?1000h + ?1006h capture even off Windows", () => {
+    process.env.MIMO_REASONIX_MOUSE_MODE = "sgr";
     enableMouseMode();
     expect(writes.join("")).toBe("\u001b[?1000h\u001b[?1006h");
     writes.length = 0;
@@ -80,14 +80,14 @@ describe("mouse-mode enable/disable", () => {
     expect(writes.join("")).toBe("\u001b[?1000h\u001b[?1006h");
   });
 
-  it("REASONIX_MOUSE_MODE=alternate-scroll forces ?1007h even on Windows", () => {
-    process.env.REASONIX_MOUSE_MODE = "alternate-scroll";
+  it("MIMO_REASONIX_MOUSE_MODE=alternate-scroll forces ?1007h even on Windows", () => {
+    process.env.MIMO_REASONIX_MOUSE_MODE = "alternate-scroll";
     enableMouseMode();
     expect(writes.join("")).toBe("\u001b[?1007h");
   });
 
-  it("REASONIX_MOUSE_MODE=off resets every mouse-capture mode the terminal might be holding from a prior session", () => {
-    process.env.REASONIX_MOUSE_MODE = "off";
+  it("MIMO_REASONIX_MOUSE_MODE=off resets every mouse-capture mode the terminal might be holding from a prior session", () => {
+    process.env.MIMO_REASONIX_MOUSE_MODE = "off";
     enableMouseMode();
     expect(writes.join("")).toBe(
       "\u001b[?9l\u001b[?1000l\u001b[?1002l\u001b[?1003l\u001b[?1005l\u001b[?1006l\u001b[?1007l\u001b[?1015l",
@@ -97,8 +97,8 @@ describe("mouse-mode enable/disable", () => {
     expect(writes).toEqual([]);
   });
 
-  it("unknown REASONIX_MOUSE_MODE falls back to off (reset-all)", () => {
-    process.env.REASONIX_MOUSE_MODE = "garbage";
+  it("unknown MIMO_REASONIX_MOUSE_MODE falls back to off (reset-all)", () => {
+    process.env.MIMO_REASONIX_MOUSE_MODE = "garbage";
     enableMouseMode();
     expect(writes.join("")).toBe(
       "\u001b[?9l\u001b[?1000l\u001b[?1002l\u001b[?1003l\u001b[?1005l\u001b[?1006l\u001b[?1007l\u001b[?1015l",
@@ -119,10 +119,10 @@ describe("mouse-mode enable/disable", () => {
   it("disable uses the mode active at enable time, not the current env", () => {
     // Switching env after enable mustn't desync the disable sequence — it
     // would leave the terminal stuck in a half-set state.
-    process.env.REASONIX_MOUSE_MODE = "sgr";
+    process.env.MIMO_REASONIX_MOUSE_MODE = "sgr";
     enableMouseMode();
     writes.length = 0;
-    process.env.REASONIX_MOUSE_MODE = "alternate-scroll";
+    process.env.MIMO_REASONIX_MOUSE_MODE = "alternate-scroll";
     disableMouseMode();
     expect(writes.join("")).toBe("\u001b[?1006l\u001b[?1000l");
   });

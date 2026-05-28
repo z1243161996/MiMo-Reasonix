@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { t } from "../../i18n/index.js";
 import { FG, TONE } from "./theme/tokens.js";
 
-const REASONIX_LOGO = [
+const MIMO_REASONIX_LOGO = [
   "██████╗ ███████╗ █████╗ ███████╗ ██████╗ ███╗   ██╗██╗██╗  ██╗",
   "██╔══██╗██╔════╝██╔══██╗██╔════╝██╔═══██╗████╗  ██║██║╚██╗██╔╝",
   "██████╔╝█████╗  ███████║███████╗██║   ██║██╔██╗ ██║██║ ╚███╔╝ ",
@@ -55,7 +55,7 @@ export function BootSplash(): React.ReactElement {
   return (
     <Box flexDirection="column" alignItems="center" marginY={1}>
       <Box flexDirection="column" alignItems="flex-start" marginBottom={1}>
-        {REASONIX_LOGO.map((line) => (
+        {MIMO_REASONIX_LOGO.map((line) => (
           <Text key={line} color={TONE.brand} bold>
             {line}
           </Text>

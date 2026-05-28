@@ -121,14 +121,14 @@ export function registerFilesystemTools(
   const normRoot = pathMod.resolve(rootDir);
   /** Approved-this-session directory prefixes — `run_once` keeps the user from being asked twice for follow-up reads in the same dir. Wiped on process exit, not persisted. */
   const sessionApproved = new Set<string>();
-  /** Subdir REASONIX.md paths already injected this session (#1033). Reset per toolset, so each tab/session re-injects on first relevant read. */
+  /** Subdir MIMO_REASONIX.md paths already injected this session (#1033). Reset per toolset, so each tab/session re-injects on first relevant read. */
   const shownSubdirMemory = new Set<string>();
 
-  /** Prepend any not-yet-shown ancestor REASONIX.md (between absPath's dir and rootDir) to a read_file body. Outer dirs first so broad rules read before specific overrides. */
+  /** Prepend any not-yet-shown ancestor MIMO_REASONIX.md (between absPath's dir and rootDir) to a read_file body. Outer dirs first so broad rules read before specific overrides. */
   function withSubdirMemory(absPath: string, body: string): string {
     return prependMemorySections(findSubdirMemoryAncestors(absPath, rootDir), body);
   }
-  /** Same idea as withSubdirMemory but for list_directory — includes the listed dir's own REASONIX.md, not just ancestors. */
+  /** Same idea as withSubdirMemory but for list_directory — includes the listed dir's own MIMO_REASONIX.md, not just ancestors. */
   function withDirMemory(absDir: string, body: string): string {
     return prependMemorySections(findDirMemory(absDir, rootDir), body);
   }

@@ -157,8 +157,8 @@ function runOne(
     {
       env: {
         ...process.env,
-        REASONIX_FOLD_THRESHOLD: String(spec.foldThreshold),
-        REASONIX_FOLD_AGGRESSIVE_THRESHOLD: String(spec.aggressiveThreshold),
+        MIMO_REASONIX_FOLD_THRESHOLD: String(spec.foldThreshold),
+        MIMO_REASONIX_FOLD_AGGRESSIVE_THRESHOLD: String(spec.aggressiveThreshold),
       },
       encoding: "utf8",
       stdio: ["ignore", "pipe", "pipe"],

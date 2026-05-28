@@ -35,28 +35,29 @@ export const ru: TranslationSchema = {
     replay: "Интерактивная Ink TUI для просмотра транскрипта.",
     diff: "Сравнение двух транскриптов в разделённой Ink TUI.",
     mcp: "Помощники Model Context Protocol — поиск серверов, проверка настройки.",
-    version: "Вывести версию Reasonix.",
-    update: "Проверить новую версию Reasonix и установить.",
+    version: "Вывести версию MiMo-Reasonix.",
+    update: "Проверить новую версию MiMo-Reasonix и установить.",
     index: "Построить (или инкрементально обновить) локальный семантический поисковый индекс.",
   },
   stats: {
     ...EN.stats,
-    usageHint: "запусти `reasonix chat`, `reasonix code` или `reasonix run <task>` — каждый шаг",
-    usageDetail: "добавляет одну строку в лог, а `reasonix stats` сводит всё вместе.",
+    usageHint:
+      "запусти `mimo-reasonix chat`, `mimo-reasonix code` или `mimo-reasonix run <task>` — каждый шаг",
+    usageDetail: "добавляет одну строку в лог, а `mimo-reasonix stats` сводит всё вместе.",
   },
   run: {
     ...EN.run,
     missingApiKey:
       "DEEPSEEK_API_KEY не задан и stdin не TTY (нельзя запросить).\n" +
-      "Установи переменную окружения или запусти `reasonix chat` один раз для сохранения ключа.\n",
+      "Установи переменную окружения или запусти `mimo-reasonix chat` один раз для сохранения ключа.\n",
   },
   sessions: {
     ...EN.sessions,
     emptyHint:
-      "ещё нет сохранённых сессий — запусти `reasonix chat` (сессии авто-сохраняются, если не указан --no-session).",
+      "ещё нет сохранённых сессий — запусти `mimo-reasonix chat` (сессии авто-сохраняются, если не указан --no-session).",
     listHeader: "Сохранённые сессии (~/.mimo-reasonix/sessions/):",
-    inspectHint: "Просмотр:  reasonix sessions <имя>",
-    resumeHint: "Возобновить: reasonix chat --session <имя>",
+    inspectHint: "Просмотр:  mimo-reasonix sessions <имя>",
+    resumeHint: "Возобновить: mimo-reasonix chat --session <имя>",
     noSession: 'нет сессии "{name}" (или она пуста).',
     lookedAt: "просмотрено: {path}",
     noIdleSessions: "нет неактивных сессий ≥{days} дн. Ничего не удалено.",
@@ -127,7 +128,7 @@ export const ru: TranslationSchema = {
     jsonHintReport: "вывести отчёт проверки в JSON",
     modelOverrideFlash: "переопределить модель (по умолч.: mimo-v2.5)",
     skipConfirmHint: "пропустить запрос подтверждения",
-    welcome: "Запускай `reasonix` в любое время — настройки сохраняются.",
+    welcome: "Запускай `mimo-reasonix` в любое время — настройки сохраняются.",
     taglineChat: "Нативный агент MiMo",
     taglineCode: "Нативный кодинг-агент MiMo",
     taglineSub: "кэш-первый · flash-первый",
@@ -165,7 +166,7 @@ export const ru: TranslationSchema = {
   code: {
     ...EN.code,
     workspaceConflict:
-      "⚠ рабочая область содержит файлы другой платформы агента ({platforms}). Reasonix Code может прочитать их как содержимое проекта; перезапусти с --dir <твой-проект> если это нежелательно.\n",
+      "⚠ рабочая область содержит файлы другой платформы агента ({platforms}). MiMo-Reasonix Code может прочитать их как содержимое проекта; перезапусти с --dir <твой-проект> если это нежелательно.\n",
     systemAppendEmpty: "--system-append пуст — текст промпта не будет добавлен\n",
     systemAppendFileReadError:
       'Ошибка: не удалось прочитать --system-append-file "{filePath}": {errorDetails}\n',
@@ -301,7 +302,7 @@ export const ru: TranslationSchema = {
       description:
         "подключить, проверить или отключить QQ-канал для этой сессии (первое подключение проводит через App ID / App Secret настройку)",
     },
-    setup: { ...EN.slash.setup, description: "напоминает выйти и запустить `reasonix setup`" },
+    setup: { ...EN.slash.setup, description: "напоминает выйти и запустить `mimo-reasonix setup`" },
     semantic: {
       ...EN.slash.semantic,
       description: "показать статус semantic_search — построен? Ollama установлен? как включить",
@@ -393,7 +394,7 @@ export const ru: TranslationSchema = {
     ...EN.wizard,
     languageTitle: "Выберите язык",
     languageSubtitle: "Обнаружен из системной локали. Можно сменить позже через /language.",
-    welcomeTitle: "Добро пожаловать в Reasonix.",
+    welcomeTitle: "Добро пожаловать в MiMo-Reasonix.",
     apiKeyPrompt: "Вставьте ваш DeepSeek API ключ для начала работы.",
     apiKeyGetOne: "Получить: https://platform.deepseek.com/api_keys",
     apiKeySavedLocally: "Сохранён локально: {path}",
@@ -418,7 +419,7 @@ export const ru: TranslationSchema = {
       "deep-blue": "Глубокий синий на чёрном",
       "high-contrast": "Доступность",
     },
-    mcpTitle: "Какие MCP-серверы должен подключить Reasonix?",
+    mcpTitle: "Какие MCP-серверы должен подключить MiMo-Reasonix?",
     mcpUserArgsHint: "(вы предоставите {arg})",
     mcpFooterMulti:
       "[↑↓] навигация  ·  [Space] переключить  ·  [Enter] подтвердить  ·  [Esc] отмена  ·  пусто = пропустить",

@@ -8,7 +8,7 @@ type DebugOptions = {
 // Off by default. The env var lets us trace renderer activity in production
 // builds without recompiling — useful when a downstream consumer hits a
 // terminal-specific glitch we cannot reproduce locally.
-let debugEnabled = isEnvTruthy(process.env['REASONIX_DEBUG_INK']);
+let debugEnabled = isEnvTruthy(process.env['MIMO_REASONIX_DEBUG_INK']);
 
 export function setDebugLogging(enabled: boolean): void {
   debugEnabled = enabled;

@@ -12,7 +12,7 @@ let currentTurn = 1;
 // 模式检测
 const modeMeta = document.querySelector('meta[name="reasonix-mode"]');
 const rawMode = modeMeta?.getAttribute("content") ?? "";
-const isServerMode = rawMode !== "" && rawMode !== "__REASONIX_MODE__";
+const isServerMode = rawMode !== "" && rawMode !== "__MIMO_REASONIX_MODE__";
 const MODE = isServerMode ? "server" : "mock";
 
 /** Web vs. native dispatcher hint — `true` whenever the dashboard is served by the CLI server, false in the Tauri desktop wrapper where native dialogs work. */
@@ -233,7 +233,7 @@ function connectSSE(): void {
   const token =
     document.querySelector('meta[name="reasonix-token"]')?.getAttribute("content") ?? "";
   const sseUrl =
-    token && token !== "__REASONIX_TOKEN__"
+    token && token !== "__MIMO_REASONIX_TOKEN__"
       ? `/api/events?token=${encodeURIComponent(token)}`
       : "/api/events";
   sse = new EventSource(sseUrl);
@@ -303,7 +303,7 @@ async function apiFetch(endpoint: string, options?: RequestInit): Promise<any> {
   const headers: Record<string, string> = {
     ...((options?.headers as Record<string, string>) ?? {}),
   };
-  if (token && token !== "__REASONIX_TOKEN__") {
+  if (token && token !== "__MIMO_REASONIX_TOKEN__") {
     headers["x-reasonix-token"] = token;
   }
   if (options?.body && !headers["content-type"]) {

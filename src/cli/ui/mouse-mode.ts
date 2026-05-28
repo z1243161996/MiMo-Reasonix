@@ -3,13 +3,13 @@
 // mouse-capture modes so stale state from a prior crashed TUI can't keep
 // eating wheel events. Apple Terminal has had native crashes in its renderer
 // after receiving these private mouse-mode toggles, so its default is silent.
-// REASONIX_MOUSE_MODE remains an escape hatch.
+// MIMO_REASONIX_MOUSE_MODE remains an escape hatch.
 
 type Mode = "alternate-scroll" | "sgr" | "off" | "apple-terminal-off";
 export type MouseHistoryMode = "native" | "app";
 
 function readMode(historyMode: MouseHistoryMode): Mode {
-  const raw = (process.env.REASONIX_MOUSE_MODE ?? "").toLowerCase();
+  const raw = (process.env.MIMO_REASONIX_MOUSE_MODE ?? "").toLowerCase();
   if (raw === "sgr") return "sgr";
   if (raw === "alternate-scroll") return "alternate-scroll";
   if (raw === "off") return "off";

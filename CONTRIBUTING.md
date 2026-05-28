@@ -15,7 +15,7 @@ npm run dev          # tsx src/cli/index.ts — live source
 
 Node ≥ 22. No global install needed during development.
 
-For stack, layout, scripts, see [`REASONIX.md`](./REASONIX.md).
+For stack, layout, scripts, see [`MIMO_REASONIX.md`](./MIMO_REASONIX.md).
 
 ## Proposing changes
 

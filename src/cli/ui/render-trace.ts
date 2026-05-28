@@ -1,4 +1,4 @@
-/** Render frequency + duration counters, gated by `REASONIX_TRACE_RENDERS` so prod paths stay free. */
+/** Render frequency + duration counters, gated by `MIMO_REASONIX_TRACE_RENDERS` so prod paths stay free. */
 
 import React from "react";
 
@@ -12,7 +12,7 @@ interface Stats {
 
 const REPORT_INTERVAL_MS = 1000;
 const enabled = ((): boolean => {
-  const v = process.env.REASONIX_TRACE_RENDERS;
+  const v = process.env.MIMO_REASONIX_TRACE_RENDERS;
   return v === "1" || v === "true" || v === "yes";
 })();
 
@@ -49,7 +49,7 @@ export function useRenderTrace(name: string): void {
   });
 }
 
-/** True when `REASONIX_TRACE_RENDERS` is set — skip expensive wiring otherwise. */
+/** True when `MIMO_REASONIX_TRACE_RENDERS` is set — skip expensive wiring otherwise. */
 export const renderTraceEnabled = enabled;
 
 /** Snapshot the trace counters. Used by probes that need raw numbers instead of stderr scraping. */

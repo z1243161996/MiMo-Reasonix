@@ -35,7 +35,7 @@ export async function openInExternalEditor(initial: string): Promise<OpenEditorR
     };
   }
   const dir = mkdtempSync(join(tmpdir(), "reasonix-compose-"));
-  const path = join(dir, "REASONIX_INPUT.md");
+  const path = join(dir, "MIMO_REASONIX_INPUT.md");
   try {
     writeFileSync(path, initial, "utf8");
     await spawnEditor(editor, path);

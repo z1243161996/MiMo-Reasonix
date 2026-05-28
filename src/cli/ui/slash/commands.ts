@@ -166,7 +166,7 @@ export const SLASH_COMMANDS: readonly SlashCommandSpec[] = [
     cmd: "memory",
     group: "extend",
     argsHint: "[list|show <name>|forget <name>|clear <scope> confirm]",
-    summary: "show / manage pinned memory (REASONIX.md + ~/.reasonix/memory)",
+    summary: "show / manage pinned memory (MIMO_REASONIX.md + ~/.reasonix/memory)",
   },
   {
     cmd: "skill",
@@ -189,7 +189,7 @@ export const SLASH_COMMANDS: readonly SlashCommandSpec[] = [
     group: "code",
     argsHint: "[force]",
     summary:
-      "scan the project and synthesize a baseline REASONIX.md (model writes; review with /apply). `force` overwrites an existing file.",
+      "scan the project and synthesize a baseline MIMO_REASONIX.md (model writes; review with /apply). `force` overwrites an existing file.",
     contextual: "code",
     argCompleter: ["force"],
   },

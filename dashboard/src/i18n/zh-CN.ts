@@ -708,7 +708,7 @@ export const zhCN = {
     create: "创建",
     noFiles: "暂无记忆文件。",
     pickHint: "选择左侧的记忆文件。",
-    pickDesc: "项目 REASONIX.md 可提交；全局笔记存储在 ~/.reasonix/memory/。",
+    pickDesc: "项目 MIMO_REASONIX.md 可提交；全局笔记存储在 ~/.reasonix/memory/。",
     chars: "{count} 个字符",
     saved: "已保存 {scope}",
     reloadHint: "在下次 /new 或会话重启时重新加载",

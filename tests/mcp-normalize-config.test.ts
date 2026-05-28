@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { type ReasonixConfig, normalizeMcpConfig } from "../src/config.js";
+import { type MimoReasonixConfig, normalizeMcpConfig } from "../src/config.js";
 import type { McpServerSpec } from "../src/mcp/spec.js";
 import { SseTransport } from "../src/mcp/sse.js";
 import { StdioTransport } from "../src/mcp/stdio.js";
@@ -16,7 +16,7 @@ function findByName(specs: McpServerSpec[], name: string): McpServerSpec | undef
 
 describe("normalizeMcpConfig: legacy-only", () => {
   it("parses mcp: string[] into McpServerSpec[]", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcp: ["fs=npx -y @scope/fs /tmp", "git=uvx mcp-server-git"],
     };
     const result = normalizeMcpConfig(cfg);
@@ -32,7 +32,7 @@ describe("normalizeMcpConfig: legacy-only", () => {
   });
 
   it("parses anonymous legacy specs", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcp: ["npx -y @scope/fs /tmp"],
     };
     const result = normalizeMcpConfig(cfg);
@@ -41,7 +41,7 @@ describe("normalizeMcpConfig: legacy-only", () => {
   });
 
   it("parses SSE legacy specs", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcp: ["remote=https://example.com/sse"],
     };
     const result = normalizeMcpConfig(cfg);
@@ -50,7 +50,7 @@ describe("normalizeMcpConfig: legacy-only", () => {
   });
 
   it("parses streamable-http legacy specs", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcp: ["edge=streamable+https://edge.example.com/mcp"],
     };
     const result = normalizeMcpConfig(cfg);
@@ -59,7 +59,7 @@ describe("normalizeMcpConfig: legacy-only", () => {
   });
 
   it("skips invalid legacy specs silently", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcp: ["fs=npx -y @scope/fs", "", "   "],
     };
     const result = normalizeMcpConfig(cfg);
@@ -70,7 +70,7 @@ describe("normalizeMcpConfig: legacy-only", () => {
 
 describe("normalizeMcpConfig: object-only", () => {
   it("parses mcpServers into McpServerSpec[]", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         github: {
           command: "npx",
@@ -95,7 +95,7 @@ describe("normalizeMcpConfig: object-only", () => {
   });
 
   it("parses SSE mcpServers with headers", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         remote: {
           transport: "sse",
@@ -114,7 +114,7 @@ describe("normalizeMcpConfig: object-only", () => {
   });
 
   it("parses streamable-http mcpServers with headers", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         edge: {
           transport: "streamable-http",
@@ -133,7 +133,7 @@ describe("normalizeMcpConfig: object-only", () => {
   });
 
   it("infers transport from url when transport is omitted", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         sseSvc: { url: "https://example.com/sse" },
         stdioSvc: { command: "npx", args: ["-y", "pkg"] },
@@ -148,7 +148,7 @@ describe("normalizeMcpConfig: object-only", () => {
   });
 
   it("strips streamable+ prefix from url when transport is omitted", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         edge: { url: "streamable+https://edge.example.com/mcp" },
       },
@@ -164,7 +164,7 @@ describe("normalizeMcpConfig: object-only", () => {
 
 describe("normalizeMcpConfig: merge with name conflict", () => {
   it("mcpServers wins silently when both sources have the same name", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcp: ["fs=npx -y @scope/fs /tmp"],
       mcpServers: {
         fs: {
@@ -186,7 +186,7 @@ describe("normalizeMcpConfig: merge with name conflict", () => {
   });
 
   it("mcpServers entry shadows legacy spec with same name", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcp: ["fs=npx -y @scope/fs /tmp", "git=uvx mcp-server-git"],
       mcpServers: {
         fs: {
@@ -212,7 +212,7 @@ describe("normalizeMcpConfig: merge with name conflict", () => {
 
 describe("normalizeMcpConfig: disabled handling", () => {
   it("honors disabled: true from mcpServers entry", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         github: {
           command: "npx",
@@ -227,7 +227,7 @@ describe("normalizeMcpConfig: disabled handling", () => {
   });
 
   it("honors disabled from legacy mcpDisabled array", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcp: ["fs=npx -y @scope/fs /tmp"],
       mcpDisabled: ["fs"],
     };
@@ -237,7 +237,7 @@ describe("normalizeMcpConfig: disabled handling", () => {
   });
 
   it("combines both disabled sources", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcp: ["fs=npx -y @scope/fs /tmp", "git=uvx mcp-server-git"],
       mcpDisabled: ["fs"],
       mcpServers: {
@@ -256,7 +256,7 @@ describe("normalizeMcpConfig: disabled handling", () => {
   });
 
   it("mcpServers disabled:true overrides legacy mcpDisabled for same name", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcp: ["fs=npx -y @scope/fs"],
       mcpDisabled: [],
       mcpServers: {
@@ -271,7 +271,7 @@ describe("normalizeMcpConfig: disabled handling", () => {
 
 describe("normalizeMcpConfig: env and headers", () => {
   it("env from mcpServers is present on stdio specs", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         github: {
           command: "npx",
@@ -287,7 +287,7 @@ describe("normalizeMcpConfig: env and headers", () => {
   });
 
   it("env from legacy mcpEnv is present on stdio specs", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcp: ["github=npx -y @scope/github"],
       mcpEnv: { github: { GITHUB_TOKEN: "ghp_abc" } },
     };
@@ -298,7 +298,7 @@ describe("normalizeMcpConfig: env and headers", () => {
   });
 
   it("headers from mcpServers are present on SSE specs", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         remote: {
           transport: "sse",
@@ -314,7 +314,7 @@ describe("normalizeMcpConfig: env and headers", () => {
   });
 
   it("headers from mcpServers are present on streamable-http specs", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         edge: {
           transport: "streamable-http",
@@ -330,7 +330,7 @@ describe("normalizeMcpConfig: env and headers", () => {
   });
 
   it("anonymous legacy spec has no env overlay", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcp: ["npx -y @scope/fs"],
       mcpEnv: { anon: { TOKEN: "val" } },
     };
@@ -344,7 +344,7 @@ describe("normalizeMcpConfig: env and headers", () => {
 
 describe("normalizeMcpConfig: headers round-trip into transport", () => {
   it("headers on SSE spec are passed to SseTransport", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         remote: {
           transport: "sse",
@@ -359,7 +359,7 @@ describe("normalizeMcpConfig: headers round-trip into transport", () => {
   });
 
   it("headers on streamable-http spec are passed to StreamableHttpTransport", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         edge: {
           transport: "streamable-http",
@@ -374,7 +374,7 @@ describe("normalizeMcpConfig: headers round-trip into transport", () => {
   });
 
   it("stdio server with headers ignores headers", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         local: {
           command: "npx",
@@ -394,7 +394,7 @@ describe("normalizeMcpConfig: headers round-trip into transport", () => {
   });
 
   it("env on stdio spec is passed to StdioTransport", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         local: {
           command: "node",
@@ -412,7 +412,7 @@ describe("normalizeMcpConfig: headers round-trip into transport", () => {
 
 describe("normalizeMcpConfig: extraLegacy parameter", () => {
   it("extraLegacy replaces cfg.mcp when provided", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcp: ["fs=npx -y @scope/fs"],
       mcpServers: {
         db: { command: "npx", args: ["-y", "@scope/db"] },
@@ -424,7 +424,7 @@ describe("normalizeMcpConfig: extraLegacy parameter", () => {
   });
 
   it("extraLegacy is empty array falls back to cfg.mcp", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcp: ["fs=npx -y @scope/fs"],
     };
     const result = normalizeMcpConfig(cfg, []);
@@ -435,7 +435,7 @@ describe("normalizeMcpConfig: extraLegacy parameter", () => {
 
 describe("normalizeMcpConfig: Claude .mcp.json compatibility", () => {
   it("accepts `type` as alias for `transport`", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         local: { type: "stdio", command: "node", args: ["server.js"] },
         events: { type: "sse", url: "https://example.com/sse" },
@@ -449,7 +449,7 @@ describe("normalizeMcpConfig: Claude .mcp.json compatibility", () => {
   });
 
   it('treats `type: "http"` as `streamable-http`', () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         gh: { type: "http", url: "https://api.githubcopilot.com/mcp/" },
       },
@@ -460,7 +460,7 @@ describe("normalizeMcpConfig: Claude .mcp.json compatibility", () => {
   });
 
   it("`transport` still wins when both transport and type are set", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         odd: { transport: "stdio", type: "http", command: "node" },
       },
@@ -472,7 +472,7 @@ describe("normalizeMcpConfig: Claude .mcp.json compatibility", () => {
 
 describe("normalizeMcpConfig: requestTimeoutMs (#2023)", () => {
   it("passes requestTimeoutMs through for stdio mcpServers", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         slow: {
           command: "npx",
@@ -487,7 +487,7 @@ describe("normalizeMcpConfig: requestTimeoutMs (#2023)", () => {
   });
 
   it("passes requestTimeoutMs through for SSE mcpServers", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         remote: {
           transport: "sse",
@@ -502,7 +502,7 @@ describe("normalizeMcpConfig: requestTimeoutMs (#2023)", () => {
   });
 
   it("passes requestTimeoutMs through for streamable-http mcpServers", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         edge: {
           transport: "streamable-http",
@@ -517,7 +517,7 @@ describe("normalizeMcpConfig: requestTimeoutMs (#2023)", () => {
   });
 
   it("leaves requestTimeoutMs undefined when not set", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         normal: {
           command: "npx",

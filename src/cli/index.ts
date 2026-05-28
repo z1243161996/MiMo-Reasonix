@@ -124,23 +124,23 @@ function resolveDashboardPort(
     : undefined;
 }
 
-/** Resolution order: flag → REASONIX_DASHBOARD_HOST env → config.dashboard.host → undefined (server defaults to 127.0.0.1). */
+/** Resolution order: flag → MIMO_REASONIX_DASHBOARD_HOST env → config.dashboard.host → undefined (server defaults to 127.0.0.1). */
 function resolveDashboardHost(
   flagValue: string | undefined,
   noConfig: boolean,
 ): string | undefined {
   const fromFlag = flagValue?.trim();
   if (fromFlag) return fromFlag;
-  const fromEnv = process.env.REASONIX_DASHBOARD_HOST?.trim();
+  const fromEnv = process.env.MIMO_REASONIX_DASHBOARD_HOST?.trim();
   if (fromEnv) return fromEnv;
   if (noConfig) return undefined;
   const fromCfg = readConfig().dashboard?.host;
   return typeof fromCfg === "string" && fromCfg.trim() ? fromCfg.trim() : undefined;
 }
 
-/** Resolution order: REASONIX_DASHBOARD_TOKEN env → config.dashboard.token (minted + persisted on first call so the URL survives CLI restarts). Min 16 chars; shorter env overrides are dropped with a warning. */
+/** Resolution order: MIMO_REASONIX_DASHBOARD_TOKEN env → config.dashboard.token (minted + persisted on first call so the URL survives CLI restarts). Min 16 chars; shorter env overrides are dropped with a warning. */
 function resolveDashboardToken(noConfig: boolean): string | undefined {
-  const fromEnv = process.env.REASONIX_DASHBOARD_TOKEN?.trim();
+  const fromEnv = process.env.MIMO_REASONIX_DASHBOARD_TOKEN?.trim();
   if (fromEnv) {
     if (fromEnv.length < 16) {
       process.stderr.write(

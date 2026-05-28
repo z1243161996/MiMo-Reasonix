@@ -10,23 +10,23 @@ import { MemoryStore } from "../src/memory/user.js";
 
 describe("desktop memory browser", () => {
   let root: string;
-  let reasonixHome: string;
+  let mimoReasonixHome: string;
 
   beforeEach(() => {
     root = mkdtempSync(join(tmpdir(), "reasonix-memory-project-"));
-    reasonixHome = join(mkdtempSync(join(tmpdir(), "reasonix-memory-home-")), ".mimo-reasonix");
-    mkdirSync(reasonixHome, { recursive: true });
+    mimoReasonixHome = join(mkdtempSync(join(tmpdir(), "reasonix-memory-home-")), ".mimo-reasonix");
+    mkdirSync(mimoReasonixHome, { recursive: true });
   });
 
   afterEach(() => {
     rmSync(root, { recursive: true, force: true });
-    rmSync(reasonixHome, { recursive: true, force: true });
+    rmSync(mimoReasonixHome, { recursive: true, force: true });
   });
 
-  it("lists project REASONIX.md, global REASONIX.md, and structured memory entries", () => {
-    writeFileSync(join(root, "REASONIX.md"), "project note", "utf8");
-    writeFileSync(join(reasonixHome, "REASONIX.md"), "global note", "utf8");
-    const store = new MemoryStore({ homeDir: reasonixHome, projectRoot: root });
+  it("lists project MIMO_REASONIX.md, global MIMO_REASONIX.md, and structured memory entries", () => {
+    writeFileSync(join(root, "MIMO_REASONIX.md"), "project note", "utf8");
+    writeFileSync(join(mimoReasonixHome, "MIMO_REASONIX.md"), "global note", "utf8");
+    const store = new MemoryStore({ homeDir: mimoReasonixHome, projectRoot: root });
     store.write({
       name: "cli_pref",
       scope: "global",
@@ -42,11 +42,11 @@ describe("desktop memory browser", () => {
       body: "Run npm run verify before release.",
     });
 
-    const entries = collectMemoryEntriesForWorkspace(root, { reasonixHome });
+    const entries = collectMemoryEntriesForWorkspace(root, { mimoReasonixHome });
 
     expect(entries.map((e) => `${e.kind}:${e.scope}:${e.name}`)).toEqual([
-      "project_file:project:REASONIX.md",
-      "global_file:global:REASONIX.md",
+      "project_file:project:MIMO_REASONIX.md",
+      "global_file:global:MIMO_REASONIX.md",
       "structured:global:cli_pref",
       "structured:project:build_cmd",
     ]);
@@ -55,20 +55,20 @@ describe("desktop memory browser", () => {
   });
 
   it("reads details only for listed memory files", () => {
-    writeFileSync(join(root, "REASONIX.md"), "project note", "utf8");
-    const entries = collectMemoryEntriesForWorkspace(root, { reasonixHome });
+    writeFileSync(join(root, "MIMO_REASONIX.md"), "project note", "utf8");
+    const entries = collectMemoryEntriesForWorkspace(root, { mimoReasonixHome });
 
-    const detail = readMemoryEntryDetail({ path: entries[0]!.path }, root, { reasonixHome });
+    const detail = readMemoryEntryDetail({ path: entries[0]!.path }, root, { mimoReasonixHome });
 
     expect(detail).toMatchObject({
       kind: "project_file",
       scope: "project",
-      name: "REASONIX.md",
+      name: "MIMO_REASONIX.md",
       body: "project note",
     });
     expect(() =>
-      readMemoryEntryDetail({ path: join(reasonixHome, "not-listed.md") }, root, {
-        reasonixHome,
+      readMemoryEntryDetail({ path: join(mimoReasonixHome, "not-listed.md") }, root, {
+        mimoReasonixHome,
       }),
     ).toThrow(/not available/);
   });

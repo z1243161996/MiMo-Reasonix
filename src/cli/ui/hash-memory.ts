@@ -65,7 +65,7 @@ export function appendProjectMemory(rootDir: string, note: string): AppendMemory
 }
 
 export const GLOBAL_MEMORY_DIR = ".mimo-reasonix";
-export const GLOBAL_MEMORY_FILE = "REASONIX.md";
+export const GLOBAL_MEMORY_FILE = "MIMO_REASONIX.md";
 
 export function globalMemoryPath(homeDir: string = homedir()): string {
   return join(homeDir, GLOBAL_MEMORY_DIR, GLOBAL_MEMORY_FILE);

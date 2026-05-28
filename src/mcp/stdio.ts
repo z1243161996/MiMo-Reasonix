@@ -142,8 +142,8 @@ export class StdioTransport implements McpTransport {
       } catch {
         // Malformed stdout lines are dropped — some servers emit startup
         // banners before the JSON-RPC loop begins. Surface only under
-        // REASONIX_DEBUG_MCP=1; otherwise the noise corrupts the TUI render.
-        if (process.env.REASONIX_DEBUG_MCP === "1") {
+        // MIMO_REASONIX_DEBUG_MCP=1; otherwise the noise corrupts the TUI render.
+        if (process.env.MIMO_REASONIX_DEBUG_MCP === "1") {
           process.stderr.write(`[mcp-stdio] dropped malformed line: ${line}\n`);
         }
       }
@@ -153,7 +153,7 @@ export class StdioTransport implements McpTransport {
   // Python MCP SDK writes info logs (`server.py:534 ListPromptsRequest`)
   // to stderr — letting those through would corrupt the TUI render.
   private onStderr(chunk: string): void {
-    if (process.env.REASONIX_DEBUG_MCP === "1") {
+    if (process.env.MIMO_REASONIX_DEBUG_MCP === "1") {
       process.stderr.write(chunk);
     }
   }

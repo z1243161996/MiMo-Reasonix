@@ -1,4 +1,4 @@
-/** Child stderr is piped, not inherited — only forwarded under REASONIX_DEBUG_MCP=1. */
+/** Child stderr is piped, not inherited — only forwarded under MIMO_REASONIX_DEBUG_MCP=1. */
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { StdioTransport } from "../src/mcp/stdio.js";
@@ -24,8 +24,8 @@ describe("StdioTransport child stderr handling", { timeout: 5_000 }, () => {
     vi.unstubAllEnvs();
   });
 
-  it("does not forward child stderr to our stderr when REASONIX_DEBUG_MCP is unset", async () => {
-    vi.stubEnv("REASONIX_DEBUG_MCP", "");
+  it("does not forward child stderr to our stderr when MIMO_REASONIX_DEBUG_MCP is unset", async () => {
+    vi.stubEnv("MIMO_REASONIX_DEBUG_MCP", "");
     const t = new StdioTransport({
       command: "node",
       args: ["-e", STDERR_THEN_EXIT],
@@ -38,8 +38,8 @@ describe("StdioTransport child stderr handling", { timeout: 5_000 }, () => {
     expect(stderrCalls.some((s) => s.includes("server.py:534"))).toBe(false);
   });
 
-  it("forwards child stderr to our stderr when REASONIX_DEBUG_MCP=1", async () => {
-    vi.stubEnv("REASONIX_DEBUG_MCP", "1");
+  it("forwards child stderr to our stderr when MIMO_REASONIX_DEBUG_MCP=1", async () => {
+    vi.stubEnv("MIMO_REASONIX_DEBUG_MCP", "1");
     const t = new StdioTransport({
       command: "node",
       args: ["-e", STDERR_THEN_EXIT],

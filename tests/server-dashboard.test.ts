@@ -552,13 +552,13 @@ describe("dashboard server: SPA shell", () => {
 
   it("rendered index.html replaces ALL token placeholders, not just the first", async () => {
     // Regression: String.replace(s, r) only swaps the first occurrence.
-    // The HTML template has __REASONIX_TOKEN__ in three spots (meta,
+    // The HTML template has __MIMO_REASONIX_TOKEN__ in three spots (meta,
     // css href, script src). Browser hits 401 on every asset fetch
     // when only the meta tag gets the real token.
     const r = await call(handle!.url, { token: TOKEN });
     const html = String(r.body);
-    expect(html).not.toContain("__REASONIX_TOKEN__");
-    expect(html).not.toContain("__REASONIX_MODE__");
+    expect(html).not.toContain("__MIMO_REASONIX_TOKEN__");
+    expect(html).not.toContain("__MIMO_REASONIX_MODE__");
     // Sanity: every asset URL should embed the live token, not the placeholder.
     const assetMatches = html.match(/\/assets\/[^"]+/g) ?? [];
     for (const url of assetMatches) {

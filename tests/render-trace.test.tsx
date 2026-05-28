@@ -4,7 +4,7 @@ import { renderTraceEnabled, useRenderTrace } from "../src/cli/ui/render-trace.j
 import { render } from "./helpers/ink-test.js";
 
 describe("render-trace", () => {
-  it("is disabled when REASONIX_TRACE_RENDERS is unset (default for tests)", () => {
+  it("is disabled when MIMO_REASONIX_TRACE_RENDERS is unset (default for tests)", () => {
     expect(renderTraceEnabled).toBe(false);
   });
 

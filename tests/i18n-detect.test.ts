@@ -36,12 +36,9 @@ describe("detectSystemLanguage", () => {
     expect(detectSystemLanguage("de")).toBe("de");
   });
 
-  it("maps ja-* variants to ja", () => {
-    expect(detectSystemLanguage("ja-JP")).toBe("ja");
-    expect(detectSystemLanguage("ja")).toBe("ja");
-  });
-
-  it("returns null for unsupported locales", () => {
+  it("returns null for unsupported locales (including ja)", () => {
+    expect(detectSystemLanguage("ja-JP")).toBeNull();
+    expect(detectSystemLanguage("ja")).toBeNull();
     expect(detectSystemLanguage("fr-FR")).toBeNull();
     expect(detectSystemLanguage("")).toBeNull();
   });
@@ -53,8 +50,7 @@ describe("detectSystemLanguage", () => {
         result === "EN" ||
         result === "zh-CN" ||
         result === "de" ||
-        result === "ru" ||
-        result === "ja",
+        result === "ru",
     ).toBe(true);
   });
 

@@ -237,7 +237,7 @@ function estimateCost(userText: string, loop: import("@/loop.js").CacheFirstLoop
 }
 
 const feedback: SlashHandler = (_args, loop, ctx) => {
-  const themeName = resolveThemePreference(loadTheme(), process.env.REASONIX_THEME);
+  const themeName = resolveThemePreference(loadTheme(), process.env.MIMO_REASONIX_THEME);
   const diagnostic = buildFeedbackDiagnostic({
     version: VERSION,
     latestVersion: ctx.latestVersion ?? undefined,

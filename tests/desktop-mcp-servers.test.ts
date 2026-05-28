@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { getAllMcpSpecs } from "../src/cli/commands/desktop.js";
-import type { ReasonixConfig } from "../src/config.js";
+import type { MimoReasonixConfig } from "../src/config.js";
 
 describe("getAllMcpSpecs", () => {
   it("returns legacy cfg.mcp specs", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcp: ["fs=npx -y @scope/fs /tmp", "git=uvx mcp-server-git"],
     };
     const specs = getAllMcpSpecs(cfg);
@@ -14,7 +14,7 @@ describe("getAllMcpSpecs", () => {
   });
 
   it("returns mcpServers specs when legacy mcp is absent", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcpServers: {
         github: {
           command: "npx",
@@ -28,7 +28,7 @@ describe("getAllMcpSpecs", () => {
   });
 
   it("merges both legacy mcp and mcpServers", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcp: ["fs=npx -y @scope/fs /tmp"],
       mcpServers: {
         github: {
@@ -44,7 +44,7 @@ describe("getAllMcpSpecs", () => {
   });
 
   it("mcpServers wins on name conflict", () => {
-    const cfg: ReasonixConfig = {
+    const cfg: MimoReasonixConfig = {
       mcp: ["fs=npx -y @scope/fs /tmp"],
       mcpServers: {
         fs: {
@@ -60,7 +60,7 @@ describe("getAllMcpSpecs", () => {
   });
 
   it("returns empty array when neither mcp nor mcpServers present", () => {
-    const cfg: ReasonixConfig = {};
+    const cfg: MimoReasonixConfig = {};
     const specs = getAllMcpSpecs(cfg);
     expect(specs).toEqual([]);
   });

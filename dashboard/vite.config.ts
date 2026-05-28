@@ -10,8 +10,8 @@ export default defineConfig({
       name: "dev-html-rewrite",
       transformIndexHtml(html: string) {
         return html
-          .replace('/assets/app.js?token=__REASONIX_TOKEN__', '/src/main.tsx')
-          .replace('/assets/app.css?token=__REASONIX_TOKEN__', '/src/styles.css');
+          .replace('/assets/app.js?token=__MIMO_REASONIX_TOKEN__', '/src/main.tsx')
+          .replace('/assets/app.css?token=__MIMO_REASONIX_TOKEN__', '/src/styles.css');
       },
     },
   ],

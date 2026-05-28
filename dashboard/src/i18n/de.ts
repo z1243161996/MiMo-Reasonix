@@ -757,7 +757,7 @@ export const de: typeof en = {
     create: "erstellen",
     noFiles: "Noch keine Memory-Dateien.",
     pickHint: "Wähle links eine Memory-Datei.",
-    pickDesc: "Projekt-REASONIX.md ist commitierbar; globale Notizen leben in ~/.reasonix/memory/.",
+    pickDesc: "Projekt-MIMO_REASONIX.md ist commitierbar; globale Notizen leben in ~/.reasonix/memory/.",
     chars: "{count} Zeichen",
     saved: "{scope} gespeichert",
     reloadHint: "wird beim nächsten /new oder Sitzungsneustart neu angewendet",

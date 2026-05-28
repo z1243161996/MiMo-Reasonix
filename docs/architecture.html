@@ -246,12 +246,12 @@
               </thead>
               <tbody>
                 <tr>
-                  <td><code>REASONIX_PARALLEL_MAX</code></td>
+                  <td><code>MIMO_REASONIX_PARALLEL_MAX</code></td>
                   <td><code>3</code> (hard cap <code>16</code>)</td>
                   <td>Max chunk size.</td>
                 </tr>
                 <tr>
-                  <td><code>REASONIX_TOOL_DISPATCH=serial</code></td>
+                  <td><code>MIMO_REASONIX_TOOL_DISPATCH=serial</code></td>
                   <td>unset</td>
                   <td>Forces serial dispatch — escape hatch.</td>
                 </tr>
@@ -436,7 +436,7 @@
 │   └── web.ts              <span class="hash"># web_search, web_fetch (multi-engine: Mojeek, SearXNG or Metaso)</span>
 ├── mcp/                    <span class="hash"># MCP client + bridge (stdio + SSE)</span>
 ├── memory.ts               <span class="hash"># ImmutablePrefix / AppendOnlyLog / VolatileScratch</span>
-├── project-memory.ts       <span class="hash"># REASONIX.md loader</span>
+├── project-memory.ts       <span class="hash"># MIMO_REASONIX.md loader</span>
 ├── user-memory.ts          <span class="hash"># ~/.reasonix/memory/ store (project + global)</span>
 ├── skills.ts               <span class="hash"># built-in explore + research skills</span>
 ├── session.ts              <span class="hash"># JSONL session persistence</span>

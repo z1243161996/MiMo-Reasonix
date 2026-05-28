@@ -4,7 +4,7 @@ import type { Color, TextStyles } from './styles.js';
 /** Adjust chalk's color level for environments it can't auto-detect. */
 
 const VSCODE_PROGRAM = 'vscode';
-const TMUX_TRUECOLOR_OPT_OUT = 'REASONIX_TMUX_TRUECOLOR';
+const TMUX_TRUECOLOR_OPT_OUT = 'MIMO_REASONIX_TMUX_TRUECOLOR';
 
 function liftLevelForXtermJs(): boolean {
   if (process.env.TERM_PROGRAM === VSCODE_PROGRAM && chalk.level === 2) {

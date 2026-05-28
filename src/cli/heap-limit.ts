@@ -8,7 +8,7 @@ export const TARGET_HEAP_MB_FLOOR = 2048;
 export const HEAP_HEADROOM_MB = 64;
 
 /** Set on the spawned child so we don't re-exec recursively if Node ignores our flag. */
-export const RX_HEAP_REEXEC_ENV = "REASONIX_HEAP_REEXEC";
+export const RX_HEAP_REEXEC_ENV = "MIMO_REASONIX_HEAP_REEXEC";
 
 export interface HeapCheckInputs {
   currentLimitMb: number;

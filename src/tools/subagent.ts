@@ -458,7 +458,7 @@ export function registerSubagentTool(
 ): ToolRegistry {
   const baseSystem = opts.defaultSystem ?? SUBAGENT_BASE_SYSTEM;
   // Bake project memory into the default once — re-reading on every
-  // spawn would (a) make the child prefix unstable when REASONIX.md
+  // spawn would (a) make the child prefix unstable when MIMO_REASONIX.md
   // changes mid-session, defeating cache reuse across multiple
   // subagent calls, and (b) cost a stat() per call. The parent itself
   // also reads memory once at startup; matching that semantics keeps

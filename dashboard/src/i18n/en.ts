@@ -730,7 +730,7 @@ export const en = {
     create: "create",
     noFiles: "No memory files yet.",
     pickHint: "Pick a memory file on the left.",
-    pickDesc: "Project REASONIX.md is committable; global notes live in ~/.reasonix/memory/.",
+    pickDesc: "Project MIMO_REASONIX.md is committable; global notes live in ~/.reasonix/memory/.",
     chars: "{count} chars",
     saved: "saved {scope}",
     reloadHint: "re-applied on next /new or session restart",

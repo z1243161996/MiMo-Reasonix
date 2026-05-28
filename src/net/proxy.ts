@@ -24,7 +24,7 @@ const LOOPBACK_NO_PROXY = ["localhost", "127.0.0.1", "::1"] as const;
 // DeepSeek's API origin is in CN; routing it through a user's clash/v2ray
 // (typically a US-exit pool) lands on shared abuse IPs that DeepSeek 403s.
 // Opt-out via `proxy.bypassDeepSeekDirect: false` (config) or
-// `REASONIX_PROXY_DEEPSEEK_DIRECT=0` (env) for corporate firewalls that block
+// `MIMO_REASONIX_PROXY_DEEPSEEK_DIRECT=0` (env) for corporate firewalls that block
 // direct egress and require the proxy to reach api.deepseek.com (issue #1497).
 const DEEPSEEK_NO_PROXY = ["api.deepseek.com", "*.deepseek.com"] as const;
 
@@ -167,7 +167,7 @@ export interface InstallProxyOptions {
   disabled?: boolean;
   /** Config-supplied proxy URL. Wins over env detection so desktop-GUI users who can't reliably set HTTPS_PROXY can still route via `cfg.proxy.url` (issue #1868). */
   url?: string;
-  /** Additional NO_PROXY patterns layered on top of defaults + env. Sourced from `cfg.proxy.noProxy` / `REASONIX_NO_PROXY`. */
+  /** Additional NO_PROXY patterns layered on top of defaults + env. Sourced from `cfg.proxy.noProxy` / `MIMO_REASONIX_NO_PROXY`. */
   extraNoProxy?: readonly string[];
   /** When false, route api.deepseek.com / *.deepseek.com through the proxy too (issue #1497). Default true preserves the clash/v2ray US-exit-IP 403 fix. */
   bypassDeepSeekDirect?: boolean;
@@ -191,12 +191,12 @@ export interface ResolvedNoProxy {
   all: NoProxyPattern[];
 }
 
-/** Env `REASONIX_PROXY_DEEPSEEK_DIRECT` (1/0/true/false/yes/no/on/off) overrides config when set; defaults true. Per issue #1497, corporate firewalls need the env knob since they often can't edit `~/.reasonix/config.json` ergonomically. */
+/** Env `MIMO_REASONIX_PROXY_DEEPSEEK_DIRECT` (1/0/true/false/yes/no/on/off) overrides config when set; defaults true. Per issue #1497, corporate firewalls need the env knob since they often can't edit `~/.reasonix/config.json` ergonomically. */
 export function resolveBypassDeepSeekDirect(
   env: NodeJS.ProcessEnv,
   configValue: boolean | undefined,
 ): boolean {
-  const raw = env.REASONIX_PROXY_DEEPSEEK_DIRECT;
+  const raw = env.MIMO_REASONIX_PROXY_DEEPSEEK_DIRECT;
   if (typeof raw === "string") {
     const trimmed = raw.trim().toLowerCase();
     if (trimmed === "0" || trimmed === "false" || trimmed === "no" || trimmed === "off") {
@@ -210,7 +210,7 @@ export function resolveBypassDeepSeekDirect(
   return true;
 }
 
-/** Merge default + env + REASONIX_NO_PROXY + opts.extraNoProxy into one resolved view. Same composition as installProxyIfConfigured so /doctor can show what's actually applied. */
+/** Merge default + env + MIMO_REASONIX_NO_PROXY + opts.extraNoProxy into one resolved view. Same composition as installProxyIfConfigured so /doctor can show what's actually applied. */
 export function resolveNoProxy(
   env: NodeJS.ProcessEnv = process.env,
   opts: { extraNoProxy?: readonly string[]; bypassDeepSeekDirect?: boolean } = {},
@@ -222,7 +222,7 @@ export function resolveNoProxy(
   const defaults = parseNoProxy(defaultHosts.join(","));
   const envSystem = parseNoProxy(detectNoProxyRaw(env));
   const envReasonix = parseNoProxy(
-    typeof env.REASONIX_NO_PROXY === "string" ? env.REASONIX_NO_PROXY : null,
+    typeof env.MIMO_REASONIX_NO_PROXY === "string" ? env.MIMO_REASONIX_NO_PROXY : null,
   );
   const extra = parseNoProxy((opts.extraNoProxy ?? []).join(","));
   return {
@@ -253,7 +253,7 @@ export function installProxyIfConfigured(
   }
   const source: ProxyUrlSource = configRaw ? "config" : "env";
 
-  // Default whitelist always applies; env NO_PROXY, REASONIX_NO_PROXY, and
+  // Default whitelist always applies; env NO_PROXY, MIMO_REASONIX_NO_PROXY, and
   // opts.extraNoProxy (config) all layer on top additively. Composition lives
   // in resolveNoProxy() so /doctor and install can't drift.
   const { all: patterns } = resolveNoProxy(env, {

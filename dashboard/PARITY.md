@@ -58,7 +58,7 @@ into one row.
 | Slash | Purpose | Coverage |
 |---|---|---|
 | `/memory [list / show / forget / clear]` | manage pinned memory | **panel** · Memory tab |
-| `/init` | synthesize baseline REASONIX.md | chat-box |
+| `/init` | synthesize baseline MIMO_REASONIX.md | chat-box |
 | `/semantic` | semantic-search index status | chat-box |
 | `/search-engine` (`/se`) | switch web search backend | chat-box |
 | `/language` (`/lang`) | runtime language | **panel** · Settings → Language |
@@ -96,7 +96,7 @@ into one row.
 
 | Slash | Purpose | Coverage |
 |---|---|---|
-| `/init [force]` | scan + synthesize REASONIX.md | chat-box |
+| `/init [force]` | scan + synthesize MIMO_REASONIX.md | chat-box |
 | `/apply [N]` | commit pending edits | chat-box |
 | `/discard [N]` | drop pending edits | chat-box |
 | `/walk` | step through pending edits | **panel** · edit-review modal already covered web pre-#369 |

@@ -58,7 +58,7 @@ describe("config", () => {
   let dir: string;
   let path: string;
   const originalEnv = process.env.DEEPSEEK_API_KEY;
-  const originalSearch = process.env.REASONIX_SEARCH;
+  const originalSearch = process.env.MIMO_REASONIX_SEARCH;
   const originalBaseUrl = process.env.DEEPSEEK_BASE_URL;
   const originalApiBaseUrl = process.env.DEEPSEEK_API_BASE_URL;
 
@@ -68,7 +68,7 @@ describe("config", () => {
     // biome-ignore lint/performance/noDelete: the string "undefined" leaks into process.env otherwise
     delete process.env.DEEPSEEK_API_KEY;
     // biome-ignore lint/performance/noDelete: same reason
-    delete process.env.REASONIX_SEARCH;
+    delete process.env.MIMO_REASONIX_SEARCH;
     // biome-ignore lint/performance/noDelete: same reason
     delete process.env.DEEPSEEK_BASE_URL;
     // biome-ignore lint/performance/noDelete: same reason
@@ -85,9 +85,9 @@ describe("config", () => {
     }
     if (originalSearch === undefined) {
       // biome-ignore lint/performance/noDelete: same reason
-      delete process.env.REASONIX_SEARCH;
+      delete process.env.MIMO_REASONIX_SEARCH;
     } else {
-      process.env.REASONIX_SEARCH = originalSearch;
+      process.env.MIMO_REASONIX_SEARCH = originalSearch;
     }
     if (originalBaseUrl === undefined) {
       // biome-ignore lint/performance/noDelete: same reason
@@ -398,7 +398,7 @@ describe("config", () => {
     expect(redactKey("")).toBe("");
   });
 
-  it("round-trips the full ReasonixConfig (model, effort, mcp, session, setupCompleted)", () => {
+  it("round-trips the full MimoReasonixConfig (model, effort, mcp, session, setupCompleted)", () => {
     writeConfig(
       {
         apiKey: "sk-test123abcdefghijkl",
@@ -436,23 +436,23 @@ describe("config", () => {
     expect(searchEnabled(path)).toBe(false);
   });
 
-  it("searchEnabled honours REASONIX_SEARCH=off/false/0", () => {
-    process.env.REASONIX_SEARCH = "off";
+  it("searchEnabled honours MIMO_REASONIX_SEARCH=off/false/0", () => {
+    process.env.MIMO_REASONIX_SEARCH = "off";
     expect(searchEnabled(path)).toBe(false);
-    process.env.REASONIX_SEARCH = "false";
+    process.env.MIMO_REASONIX_SEARCH = "false";
     expect(searchEnabled(path)).toBe(false);
-    process.env.REASONIX_SEARCH = "0";
+    process.env.MIMO_REASONIX_SEARCH = "0";
     expect(searchEnabled(path)).toBe(false);
   });
 
   it("searchEnabled stays true for unrelated env values", () => {
-    process.env.REASONIX_SEARCH = "on";
+    process.env.MIMO_REASONIX_SEARCH = "on";
     expect(searchEnabled(path)).toBe(true);
   });
 
   it("env off beats config true", () => {
     writeConfig({ apiKey: "sk-test123abcdefghijkl", search: true }, path);
-    process.env.REASONIX_SEARCH = "off";
+    process.env.MIMO_REASONIX_SEARCH = "off";
     expect(searchEnabled(path)).toBe(false);
   });
 

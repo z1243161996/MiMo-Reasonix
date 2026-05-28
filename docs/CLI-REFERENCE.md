@@ -87,7 +87,7 @@ Type `/` mid-chat to open the picker. Aliases shown in parentheses. Code-mode-on
 | `/mcp` | Open the MCP hub (live + marketplace tabs) |
 | `/resource [uri]` | Browse / read MCP resources |
 | `/prompt [name]` | Browse / fetch MCP prompts |
-| `/memory [list\|show\|forget\|clear]` | Manage pinned memory (REASONIX.md + `~/.reasonix/memory`) |
+| `/memory [list\|show\|forget\|clear]` | Manage pinned memory (MIMO_REASONIX.md + `~/.reasonix/memory`) |
 | `/skill [list\|show\|new\|<name>]` | List / run / scaffold user skills |
 
 ### Session
@@ -100,7 +100,7 @@ Type `/` mid-chat to open the picker. Aliases shown in parentheses. Code-mode-on
 
 | Command | What it does |
 |---|---|
-| `/init [force]` | Scan project, synthesize a baseline `REASONIX.md` |
+| `/init [force]` | Scan project, synthesize a baseline `MIMO_REASONIX.md` |
 | `/apply [N\|N,M\|N-M]` | Commit pending edit blocks to disk (subset selection supported) |
 | `/discard [N\|N,M\|N-M]` | Drop pending edits without writing |
 | `/walk` | Step through pending edits one block at a time (git-add-p style) |

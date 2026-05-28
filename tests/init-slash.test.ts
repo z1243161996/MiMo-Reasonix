@@ -33,11 +33,11 @@ describe("/init slash handler", () => {
     expect(result.resubmit).toBeUndefined();
   });
 
-  it("emits the structured init prompt as resubmit when REASONIX.md does not exist", () => {
+  it("emits the structured init prompt as resubmit when MIMO_REASONIX.md does not exist", () => {
     const loop = makeLoop();
     const result = handleSlash("init", [], loop, { codeRoot: tmp });
     expect(result.resubmit).toBeDefined();
-    expect(result.resubmit).toMatch(/Initialize REASONIX.md/);
+    expect(result.resubmit).toMatch(/Initialize MIMO_REASONIX.md/);
     // The hard length cap is the most important constraint — pin it.
     expect(result.resubmit).toMatch(/≤\s*80\s*lines/);
     // The "STOP after writing" line is load-bearing for flash; pin it
@@ -46,8 +46,8 @@ describe("/init slash handler", () => {
     expect(result.info).toMatch(/scan the project/);
   });
 
-  it("refuses overwriting an existing REASONIX.md without `force`", () => {
-    writeFileSync(join(tmp, "REASONIX.md"), "# pre-existing");
+  it("refuses overwriting an existing MIMO_REASONIX.md without `force`", () => {
+    writeFileSync(join(tmp, "MIMO_REASONIX.md"), "# pre-existing");
     const loop = makeLoop();
     const result = handleSlash("init", [], loop, { codeRoot: tmp });
     expect(result.resubmit).toBeUndefined();
@@ -55,17 +55,17 @@ describe("/init slash handler", () => {
     expect(result.info).toMatch(/\/init force/);
   });
 
-  it("`/init force` proceeds even when REASONIX.md exists", () => {
-    writeFileSync(join(tmp, "REASONIX.md"), "# pre-existing");
+  it("`/init force` proceeds even when MIMO_REASONIX.md exists", () => {
+    writeFileSync(join(tmp, "MIMO_REASONIX.md"), "# pre-existing");
     const loop = makeLoop();
     const result = handleSlash("init", ["force"], loop, { codeRoot: tmp });
     expect(result.resubmit).toBeDefined();
-    expect(result.resubmit).toMatch(/Initialize REASONIX.md/);
+    expect(result.resubmit).toMatch(/Initialize MIMO_REASONIX.md/);
     expect(result.info).toMatch(/scan the project/);
   });
 
   it("`force` matching is case-insensitive", () => {
-    writeFileSync(join(tmp, "REASONIX.md"), "# pre-existing");
+    writeFileSync(join(tmp, "MIMO_REASONIX.md"), "# pre-existing");
     const loop = makeLoop();
     const result = handleSlash("init", ["FORCE"], loop, { codeRoot: tmp });
     expect(result.resubmit).toBeDefined();

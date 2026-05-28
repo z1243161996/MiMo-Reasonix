@@ -5,5 +5,5 @@ import { isEnvTruthy } from './envUtils.js';
 // mouse handling. The env var lets users opt out without code changes when
 // they hit one of those scenarios.
 export function isMouseClicksDisabled(): boolean {
-  return isEnvTruthy(process.env['REASONIX_DISABLE_MOUSE']);
+  return isEnvTruthy(process.env['MIMO_REASONIX_DISABLE_MOUSE']);
 }

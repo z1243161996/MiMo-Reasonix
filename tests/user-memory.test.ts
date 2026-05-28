@@ -9,7 +9,7 @@ import {
   MEMORY_INDEX_FILE,
   MEMORY_INDEX_MAX_CHARS,
   MemoryStore,
-  applyGlobalReasonixMemory,
+  applyGlobalMimoReasonixMemory,
   applyMemoryStack,
   applyUserMemory,
   projectHash,
@@ -21,7 +21,7 @@ const BASE = "You are a test assistant.";
 describe("user-memory", () => {
   let home: string;
   let projectRoot: string;
-  const originalEnv = process.env.REASONIX_MEMORY;
+  const originalEnv = process.env.MIMO_REASONIX_MEMORY;
   const originalHome = process.env.HOME;
   const originalUserProfile = process.env.USERPROFILE;
 
@@ -31,7 +31,7 @@ describe("user-memory", () => {
     process.env.HOME = home;
     process.env.USERPROFILE = home;
     // biome-ignore lint/performance/noDelete: avoid leaking "undefined" into env
-    delete process.env.REASONIX_MEMORY;
+    delete process.env.MIMO_REASONIX_MEMORY;
   });
 
   afterEach(() => {
@@ -39,9 +39,9 @@ describe("user-memory", () => {
     rmSync(projectRoot, { recursive: true, force: true });
     if (originalEnv === undefined) {
       // biome-ignore lint/performance/noDelete: same
-      delete process.env.REASONIX_MEMORY;
+      delete process.env.MIMO_REASONIX_MEMORY;
     } else {
-      process.env.REASONIX_MEMORY = originalEnv;
+      process.env.MIMO_REASONIX_MEMORY = originalEnv;
     }
     if (originalHome === undefined) {
       // biome-ignore lint/performance/noDelete: env restoration needs absence, not "undefined"
@@ -333,7 +333,7 @@ describe("user-memory", () => {
       expect(a).toBe(b);
     });
 
-    it("respects REASONIX_MEMORY=off", () => {
+    it("respects MIMO_REASONIX_MEMORY=off", () => {
       const store = new MemoryStore({ homeDir: home, projectRoot });
       store.write({
         name: "pref_one",
@@ -342,7 +342,7 @@ describe("user-memory", () => {
         description: "d",
         body: "b",
       });
-      process.env.REASONIX_MEMORY = "off";
+      process.env.MIMO_REASONIX_MEMORY = "off";
       expect(applyUserMemory(BASE, { homeDir: home, projectRoot })).toBe(BASE);
     });
 
@@ -362,8 +362,8 @@ describe("user-memory", () => {
   });
 
   describe("applyMemoryStack", () => {
-    it("composes REASONIX.md → global memory → project memory", () => {
-      writeFileSync(join(projectRoot, "REASONIX.md"), "Pinned by REASONIX.md\n", "utf8");
+    it("composes MIMO_REASONIX.md → global memory → project memory", () => {
+      writeFileSync(join(projectRoot, "MIMO_REASONIX.md"), "Pinned by MIMO_REASONIX.md\n", "utf8");
       // applyMemoryStack uses ~/.mimo-reasonix by default — redirect via HOME
       // isn't portable across Windows; use the public applyUserMemory
       // directly for the global/project part and compose manually to
@@ -385,9 +385,9 @@ describe("user-memory", () => {
         body: "b",
       });
       const out = applyUserMemory(withProj, { homeDir: home, projectRoot });
-      // Order: REASONIX.md content → global → project. Each unique
+      // Order: MIMO_REASONIX.md content → global → project. Each unique
       // string should appear, and in that order.
-      const iReasonix = out.indexOf("Pinned by REASONIX.md");
+      const iReasonix = out.indexOf("Pinned by MIMO_REASONIX.md");
       const iGlobal = out.indexOf("g_pref");
       const iProject = out.indexOf("p_fact");
       expect(iReasonix).toBeGreaterThan(BASE.length - 1);
@@ -406,42 +406,42 @@ describe("user-memory", () => {
     });
   });
 
-  describe("applyGlobalReasonixMemory", () => {
-    it("loads ~/.mimo-reasonix/REASONIX.md when present", () => {
+  describe("applyGlobalMimoReasonixMemory", () => {
+    it("loads ~/.mimo-reasonix/MIMO_REASONIX.md when present", () => {
       mkdirSync(home, { recursive: true });
-      writeFileSync(join(home, "REASONIX.md"), "- always pnpm not npm\n", "utf8");
-      const out = applyGlobalReasonixMemory(BASE, home);
+      writeFileSync(join(home, "MIMO_REASONIX.md"), "- always pnpm not npm\n", "utf8");
+      const out = applyGlobalMimoReasonixMemory(BASE, home);
       expect(out).toContain("# Global memory");
       expect(out).toContain("always pnpm not npm");
       expect(out.startsWith(BASE)).toBe(true);
     });
 
     it("returns BASE unchanged when the file is missing", () => {
-      const out = applyGlobalReasonixMemory(BASE, home);
+      const out = applyGlobalMimoReasonixMemory(BASE, home);
       expect(out).toBe(BASE);
     });
 
     it("returns BASE unchanged when the file is empty / whitespace-only", () => {
       mkdirSync(home, { recursive: true });
-      writeFileSync(join(home, "REASONIX.md"), "   \n  \n", "utf8");
-      const out = applyGlobalReasonixMemory(BASE, home);
+      writeFileSync(join(home, "MIMO_REASONIX.md"), "   \n  \n", "utf8");
+      const out = applyGlobalMimoReasonixMemory(BASE, home);
       expect(out).toBe(BASE);
     });
 
-    it("respects REASONIX_MEMORY=off opt-out", () => {
+    it("respects MIMO_REASONIX_MEMORY=off opt-out", () => {
       mkdirSync(home, { recursive: true });
-      writeFileSync(join(home, "REASONIX.md"), "- secret\n", "utf8");
-      const orig = process.env.REASONIX_MEMORY;
-      process.env.REASONIX_MEMORY = "off";
+      writeFileSync(join(home, "MIMO_REASONIX.md"), "- secret\n", "utf8");
+      const orig = process.env.MIMO_REASONIX_MEMORY;
+      process.env.MIMO_REASONIX_MEMORY = "off";
       try {
-        const out = applyGlobalReasonixMemory(BASE, home);
+        const out = applyGlobalMimoReasonixMemory(BASE, home);
         expect(out).toBe(BASE);
       } finally {
         if (orig === undefined) {
           // biome-ignore lint/performance/noDelete: env key must lose presence
-          delete process.env.REASONIX_MEMORY;
+          delete process.env.MIMO_REASONIX_MEMORY;
         } else {
-          process.env.REASONIX_MEMORY = orig;
+          process.env.MIMO_REASONIX_MEMORY = orig;
         }
       }
     });

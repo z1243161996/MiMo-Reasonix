@@ -221,7 +221,7 @@ export interface AppProps {
   model: string;
   reasoningEffort?: ReasoningEffort;
   system: string;
-  /** Re-runs the prompt builder on /new so REASONIX.md edits don't need a restart. Must produce the same shape as `system` was built from. */
+  /** Re-runs the prompt builder on /new so MIMO_REASONIX.md edits don't need a restart. Must produce the same shape as `system` was built from. */
   rebuildSystem?: () => string;
   transcript?: string;
   /** Soft USD spend cap; undefined —no cap. See CacheFirstLoopOptions.budgetUsd. */
@@ -393,7 +393,7 @@ export function App(props: AppProps): React.ReactElement {
     [props.session],
   );
   const [themeName, setThemeName] = React.useState<ThemeName>(() =>
-    resolveThemePreference(loadTheme(), process.env.REASONIX_THEME),
+    resolveThemePreference(loadTheme(), process.env.MIMO_REASONIX_THEME),
   );
   const statusBar = React.useMemo((): StatusBarConfig => {
     const cfg = readConfig().statusBar ?? {};
@@ -2679,7 +2679,7 @@ function AppInner({
   const handleQQThemePick = useCallback(
     (target: ThemeChoice): string => {
       saveTheme(target);
-      const active = resolveThemePreference(target, process.env.REASONIX_THEME);
+      const active = resolveThemePreference(target, process.env.MIMO_REASONIX_THEME);
       setThemeName(active);
       return `theme saved: ${target}\nactive now: ${active}`;
     },
@@ -2800,7 +2800,7 @@ function AppInner({
       }
 
       // Hash mode —`#note` (project) and `#g note` (global) append to
-      // a REASONIX.md so future sessions pin the note in the immutable
+      // a MIMO_REASONIX.md so future sessions pin the note in the immutable
       // prefix. No model round-trip. `\#literal` escape falls through to
       // normal submission with the backslash stripped so the model sees
       // `#literal` verbatim.
@@ -4501,7 +4501,7 @@ function AppInner({
                     saveTheme(outcome.value);
                     const active = resolveThemePreference(
                       outcome.value,
-                      process.env.REASONIX_THEME,
+                      process.env.MIMO_REASONIX_THEME,
                     );
                     setThemeName(active);
                     log.pushInfo(`theme saved: ${outcome.value}\n  active now: ${active}`);

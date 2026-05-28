@@ -34,7 +34,7 @@ Almost entirely additive, no behavior change.
 This is where most of the actual integration risk lives.
 
 **Changes:**
-- `src/tools/filesystem.ts:518` — `edit_file` registration wraps in a gate. When `REASONIX_STRICT_TDD=1`:
+- `src/tools/filesystem.ts:518` — `edit_file` registration wraps in a gate. When `MIMO_REASONIX_STRICT_TDD=1`:
   1. Look up most recent `test_run` for `test_id` from in-memory event list (cheaper than re-reading jsonl).
   2. Verify a matching `edit_claim` followed it.
   3. On dispatch refusal, throw a structured error the model can read.
@@ -77,7 +77,7 @@ This is where most of the actual integration risk lives.
 
 - After stage 3 lands: minor release with flag *off* by default.
 - Two minor releases of soak — collect any hangs / false-refusals via telemetry, fix in patches.
-- Flip default-on; keep `REASONIX_STRICT_TDD=0` opt-out for two more minor releases.
+- Flip default-on; keep `MIMO_REASONIX_STRICT_TDD=0` opt-out for two more minor releases.
 
 ## Cross-cutting risks not pinned to a stage
 

@@ -21,12 +21,12 @@ export interface DispatchContext {
 }
 
 function readParallelMax(): number {
-  const raw = Number.parseInt(process.env.REASONIX_PARALLEL_MAX ?? "", 10);
+  const raw = Number.parseInt(process.env.MIMO_REASONIX_PARALLEL_MAX ?? "", 10);
   return Number.isFinite(raw) && raw >= 1 ? Math.min(raw, 16) : 3;
 }
 
 function readDispatchSerial(): boolean {
-  return (process.env.REASONIX_TOOL_DISPATCH ?? "auto").toLowerCase() === "serial";
+  return (process.env.MIMO_REASONIX_TOOL_DISPATCH ?? "auto").toLowerCase() === "serial";
 }
 
 export async function* dispatchToolCallsChunked(

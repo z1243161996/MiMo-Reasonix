@@ -79,7 +79,7 @@ let cached: LoadedTokenizer | null = null;
 
 /** Two ../data candidates needed: dist/index.js AND dist/cli/index.js resolve to different roots. */
 export function resolveDataPath(): string {
-  if (process.env.REASONIX_TOKENIZER_PATH) return process.env.REASONIX_TOKENIZER_PATH;
+  if (process.env.MIMO_REASONIX_TOKENIZER_PATH) return process.env.MIMO_REASONIX_TOKENIZER_PATH;
   const candidates: string[] = [];
   try {
     const here = dirname(fileURLToPath(import.meta.url));

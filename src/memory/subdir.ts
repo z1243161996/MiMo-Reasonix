@@ -1,4 +1,4 @@
-/** Module-scoped memory files (#1033). Walks from a file's dir up to rootDir, collecting REASONIX.md (or AGENTS.md / AGENT.md) found along the way. The root's memory is excluded — it's already in the system prompt via applyProjectMemory. */
+/** Module-scoped memory files (#1033). Walks from a file's dir up to rootDir, collecting MIMO_REASONIX.md (or AGENTS.md / AGENT.md) found along the way. The root's memory is excluded — it's already in the system prompt via applyProjectMemory. */
 
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";

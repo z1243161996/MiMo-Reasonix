@@ -305,7 +305,7 @@ export {
   saveBaseUrl,
   writeConfig,
 } from "./config.js";
-export type { ReasonixConfig } from "./config.js";
+export type { MimoReasonixConfig } from "./config.js";
 
 export type {
   ChatMessage,

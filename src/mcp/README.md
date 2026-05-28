@@ -145,7 +145,7 @@ about it.
   process hasn't exited.
 - **Malformed lines**: dropped silently. Some servers emit non-JSON
   during startup; logging every dropped line would be noise.
-- **Debugging dropped lines**: set `REASONIX_DEBUG_MCP=1` to print each
+- **Debugging dropped lines**: set `MIMO_REASONIX_DEBUG_MCP=1` to print each
   dropped malformed line to stderr, prefixed with
   `[mcp-stdio] dropped malformed line:`. Useful when an MCP server
   ships truncated or corrupted frames and tool calls come back empty.

@@ -4,9 +4,9 @@ import { t } from "@/i18n/index.js";
 import type { SlashHandler } from "../dispatch.js";
 
 const INIT_PROMPT = [
-  "# Task: Initialize REASONIX.md",
+  "# Task: Initialize MIMO_REASONIX.md",
   "",
-  "I want you to generate a REASONIX.md at the project root that captures",
+  "I want you to generate a MIMO_REASONIX.md at the project root that captures",
   "the working knowledge a future Reasonix session needs to be productive",
   "here. This file is auto-pinned into your system prompt every launch,",
   "so its size and accuracy matter.",
@@ -33,7 +33,7 @@ const INIT_PROMPT = [
   "   runner, lint/format setup, build/run/test scripts, any non-obvious",
   "   convention with visible evidence (commit message format, import",
   "   order, naming pattern).",
-  "5. Write REASONIX.md with the sections below, skipping any you can't",
+  "5. Write MIMO_REASONIX.md with the sections below, skipping any you can't",
   "   fill from evidence.",
   "",
   "## Sections to use (skip ones with no evidence)",
@@ -53,7 +53,7 @@ const INIT_PROMPT = [
   "",
   "## Output",
   "",
-  "Write the result to `REASONIX.md` in the project root using the",
+  "Write the result to `MIMO_REASONIX.md` in the project root using the",
   "filesystem tools (edit_file with empty SEARCH if creating new,",
   "write_file if overwriting). After writing, STOP — do not summarize",
   "what you did, do not propose follow-up tasks. The user will review",
@@ -67,7 +67,7 @@ const init: SlashHandler = (args, _loop, ctx) => {
     return { info: t("handlers.init.codeOnly") };
   }
   const force = (args[0] ?? "").toLowerCase() === "force";
-  const target = pathMod.join(ctx.codeRoot, "REASONIX.md");
+  const target = pathMod.join(ctx.codeRoot, "MIMO_REASONIX.md");
   if (existsSync(target) && !force) {
     return {
       info: [

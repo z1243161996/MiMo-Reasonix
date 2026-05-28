@@ -246,7 +246,7 @@ runAs: inline
 ### 工具调用
 - MiMo 使用标准 OpenAI tool_calls 格式
 - 无需 DSML 清洗
-- 建议 `REASONIX_PARALLEL_MAX=5`（MiMo 可稳定处理更多并行调用）
+- 建议 `MIMO_REASONIX_PARALLEL_MAX=5`（MiMo 可稳定处理更多并行调用）
 
 ### 缓存策略
 - MiMo 缓存按字节前缀匹配

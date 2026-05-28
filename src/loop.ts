@@ -100,7 +100,7 @@ export interface CacheFirstLoopOptions {
   hookCwd?: string;
   /** PauseGate bridge — defaults to singleton, injectable for tests. */
   confirmationGate?: PauseGate;
-  /** Re-runs the prompt builder (applyMemoryStack / codeSystemPrompt) on /new so REASONIX.md edits take effect without a restart. Accepting a cache miss is the price. */
+  /** Re-runs the prompt builder (applyMemoryStack / codeSystemPrompt) on /new so MIMO_REASONIX.md edits take effect without a restart. Accepting a cache miss is the price. */
   rebuildSystem?: () => string;
 }
 
@@ -231,8 +231,8 @@ export class CacheFirstLoop {
       allowedToolNames: allowedNames,
       isMutating: (call) => this.isMutating(call),
       isStormExempt,
-      stormThreshold: parsePositiveIntEnv(process.env.REASONIX_STORM_THRESHOLD),
-      stormWindow: parsePositiveIntEnv(process.env.REASONIX_STORM_WINDOW),
+      stormThreshold: parsePositiveIntEnv(process.env.MIMO_REASONIX_STORM_THRESHOLD),
+      stormWindow: parsePositiveIntEnv(process.env.MIMO_REASONIX_STORM_WINDOW),
     });
 
     // Heal-on-load: oversized tool results would 400 the next call before the user types.
@@ -338,7 +338,7 @@ export class CacheFirstLoop {
     }
   }
 
-  /** "New chat" — drops in-memory messages, archives the on-disk transcript so it survives in Sessions, keeps sessionName so the prefix cache stays warm. Re-runs the system-prompt builder if one was wired (issue #778: REASONIX.md edits otherwise need a restart). */
+  /** "New chat" — drops in-memory messages, archives the on-disk transcript so it survives in Sessions, keeps sessionName so the prefix cache stays warm. Re-runs the system-prompt builder if one was wired (issue #778: MIMO_REASONIX.md edits otherwise need a restart). */
   clearLog(): { dropped: number; archived: string | null; systemRebuilt: boolean } {
     const dropped = this.log.length;
     this.log.compactInPlace([]);

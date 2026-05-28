@@ -175,7 +175,7 @@ export function getOwnerChain(fiber: unknown): string[] {
 let debugRepaints: boolean | undefined
 export function isDebugRepaintsEnabled(): boolean {
   if (debugRepaints === undefined) {
-    debugRepaints = isEnvTruthy(process.env.REASONIX_DEBUG_REPAINTS)
+    debugRepaints = isEnvTruthy(process.env.MIMO_REASONIX_DEBUG_REPAINTS)
   }
   return debugRepaints
 }
@@ -184,7 +184,7 @@ export const dispatcher = new Dispatcher()
 
 // --- COMMIT INSTRUMENTATION (temp debugging) ---
 // eslint-disable-next-line custom-rules/no-process-env-top-level -- debug instrumentation, read-once is fine
-const COMMIT_LOG = process.env.REASONIX_COMMIT_LOG
+const COMMIT_LOG = process.env.MIMO_REASONIX_COMMIT_LOG
 let _commits = 0
 let _lastLog = 0
 let _lastCommitAt = 0
