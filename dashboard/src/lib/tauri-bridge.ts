@@ -1105,7 +1105,7 @@ const mockMessages: any[] = [
     turn: 1,
     segments: [
       { kind: "reasoning", text: "用户询问项目的技术栈和前端架构。" },
-      { kind: "text", text: "你好！**DeepSeek-Reasonix** 是一个以 DeepSeek 为内核的智能代码助手…" },
+      { kind: "text", text: "你好！**MiMo-Reasonix** 是一个以 MiMo 为内核的智能代码助手…" },
     ],
     pending: false,
   },
