@@ -1,16 +1,16 @@
 name: Publish dsnix
 
-# Tag namespace: `dsnix-v<semver>` triggers npm publish for the
-# dsnix shim package only. Plain `v<semver>` tags publish the main
+# Tag namespace: `mimo-dsnix-v<semver>` triggers npm publish for the
+# mimo-dsnix shim package only. Plain `v<semver>` tags publish the main
 # `mimo-reasonix` CLI (see publish-npm.yml); the two are decoupled so the
 # alias can be released independently when the shim itself changes.
 on:
   push:
-    tags: ["dsnix-v*"]
+    tags: ["mimo-dsnix-v*"]
   workflow_dispatch:
     inputs:
       tag:
-        description: "Tag to publish (e.g. dsnix-v0.48.0). Required when running manually."
+        description: "Tag to publish (e.g. mimo-dsnix-v0.1.0). Required when running manually."
         required: true
         type: string
 
@@ -38,7 +38,7 @@ jobs:
         shell: bash
         run: |
           tag="${{ github.event.inputs.tag || github.ref_name }}"
-          tag_version="${tag#dsnix-v}"
+          tag_version="${tag#mimo-dsnix-v}"
           pkg_version=$(node -p "require('./packages/dsnix/package.json').version")
           if [ "$tag_version" != "$pkg_version" ]; then
             echo "::error::tag $tag (version $tag_version) does not match packages/dsnix/package.json version $pkg_version"
@@ -56,7 +56,7 @@ jobs:
           fi
           echo "mimo-reasonix@${dep_version} is published — safe to publish dsnix"
 
-      - name: Publish dsnix to npm
+      - name: Publish mimo-dsnix to npm
         run: npm publish --access public
         working-directory: packages/dsnix
         env:

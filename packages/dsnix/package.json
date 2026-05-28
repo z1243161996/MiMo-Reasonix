@@ -1,5 +1,5 @@
 {
-  "name": "dsnix",
+  "name": "mimo-dsnix",
   "version": "0.1.0",
   "description": "Short alias for mimo-reasonix — MiMo-native coding agent. Forwards to the mimo-reasonix CLI.",
   "bin": {
