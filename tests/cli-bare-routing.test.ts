@@ -66,7 +66,7 @@ describe("bare CLI routing", () => {
   });
 
   it("routes bare reasonix to code mode rooted at cwd", async () => {
-    writeConfig({ setupCompleted: true }, join(home, ".reasonix", "config.json"));
+    writeConfig({ setupCompleted: true }, join(home, ".mimo-reasonix", "config.json"));
     mkdirSync(join(cwd, ".git"));
 
     await importCli([]);
@@ -78,7 +78,7 @@ describe("bare CLI routing", () => {
   });
 
   it("routes bare reasonix in a non-project directory to code mode too", async () => {
-    writeConfig({ setupCompleted: true }, join(home, ".reasonix", "config.json"));
+    writeConfig({ setupCompleted: true }, join(home, ".mimo-reasonix", "config.json"));
 
     await importCli([]);
 
@@ -92,7 +92,7 @@ describe("bare CLI routing", () => {
   });
 
   it("forwards -c to code mode as forceResume", async () => {
-    writeConfig({ setupCompleted: true }, join(home, ".reasonix", "config.json"));
+    writeConfig({ setupCompleted: true }, join(home, ".mimo-reasonix", "config.json"));
 
     await importCli(["-c"]);
 
@@ -102,7 +102,7 @@ describe("bare CLI routing", () => {
   });
 
   it("forwards bare --no-mouse to code mode", async () => {
-    writeConfig({ setupCompleted: true }, join(home, ".reasonix", "config.json"));
+    writeConfig({ setupCompleted: true }, join(home, ".mimo-reasonix", "config.json"));
 
     await importCli(["--no-mouse"]);
 
@@ -112,7 +112,7 @@ describe("bare CLI routing", () => {
   });
 
   it("keeps explicit reasonix chat in chat mode even inside a project", async () => {
-    writeConfig({ setupCompleted: true }, join(home, ".reasonix", "config.json"));
+    writeConfig({ setupCompleted: true }, join(home, ".mimo-reasonix", "config.json"));
     writeFileSync(join(cwd, "package.json"), "{}\n", "utf8");
 
     await importCli(["chat"]);
@@ -122,7 +122,7 @@ describe("bare CLI routing", () => {
   });
 
   it("keeps first-run bare reasonix on the setup wizard", async () => {
-    writeConfig({ setupCompleted: false }, join(home, ".reasonix", "config.json"));
+    writeConfig({ setupCompleted: false }, join(home, ".mimo-reasonix", "config.json"));
     mkdirSync(join(cwd, ".git"));
 
     await importCli([]);

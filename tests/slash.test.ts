@@ -153,7 +153,7 @@ describe("handleSlash", () => {
   it("/status reflects current loop config", () => {
     const loop = makeLoop();
     const r = handleSlash("status", [], loop);
-    expect(r.info).toMatch(/model\s+deepseek-/);
+    expect(r.info).toMatch(/model\s+mimo-/);
     expect(r.info).toMatch(/effort=high/);
   });
 
@@ -162,8 +162,8 @@ describe("handleSlash", () => {
     const tempDir = mkdtempSync(join(tmpdir(), "reasonix-slash-model-basic-"));
     const tempConfig = join(tempDir, "config.json");
     try {
-      handleSlash("model", ["deepseek-reasoner"], loop, { configPath: tempConfig });
-      expect(loop.model).toBe("deepseek-reasoner");
+      handleSlash("model", ["mimo-v2.5-pro"], loop, { configPath: tempConfig });
+      expect(loop.model).toBe("mimo-v2.5-pro");
     } finally {
       rmSync(tempDir, { recursive: true, force: true });
     }
@@ -175,7 +175,7 @@ describe("handleSlash", () => {
     try {
       const loop = makeLoop();
       const r = handleSlash("model", ["deepseek-made-up"], loop, {
-        models: ["deepseek-chat", "deepseek-reasoner"],
+        models: ["mimo-v2.5", "mimo-v2.5-pro"],
         configPath: tempConfig,
       });
       expect(loop.model).toBe("deepseek-made-up");
@@ -191,7 +191,7 @@ describe("handleSlash", () => {
     try {
       const loop = makeLoop();
       const r = handleSlash("model", ["deepseek-made-up"], loop, {
-        models: ["deepseek-chat", "deepseek-reasoner"],
+        models: ["mimo-v2.5", "mimo-v2.5-pro"],
         configPath: tempConfig,
       });
       expect(loop.model).toBe("deepseek-made-up");
@@ -206,7 +206,7 @@ describe("handleSlash", () => {
   it("/model with no arg opens the unified picker (#371)", () => {
     const loop = makeLoop();
     const r = handleSlash("model", [], loop, {
-      models: ["deepseek-chat", "deepseek-reasoner"],
+      models: ["mimo-v2.5", "mimo-v2.5-pro"],
     });
     expect(r.openModelPicker).toBe(true);
   });
@@ -325,7 +325,7 @@ describe("handleSlash", () => {
 
   it("/undo outside code mode says it's not available", () => {
     const r = handleSlash("undo", [], makeLoop());
-    expect(r.info).toMatch(/only available inside .reasonix code/);
+    expect(r.info).toMatch(/only available inside `reasonix code`/);
   });
 
   it("/restore with no arg opens the checkpoint picker in code mode", () => {
@@ -343,9 +343,9 @@ describe("handleSlash", () => {
   it("/restore outside code mode is unavailable regardless of args", () => {
     const noArg = handleSlash("restore", [], makeLoop());
     expect(noArg.openCheckpointPicker).toBeUndefined();
-    expect(noArg.info).toMatch(/only available inside .reasonix code/);
+    expect(noArg.info).toMatch(/only available inside `reasonix code`/);
     const withArg = handleSlash("restore", ["abc"], makeLoop());
-    expect(withArg.info).toMatch(/only available inside .reasonix code/);
+    expect(withArg.info).toMatch(/only available inside `reasonix code`/);
   });
 
   it("/undo in code mode invokes the callback", () => {
@@ -379,7 +379,7 @@ describe("handleSlash", () => {
 
   it("/commit outside code mode says it's not available", () => {
     const r = handleSlash("commit", ["foo"], makeLoop());
-    expect(r.info).toMatch(/only available inside .reasonix code/);
+    expect(r.info).toMatch(/only available inside `reasonix code`/);
   });
 
   it("/commit with no message prints usage", () => {
@@ -389,7 +389,7 @@ describe("handleSlash", () => {
 
   it("/apply outside code mode says it's not available", () => {
     const r = handleSlash("apply", [], makeLoop());
-    expect(r.info).toMatch(/only available inside .reasonix code/);
+    expect(r.info).toMatch(/only available inside `reasonix code`/);
   });
 
   it("/apply in code mode invokes the callback", () => {
@@ -401,7 +401,7 @@ describe("handleSlash", () => {
 
   it("/discard outside code mode says it's not available", () => {
     const r = handleSlash("discard", [], makeLoop());
-    expect(r.info).toMatch(/only available inside .reasonix code/);
+    expect(r.info).toMatch(/only available inside `reasonix code`/);
   });
 
   it("/discard in code mode invokes the callback", () => {
@@ -842,14 +842,14 @@ describe("handleSlash", () => {
       });
       expect(r.info).toMatch(/notion disabled/);
       expect(r.info).toMatch(/next launch/);
-      const cfgPath = join(tempHome, ".reasonix", "config.json");
+      const cfgPath = join(tempHome, ".mimo-reasonix", "config.json");
       const cfg = JSON.parse(readFileSync(cfgPath, "utf8"));
       expect(cfg.mcpDisabled).toEqual(["notion"]);
     });
 
     it("/mcp enable <name> removes from disabled and clears the array when empty", () => {
-      const cfgPath = join(tempHome, ".reasonix", "config.json");
-      mkdirSync(join(tempHome, ".reasonix"), { recursive: true });
+      const cfgPath = join(tempHome, ".mimo-reasonix", "config.json");
+      mkdirSync(join(tempHome, ".mimo-reasonix"), { recursive: true });
       writeFileSync(cfgPath, JSON.stringify({ mcpDisabled: ["notion", "linear"] }));
       const r = handleSlash("mcp", ["enable", "notion"], makeLoop(), {
         mcpSpecs: ["notion=npx -y @scope/notion", "linear=npx -y @scope/linear"],
@@ -860,8 +860,8 @@ describe("handleSlash", () => {
     });
 
     it("/mcp enable removes the array entirely when last entry clears", () => {
-      const cfgPath = join(tempHome, ".reasonix", "config.json");
-      mkdirSync(join(tempHome, ".reasonix"), { recursive: true });
+      const cfgPath = join(tempHome, ".mimo-reasonix", "config.json");
+      mkdirSync(join(tempHome, ".mimo-reasonix"), { recursive: true });
       writeFileSync(cfgPath, JSON.stringify({ mcpDisabled: ["notion"] }));
       handleSlash("mcp", ["enable", "notion"], makeLoop(), {
         mcpSpecs: ["notion=npx -y @scope/notion"],
@@ -886,8 +886,8 @@ describe("handleSlash", () => {
     });
 
     it("/mcp disable on already-disabled is idempotent", () => {
-      const cfgPath = join(tempHome, ".reasonix", "config.json");
-      mkdirSync(join(tempHome, ".reasonix"), { recursive: true });
+      const cfgPath = join(tempHome, ".mimo-reasonix", "config.json");
+      mkdirSync(join(tempHome, ".mimo-reasonix"), { recursive: true });
       writeFileSync(cfgPath, JSON.stringify({ mcpDisabled: ["notion"] }));
       const r = handleSlash("mcp", ["disable", "notion"], makeLoop(), {
         mcpSpecs: ["notion=cmd"],
@@ -906,7 +906,7 @@ describe("handleSlash", () => {
       mcpSpecs: ["filesystem=npx -y @scope/fs /tmp", "mem=npx -y @scope/mem"],
       pendingEditCount: 3,
     });
-    expect(r.info).toMatch(/model\s+deepseek-/);
+    expect(r.info).toMatch(/model\s+mimo-/);
     // ctx row now includes a tiny [██░░░░] char bar between the label
     // and the count — match the count itself loosely.
     expect(r.info).toMatch(/ctx\s+\S+\s+\d+\.?\d*K?\/\d+K/);
@@ -1071,7 +1071,7 @@ describe("handleSlash", () => {
       stamp: string,
       payload: Record<string, unknown>,
     ): void {
-      const dir = join(tempHome, ".reasonix", "sessions");
+      const dir = join(tempHome, ".mimo-reasonix", "sessions");
       const fs = require("node:fs") as typeof import("node:fs");
       fs.mkdirSync(dir, { recursive: true });
       fs.writeFileSync(
@@ -1159,7 +1159,7 @@ describe("handleSlash", () => {
     it("/plans surfaces the summary as the active plan label", () => {
       const loop = loopWithSession("plans-summary");
       const fs = require("node:fs") as typeof import("node:fs");
-      const dir = join(tempHome, ".reasonix", "sessions");
+      const dir = join(tempHome, ".mimo-reasonix", "sessions");
       fs.mkdirSync(dir, { recursive: true });
       fs.writeFileSync(
         join(dir, "plans-summary.plan.json"),
@@ -1182,7 +1182,7 @@ describe("handleSlash", () => {
     it("/plans surfaces active step evidence and pending evidence state", () => {
       const loop = loopWithSession("plans-active-evidence");
       const fs = require("node:fs") as typeof import("node:fs");
-      const dir = join(tempHome, ".reasonix", "sessions");
+      const dir = join(tempHome, ".mimo-reasonix", "sessions");
       fs.mkdirSync(dir, { recursive: true });
       fs.writeFileSync(
         join(dir, "plans-active-evidence.plan.json"),
@@ -1323,7 +1323,7 @@ describe("handleSlash", () => {
       }
     });
 
-    it("prints a how-to when no memory (REASONIX.md or ~/.reasonix/memory) exists", () => {
+    it("prints a how-to when no memory (REASONIX.md or ~/.mimo-reasonix/memory) exists", () => {
       const r = handleSlash("memory", [], makeLoop(), { memoryRoot: root });
       expect(r.info).toMatch(/no memory pinned/);
       expect(r.info).toMatch(/REASONIX\.md/);

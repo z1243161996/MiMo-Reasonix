@@ -20,9 +20,9 @@ function writeSkillDir(
 ): string {
   const parent =
     which === "global"
-      ? join(homeOrProject, ".reasonix", "skills")
+      ? join(homeOrProject, ".mimo-reasonix", "skills")
       : which === "project"
-        ? join(root, ".reasonix", "skills")
+        ? join(root, ".mimo-reasonix", "skills")
         : homeOrProject;
   const dir = join(parent, name);
   mkdirSync(dir, { recursive: true });
@@ -40,7 +40,7 @@ function writeFlatSkill(
   frontmatter: Record<string, string>,
   body: string,
 ): string {
-  const skills = join(dir, ".reasonix", "skills");
+  const skills = join(dir, ".mimo-reasonix", "skills");
   mkdirSync(skills, { recursive: true });
   const fmLines = ["---"];
   for (const [k, v] of Object.entries(frontmatter)) fmLines.push(`${k}: ${v}`);
@@ -99,7 +99,7 @@ describe("SkillStore", () => {
     expect(skills[0]?.description).toBe("Commit and push changes");
   });
 
-  it("surfaces project-scope skills from <projectRoot>/.reasonix/skills", () => {
+  it("surfaces project-scope skills from <projectRoot>/.mimo-reasonix/skills", () => {
     writeSkillDir(
       projectRoot,
       "project",
@@ -163,7 +163,7 @@ describe("SkillStore", () => {
 
   it("skips dotfiles that would masquerade as skills", () => {
     writeSkillDir(projectRoot, "global", "ok", { description: "fine" }, "body", home);
-    const dotDir = join(home, ".reasonix", "skills");
+    const dotDir = join(home, ".mimo-reasonix", "skills");
     writeFileSync(join(dotDir, ".hidden.md"), "---\ndescription: x\n---\nbody\n", "utf8");
     const list = new SkillStore({ homeDir: home, projectRoot, disableBuiltins: true }).list();
     expect(list.map((s) => s.name)).toEqual(["ok"]);
@@ -274,8 +274,8 @@ describe("SkillStore", () => {
         subagentModels: { explore: "pro", review: "flash" },
       });
       const byName = new Map(store.list().map((s) => [s.name, s]));
-      expect(byName.get("explore")?.model).toBe("deepseek-v4-pro");
-      expect(byName.get("review")?.model).toBe("deepseek-v4-flash");
+      expect(byName.get("explore")?.model).toBe("mimo-v2.5-pro");
+      expect(byName.get("review")?.model).toBe("mimo-v2.5");
     });
 
     it("leaves inline skills (test) untouched even when their name appears in the override map", () => {
@@ -299,14 +299,14 @@ describe("SkillStore", () => {
           name: "custom-sub",
           description: "custom subagent skill",
           runAs: "subagent",
-          model: "deepseek-v4-pro",
+          model: "mimo-v2.5-pro",
         },
         "body",
         home,
       );
       const store = new SkillStore({ homeDir: home, projectRoot, disableBuiltins: true });
       const sub = store.list().find((s) => s.name === "custom-sub");
-      expect(sub?.model).toBe("deepseek-v4-pro");
+      expect(sub?.model).toBe("mimo-v2.5-pro");
     });
 
     it("override beats frontmatter model: when both are set", () => {
@@ -318,7 +318,7 @@ describe("SkillStore", () => {
           name: "custom-sub",
           description: "custom subagent skill",
           runAs: "subagent",
-          model: "deepseek-v4-pro",
+          model: "mimo-v2.5-pro",
         },
         "body",
         home,
@@ -330,7 +330,7 @@ describe("SkillStore", () => {
         subagentModels: { "custom-sub": "flash" },
       });
       const sub = store.list().find((s) => s.name === "custom-sub");
-      expect(sub?.model).toBe("deepseek-v4-flash");
+      expect(sub?.model).toBe("mimo-v2.5");
     });
   });
 
@@ -535,7 +535,7 @@ describe("Skill frontmatter — runAs", () => {
       home,
       "global",
       "rsr",
-      { description: "...", runAs: "subagent", model: "deepseek-reasoner" },
+      { description: "...", runAs: "subagent", model: "mimo-v2.5-pro" },
       "body",
       home,
     );
@@ -548,7 +548,7 @@ describe("Skill frontmatter — runAs", () => {
       home,
     );
     const store = new SkillStore({ homeDir: home, disableBuiltins: true });
-    expect(store.read("rsr")?.model).toBe("deepseek-reasoner");
+    expect(store.read("rsr")?.model).toBe("mimo-v2.5-pro");
     expect(store.read("wrong")?.model).toBeUndefined();
   });
 

@@ -232,7 +232,7 @@ describe("dashboard server: endpoints", () => {
   it("GET /api/semantic reports incompatible on-disk index against current config", async () => {
     const proj = mkdtempSync(join(tmpdir(), "reasonix-dash-sem-"));
     try {
-      const semanticDir = join(proj, ".reasonix", "semantic");
+      const semanticDir = join(proj, ".mimo-reasonix", "semantic");
       await mkdir(semanticDir, { recursive: true });
       await writeFile(
         cfgPath,
@@ -294,7 +294,7 @@ describe("dashboard server: endpoints", () => {
   it("GET /api/skills lists and edits flat-format project skills (#586)", async () => {
     const proj = mkdtempSync(join(tmpdir(), "reasonix-dash-skills-"));
     try {
-      const skillsDir = join(proj, ".reasonix", "skills");
+      const skillsDir = join(proj, ".mimo-reasonix", "skills");
       const folderDir = join(skillsDir, "folder-skill");
       const flatPath = join(skillsDir, "flat-skill.md");
       await mkdir(folderDir, { recursive: true });
@@ -392,7 +392,7 @@ describe("dashboard server: endpoints", () => {
         getCurrentCwd: () => proj,
         audit: (e) => audited.push({ action: e.action }),
       });
-      const target = join(proj, ".reasonix", "skills", "silent-fail", "SKILL.md");
+      const target = join(proj, ".mimo-reasonix", "skills", "silent-fail", "SKILL.md");
 
       const noFrontmatter = await call(`${base}api/skills/project/silent-fail`, {
         method: "POST",
@@ -789,7 +789,7 @@ describe("dashboard server: v0.13 panels", () => {
     dir = mkdtempSync(join(tmpdir(), "reasonix-dash-v013-"));
     cfgPath = join(dir, "config.json");
     usagePath = join(dir, "usage.jsonl");
-    // Handlers like /api/health still walk `homedir()/.reasonix/{sessions,memory,semantic}`,
+    // Handlers like /api/health still walk `homedir()/.mimo-reasonix/{sessions,memory,semantic}`,
     // so without redirecting HOME the test reads the dev's real history. On a machine
     // with ~20k sessions the readdir + per-file statSync chain blows past the 5s default.
     savedHome = process.env.HOME;

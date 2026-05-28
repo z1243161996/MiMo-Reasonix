@@ -21,7 +21,7 @@ import {
   savePlanState,
 } from "../src/code/plan-store.js";
 
-// We point the test at a temp HOME so the real ~/.reasonix isn't
+// We point the test at a temp HOME so the real ~/.mimo-reasonix isn't
 // touched. sessionsDir() reads homedir() via os, which honors HOME on
 // POSIX and USERPROFILE on Windows. Setting both keeps the test
 // portable across the matrix.
@@ -352,7 +352,7 @@ describe("listPlanArchives", () => {
     const newStamp = "2026-04-20T15:30:00.000Z";
     const fs = await import("node:fs");
     const { join: pj } = await import("node:path");
-    const dir = pj(tempHome, ".reasonix", "sessions");
+    const dir = pj(tempHome, ".mimo-reasonix", "sessions");
     fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(
       pj(dir, "test-list.plan.2026-04-01-old.done.json"),
@@ -390,7 +390,7 @@ describe("listPlanArchives", () => {
   it("does NOT cross sessions — each project sees its own archives", async () => {
     const fs = await import("node:fs");
     const { join: pj } = await import("node:path");
-    const dir = pj(tempHome, ".reasonix", "sessions");
+    const dir = pj(tempHome, ".mimo-reasonix", "sessions");
     fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(
       pj(dir, "project-a.plan.2026-04-01-x.done.json"),
@@ -417,7 +417,7 @@ describe("listPlanArchives", () => {
   it("skips corrupt archives without failing the whole list", async () => {
     const fs = await import("node:fs");
     const { join: pj } = await import("node:path");
-    const dir = pj(tempHome, ".reasonix", "sessions");
+    const dir = pj(tempHome, ".mimo-reasonix", "sessions");
     fs.mkdirSync(dir, { recursive: true });
     // One good, one malformed JSON, one wrong-version, one zero-steps.
     fs.writeFileSync(
@@ -451,7 +451,7 @@ describe("listPlanArchives", () => {
   it("falls back to mtime when updatedAt is missing or unparseable", async () => {
     const fs = await import("node:fs");
     const { join: pj } = await import("node:path");
-    const dir = pj(tempHome, ".reasonix", "sessions");
+    const dir = pj(tempHome, ".mimo-reasonix", "sessions");
     fs.mkdirSync(dir, { recursive: true });
     // Archive without updatedAt should still surface, dated by mtime.
     fs.writeFileSync(

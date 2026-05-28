@@ -185,12 +185,12 @@ describe("installProxyIfConfigured", () => {
     const result = installProxyIfConfigured({
       HTTPS_PROXY: "http://example:8080",
       NO_PROXY: "system.corp.example",
-      REASONIX_NO_PROXY: "app.specific.example, .reasonix.lan",
+      REASONIX_NO_PROXY: "app.specific.example, .mimo-reasonix.lan",
     });
     const raws = result?.noProxy.map((p) => p.raw) ?? [];
     expect(raws).toContain("system.corp.example");
     expect(raws).toContain("app.specific.example");
-    expect(raws).toContain(".reasonix.lan");
+    expect(raws).toContain(".mimo-reasonix.lan");
   });
 
   it("layers opts.extraNoProxy (config) on top of env-derived patterns", () => {

@@ -1,4 +1,4 @@
-import { COMPACTION_SUMMARY_MARKER } from "@reasonix/core-utils";
+import { COMPACTION_SUMMARY_MARKER } from "@mimo-reasonix/core-utils";
 import { describe, expect, it } from "vitest";
 import { hydrateCardsFromMessages } from "../src/cli/ui/state/hydrate.js";
 import type { ChatMessage } from "../src/types.js";

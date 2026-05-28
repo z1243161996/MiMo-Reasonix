@@ -319,7 +319,7 @@ describe("registerSubagentTool", () => {
     // Subagent default was pro pre-0.6; now flash to keep explore/research
     // cheap. Skill frontmatter `model:` is the opt-in override for skills
     // that empirically benefit from pro.
-    expect(seenModels[0]).toBe("deepseek-v4-flash");
+    expect(seenModels[0]).toBe("mimo-v2.5");
   });
 
   it("aborts the child when the parent's tool ctx signal fires", async () => {
@@ -547,7 +547,7 @@ describe("formatSubagentResult — forcedSummary path", () => {
       toolIters: 4,
       elapsedMs: 1000,
       costUsd: 0.0001,
-      model: "deepseek-chat",
+      model: "mimo-v2.5",
       usage: new Usage(),
       ...over,
     };

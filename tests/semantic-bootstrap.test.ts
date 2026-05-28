@@ -20,7 +20,7 @@ describe("bootstrapSemanticSearchInCodeMode", () => {
   });
 
   it("registers the tool when an index already exists", async () => {
-    const semanticDir = join(root, ".reasonix", "semantic");
+    const semanticDir = join(root, ".mimo-reasonix", "semantic");
     await fs.mkdir(semanticDir, { recursive: true });
     await fs.writeFile(
       join(semanticDir, "index.meta.json"),
@@ -43,7 +43,7 @@ describe("bootstrapSemanticSearchInCodeMode", () => {
   });
 
   it("skips the tool when the on-disk index targets a different provider", async () => {
-    const semanticDir = join(root, ".reasonix", "semantic");
+    const semanticDir = join(root, ".mimo-reasonix", "semantic");
     await fs.mkdir(semanticDir, { recursive: true });
     await fs.writeFile(
       join(semanticDir, "index.meta.json"),

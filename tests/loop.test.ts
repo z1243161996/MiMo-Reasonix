@@ -1108,9 +1108,9 @@ describe("CacheFirstLoop - configure() method", () => {
       prefix: new ImmutablePrefix({ system: "s" }),
       stream: false,
     });
-    expect(loop.model).toBe("deepseek-v4-flash");
-    loop.configure({ model: "deepseek-v4-pro" });
-    expect(loop.model).toBe("deepseek-v4-pro");
+    expect(loop.model).toBe("mimo-v2.5");
+    loop.configure({ model: "mimo-v2.5-pro" });
+    expect(loop.model).toBe("mimo-v2.5-pro");
   });
 
   it("updates stream preference via configure", () => {

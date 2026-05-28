@@ -48,7 +48,7 @@ describe("dashboard /sessions: new / switch / delete (attached)", () => {
 
   beforeEach(async () => {
     dir = mkdtempSync(join(tmpdir(), "reasonix-sess-ops-"));
-    // Re-home so listSessions reads from our temp dir, not the user's real ~/.reasonix.
+    // Re-home so listSessions reads from our temp dir, not the user's real ~/.mimo-reasonix.
     vi.stubEnv("USERPROFILE", dir);
     vi.stubEnv("HOME", dir);
     vi.spyOn(require("node:os"), "homedir").mockReturnValue(dir);

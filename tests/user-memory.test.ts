@@ -1,4 +1,4 @@
-/** `~/.reasonix/memory/` store + prefix-loading composer — temp homeDir per test. */
+/** `~/.mimo-reasonix/memory/` store + prefix-loading composer — temp homeDir per test. */
 
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -364,7 +364,7 @@ describe("user-memory", () => {
   describe("applyMemoryStack", () => {
     it("composes REASONIX.md → global memory → project memory", () => {
       writeFileSync(join(projectRoot, "REASONIX.md"), "Pinned by REASONIX.md\n", "utf8");
-      // applyMemoryStack uses ~/.reasonix by default — redirect via HOME
+      // applyMemoryStack uses ~/.mimo-reasonix by default — redirect via HOME
       // isn't portable across Windows; use the public applyUserMemory
       // directly for the global/project part and compose manually to
       // check ordering is what the helper produces.
@@ -397,7 +397,7 @@ describe("user-memory", () => {
 
     it("applyMemoryStack injects no memory blocks when no memory is set", () => {
       // homeDir override required — otherwise the helper falls back to the
-      // dev's real ~/.reasonix and bleeds in whatever memory they have.
+      // dev's real ~/.mimo-reasonix and bleeds in whatever memory they have.
       const out = applyMemoryStack(BASE, projectRoot, { homeDir: home });
       expect(out).toContain(BASE);
       expect(out).not.toMatch(/# Project memory/);
@@ -407,7 +407,7 @@ describe("user-memory", () => {
   });
 
   describe("applyGlobalReasonixMemory", () => {
-    it("loads ~/.reasonix/REASONIX.md when present", () => {
+    it("loads ~/.mimo-reasonix/REASONIX.md when present", () => {
       mkdirSync(home, { recursive: true });
       writeFileSync(join(home, "REASONIX.md"), "- always pnpm not npm\n", "utf8");
       const out = applyGlobalReasonixMemory(BASE, home);

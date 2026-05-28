@@ -1213,7 +1213,8 @@ export const de: TranslationSchema = {
       noMemory: "Kein Memory in {root} eingefügt.",
       layers: "Drei Ebenen sind verfügbar:",
       layerProject: "  1. {file} — commitierbares Team-Memory (im Repo).",
-      layerGlobal: "  2. ~/.mimo-reasonix/memory/global/ — dein projektübergreifendes privates Memory.",
+      layerGlobal:
+        "  2. ~/.mimo-reasonix/memory/global/ — dein projektübergreifendes privates Memory.",
       layerProjectHash:
         "  3. ~/.mimo-reasonix/memory/<projekt-hash>/ — privates Memory dieses Projekts.",
       askModel: "Bitte das Modell, etwas zu `remember`, oder bearbeite die Dateien direkt.",

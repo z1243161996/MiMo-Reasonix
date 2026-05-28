@@ -54,7 +54,7 @@ export function registerScaffoldTools(
           type: "string",
           enum: ["project", "global"],
           description:
-            "`project` (default) = workspace .reasonix/skills/; `global` = ~/.reasonix/skills/.",
+            "`project` (default) = workspace .mimo-reasonix/skills/; `global` = ~/.mimo-reasonix/skills/.",
         },
         allowed_tools: {
           type: "array",
@@ -70,7 +70,13 @@ export function registerScaffoldTools(
         },
         model: {
           type: "string",
-          enum: ["mimo-v2.5", "mimo-v2-flash", "mimo-v2.5-pro", "deepseek-v4-flash", "deepseek-v4-pro"],
+          enum: [
+            "mimo-v2.5",
+            "mimo-v2-flash",
+            "mimo-v2.5-pro",
+            "deepseek-v4-flash",
+            "deepseek-v4-pro",
+          ],
           description:
             "Subagent model override. Default flash; use pro only when the playbook needs it.",
         },
@@ -111,7 +117,8 @@ export function registerScaffoldTools(
         return JSON.stringify({ error: allowedTools.error });
       }
       const model =
-        typeof args.model === "string" && args.model.startsWith("deepseek-")
+        typeof args.model === "string" &&
+        (args.model.startsWith("mimo-") || args.model.startsWith("deepseek-"))
           ? args.model
           : undefined;
 

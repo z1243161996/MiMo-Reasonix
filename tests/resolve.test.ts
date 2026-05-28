@@ -36,31 +36,31 @@ describe("resolveDefaults", () => {
 
   it("empty flags + empty config → flash + high", () => {
     const r = resolveDefaults({});
-    expect(r.model).toBe("deepseek-v4-flash");
+    expect(r.model).toBe("mimo-v2.5");
     expect(r.reasoningEffort).toBe("high");
     expect(r.mcp).toEqual([]);
     expect(r.session).toBe("default");
   });
 
   it("config.model overrides the default", () => {
-    writeConfig({ model: "deepseek-v4-pro" }, join(home, ".reasonix", "config.json"));
+    writeConfig({ model: "mimo-v2.5-pro" }, join(home, ".mimo-reasonix", "config.json"));
     const r = resolveDefaults({});
-    expect(r.model).toBe("deepseek-v4-pro");
+    expect(r.model).toBe("mimo-v2.5-pro");
   });
 
   it("config.reasoningEffort persists across launches", () => {
-    writeConfig({ reasoningEffort: "max" }, join(home, ".reasonix", "config.json"));
+    writeConfig({ reasoningEffort: "max" }, join(home, ".mimo-reasonix", "config.json"));
     expect(resolveDefaults({}).reasoningEffort).toBe("max");
   });
 
   it("--model wins over config.model", () => {
-    writeConfig({ model: "deepseek-v4-flash" }, join(home, ".reasonix", "config.json"));
-    const r = resolveDefaults({ model: "deepseek-v4-pro" });
-    expect(r.model).toBe("deepseek-v4-pro");
+    writeConfig({ model: "mimo-v2.5" }, join(home, ".mimo-reasonix", "config.json"));
+    const r = resolveDefaults({ model: "mimo-v2.5-pro" });
+    expect(r.model).toBe("mimo-v2.5-pro");
   });
 
   it("--effort wins over config.reasoningEffort", () => {
-    writeConfig({ reasoningEffort: "max" }, join(home, ".reasonix", "config.json"));
+    writeConfig({ reasoningEffort: "max" }, join(home, ".mimo-reasonix", "config.json"));
     const r = resolveDefaults({ effort: "low" });
     expect(r.reasoningEffort).toBe("low");
   });
@@ -72,14 +72,14 @@ describe("resolveDefaults", () => {
   });
 
   it("--effort with garbage value falls through to config / default", () => {
-    writeConfig({ reasoningEffort: "medium" }, join(home, ".reasonix", "config.json"));
+    writeConfig({ reasoningEffort: "medium" }, join(home, ".mimo-reasonix", "config.json"));
     expect(resolveDefaults({ effort: "absurd" }).reasoningEffort).toBe("medium");
   });
 
   it("--mcp overrides config.mcp wholesale (no merging)", () => {
     writeConfig(
       { mcp: ["fs=npx -y @modelcontextprotocol/server-filesystem /tmp/old"] },
-      join(home, ".reasonix", "config.json"),
+      join(home, ".mimo-reasonix", "config.json"),
     );
     const r = resolveDefaults({ mcp: ["new=cmd arg"] });
     expect(r.mcp).toEqual(["new=cmd arg"]);
@@ -88,7 +88,7 @@ describe("resolveDefaults", () => {
   it("empty --mcp array falls through to config.mcp", () => {
     writeConfig(
       { mcp: ["fs=npx -y @modelcontextprotocol/server-filesystem /tmp/safe"] },
-      join(home, ".reasonix", "config.json"),
+      join(home, ".mimo-reasonix", "config.json"),
     );
     const r = resolveDefaults({ mcp: [] });
     expect(r.mcp).toHaveLength(1);
@@ -97,23 +97,23 @@ describe("resolveDefaults", () => {
 
   it("--no-config ignores the config entirely", () => {
     writeConfig(
-      { model: "deepseek-v4-pro", reasoningEffort: "max", mcp: ["x=cmd"] },
-      join(home, ".reasonix", "config.json"),
+      { model: "mimo-v2.5-pro", reasoningEffort: "max", mcp: ["x=cmd"] },
+      join(home, ".mimo-reasonix", "config.json"),
     );
     const r = resolveDefaults({ noConfig: true });
-    expect(r.model).toBe("deepseek-v4-flash");
+    expect(r.model).toBe("mimo-v2.5");
     expect(r.reasoningEffort).toBe("high");
     expect(r.mcp).toEqual([]);
   });
 
   it("--no-session beats config.session", () => {
-    writeConfig({ session: "work" }, join(home, ".reasonix", "config.json"));
+    writeConfig({ session: "work" }, join(home, ".mimo-reasonix", "config.json"));
     const r = resolveDefaults({ session: false });
     expect(r.session).toBeUndefined();
   });
 
   it("config.session=null means ephemeral by default", () => {
-    writeConfig({ session: null }, join(home, ".reasonix", "config.json"));
+    writeConfig({ session: null }, join(home, ".mimo-reasonix", "config.json"));
     const r = resolveDefaults({});
     expect(r.session).toBeUndefined();
   });
@@ -151,7 +151,7 @@ describe("resolveDefaults", () => {
         {
           mcpServers: { gh: { command: "user-level-cmd" } },
         },
-        join(home, ".reasonix", "config.json"),
+        join(home, ".mimo-reasonix", "config.json"),
       );
       writeFileSync(
         join(cwd, ".mcp.json"),

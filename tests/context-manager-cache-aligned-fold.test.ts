@@ -194,7 +194,7 @@ describe("ContextManager fold sends cache-aligned summary request", () => {
     seedTurns(loop, 8);
 
     await loop.compactHistory({ keepRecentTokens: 40 });
-    expect(captured[0]!.model).toBe("deepseek-v4-flash");
+    expect(captured[0]!.model).toBe("mimo-v2.5");
   });
 
   it("skill-pinned bodies are sent to summarizer verbatim (head bytes unchanged)", async () => {

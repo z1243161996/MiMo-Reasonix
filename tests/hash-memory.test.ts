@@ -179,7 +179,7 @@ describe("appendGlobalMemory", () => {
     }
   });
 
-  it("creates ~/.reasonix/REASONIX.md (with parent dir) when missing", () => {
+  it("creates ~/.mimo-reasonix/REASONIX.md (with parent dir) when missing", () => {
     const path = globalMemoryPath(home);
     expect(existsSync(path)).toBe(false);
     const result = appendGlobalMemory("always use pnpm", home);
@@ -192,7 +192,7 @@ describe("appendGlobalMemory", () => {
 
   it("appends to an existing global file", () => {
     const path = globalMemoryPath(home);
-    mkdirSync(join(home, ".reasonix"), { recursive: true });
+    mkdirSync(join(home, ".mimo-reasonix"), { recursive: true });
     writeFileSync(path, "# header\n\n- existing\n", "utf8");
     appendGlobalMemory("second", home);
     const content = readFileSync(path, "utf8");
@@ -205,7 +205,7 @@ describe("appendGlobalMemory", () => {
     // sane. The test environment's HOME is a tmpdir from the parent
     // afterEach setup, so this won't pollute the real user home.
     const path = globalMemoryPath();
-    expect(path).toMatch(/[/\\]\.reasonix[/\\]REASONIX\.md$/);
+    expect(path).toMatch(/[/\\]\.mimo-reasonix[/\\]REASONIX\.md$/);
   });
 
   it("rejects empty notes", () => {

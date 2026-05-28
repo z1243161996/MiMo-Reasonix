@@ -18,8 +18,8 @@ import {
 } from "../src/hooks.js";
 
 function writeSettings(dir: string, json: unknown): string {
-  const path = join(dir, ".reasonix", "settings.json");
-  mkdirSync(join(dir, ".reasonix"), { recursive: true });
+  const path = join(dir, ".mimo-reasonix", "settings.json");
+  mkdirSync(join(dir, ".mimo-reasonix"), { recursive: true });
   writeFileSync(path, JSON.stringify(json), "utf8");
   return path;
 }
@@ -115,8 +115,8 @@ describe("loadHooks", () => {
   });
 
   it("tolerates malformed JSON without throwing", () => {
-    mkdirSync(join(home, ".reasonix"), { recursive: true });
-    writeFileSync(join(home, ".reasonix", "settings.json"), "{ not valid json", "utf8");
+    mkdirSync(join(home, ".mimo-reasonix"), { recursive: true });
+    writeFileSync(join(home, ".mimo-reasonix", "settings.json"), "{ not valid json", "utf8");
     expect(() => loadHooks({ homeDir: home })).not.toThrow();
     expect(loadHooks({ homeDir: home })).toEqual([]);
   });
@@ -128,8 +128,8 @@ describe("loadHooks", () => {
   });
 
   it("paths reported by *SettingsPath helpers are absolute", () => {
-    expect(globalSettingsPath(home)).toBe(join(home, ".reasonix", "settings.json"));
-    expect(projectSettingsPath(project)).toBe(join(project, ".reasonix", "settings.json"));
+    expect(globalSettingsPath(home)).toBe(join(home, ".mimo-reasonix", "settings.json"));
+    expect(projectSettingsPath(project)).toBe(join(project, ".mimo-reasonix", "settings.json"));
   });
 });
 

@@ -57,7 +57,7 @@ describe("settings API — combined POST persistence (#274)", () => {
       JSON.stringify({
         lang: "EN",
         baseUrl: "https://example.com",
-        model: "deepseek-v4-pro",
+        model: "mimo-v2.5-pro",
         reasoningEffort: "high",
         search: false,
       }),
@@ -67,7 +67,7 @@ describe("settings API — combined POST persistence (#274)", () => {
     const cfg = readCfg(configPath);
     expect(cfg.lang).toBe("EN");
     expect(cfg.baseUrl).toBe("https://example.com");
-    expect(cfg.model).toBe("deepseek-v4-pro");
+    expect(cfg.model).toBe("mimo-v2.5-pro");
     expect(cfg.reasoningEffort).toBe("high");
     expect(cfg.search).toBe(false);
   });
@@ -334,13 +334,13 @@ describe("settings API — combined POST persistence (#274)", () => {
     const res = await handleSettings(
       "POST",
       [],
-      JSON.stringify({ model: "deepseek-v4-pro", reasoningEffort: "high" }),
+      JSON.stringify({ model: "mimo-v2.5-pro", reasoningEffort: "high" }),
       ctx,
     );
     expect(res.status).toBe(200);
-    expect(calls).toEqual(["effort:high", "model:deepseek-v4-pro"]);
+    expect(calls).toEqual(["effort:high", "model:mimo-v2.5-pro"]);
     const cfg = readCfg(configPath);
-    expect(cfg.model).toBe("deepseek-v4-pro");
+    expect(cfg.model).toBe("mimo-v2.5-pro");
     expect(cfg.reasoningEffort).toBe("high");
   });
 

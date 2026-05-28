@@ -1,4 +1,4 @@
-import { derivePrefix } from "@reasonix/core-utils";
+import { derivePrefix } from "@mimo-reasonix/core-utils";
 import { describe, expect, it } from "vitest";
 
 describe("derivePrefix", () => {

@@ -115,7 +115,7 @@ function defaultSubagentSystem(modelId: string): string {
 const DEFAULT_MAX_RESULT_CHARS = 8000;
 // Subagents follow the project default — their work is read-and-synthesize
 // (explore, research), which doesn't need the pro tier. Skill
-// frontmatter `model: mimo-v2.5-pro` is the opt-in override for
+// frontmatter model overrides are the opt-in path for
 // skills that empirically benefit from the stronger model.
 const DEFAULT_SUBAGENT_MODEL = "mimo-v2.5";
 const DEFAULT_SUBAGENT_EFFORT: import("../config.js").ReasoningEffort = "high";
@@ -495,7 +495,13 @@ export function registerSubagentTool(
         },
         model: {
           type: "string",
-          enum: ["mimo-v2.5", "mimo-v2-flash", "mimo-v2.5-pro", "deepseek-v4-flash", "deepseek-v4-pro"],
+          enum: [
+            "mimo-v2.5",
+            "mimo-v2-flash",
+            "mimo-v2.5-pro",
+            "deepseek-v4-flash",
+            "deepseek-v4-pro",
+          ],
           description:
             "Which model the subagent runs on. Default is 'mimo-v2.5' — the project default, fine for explore/research-style subtasks. Override to 'mimo-v2.5-pro' when the subtask genuinely needs the stronger model: cross-file architecture, subtle bug hunts, anything where the default has empirically underperformed.",
         },

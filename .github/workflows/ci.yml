@@ -49,7 +49,7 @@ jobs:
       # DEEPSEEK_API_KEY in CI. RUNNER_TEMP is set on every GH Actions
       # runner (POSIX + Windows) — beats hardcoding /tmp.
       - name: τ-bench harness dry-run
-        run: npx tsx benchmarks/tau-bench/runner.ts --dry --out "${{ runner.temp }}/tau-dry.json"
+        run: ./node_modules/.bin/tsx benchmarks/tau-bench/runner.ts --dry --out "${{ runner.temp }}/tau-dry.json"
 
       - name: Notify Discord on main failure
         if: failure() && github.event_name == 'push' && github.ref == 'refs/heads/main'

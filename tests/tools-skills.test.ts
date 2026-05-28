@@ -9,7 +9,7 @@ import { ToolRegistry } from "../src/tools.js";
 import { registerSkillTools } from "../src/tools/skills.js";
 
 function writeSkill(baseDir: string, name: string, description: string, body: string): void {
-  const dir = join(baseDir, ".reasonix", "skills", name);
+  const dir = join(baseDir, ".mimo-reasonix", "skills", name);
   mkdirSync(dir, { recursive: true });
   writeFileSync(
     join(dir, "SKILL.md"),
@@ -24,7 +24,7 @@ function writeSkillWithFrontmatter(
   fm: Record<string, string>,
   body: string,
 ): void {
-  const dir = join(baseDir, ".reasonix", "skills", name);
+  const dir = join(baseDir, ".mimo-reasonix", "skills", name);
   mkdirSync(dir, { recursive: true });
   const lines = ["---", `name: ${name}`];
   for (const [k, v] of Object.entries(fm)) lines.push(`${k}: ${v}`);

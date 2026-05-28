@@ -93,7 +93,7 @@ function parseAllowedTools(raw: string | undefined): readonly string[] | undefin
   return names.length > 0 ? Object.freeze(names) : undefined;
 }
 
-/** flash/pro preset → concrete deepseek model id. Kept local so this file doesn't import the CLI preset bundle. */
+/** flash/pro preset → concrete model id. Kept local so this file doesn't import the CLI preset bundle. */
 function subagentModelForPreset(preset: "flash" | "pro"): string {
   return preset === "pro" ? "mimo-v2.5-pro" : "mimo-v2.5";
 }
@@ -288,7 +288,10 @@ export class SkillStore {
       path,
       allowedTools: parseAllowedTools(data["allowed-tools"]),
       runAs: parseRunAs(data.runAs, data.context, data.agent),
-      model: data.model?.startsWith("deepseek-") ? data.model : undefined,
+      model:
+        data.model?.startsWith("mimo-") || data.model?.startsWith("deepseek-")
+          ? data.model
+          : undefined,
     };
   }
 }

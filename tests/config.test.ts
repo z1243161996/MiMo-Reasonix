@@ -223,9 +223,9 @@ describe("config", () => {
     // make the first chat request 400 with "supported API model names are
     // deepseek-v4-pro or deepseek-v4-flash, but you passed …".
     writeConfig({ model: "deepseek-chat" }, path);
-    expect(loadModel(path)).toBe("deepseek-v4-flash");
+    expect(loadModel(path)).toBe("mimo-v2.5");
     writeConfig({ model: "deepseek-made-up" }, path);
-    expect(loadModel(path)).toBe("deepseek-v4-flash");
+    expect(loadModel(path)).toBe("mimo-v2.5");
   });
 
   it("loadModel passes through any persisted id when a custom baseUrl is set", () => {

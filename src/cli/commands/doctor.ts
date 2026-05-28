@@ -461,7 +461,10 @@ function readSemanticMeta(
   projectRoot: string,
 ): { provider: "ollama" | "openai-compat"; model: string } | null {
   try {
-    const raw = readFileSync(join(projectRoot, ".mimo-reasonix", "semantic", "index.meta.json"), "utf8");
+    const raw = readFileSync(
+      join(projectRoot, ".mimo-reasonix", "semantic", "index.meta.json"),
+      "utf8",
+    );
     const parsed = JSON.parse(raw) as { provider?: string; model?: string };
     return {
       provider: parsed.provider === "openai-compat" ? "openai-compat" : "ollama",

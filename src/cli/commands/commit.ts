@@ -11,7 +11,7 @@ import { loadEndpoint } from "../../config.js";
 import { loadDotenv } from "../../env.js";
 
 export interface CommitOptions {
-  /** Override the default model (mimo-v2.5). */
+  /** Override the default model. */
   model?: string;
   /** Skip the confirmation step — useful in scripts where the diff has been pre-reviewed. */
   yes?: boolean;

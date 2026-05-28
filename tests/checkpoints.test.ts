@@ -1,4 +1,4 @@
-/** Checkpoint store tests — fresh temp workspace + redirected HOME so real `~/.reasonix` is untouched. */
+/** Checkpoint store tests — fresh temp workspace + redirected HOME so real `~/.mimo-reasonix` is untouched. */
 
 import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";

@@ -989,8 +989,7 @@ export const JA: TranslationSchema = {
       cwdUsageNoCurrent: "使い方: /cwd <path>   ワークスペースルートを <path> に変更します。",
     },
     model: {
-      modelHint:
-        "mimo-v2.5 または mimo-v2.5-pro を試してください — /models で最新リストを取得",
+      modelHint: "mimo-v2.5 または mimo-v2.5-pro を試してください — /models で最新リストを取得",
       modelUsage: "使い方: /model <id>   ({hint})",
       modelNotInCatalog:
         "model → {id}   （⚠ 取得済みカタログにありません: {list}。間違いの場合、次の呼び出しが400になります — /models で更新してください。）",

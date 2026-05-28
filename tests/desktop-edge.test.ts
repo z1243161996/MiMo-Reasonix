@@ -1,7 +1,7 @@
 /** Regression net for issue #1180 — `derivePrefix` must not drift between the CLI
  *  re-export path and the direct core-utils import path (used by Desktop). */
 
-import { derivePrefix as fromCoreUtils } from "@reasonix/core-utils";
+import { derivePrefix as fromCoreUtils } from "@mimo-reasonix/core-utils";
 import { describe, expect, it } from "vitest";
 import { derivePrefix as fromCliPath } from "../src/tools/shell/parse.js";
 

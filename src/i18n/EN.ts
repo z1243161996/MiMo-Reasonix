@@ -302,7 +302,8 @@ export const EN: TranslationSchema = {
       argsHint: "[list|paths|show <name>|<name> [args]]",
     },
     hooks: {
-      description: "list active hooks (settings.json under .mimo-reasonix/) · reload re-reads from disk",
+      description:
+        "list active hooks (settings.json under .mimo-reasonix/) · reload re-reads from disk",
       argsHint: "[reload]",
     },
     permissions: {
@@ -1152,7 +1153,8 @@ export const EN: TranslationSchema = {
       layers: "Three layers are available:",
       layerProject: "  1. {file} — committable team memory (in the repo).",
       layerGlobal: "  2. ~/.mimo-reasonix/memory/global/ — your cross-project private memory.",
-      layerProjectHash: "  3. ~/.mimo-reasonix/memory/<project-hash>/ — this project's private memory.",
+      layerProjectHash:
+        "  3. ~/.mimo-reasonix/memory/<project-hash>/ — this project's private memory.",
       askModel: "Ask the model to `remember` something, or hand-edit files directly.",
       changesNote:
         "Changes take effect on next /new or launch — the system prompt is hashed once per session to keep the prefix cache warm.",
@@ -1243,7 +1245,8 @@ export const EN: TranslationSchema = {
       listEmpty: "no skills found. Reasonix reads skills from:",
       listProjectScope:
         "  · <project>/.mimo-reasonix/skills/<name>/SKILL.md  (or <name>.md)  — project scope",
-      listGlobalScope: "  · ~/.mimo-reasonix/skills/<name>/SKILL.md  (or <name>.md)  — global scope",
+      listGlobalScope:
+        "  · ~/.mimo-reasonix/skills/<name>/SKILL.md  (or <name>.md)  — global scope",
       listProjectOnly: "  (project scope is only active in `reasonix code`)",
       listFrontmatter: "Each file's frontmatter needs at least `name` and `description`.",
       listInvoke:
@@ -1343,7 +1346,8 @@ export const EN: TranslationSchema = {
     allowOnce: "allow once",
     allowOnceDesc: "permit this access; remember the directory for the rest of this session",
     allowAlways: "allow always",
-    allowAlwaysDesc: "remember `{prefix}` for this project (persisted in ~/.mimo-reasonix/config.json)",
+    allowAlwaysDesc:
+      "remember `{prefix}` for this project (persisted in ~/.mimo-reasonix/config.json)",
     deny: "deny",
     denyDesc: "press Tab to add context telling the model why",
     pathLabel: "path",

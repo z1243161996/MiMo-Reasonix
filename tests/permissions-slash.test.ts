@@ -28,7 +28,7 @@ describe("/permissions slash handler", () => {
     dir = mkdtempSync(join(tmpdir(), "reasonix-perms-slash-"));
     cfgPath = join(dir, "config.json");
     projectRoot = join(dir, "project");
-    // Redirect ~/.reasonix → temp dir so the handler's calls (which use
+    // Redirect ~/.mimo-reasonix → temp dir so the handler's calls (which use
     // defaultConfigPath) land in `cfgPath`. config.test.ts skips this by
     // passing `path` explicitly to every helper, but the slash handler
     // hardcodes the default — so we have to redirect HOME instead.
@@ -69,8 +69,12 @@ describe("/permissions slash handler", () => {
   });
 
   it("bare /permissions lists project entries with 1-based indices", () => {
-    addProjectShellAllowed(projectRoot, "npm run build", join(dir, ".reasonix", "config.json"));
-    addProjectShellAllowed(projectRoot, "deploy.sh", join(dir, ".reasonix", "config.json"));
+    addProjectShellAllowed(
+      projectRoot,
+      "npm run build",
+      join(dir, ".mimo-reasonix", "config.json"),
+    );
+    addProjectShellAllowed(projectRoot, "deploy.sh", join(dir, ".mimo-reasonix", "config.json"));
     const result = handleSlash("permissions", [], makeLoop(), {
       codeRoot: projectRoot,
       editMode: "review",
@@ -84,9 +88,9 @@ describe("/permissions slash handler", () => {
       codeRoot: projectRoot,
     });
     expect(result.info).toMatch(/added.*npm run build/);
-    expect(loadProjectShellAllowed(projectRoot, join(dir, ".reasonix", "config.json"))).toContain(
-      "npm run build",
-    );
+    expect(
+      loadProjectShellAllowed(projectRoot, join(dir, ".mimo-reasonix", "config.json")),
+    ).toContain("npm run build");
   });
 
   it("/permissions add rejects an empty prefix with a usage hint", () => {
@@ -100,11 +104,13 @@ describe("/permissions slash handler", () => {
     });
     expect(result.info).toMatch(/builtin allowlist/i);
     // Should NOT have written a redundant project entry.
-    expect(loadProjectShellAllowed(projectRoot, join(dir, ".reasonix", "config.json"))).toEqual([]);
+    expect(
+      loadProjectShellAllowed(projectRoot, join(dir, ".mimo-reasonix", "config.json")),
+    ).toEqual([]);
   });
 
   it("/permissions remove drops by exact prefix", () => {
-    const cfgFile = join(dir, ".reasonix", "config.json");
+    const cfgFile = join(dir, ".mimo-reasonix", "config.json");
     addProjectShellAllowed(projectRoot, "npm run build", cfgFile);
     addProjectShellAllowed(projectRoot, "deploy.sh", cfgFile);
     const result = handleSlash("permissions", ["remove", "deploy.sh"], makeLoop(), {
@@ -115,7 +121,7 @@ describe("/permissions slash handler", () => {
   });
 
   it("/permissions remove drops by 1-based project index", () => {
-    const cfgFile = join(dir, ".reasonix", "config.json");
+    const cfgFile = join(dir, ".mimo-reasonix", "config.json");
     addProjectShellAllowed(projectRoot, "alpha", cfgFile);
     addProjectShellAllowed(projectRoot, "beta", cfgFile);
     addProjectShellAllowed(projectRoot, "gamma", cfgFile);
@@ -127,7 +133,7 @@ describe("/permissions slash handler", () => {
   });
 
   it("/permissions remove flags an out-of-range index", () => {
-    const cfgFile = join(dir, ".reasonix", "config.json");
+    const cfgFile = join(dir, ".mimo-reasonix", "config.json");
     addProjectShellAllowed(projectRoot, "alpha", cfgFile);
     const result = handleSlash("permissions", ["remove", "5"], makeLoop(), {
       codeRoot: projectRoot,
@@ -151,7 +157,7 @@ describe("/permissions slash handler", () => {
   });
 
   it("/permissions clear without 'confirm' asks for confirmation", () => {
-    const cfgFile = join(dir, ".reasonix", "config.json");
+    const cfgFile = join(dir, ".mimo-reasonix", "config.json");
     addProjectShellAllowed(projectRoot, "alpha", cfgFile);
     addProjectShellAllowed(projectRoot, "beta", cfgFile);
     const result = handleSlash("permissions", ["clear"], makeLoop(), { codeRoot: projectRoot });
@@ -160,7 +166,7 @@ describe("/permissions slash handler", () => {
   });
 
   it("/permissions clear confirm wipes the project list", () => {
-    const cfgFile = join(dir, ".reasonix", "config.json");
+    const cfgFile = join(dir, ".mimo-reasonix", "config.json");
     addProjectShellAllowed(projectRoot, "alpha", cfgFile);
     addProjectShellAllowed(projectRoot, "beta", cfgFile);
     const result = handleSlash("permissions", ["clear", "confirm"], makeLoop(), {

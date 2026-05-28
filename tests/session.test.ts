@@ -68,9 +68,9 @@ describe("session persistence", () => {
     if (existsSync(tmp)) rmSync(tmp, { recursive: true, force: true });
   });
 
-  it("sessionPath lives under <home>/.reasonix/sessions", () => {
+  it("sessionPath lives under <home>/.mimo-reasonix/sessions", () => {
     const p = sessionPath("demo");
-    expect(p).toContain(".reasonix");
+    expect(p).toContain(".mimo-reasonix");
     expect(p).toContain("sessions");
     expect(p.endsWith("demo.jsonl")).toBe(true);
     expect(p.startsWith(tmp)).toBe(true);
