@@ -3,6 +3,18 @@
 All notable changes to Reasonix. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.0] - 2026-05-28
+
+### Changed
+- Fork DeepSeek-Reasonix v0.52.0 into MiMo-Reasonix
+- Default backend switched to Xiaomi MiMo models (mimo-v2.5)
+- Updated repository URLs to z1243161996/MiMo-Reasonix
+- CI: use local tsx binary for τ-bench to avoid npx resolution issues
+
+### Notes
+- DeepSeek models remain fully supported via `--model deepseek-v4-flash`
+- All existing features (MCP, skills, hooks, memory, desktop, dashboard) preserved
+
 ## [0.52.0] — 2026-05-26
 
 **Ink renderer in-tree as `@esengine/ink`.** The vendored Ink fork now

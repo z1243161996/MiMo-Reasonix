@@ -9,9 +9,9 @@
   &nbsp;·&nbsp;
   <a href="./README.ja-JP.md">日本語</a>
   &nbsp;·&nbsp;
-  <a href="https://esengine.github.io/MiMo-Reasonix/">Website</a>
+  <a href="https://github.com/z1243161996/MiMo-Reasonix">Website</a>
   &nbsp;·&nbsp;
-  <a href="https://esengine.github.io/MiMo-Reasonix/configuration.html">Guide</a>
+  <a href="https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/CLI-REFERENCE.md">Guide</a>
   &nbsp;·&nbsp;
   <a href="./docs/ARCHITECTURE.md">Architecture</a>
   &nbsp;·&nbsp;
@@ -145,12 +145,12 @@ One JSON file at `~/.mimo-reasonix/config.json` plus per-project overrides under
 
 | Topic | Quick read |
 |---|---|
-| [MCP servers](https://esengine.github.io/MiMo-Reasonix/configuration.html#mcp) | stdio · SSE · Streamable HTTP |
-| [Skills](https://esengine.github.io/MiMo-Reasonix/configuration.html#skills) | Markdown playbooks, `inline` or `subagent` mode |
-| [Memory](https://esengine.github.io/MiMo-Reasonix/configuration.html#memory) | User-private knowledge pinned into prefix |
-| [Hooks](https://esengine.github.io/MiMo-Reasonix/configuration.html#hooks) | PreToolUse · PostToolUse · UserPromptSubmit · Stop |
-| [Permissions](https://esengine.github.io/MiMo-Reasonix/configuration.html#permissions) | Per-workspace shell allowlist |
-| [Web search](https://esengine.github.io/MiMo-Reasonix/configuration.html#search) | Mojeek / SearXNG / Metaso |
+| [MCP servers](https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/CLI-REFERENCE.md#mcp) | stdio · SSE · Streamable HTTP |
+| [Skills](https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/CLI-REFERENCE.md#skills) | Markdown playbooks, `inline` or `subagent` mode |
+| [Memory](https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/CLI-REFERENCE.md#memory) | User-private knowledge pinned into prefix |
+| [Hooks](https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/CLI-REFERENCE.md#hooks) | PreToolUse · PostToolUse · UserPromptSubmit · Stop |
+| [Permissions](https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/CLI-REFERENCE.md#permissions) | Per-workspace shell allowlist |
+| [Web search](https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/CLI-REFERENCE.md#search) | Mojeek / SearXNG / Metaso |
 
 <br/>
 
@@ -159,7 +159,7 @@ One JSON file at `~/.mimo-reasonix/config.json` plus per-project overrides under
 - [**Architecture**](./docs/ARCHITECTURE.md) — three pillars: cache-first loop, tool-call repair, cost control
 - [**CLI Reference**](./docs/CLI-REFERENCE.md) — every subcommand, slash command, keybinding
 - [**Benchmarks**](./benchmarks/) — τ-bench-lite harness, transcripts, cost methodology
-- [**Website**](https://esengine.github.io/MiMo-Reasonix/)
+- [**Website**](https://github.com/z1243161996/MiMo-Reasonix)
 - [**Contributing**](./CONTRIBUTING.md) · [**Code of Conduct**](./CODE_OF_CONDUCT.md)
 
 <br/>

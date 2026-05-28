@@ -9,9 +9,9 @@
   &nbsp;·&nbsp;
   <strong>日本語</strong>
   &nbsp;·&nbsp;
-  <a href="https://esengine.github.io/MiMo-Reasonix/">公式サイト</a>
+  <a href="https://github.com/z1243161996/MiMo-Reasonix">公式サイト</a>
   &nbsp;·&nbsp;
-  <a href="https://esengine.github.io/MiMo-Reasonix/configuration.html">ガイド</a>
+  <a href="https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/CLI-REFERENCE.md">ガイド</a>
   &nbsp;·&nbsp;
   <a href="./docs/ARCHITECTURE.md">アーキテクチャ</a>
   &nbsp;·&nbsp;
@@ -104,7 +104,7 @@ npx dsnix@latest code      # より短いコマンドで一度だけ実行
 | `reasonix doctor` | ヘルスチェック: Node、API キー、MCP の配線。 |
 | `reasonix update` | Reasonix 自体をアップグレード。 |
 
-その他のサブコマンド（`replay` · `diff` · `events` · `stats` · `index` · `mcp` · `prune-sessions`）は `reasonix --help` と [CLI リファレンス](https://esengine.github.io/MiMo-Reasonix/#cli)にあります。
+その他のサブコマンド（`replay` · `diff` · `events` · `stats` · `index` · `mcp` · `prune-sessions`）は `reasonix --help` と [CLI リファレンス](https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/CLI-REFERENCE.md)にあります。
 
 ### QQ チャンネル
 
@@ -173,17 +173,17 @@ npx openspec init --tools claude    # .claude/skills/openspec-*/SKILL.md を書�
 
 `~/.reasonix/config.json` の1つの JSON ファイルと、`<project>/.reasonix/` 配下のプロジェクトごとのオーバーライドで設定します。すべてのキー、すべてのスラッシュコマンド、スキル / メモリ / フックのオンディスク構造を網羅した完全なバイリンガルリファレンスはこちら:
 
-> 📘 **[設定ガイド](https://esengine.github.io/MiMo-Reasonix/configuration.html)** · [中文](https://esengine.github.io/MiMo-Reasonix/configuration.html?lang=zh)
+> 📘 **[設定ガイド](https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/CLI-REFERENCE.md)** · [中文](https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/CLI-REFERENCE.md)
 
 | トピック | 概要 |
 |---|---|
-| [MCP サーバー](https://esengine.github.io/MiMo-Reasonix/configuration.html#mcp) | stdio · SSE · Streamable HTTP。1つの仕様形式が `config.json` と `--mcp` の両方で動作。 |
-| [スキル](https://esengine.github.io/MiMo-Reasonix/configuration.html#skills) | モデルが呼び出せる Markdown のプレイブック。`inline` または `subagent` モード。 |
-| [メモリ](https://esengine.github.io/MiMo-Reasonix/configuration.html#memory) | プレフィックスにピン留めされるユーザー専用の知識。`user` / `feedback` / `project` / `reference` の型。 |
-| [フック](https://esengine.github.io/MiMo-Reasonix/configuration.html#hooks) | ライフサイクルイベント時のシェルコマンド。`PreToolUse`（ゲート） · `PostToolUse` · `UserPromptSubmit` · `Stop`。 |
-| [権限](https://esengine.github.io/MiMo-Reasonix/configuration.html#permissions) | ワークスペースごとのシェル許可リスト。完全な前方一致。 |
-| [ウェブ検索](https://esengine.github.io/MiMo-Reasonix/configuration.html#search) | デフォルトは Mojeek。`/search-engine` でセルフホストの SearXNG や Metaso に切り替え可能。 |
-| [セマンティックインデックス](https://esengine.github.io/MiMo-Reasonix/configuration.html#index) | `reasonix index` — ローカルの Ollama または任意の OpenAI 互換の埋め込みエンドポイント。 |
+| [MCP サーバー](https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/CLI-REFERENCE.md#mcp) | stdio · SSE · Streamable HTTP。1つの仕様形式が `config.json` と `--mcp` の両方で動作。 |
+| [スキル](https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/CLI-REFERENCE.md#skills) | モデルが呼び出せる Markdown のプレイブック。`inline` または `subagent` モード。 |
+| [メモリ](https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/CLI-REFERENCE.md#memory) | プレフィックスにピン留めされるユーザー専用の知識。`user` / `feedback` / `project` / `reference` の型。 |
+| [フック](https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/CLI-REFERENCE.md#hooks) | ライフサイクルイベント時のシェルコマンド。`PreToolUse`（ゲート） · `PostToolUse` · `UserPromptSubmit` · `Stop`。 |
+| [権限](https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/CLI-REFERENCE.md#permissions) | ワークスペースごとのシェル許可リスト。完全な前方一致。 |
+| [ウェブ検索](https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/CLI-REFERENCE.md#search) | デフォルトは Mojeek。`/search-engine` でセルフホストの SearXNG や Metaso に切り替え可能。 |
+| [セマンティックインデックス](https://github.com/z1243161996/MiMo-Reasonix/blob/main/docs/CLI-REFERENCE.md#index) | `reasonix index` — ローカルの Ollama または任意の OpenAI 互換の埋め込みエンドポイント。 |
 
 <br/>
 
@@ -232,7 +232,7 @@ npx openspec init --tools claude    # .claude/skills/openspec-*/SKILL.md を書�
 - [**CLI リファレンス**](./docs/CLI-REFERENCE.md) — すべてのシェルサブコマンド、すべてのスラッシュコマンド、すべてのキーバインド
 - [**QQ チャンネルのセットアップ**](./docs/qq-connect.md) — CLI の初回接続フロー、デスクトップのエントリ、QQ Open Platform の認証情報
 - [**ベンチマーク**](./benchmarks/) — τ-bench-lite ハーネス、トランスクリプト、コスト算出手法
-- [**公式サイト**](https://esengine.github.io/MiMo-Reasonix/) — はじめに、ダッシュボードのモックアップ、TUI のモックアップ
+- [**公式サイト**](https://github.com/z1243161996/MiMo-Reasonix) — はじめに、ダッシュボードのモックアップ、TUI のモックアップ
 - [**コントリビューション**](./CONTRIBUTING.md) — コメントポリシー、エラーハンドリングのルール、自作よりライブラリを優先
 - [**行動規範**](./CODE_OF_CONDUCT.md) · [**セキュリティポリシー**](./SECURITY.md)
 
@@ -248,7 +248,7 @@ npx openspec init --tools claude    # .claude/skills/openspec-*/SKILL.md を書�
 **オープンな Discussions — 意見募集中:**
 
 - [#20 · CLI / TUI デザイン](https://github.com/esengine/reasonix/discussions/20) — 何が壊れていて、何が足りず、何を変えますか？
-- [#21 · ダッシュボードデザイン](https://github.com/esengine/reasonix/discussions/21) — [提案中のモックアップ](https://esengine.github.io/MiMo-Reasonix/design/agent-dashboard.html)への反応をどうぞ
+- [#21 · ダッシュボードデザイン](https://github.com/esengine/reasonix/discussions/21) — [提案中のモックアップ](https://github.com/z1243161996/MiMo-Reasonix)への反応をどうぞ
 - [#22 · 今後の機能ウィッシュリスト](https://github.com/esengine/reasonix/discussions/22) — 次に Reasonix に組み込みたいものは？
 
 **すでに Reasonix を使っていて、他の人に広める手伝いをしてもいい？** ブログ記事、記事、スクリーンショット、講演、動画を [**Show and tell**](https://github.com/esengine/reasonix/discussions/categories/show-and-tell) に公開してください。このプロジェクトにはマーケティング予算がありません — 新しいユーザーは口コミで見つけてくれます。継続的に応援してくれる人は、以下のバッジを獲得でき、付与されるとコントリビューターウォールの横に表示されます:
