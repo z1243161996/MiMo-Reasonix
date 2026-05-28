@@ -71,12 +71,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/esengine/MiMo-Reasonix.git"
+    "url": "git+https://github.com/z1243161996/MiMo-Reasonix.git"
   },
   "bugs": {
-    "url": "https://github.com/esengine/MiMo-Reasonix/issues"
+    "url": "https://github.com/z1243161996/MiMo-Reasonix/issues"
   },
-  "homepage": "https://github.com/esengine/MiMo-Reasonix#readme",
+  "homepage": "https://github.com/z1243161996/MiMo-Reasonix#readme",
   "engines": {
     "node": ">=22"
   },
