@@ -1,7 +1,7 @@
 {
-  "name": "mimo-reasonix",
+  "name": "mimo-reasonix-dev",
   "version": "2.0.0",
-  "description": "MiMo-native coding agent — fork of DeepSeek-Reasonix, defaulting to Xiaomi MiMo models with cache-first loop and tool-call repair.",
+  "description": "MiMo-native coding agent (dev build) — fork of DeepSeek-Reasonix, defaulting to Xiaomi MiMo models with cache-first loop and tool-call repair.",
   "type": "module",
   "bin": {
     "mimo-reasonix": "dist/cli/index.js",
