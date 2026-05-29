@@ -232,17 +232,32 @@ export async function fetchSmitheryFirstPage(
 }
 
 export function fallbackFromCatalog(): RegistryEntry[] {
-  return MCP_CATALOG.map((e) => ({
-    name: e.name,
-    title: e.name,
-    description: e.summary,
-    source: "local" as const,
-    install: {
-      runtime: "npm" as const,
-      packageId: e.package,
-      transport: "stdio" as const,
-    },
-  }));
+  return MCP_CATALOG.map((e) => {
+    if (e.remoteUrl) {
+      return {
+        name: e.name,
+        title: e.name,
+        description: e.summary,
+        source: "local" as const,
+        install: {
+          runtime: "remote" as const,
+          transport: "sse" as const,
+          url: e.remoteUrl,
+        },
+      };
+    }
+    return {
+      name: e.name,
+      title: e.name,
+      description: e.summary,
+      source: "local" as const,
+      install: {
+        runtime: "npm" as const,
+        packageId: e.package,
+        transport: "stdio" as const,
+      },
+    };
+  });
 }
 
 export type FetchProgress = (info: {

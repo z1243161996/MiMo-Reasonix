@@ -536,14 +536,20 @@ describe("fetchSmitheryDetail", () => {
 });
 
 describe("fallbackFromCatalog", () => {
-  it("maps every catalog entry to a stdio npm RegistryEntry", () => {
+  it("maps every catalog entry to a RegistryEntry (stdio npm or remote sse)", () => {
     const entries = fallbackFromCatalog();
     expect(entries.length).toBeGreaterThan(0);
     for (const e of entries) {
       expect(e.source).toBe("local");
-      expect(e.install?.runtime).toBe("npm");
-      expect(e.install?.transport).toBe("stdio");
-      expect(e.install?.packageId).toBeTruthy();
+      expect(e.install).toBeTruthy();
+      if (e.install?.runtime === "remote") {
+        expect(e.install.transport).toBe("sse");
+        expect((e.install as { url?: string }).url).toBeTruthy();
+      } else {
+        expect(e.install?.runtime).toBe("npm");
+        expect(e.install?.transport).toBe("stdio");
+        expect(e.install?.packageId).toBeTruthy();
+      }
     }
   });
 });

@@ -267,6 +267,12 @@ export class StdinReader {
   private started = false;
   /** The actual `data` listener — kept as a field so `stop()` can detach it. */
   private listener: ((chunk: Buffer | string) => void) | null = null;
+  /** Coalesce rapid stdin chunks (e.g. large paste arriving as multiple reads)
+   *  into a single `handleChunk` call so the parser sees the full content at
+   *  once and the UI re-renders once instead of N times. (#2150) */
+  private dataBuf = "";
+  private dataFlushScheduled = false;
+  private dataFlushImmediate: NodeJS.Immediate | null = null;
 
   start(): void {
     if (this.started) return;
@@ -278,18 +284,47 @@ export class StdinReader {
     }
     stdin.setEncoding("utf8");
     stdin.resume();
-    this.listener = (chunk) =>
-      this.handleChunk(typeof chunk === "string" ? chunk : chunk.toString("utf8"));
+    // Enable DECSET 2004 (bracketed paste mode) so the terminal wraps
+    // pasted text in \x1b[200~ … \x1b[201~ markers.  Without this,
+    // large pastes arrive as raw character streams — each chunk triggers
+    // a separate key event → separate React re-render → the UI freezes.
+    // The sequence is harmless on terminals that don't support it.
+    if (stdin.isTTY) process.stdout.write("\x1b[?2004h");
+    this.listener = (chunk) => {
+      this.dataBuf += typeof chunk === "string" ? chunk : chunk.toString("utf8");
+      if (!this.dataFlushScheduled) {
+        this.dataFlushScheduled = true;
+        this.dataFlushImmediate = setImmediate(() => {
+          this.dataFlushScheduled = false;
+          this.dataFlushImmediate = null;
+          const buf = this.dataBuf;
+          this.dataBuf = "";
+          if (buf.length > 0) this.handleChunk(buf);
+        });
+      }
+    };
     stdin.on("data", this.listener);
     this.started = true;
   }
 
   stop(): void {
     if (!this.started) return;
+    // Disable bracketed paste mode before tearing down raw mode.
+    if (stdin.isTTY) process.stdout.write("\x1b[?2004l");
     if (this.listener) {
       stdin.off("data", this.listener);
       this.listener = null;
     }
+    // Flush any buffered data before stopping.
+    if (this.dataFlushImmediate) {
+      clearImmediate(this.dataFlushImmediate);
+      this.dataFlushImmediate = null;
+    }
+    if (this.dataBuf.length > 0) {
+      this.handleChunk(this.dataBuf);
+      this.dataBuf = "";
+    }
+    this.dataFlushScheduled = false;
     try {
       stdin.setRawMode(false);
     } catch {

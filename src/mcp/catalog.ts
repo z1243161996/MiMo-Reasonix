@@ -5,8 +5,10 @@ export interface CatalogEntry {
   name: string;
   /** One-line description shown in `reasonix mcp list`. */
   summary: string;
-  /** npm package id (for `npx -y <pkg>`). */
+  /** npm package id (for `npx -y <pkg>`). Used for stdio transport. */
   package: string;
+  /** Remote SSE endpoint URL. When set, the entry defaults to SSE transport instead of stdio. */
+  remoteUrl?: string;
   /** Extra args the user must supply (e.g. a directory path). */
   userArgs?: string;
   /** Notes the user needs to know — shown dimmed. */
@@ -34,9 +36,10 @@ export const MCP_CATALOG: CatalogEntry[] = [
   },
   {
     name: "github",
-    summary: "read issues, PRs, code search (needs GITHUB_PERSONAL_ACCESS_TOKEN)",
+    summary: "read issues, PRs, code search via GitHub remote SSE — no Docker required",
     package: "@modelcontextprotocol/server-github",
-    note: "set GITHUB_PERSONAL_ACCESS_TOKEN in your env before spawning",
+    remoteUrl: "https://api.githubcopilot.com/mcp/",
+    note: "defaults to remote SSE (zero Docker); set GITHUB_PERSONAL_ACCESS_TOKEN in your env before spawning if using stdio fallback",
   },
   {
     name: "puppeteer",
@@ -53,6 +56,9 @@ export const MCP_CATALOG: CatalogEntry[] = [
 ];
 
 export function mcpCommandFor(entry: CatalogEntry): string {
+  if (entry.remoteUrl && !entry.userArgs) {
+    return `--mcp "${entry.name}=${entry.remoteUrl}"`;
+  }
   const pkg = entry.package;
   const tail = entry.userArgs ? ` ${entry.userArgs}` : "";
   return `--mcp "${entry.name}=npx -y ${pkg}${tail}"`;

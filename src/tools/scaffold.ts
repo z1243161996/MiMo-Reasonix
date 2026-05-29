@@ -329,6 +329,10 @@ function buildSpecString(input: BuildSpecInput): { spec: string } | { error: str
         error: `catalog entry "${entry.name}" needs ${entry.userArgs} — pass it via the 'args' parameter`,
       };
     }
+    // Default to remote SSE when available and no user-supplied args force stdio.
+    if (entry.remoteUrl && userArgs.length === 0) {
+      return { spec: `${input.name}=${entry.remoteUrl}` };
+    }
     const tail = userArgs.map(quoteIfNeeded).join(" ");
     const body = `npx -y ${entry.package}${tail ? ` ${tail}` : ""}`;
     return { spec: `${input.name}=${body}` };

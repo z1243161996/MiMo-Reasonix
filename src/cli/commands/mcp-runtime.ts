@@ -143,7 +143,24 @@ export function createMcpRuntime(ctx: RuntimeContext): McpRuntime {
     signal?: AbortSignal,
   ): Promise<{ ok: true; summary: McpServerSummary } | { ok: false; reason: string }> {
     if (records.has(raw)) {
-      return { ok: true, summary: records.get(raw)!.summary };
+      const existing = records.get(raw)!;
+      // Ensure the current loop's prefix includes all MCP tools from this
+      // server.  Normally the prefix is built from tools.specs() which
+      // already contains them, but a race between the useMemo that creates
+      // the loop and the useEffect that bridges MCP tools can leave the
+      // prefix empty: the old bridge registers tools in the ToolRegistry
+      // *after* the new prefix was snapshotted from tools.specs(), and
+      // this early-return then skips addTool for the new prefix.
+      if (loop) {
+        for (const s of existing.registeredSpecs) {
+          try {
+            loop.prefix.addTool(s);
+          } catch {
+            /* addTool is infallible but guard anyway */
+          }
+        }
+      }
+      return { ok: true, summary: existing.summary };
     }
     failureMap.delete(raw);
     const tools = ctx.getTools();

@@ -172,4 +172,75 @@ describe("MCP tools survive TUI lifecycle events", () => {
     expect(names).toContain("mcp_fs_read");
     expect(names).toContain("mcp_fs_write");
   });
+
+  it("early-return path (records.has) still adds tools to a new prefix created before bridge completed", async () => {
+    // Simulates the race condition: /new triggers a remount and new loop
+    // creation BEFORE the first mount's bridge finishes.  The new prefix is
+    // snapshotted from tools.specs() when the registry is still empty.  Then
+    // the old bridge completes (sets records + registers in ToolRegistry),
+    // and the new mount's addSpec returns early via records.has(raw).
+    // Without the fix, the new prefix never receives the MCP tools.
+    mocks.readConfigMock.mockReturnValue({ mcpDisabled: [] });
+    mocks.initializeMock.mockImplementation(async () => undefined);
+
+    const [
+      { createMcpRuntime },
+      { ToolRegistry },
+      { ImmutablePrefix },
+      { CacheFirstLoop },
+      { DeepSeekClient },
+    ] = await Promise.all([
+      import("../src/cli/commands/mcp-runtime.js"),
+      import("../src/tools.js"),
+      import("../src/memory/runtime.js"),
+      import("../src/loop.js"),
+      import("../src/client.js"),
+    ]);
+
+    const tools = new ToolRegistry();
+    const runtime = createMcpRuntime({
+      getTools: () => tools,
+      getMcpPrefix: () => undefined,
+      getRequestedCount: () => 1,
+      progressSink: { current: null },
+    });
+
+    const spec = "fs=npx -y @scope/fs /tmp";
+
+    // Race window: new loop created BEFORE first addSpec completes.
+    // Step 1: Start the first addSpec but don't await it yet.
+    const firstLoop = new CacheFirstLoop({
+      client: new DeepSeekClient({ apiKey: "sk-test" }),
+      prefix: new ImmutablePrefix({ system: "test", toolSpecs: tools.specs() }),
+      tools,
+      model: "deepseek-chat",
+    });
+    const firstAddSpecPromise = runtime.addSpec(spec, firstLoop);
+
+    // Step 2: While the first addSpec is in-flight, create a new loop
+    // (simulates /new remount). At this point tools.specs() is still empty
+    // because bridgeMcpTools hasn't run yet.
+    const secondLoop = new CacheFirstLoop({
+      client: new DeepSeekClient({ apiKey: "sk-test" }),
+      prefix: new ImmutablePrefix({ system: "test", toolSpecs: tools.specs() }),
+      tools,
+      model: "deepseek-chat",
+    });
+
+    // Step 3: Await the first addSpec — it registers tools in the registry
+    // and sets records.has(raw) to true.
+    const firstResult = await firstAddSpecPromise;
+    expect(firstResult.ok).toBe(true);
+    expect(tools.has("mcp_fs_read")).toBe(true);
+
+    // Step 4: Now call addSpec with the second loop. records.has(raw) is
+    // true, so it takes the early-return path. The fix ensures tools are
+    // added to the second loop's prefix even in this case.
+    const secondResult = await runtime.addSpec(spec, secondLoop);
+    expect(secondResult.ok).toBe(true);
+
+    const names = secondLoop.prefix.toolSpecs.map((s) => s.function.name);
+    expect(names).toContain("mcp_fs_read");
+    expect(names).toContain("mcp_fs_write");
+  });
 });

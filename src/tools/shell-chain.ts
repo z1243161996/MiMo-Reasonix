@@ -123,12 +123,33 @@ function parseSegment(segStr: string): ChainSegment {
       } else if (quote === '"' && isDqEscape(ch, segStr[i + 1])) {
         cur += segStr[++i] ?? "";
         curHasContent = true;
+      } else if (quote !== "'" && ch === "$" && segStr[i + 1] === "(") {
+        // Reject $(…) command substitution inside double quotes.
+        throw new UnsupportedSyntaxError(
+          '"$(…)" command substitution is not supported — pass the inner command as a separate run_command call',
+        );
+      } else if (quote !== "'" && ch === "`") {
+        // Reject backtick substitution inside double quotes.
+        throw new UnsupportedSyntaxError(
+          'backtick "`" command substitution is not supported — pass the inner command as a separate run_command call',
+        );
       } else {
         cur += ch;
         curHasContent = true;
       }
       i++;
       continue;
+    }
+    // Outside any quotes — reject shell-expansion syntax.
+    if (ch === "$" && segStr[i + 1] === "(") {
+      throw new UnsupportedSyntaxError(
+        '"$(…)" command substitution is not supported — pass the inner command as a separate run_command call',
+      );
+    }
+    if (ch === "`") {
+      throw new UnsupportedSyntaxError(
+        'backtick "`" command substitution is not supported — pass the inner command as a separate run_command call',
+      );
     }
     if (ch === '"' || ch === "'") {
       quote = ch;

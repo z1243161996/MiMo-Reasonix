@@ -74,7 +74,7 @@ export function isDqEscape(prev: string, next: string | undefined): boolean {
   return prev === "\\" && (next === '"' || next === "\\");
 }
 
-/** No env / glob / backtick / `$(…)` expansion — prevents bypass of allowlist via concatenation. */
+/** No env / glob / backtick / `$(…)` expansion — prevents bypass of allowlist via concatenation. Rejects `$(…)` and backtick substitution outside single quotes (issue #2039). */
 export function tokenizeCommand(cmd: string): string[] {
   const out: string[] = [];
   let cur = "";
@@ -86,10 +86,32 @@ export function tokenizeCommand(cmd: string): string[] {
         quote = null;
       } else if (quote === '"' && isDqEscape(ch, cmd[i + 1])) {
         cur += cmd[++i];
+      } else if (quote !== "'" && ch === "$" && cmd[i + 1] === "(") {
+        // Reject $(…) command substitution inside double quotes — shells
+        // expand it there, and the tool description promises rejection.
+        throw new Error(
+          'run_command: "$(…)" command substitution is not supported — pass the inner command as a separate run_command call',
+        );
+      } else if (quote !== "'" && ch === "`") {
+        // Reject backtick substitution inside double quotes (same rationale).
+        throw new Error(
+          'run_command: backtick "`" command substitution is not supported — pass the inner command as a separate run_command call',
+        );
       } else {
         cur += ch;
       }
       continue;
+    }
+    // Outside any quotes — reject shell-expansion syntax.
+    if (ch === "$" && cmd[i + 1] === "(") {
+      throw new Error(
+        'run_command: "$(…)" command substitution is not supported — pass the inner command as a separate run_command call',
+      );
+    }
+    if (ch === "`") {
+      throw new Error(
+        'run_command: backtick "`" command substitution is not supported — pass the inner command as a separate run_command call',
+      );
     }
     if (ch === '"' || ch === "'") {
       quote = ch;
