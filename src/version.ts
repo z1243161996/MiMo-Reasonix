@@ -6,7 +6,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 /** npm registry endpoint for the `latest` dist-tag of this package. */
-const REGISTRY_URL = "https://registry.npmjs.org/mimo-reasonix/latest";
+const REGISTRY_URL = "https://registry.npmjs.org/mimo-reasonix-dev/latest";
 
 /** TTL for the on-disk cache entry. 24h keeps noise low; users who
  * want a fresh check can run `reasonix update` which passes
@@ -24,7 +24,10 @@ function readPackageVersion(): string {
       const p = join(dir, "package.json");
       if (existsSync(p)) {
         const pkg = JSON.parse(readFileSync(p, "utf8"));
-        if (pkg?.name === "mimo-reasonix" && typeof pkg.version === "string") {
+        if (
+          (pkg?.name === "mimo-reasonix" || pkg?.name === "mimo-reasonix-dev") &&
+          typeof pkg.version === "string"
+        ) {
           return pkg.version;
         }
       }
@@ -150,7 +153,7 @@ export function detectInstallSource(bin?: string): InstallSource {
   if (/\/\.bun\//.test(norm) || /\/bun\/install\//.test(norm)) return "bun";
   if (/\/pnpm\/global\//.test(norm) || /\/pnpm\/[^/]+\/node_modules\//.test(norm)) return "pnpm";
   if (/\/yarn\/global\//.test(norm) || /\/\.yarn\/global\//.test(norm)) return "yarn";
-  if (/\/node_modules\/mimo-reasonix(\b|\/)/.test(norm)) return "npm";
+  if (/\/node_modules\/mimo-reasonix(-dev)?(\b|\/)/.test(norm)) return "npm";
   return "unknown";
 }
 
@@ -164,9 +167,9 @@ export function detectNpmInstallPrefix(bin?: string): string | null {
   const raw = bin ?? process.argv[1] ?? "";
   if (!raw) return null;
   const norm = raw.replace(/\\/g, "/");
-  const posix = norm.match(/^(.+?)\/lib\/node_modules\/mimo-reasonix(?:\/|$)/i);
+  const posix = norm.match(/^(.+?)\/lib\/node_modules\/mimo-reasonix(?:-dev)?(?:\/|$)/i);
   if (posix) return posix[1] ?? null;
-  const win = norm.match(/^(.+?)\/node_modules\/mimo-reasonix(?:\/|$)/i);
+  const win = norm.match(/^(.+?)\/node_modules\/mimo-reasonix(?:-dev)?(?:\/|$)/i);
   if (win) return win[1] ?? null;
   return null;
 }
