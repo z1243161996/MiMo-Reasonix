@@ -66,15 +66,15 @@ type Summarizer interface {
 // Folder manages history folding: splitting messages into head/tail, calling
 // the LLM to summarize the head, and preserving pinned constraints.
 type Folder struct {
-	counter        *TokenCounter
-	snipRatio      float64
-	compactRatio   float64
-	forceRatio     float64
-	compactTarget  float64
-	tailTokens     int
-	recentKeep     int
-	summarizer     Summarizer
-	archiveDir     string
+	counter       *TokenCounter
+	snipRatio     float64
+	compactRatio  float64
+	forceRatio    float64
+	compactTarget float64
+	tailTokens    int
+	recentKeep    int
+	summarizer    Summarizer
+	archiveDir    string
 }
 
 // FolderConfig holds configuration for the history folder.

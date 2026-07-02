@@ -240,10 +240,12 @@ type mockTool struct {
 	name string
 }
 
-func (t *mockTool) Name() string             { return t.name }
-func (t *mockTool) Description() string      { return "mock tool for benchmarks" }
-func (t *mockTool) Schema() json.RawMessage  { return json.RawMessage(`{"type":"object","properties":{"input":{"type":"string"}}}`) }
-func (t *mockTool) ReadOnly() bool           { return true }
+func (t *mockTool) Name() string        { return t.name }
+func (t *mockTool) Description() string { return "mock tool for benchmarks" }
+func (t *mockTool) Schema() json.RawMessage {
+	return json.RawMessage(`{"type":"object","properties":{"input":{"type":"string"}}}`)
+}
+func (t *mockTool) ReadOnly() bool { return true }
 func (t *mockTool) Execute(_ context.Context, _ json.RawMessage) (string, error) {
 	return "ok", nil
 }
@@ -251,10 +253,10 @@ func (t *mockTool) Execute(_ context.Context, _ json.RawMessage) (string, error)
 // noopTool is a zero-overhead tool for benchmarking Execute dispatch.
 type noopTool struct{}
 
-func (t *noopTool) Name() string             { return "noop" }
-func (t *noopTool) Description() string      { return "no-op" }
-func (t *noopTool) Schema() json.RawMessage  { return json.RawMessage(`{"type":"object"}`) }
-func (t *noopTool) ReadOnly() bool           { return true }
+func (t *noopTool) Name() string            { return "noop" }
+func (t *noopTool) Description() string     { return "no-op" }
+func (t *noopTool) Schema() json.RawMessage { return json.RawMessage(`{"type":"object"}`) }
+func (t *noopTool) ReadOnly() bool          { return true }
 func (t *noopTool) Execute(_ context.Context, _ json.RawMessage) (string, error) {
 	return "", nil
 }

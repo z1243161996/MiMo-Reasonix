@@ -289,13 +289,13 @@ func TestIsTruncatedJSON(t *testing.T) {
 		input string
 		want  bool
 	}{
-		{`{"key": "value"}`, false},     // valid JSON
-		{`{"key": "valu`, true},         // truncated string
-		{`{"a": [1, 2`, true},           // truncated array
-		{`{`, true},                     // just opening brace
-		{`not json at all`, false},      // not JSON-like
-		{``, false},                     // empty
-		{`"hello`, true},                // truncated string value
+		{`{"key": "value"}`, false}, // valid JSON
+		{`{"key": "valu`, true},     // truncated string
+		{`{"a": [1, 2`, true},       // truncated array
+		{`{`, true},                 // just opening brace
+		{`not json at all`, false},  // not JSON-like
+		{``, false},                 // empty
+		{`"hello`, true},            // truncated string value
 	}
 	for _, tt := range tests {
 		got := IsTruncatedJSON(tt.input)
@@ -541,8 +541,8 @@ func TestRepeatSuccessTracker_Count(t *testing.T) {
 
 func TestNormalizeJSON(t *testing.T) {
 	tests := []struct {
-		input   string
-		wantOK  bool
+		input  string
+		wantOK bool
 	}{
 		{`{"b": 1, "a": 2}`, true},
 		{`[3, 1, 2]`, true},

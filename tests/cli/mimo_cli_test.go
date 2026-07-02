@@ -81,21 +81,21 @@ func TestSubcommands(t *testing.T) {
 	// Expected subcommands (from Reasonix upstream + MiMo additions)
 	expectedSubcommands := []string{
 		// Core subcommands
-		"chat",    // Interactive chat TUI
-		"run",     // Non-interactive execution
-		"setup",   // Initial configuration
-		"doctor",  // Health check
-		"config",  // Configuration management
+		"chat",   // Interactive chat TUI
+		"run",    // Non-interactive execution
+		"setup",  // Initial configuration
+		"doctor", // Health check
+		"config", // Configuration management
 		// Plugin/MCP subcommands
-		"mcp",     // MCP server management
-		"plugin",  // Plugin management
+		"mcp",    // MCP server management
+		"plugin", // Plugin management
 		// Session management
-		"resume",  // Resume a previous session
+		"resume", // Resume a previous session
 		// Memory/Context
-		"memory",  // Memory management
+		"memory", // Memory management
 		// Model management
-		"model",   // Model switching
-		"effort",  // Reasoning effort control
+		"model",  // Model switching
+		"effort", // Reasoning effort control
 		// Utility
 		"upgrade", // Self-upgrade
 	}

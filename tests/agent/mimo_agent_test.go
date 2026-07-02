@@ -154,7 +154,7 @@ func TestMiMoToolCallFlow(t *testing.T) {
 	t.Run("tool call message round trip", func(t *testing.T) {
 		// Simulate an assistant message with tool calls
 		assistantMsg := provider.Message{
-			Role: provider.RoleAssistant,
+			Role:    provider.RoleAssistant,
 			Content: "",
 			ToolCalls: []provider.ToolCall{
 				{

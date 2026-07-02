@@ -133,11 +133,11 @@ func BenchmarkPricingCalculation(b *testing.B) {
 		{
 			name: "large_turn_with_cache",
 			usage: provider.Usage{
-				PromptTokens:    100000,
+				PromptTokens:     100000,
 				CompletionTokens: 5000,
-				TotalTokens:     105000,
-				CacheHitTokens:  80000,
-				CacheMissTokens: 20000,
+				TotalTokens:      105000,
+				CacheHitTokens:   80000,
+				CacheMissTokens:  20000,
 			},
 		},
 		{
@@ -152,7 +152,7 @@ func BenchmarkPricingCalculation(b *testing.B) {
 			},
 		},
 		{
-			name: "zero_usage",
+			name:  "zero_usage",
 			usage: provider.Usage{},
 		},
 	}
@@ -391,10 +391,10 @@ func makeTruncatedArgMessages(n int) []provider.Message {
 			},
 		})
 		msgs = append(msgs, provider.Message{
-			Role:         provider.RoleTool,
-			Content:      "output",
-			ToolCallID:   callID,
-			Name:         "bash",
+			Role:       provider.RoleTool,
+			Content:    "output",
+			ToolCallID: callID,
+			Name:       "bash",
 		})
 	}
 	return msgs

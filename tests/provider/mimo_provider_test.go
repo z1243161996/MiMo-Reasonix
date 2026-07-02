@@ -75,15 +75,15 @@ func TestMiMoHostDetection(t *testing.T) {
 func TestMiMoModelList(t *testing.T) {
 	// Expected MiMo models and their properties:
 	expectedModels := map[string]struct {
-		Thinking  bool // supports reasoning_content / thinking
-		Vision    bool // supports image input
-		Context   int  // context window size
+		Thinking bool // supports reasoning_content / thinking
+		Vision   bool // supports image input
+		Context  int  // context window size
 	}{
-		"mimo-v2.5":      {Thinking: true, Vision: false, Context: 128_000},
-		"mimo-v2.5-pro":  {Thinking: true, Vision: true, Context: 128_000},
-		"mimo-v2-pro":    {Thinking: true, Vision: false, Context: 128_000},
-		"mimo-v2-flash":  {Thinking: false, Vision: false, Context: 128_000},
-		"mimo-v2-omni":   {Thinking: true, Vision: true, Context: 128_000},
+		"mimo-v2.5":     {Thinking: true, Vision: false, Context: 128_000},
+		"mimo-v2.5-pro": {Thinking: true, Vision: true, Context: 128_000},
+		"mimo-v2-pro":   {Thinking: true, Vision: false, Context: 128_000},
+		"mimo-v2-flash": {Thinking: false, Vision: false, Context: 128_000},
+		"mimo-v2-omni":  {Thinking: true, Vision: true, Context: 128_000},
 	}
 
 	// TODO: After implementation, verify that each model is correctly identified.
@@ -114,11 +114,11 @@ func TestMiMoModelList(t *testing.T) {
 func TestMiMoPricing(t *testing.T) {
 	// Expected pricing for MiMo models
 	expectedPricing := map[string]*provider.Pricing{
-		"mimo-v2.5":      {CacheHit: 0.7, Input: 7.0, Output: 14.0, Currency: "¥"},
-		"mimo-v2.5-pro":  {CacheHit: 0.7, Input: 7.0, Output: 14.0, Currency: "¥"},
-		"mimo-v2-pro":    {CacheHit: 0.7, Input: 7.0, Output: 14.0, Currency: "¥"},
-		"mimo-v2-flash":  {CacheHit: 0.7, Input: 7.0, Output: 14.0, Currency: "¥"},
-		"mimo-v2-omni":   {CacheHit: 0.7, Input: 7.0, Output: 14.0, Currency: "¥"},
+		"mimo-v2.5":     {CacheHit: 0.7, Input: 7.0, Output: 14.0, Currency: "¥"},
+		"mimo-v2.5-pro": {CacheHit: 0.7, Input: 7.0, Output: 14.0, Currency: "¥"},
+		"mimo-v2-pro":   {CacheHit: 0.7, Input: 7.0, Output: 14.0, Currency: "¥"},
+		"mimo-v2-flash": {CacheHit: 0.7, Input: 7.0, Output: 14.0, Currency: "¥"},
+		"mimo-v2-omni":  {CacheHit: 0.7, Input: 7.0, Output: 14.0, Currency: "¥"},
 	}
 
 	for model, expected := range expectedPricing {
@@ -213,9 +213,9 @@ func TestMiMoStreaming(t *testing.T) {
 		}`
 
 		var usage struct {
-			PromptTokens     int `json:"prompt_tokens"`
-			CompletionTokens int `json:"completion_tokens"`
-			TotalTokens      int `json:"total_tokens"`
+			PromptTokens        int `json:"prompt_tokens"`
+			CompletionTokens    int `json:"completion_tokens"`
+			TotalTokens         int `json:"total_tokens"`
 			PromptTokensDetails *struct {
 				CachedTokens int `json:"cached_tokens"`
 			} `json:"prompt_tokens_details"`
@@ -557,9 +557,9 @@ func TestMiMoUsageNormalization(t *testing.T) {
 	}`
 
 	type wireUsage struct {
-		PromptTokens     int `json:"prompt_tokens"`
-		CompletionTokens int `json:"completion_tokens"`
-		TotalTokens      int `json:"total_tokens"`
+		PromptTokens        int `json:"prompt_tokens"`
+		CompletionTokens    int `json:"completion_tokens"`
+		TotalTokens         int `json:"total_tokens"`
 		PromptTokensDetails *struct {
 			CachedTokens int `json:"cached_tokens"`
 		} `json:"prompt_tokens_details"`

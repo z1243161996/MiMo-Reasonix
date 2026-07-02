@@ -3,9 +3,9 @@ package agent
 import (
 	"context"
 	"errors"
+	"mimo-reasonix/internal/event"
 	"os"
 	"path/filepath"
-	"mimo-reasonix/internal/event"
 	"strings"
 	"testing"
 

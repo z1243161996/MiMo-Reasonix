@@ -83,14 +83,14 @@ context_window = 128000
 		var config struct {
 			DefaultModel string `toml:"default_model"`
 			Providers    []struct {
-				Name           string            `toml:"name"`
-				Kind           string            `toml:"kind"`
-				BaseURL        string            `toml:"base_url"`
-				Models         []string          `toml:"models"`
-				Default        string            `toml:"default"`
-				APIKeyEnv      string            `toml:"api_key_env"`
-				ContextWindow  int               `toml:"context_window"`
-				Prices         map[string]struct {
+				Name          string   `toml:"name"`
+				Kind          string   `toml:"kind"`
+				BaseURL       string   `toml:"base_url"`
+				Models        []string `toml:"models"`
+				Default       string   `toml:"default"`
+				APIKeyEnv     string   `toml:"api_key_env"`
+				ContextWindow int      `toml:"context_window"`
+				Prices        map[string]struct {
 					CacheHit float64 `toml:"cache_hit"`
 					Input    float64 `toml:"input"`
 					Output   float64 `toml:"output"`
