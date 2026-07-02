@@ -1,0 +1,167 @@
+name: "mimo-reasonix 项目诊断与验收流程生成"
+description: "检查 mimo-reasonix 项目状态，分析代码质量与测试覆盖，生成完整的开发测试验收流程文档"
+
+agents_dir: "agency-agents-zh"
+
+llm:
+  provider: claude-code
+  
+  max_tokens: 4096
+  timeout: 300000
+  retry: 2
+
+concurrency: 3
+
+steps:
+  - id: explore_project
+    role: "engineering/engineering-codebase-onboarding-engineer"
+    name: "代码库探查员"
+    emoji: "🧭"
+    task: |
+      你的任务是全面探查 /home/zhang/test/mimo-reasonix 项目，生成一份详尽的项目状态报告。
+
+      请执行以下操作：
+      1. 读取项目根目录的文件结构（tree 或 find），了解项目整体布局
+      2. 阅读 README.md、package.json、pyproject.toml、Cargo.toml、go.mod 等任意存在的项目描述文件，确定技术栈、依赖、构建方式
+      3. 查看 git log（最近 20 条提交），了解开发活跃度和最近变更
+      4. 查看 git status，确认是否有未提交的变更
+      5. 查看是否有 CI/CD 配置（.github/workflows、.gitlab-ci.yml、Jenkinsfile 等）
+      6. 检查是否有 Dockerfile、docker-compose.yml 等容器化配置
+      7. 识别项目的主要模块/目录及其职责
+      8. 识别项目的入口文件和核心配置文件
+      9. 检查是否有现有的测试目录和测试框架配置
+
+      输出格式要求：
+      用 Markdown 格式输出，包含以下章节：
+      - 项目概览（技术栈、语言、框架、构建工具）
+      - 目录结构与模块划分（关键目录的职责说明）
+      - Git 状态（分支、最近提交、未提交变更）
+      - CI/CD 配置状态
+      - 依赖管理状态
+      - 测试基础设施现状
+      - 项目健康度初步评估（列出发现的问题和风险点）
+    output: project_overview
+    depends_on: []
+
+  - id: code_quality_review
+    role: "engineering/engineering-code-reviewer"
+    name: "代码质量审查员"
+    emoji: "👀"
+    task: |
+      基于代码库探查员的项目报告，对 /home/zhang/test/mimo-reasonix 项目进行代码质量深度审查。
+
+      项目信息概要：
+      {{project_overview}}
+
+      请执行以下操作：
+      1. 根据项目报告中识别的技术栈和核心模块，阅读 3-5 个核心源文件的代码
+      2. 评估代码的架构设计合理性（分层是否清晰、耦合度、单一职责原则）
+      3. 检查是否存在明显的代码质量问题（硬编码、魔法数字、过长函数、重复代码）
+      4. 检查错误处理机制是否完善
+      5. 检查是否有类型注解/接口定义等类型安全措施
+      6. 检查配置管理是否规范（环境变量、配置文件管理）
+      7. 检查是否有代码规范工具配置（ESLint、Prettier、Ruff、Clippy 等）
+      8. 评估安全相关问题（敏感信息泄露、SQL注入、依赖漏洞等风险）
+
+      输出格式要求：
+      用 Markdown 格式输出，包含以下章节：
+      - 架构评估（分层合理性、模块化程度、可维护性评分 1-10）
+      - 代码质量发现（按严重程度：🔴 严重 / 🟡 中等 / 🟢 建议 分类列出）
+      - 安全风险评估（列出发现的安全隐患）
+      - 代码规范现状（是否有 linter/formatter 配置）
+      - 测试代码质量（如果有测试文件，评估测试质量和覆盖率）
+      - 改进建议优先级排序（Top 5 最需要立即改进的点）
+    output: code_quality_report
+    depends_on: [explore_project]
+
+  - id: test_coverage_analysis
+    role: "testing/testing-test-results-analyzer"
+    name: "测试分析专家"
+    emoji: "📈"
+    task: |
+      基于代码库探查员的项目报告，对 /home/zhang/test/mimo-reasonix 项目的测试体系进行全面分析。
+
+      项目信息概要：
+      {{project_overview}}
+
+      请执行以下操作：
+      1. 尝试运行项目中现有的测试命令（根据项目类型尝试：npm test、pytest、cargo test、go test 等），记录执行结果
+      2. 如果测试命令执行失败，记录错误信息并分析原因
+      3. 检查测试目录结构，分析测试分层（单元测试、集成测试、端到端测试）
+      4. 检查测试配置文件（jest.config、pytest.ini、conftest 等）
+      5. 分析测试覆盖情况（是否有覆盖率工具配置）
+      6. 检查是否有 mock/fixture 基础设施
+      7. 评估测试的可维护性和可重复性
+      8. 检查是否有性能测试、压力测试相关配置
+
+      输出格式要求：
+      用 Markdown 格式输出，包含以下章节：
+      - 测试执行结果摘要（成功/失败/跳过/错误的数量和详情）
+      - 测试架构分析（测试分层、组织方式、覆盖维度）
+      - 测试基础设施评估（测试框架、配置、辅助工具）
+      - 测试覆盖率现状（已知的覆盖率数据或评估）
+      - 测试质量评估（测试的有效性、边界覆盖、异常处理覆盖）
+      - 测试短板与风险（哪些关键模块缺乏测试、哪些场景未覆盖）
+      - 测试改进建议（按优先级排列的具体改进措施）
+    output: test_analysis_report
+    depends_on: [explore_project]
+
+  - id: workflow_generation
+    role: "project-management/project-management-project-shepherd"
+    name: "项目管理专家"
+    emoji: "🐑"
+    task: |
+      你是一个资深项目管理专家。基于前面的项目探查报告、代码质量报告和测试分析报告，为 /home/zhang/test/mimo-reasonix 项目生成一份完整、可执行的「开发-测试-验收」全流程文档。
+
+      输入材料：
+      === 项目概览报告 ===
+      {{project_overview}}
+
+      === 代码质量报告 ===
+      {{code_quality_report}}
+
+      === 测试分析报告 ===
+      {{test_analysis_report}}
+
+      请生成一份完整的开发测试验收流程文档，必须包含以下章节：
+
+      1. **项目现状总结**：用一段话概括项目当前状态、技术栈、健康度
+
+      2. **开发规范流程**：
+         - 分支策略（基于项目实际情况建议 Git Flow 或 Trunk-based）
+         - 代码提交规范（Conventional Commits）
+         - Code Review 流程与检查清单
+         - 代码质量门禁（lint、format、type check 的具体工具和命令）
+
+      3. **测试流程**：
+         - 测试金字塔策略（单元测试 → 集成测试 → E2E 测试的目标比例）
+         - 各层级测试的具体要求和工具选型
+         - 新功能开发的测试覆盖要求
+         - 回归测试策略
+         - 测试数据管理规范
+
+      4. **CI/CD 流程**：
+         - 持续集成流水线设计（触发条件、各阶段任务、质量门禁）
+         - 持续部署流程（环境管理、部署策略、回滚机制）
+         - 具体的流水线步骤（用 YAML 伪代码表示）
+
+      5. **验收标准**：
+         - 功能验收标准（需求覆盖、功能完整性）
+         - 质量验收标准（代码质量指标、测试覆盖率阈值、性能基线）
+         - 安全验收标准（安全扫描、漏洞修复要求）
+         - 文档验收标准（API 文档、用户文档）
+         - 上线检查清单（Checklist 格式，每项可勾选）
+
+      6. **风险与改进路线图**：
+         - 基于报告发现的问题，按优先级排列的改进计划
+         - 短期（1周）、中期（1月）、长期（1季度）的改进目标
+
+      格式要求：
+      - 使用 Markdown 格式
+      - 所有流程描述要具体到工具名、命令、配置示例，不要只说抽象概念
+      - 文档要针对这个具体项目的实际情况量身定制，不要泛泛而谈
+      - 最终输出为一份完整的可直接使用的流程文档
+
+      ⚠️ 只输出最终成品本身：不要开场白、不要复盘或说明、不要向用户提问、不要建议任何命令或后续动作。
+    output: final_workflow_document
+    depends_on: [code_quality_review, test_coverage_analysis]

@@ -1,0 +1,29 @@
+name: "Mimo-Reasonix 项目开发测试验收流程"
+description: "检查 /home/zhang/test/mimo-reasonix 项目状态，执行完整的开发测试验收流程并生成验收报告"
+
+agents_dir: "agency-agents-zh"
+
+llm:
+  provider: claude-code
+  max_tokens: 4096
+  timeout: 300000
+  retry: 2
+
+concurrency: 3
+
+steps:
+  - id: project_explorer
+    role: "engineering/engineering-codebase-onboarding-engineer"
+    name: "项目侦察兵"
+    emoji: "🔍"
+    task: |
+      你的任务是对 /home/zhang/test/mimo-reasonix 项目进行全面侦察，输出项目全景报告。
+
+      具体要求：
+      1. 阅读项目根目录的 README.md、package.json、pyproject.toml、Cargo.toml 或其他项目配置文件，确定项目类型、技术栈和依赖关系
+      2. 扫描项目目录结构，列出主要模块和目录层次（用 tree 命令或手动遍历）
+      3. 检查是否存在 CI/CD 配置（如 .github/workflows、Makefile、Dockerfile 等）
+      4. 读取关键入口文件，理解项目的核心功能和架构
+      5. 检查 package.json / requirements.txt 等依赖文件中的 scripts 或 entry points
+
+      输出格式要求：

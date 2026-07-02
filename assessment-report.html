@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MiMo-Reasonix 项目评估报告</title>
+<style>
+  :root {
+    --bg: #fafaf9; --paper: #fff; --ink: #1a1b1e; --body: #3c3e44;
+    --muted: #6b6e77; --faint: #9b9ea5; --line: #e5e3dc;
+    --accent: #2f5bd6; --green: #1a7f3f; --amber: #b85c00; --red: #c62828;
+    --green-bg: #edf7f0; --amber-bg: #fff5e8; --red-bg: #fef0f0;
+    --maxw: 1060px; --radius: 8px;
+    --mono: ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+    --sans: "Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--body);font-family:var(--sans);font-size:15px;line-height:1.65}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+  header{border-bottom:1px solid var(--line);background:var(--paper);padding:40px 0 32px}
+  header h1{font-size:26px;font-weight:700;color:var(--ink);margin:0 0 6px;letter-spacing:-0.3px}
+  header .meta{font-size:13px;color:var(--muted)}
+
+  main{padding:36px 0 60px}
+  section{margin-bottom:36px}
+
+  h2{font-size:18px;font-weight:700;color:var(--ink);margin:0 0 14px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+  h3{font-size:15px;font-weight:600;color:var(--ink);margin:16px 0 8px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:12px;margin-bottom:16px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+  .card .num{font-size:32px;font-weight:700;color:var(--ink);line-height:1.1}
+  .card .label{font-size:13px;color:var(--muted);margin-top:3px}
+
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
+  th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line)}
+  th{font-weight:600;color:var(--ink);font-size:13px;text-transform:uppercase;letter-spacing:0.4px}
+  tr:last-child td{border-bottom:none}
+
+  .tag{display:inline-block;padding:1px 8px;border-radius:4px;font-size:12px;font-weight:600;letter-spacing:0.2px}
+  .tag-ok{background:var(--green-bg);color:var(--green)}
+  .tag-warn{background:var(--amber-bg);color:var(--amber)}
+  .tag-err{background:var(--red-bg);color:var(--red)}
+
+  .issue{margin-bottom:10px;padding:10px 14px;border-left:3px solid;border-radius:0 var(--radius) var(--radius) 0}
+  .issue.critical{border-color:var(--red);background:var(--red-bg)}
+  .issue.warning{border-color:var(--amber);background:var(--amber-bg)}
+  .issue.info{border-color:var(--accent);background:#eef2fc}
+  .issue-title{font-weight:600;font-size:13px;color:var(--ink);margin-bottom:2px}
+  .issue-body{font-size:13px;color:var(--body)}
+
+  .bar-wrap{background:var(--line);border-radius:4px;height:8px;margin:4px 0 8px;overflow:hidden}
+  .bar-fill{height:100%;border-radius:4px}
+  .bar-ok{background:var(--green)}
+  .bar-warn{background:var(--amber)}
+  .bar-err{background:var(--red)}
+
+  code{font-family:var(--mono);font-size:13px;background:#f0efec;padding:1px 5px;border-radius:3px}
+
+  .summary-box{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:20px 24px;margin-bottom:20px}
+  .summary-box p{margin:0 0 8px;font-size:14px}
+  .summary-box p:last-child{margin-bottom:0}
+
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:720px){.two-col{grid-template-columns:1fr}}
+
+  footer{border-top:1px solid var(--line);padding:24px 0;font-size:13px;color:var(--faint)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>MiMo-Reasonix 项目评估报告</h1>
+    <div class="meta">评估日期: 2026-07-01 · 版本: f09b8c9 (Initial commit) · 仓库: mimo-reasonix</div>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+<!-- OVERVIEW -->
+<section>
+  <h2>概览</h2>
+  <div class="summary-box">
+    <p>MiMo-Reasonix 是基于 <strong>DeepSeek-Reasonix Go 架构</strong>的品牌化重写，将小米 MiMo 模型（mimo-v2.5 系列）适配为默认后端，提供 CLI 编码 Agent 及 HTTP/SSE 服务。</p>
+    <p>项目继承原版 51 个内部包、约 607 个 Go 源文件（~177K 行），并新增 MiMo 专属的 Provider 层、配置适配、CLI 品牌化及 4 个自定义测试文件。二进制已成功静态编译（23MB），可独立运行。</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="num">177K</div>
+      <div class="label">Go 代码行数</div>
+    </div>
+    <div class="card">
+      <div class="num">607</div>
+      <div class="label">Go 源文件</div>
+    </div>
+    <div class="card">
+      <div class="num">51</div>
+      <div class="label">内部包 (packages)</div>
+    </div>
+    <div class="card">
+      <div class="num">23MB</div>
+      <div class="label">二进制体积</div>
+    </div>
+    <div class="card">
+      <div class="num">4</div>
+      <div class="label">自定义测试文件</div>
+    </div>
+    <div class="card">
+      <div class="num">1,366</div>
+      <div class="label">测试代码行数</div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY METRICS -->
+<section>
+  <h2>关键指标</h2>
+  <table>
+    <tr><th>维度</th><th>状态</th><th>说明</th></tr>
+    <tr>
+      <td>构建</td>
+      <td><span class="tag tag-ok">通过</span></td>
+      <td>二进制 <code>bin/mimo-reasonix</code> 静态编译成功（CGO_ENABLED=0, linux/amd64）</td>
+    </tr>
+    <tr>
+      <td>自定义测试 (tests/)</td>
+      <td><span class="tag tag-warn">未验证</span></td>
+      <td>4 个测试文件存在但含大量 <code>t.Skip</code> 占位，实际 MiMo 行为未被执行验证</td>
+    </tr>
+    <tr>
+      <td>内部测试 (internal/)</td>
+      <td><span class="tag tag-warn">51/66</span></td>
+      <td>15 个包测试失败，主要因缺少 API 密钥（集成测试）或路径品牌化未完全更新</td>
+    </tr>
+    <tr>
+      <td>MiMo Provider 适配</td>
+      <td><span class="tag tag-ok">完成</span></td>
+      <td>IsMiMo() 主机检测、models.go 模型列表、reasoning_effort / reasoning_content 均已实现</td>
+    </tr>
+    <tr>
+      <td>配置品牌化</td>
+      <td><span class="tag tag-ok">完成</span></td>
+      <td>默认模型 mimo-v2.5，配置文件名 mimo-reasonix.toml，路径 ~/.mimo-reasonix/</td>
+    </tr>
+    <tr>
+      <td>CLI 品牌化</td>
+      <td><span class="tag tag-ok">完成</span></td>
+      <td>用户可见字符串已全部更新为 MiMo-Reasonix</td>
+    </tr>
+    <tr>
+      <td>文档站点</td>
+      <td><span class="tag tag-err">未更新</span></td>
+      <td>docs/index.html 仍保留 "Reasonix — DeepSeek-native" 品牌和链接</td>
+    </tr>
+    <tr>
+      <td>版本控制</td>
+      <td><span class="tag tag-warn">待整理</span></td>
+      <td>仅 1 个 commit，大量文件处于 untracked 状态</td>
+    </tr>
+  </table>
+</section>
+
+<!-- CODE STRUCTURE -->
+<section>
+  <h2>代码结构</h2>
+
+  <h3>核心包 TOP 10（按代码行数）</h3>
+  <table>
+    <tr><th>包</th><th>行数</th><th>测试文件数</th><th>职责</th></tr>
+    <tr><td>cli</td><td>28,663</td><td>42</td><td>TUI 交互界面（Bubble Tea）、斜杠命令、主题、粘贴处理</td></tr>
+    <tr><td>agent</td><td>21,923</td><td>49</td><td>Agent 循环、compaction、并行任务、subagent</td></tr>
+    <tr><td>control</td><td>18,633</td><td>27</td><td>传输无关的 Controller，协调 chat/serve/desktop 三端</td></tr>
+    <tr><td>config</td><td>16,187</td><td>20</td><td>TOML 配置加载、凭据管理、路径解析</td></tr>
+    <tr><td>plugin</td><td>6,686</td><td>16</td><td>MCP 插件管理、缓存、延迟加载</td></tr>
+    <tr><td>memorycompiler</td><td>6,247</td><td>4</td><td>Memory v5 执行编译器</td></tr>
+    <tr><td>acp</td><td>5,862</td><td>6</td><td>Agent Communication Protocol 服务</td></tr>
+    <tr><td>boot</td><td>5,454</td><td>5</td><td>启动引导、Token profile、系统提示组装</td></tr>
+    <tr><td>installsource</td><td>4,293</td><td>1</td><td>Skill/MCP 安装源管理</td></tr>
+    <tr><td>bot</td><td>3,522</td><td>5</td><td>多通道 IM Bot 网关（QQ/飞书/微信）</td></tr>
+  </table>
+
+  <h3>Provider 层</h3>
+  <table>
+    <tr><th>子包</th><th>文件数</th><th>说明</th></tr>
+    <tr><td>provider/ (根)</td><td>3</td><td>Provider 接口、注册器、重试逻辑</td></tr>
+    <tr><td>provider/openai</td><td>8</td><td>OpenAI 兼容 Provider，内置 MiMo/DeepSeek/MiniMax 检测与 reasoning 适配</td></tr>
+    <tr><td>provider/anthropic</td><td>4</td><td>Anthropic Messages API 直连（支持 extended thinking）</td></tr>
+    <tr><td>provider/mimo</td><td>1</td><td>MiMo 模型列表与定价定义（models.go）</td></tr>
+  </table>
+
+  <h3>Bot 网关</h3>
+  <table>
+    <tr><th>子包</th><th>说明</th></tr>
+    <tr><td>bot/feishu</td><td>飞书 Bot 适配器 (webhook + websocket)</td></tr>
+    <tr><td>bot/qq</td><td>QQ Bot 适配器</td></tr>
+    <tr><td>bot/weixin</td><td>微信 iLink Bot 适配器</td></tr>
+  </table>
+</section>
+
+<!-- MiMo ADAPTATION -->
+<section>
+  <h2>MiMo 适配评估</h2>
+
+  <h3>已完成</h3>
+  <table>
+    <tr><th>模块</th><th>文件</th><th>内容</th></tr>
+    <tr>
+      <td>主机检测</td>
+      <td><code>internal/provider/openai/host.go</code></td>
+      <td>IsMiMo() 函数：匹配 canonical host + *.xiaomimimo.com 子域，正确拒绝 apex 域</td>
+    </tr>
+    <tr>
+      <td>模型定义</td>
+      <td><code>internal/provider/mimo/models.go</code></td>
+      <td>5 个模型 (v2.5, v2.5-pro, v2-pro, v2-flash, v2-omni) + 默认定价 (cached 0.7, input 7, output 14 CNY/M)</td>
+    </tr>
+    <tr>
+      <td>Reasoning 适配</td>
+      <td><code>internal/provider/openai/openai.go</code></td>
+      <td>reasoning_effort 探测 (low/medium/high)，reasoning_content 响应解析，usage 归一化</td>
+    </tr>
+    <tr>
+      <td>配置默认值</td>
+      <td><code>internal/config/config.go</code></td>
+      <td>default_model="mimo-v2.5"，base_url 指向 token-plan-cn.xiaomimimo.com</td>
+    </tr>
+    <tr>
+      <td>CLI 品牌化</td>
+      <td><code>cmd/reasonix/main.go</code> + internal/cli</td>
+      <td>模块路径 mimo-reasonix，所有用户可见字符串更新</td>
+    </tr>
+    <tr>
+      <td>示例配置</td>
+      <td><code>mimo-reasonix.example.toml</code></td>
+      <td>完整注释的 TOML 配置，含 MiMo 模型定价表和 Chat/IM Bot 配置</td>
+    </tr>
+  </table>
+
+  <h3>待完成</h3>
+  <table>
+    <tr><th>模块</th><th>优先级</th><th>说明</th></tr>
+    <tr>
+      <td>文档站点品牌化</td>
+      <td><span class="tag tag-err">高</span></td>
+      <td>docs/index.html 仍使用 "Reasonix — DeepSeek-native" 品牌、OG 标签和 GitHub 链接指向 esengine/DeepSeek-Reasonix</td>
+    </tr>
+    <tr>
+      <td>自定义测试激活</td>
+      <td><span class="tag tag-err">高</span></td>
+      <td>tests/ 下 4 个文件大量 t.Skip 占位，需实现 IsMiMo() 调用、streaming 解析、tool call 组装测试</td>
+    </tr>
+    <tr>
+      <td>集成测试验证</td>
+      <td><span class="tag tag-err">高</span></td>
+      <td>15 个 internal 包测试因缺少 API 密钥失败，需配置 MIMO_API_KEY 后回归</td>
+    </tr>
+    <tr>
+      <td>Tool Repair Pipeline</td>
+      <td><span class="tag tag-warn">中</span></td>
+      <td>从 TS 原版移植 scavenge/truncation/storm breaker</td>
+    </tr>
+    <tr>
+      <td>Context Manager</td>
+      <td><span class="tag tag-warn">中</span></td>
+      <td>移植 fold 逻辑和 prefix caching 优化</td>
+    </tr>
+    <tr>
+      <td>桌面端适配</td>
+      <td><span class="tag tag-warn">中</span></td>
+      <td>评估 Wails vs Tauri 方案</td>
+    </tr>
+  </table>
+</section>
+
+<!-- ISSUES -->
+<section>
+  <h2>发现的问题</h2>
+
+  <div class="issue critical">
+    <div class="issue-title">CRITICAL · 文档站点未品牌化</div>
+    <div class="issue-body">
+      <code>docs/index.html</code> 的 &lt;title&gt;、OG 标签、品牌名、链接均指向原始 DeepSeek-Reasonix（esengine/DeepSeek-Reasonix），而非 MiMo-Reasonix。对外展示存在品牌错误和链接死链风险。
+    </div>
+  </div>
+
+  <div class="issue critical">
+    <div class="issue-title">CRITICAL · 自定义测试为 TDD 占位</div>
+    <div class="issue-body">
+      <code>tests/provider/mimo_provider_test.go</code> 中 3 处 <code>t.Skip</code>（IsMiMo 检测、streaming 解析、tool call 组装均未验证）。<br>
+      <code>tests/cli/mimo_cli_test.go</code> 中 3 处 <code>t.Skip</code>（二进制名、版本号、help 输出检查因路径问题跳过）。<br>
+      测试文件存在但实际不执行 MiMo 行为验证，形同虚设。
+    </div>
+  </div>
+
+  <div class="issue critical">
+    <div class="issue-title">CRITICAL · go.mod 声明不存在的 Go 版本</div>
+    <div class="issue-body">
+      <code>go.mod</code> 声明 <code>go 1.25.0</code> 和 <code>toolchain go1.26.4</code>，当前 Go 最新稳定版为 1.24。这会导致 <code>go install</code> 和标准 CI 环境编译失败。
+    </div>
+  </div>
+
+  <div class="issue warning">
+    <div class="issue-title">WARNING · Git 历史缺失</div>
+    <div class="issue-body">
+      仅 1 个 "Initial commit"，所有文件均为 untracked 状态。项目缺乏可分步追溯的提交历史，不利于代码审查和问题定位。
+    </div>
+  </div>
+
+  <div class="issue warning">
+    <div class="issue-title">WARNING · 内部测试覆盖不均</div>
+    <div class="issue-body">
+      15 个包（包括 boot、agent 等关键路径）测试失败。部分因缺少 API 密钥，但也可能存在品牌化更新不彻底导致的测试断裂。
+    </div>
+  </div>
+
+  <div class="issue warning">
+    <div class="issue-title">WARNING · 15 个包无测试文件</div>
+    <div class="issue-body">
+      billing、doctor、environment、fileref、outputstyle、retrieval、sysproxy 等包缺少测试覆盖。
+    </div>
+  </div>
+
+  <div class="issue info">
+    <div class="issue-title">INFO · 配置命名不一致</div>
+    <div class="issue-body">
+      README 提到项目本地配置为 <code>./mimo-reasonix.toml</code>，而仓库中仅有 <code>mimo-reasonix.example.toml</code>。用户初次使用时可能对命名产生混淆。
+    </div>
+  </div>
+</section>
+
+<!-- TEST COVERAGE -->
+<section>
+  <h2>测试覆盖详情</h2>
+  <div class="two-col">
+    <div>
+      <h3>自定义测试 (tests/)</h3>
+      <table>
+        <tr><th>文件</th><th>状态</th></tr>
+        <tr><td>tests/provider/mimo_provider_test.go</td><td><span class="tag tag-warn">Skip</span></td></tr>
+        <tr><td>tests/config/mimo_config_test.go</td><td><span class="tag tag-warn">Skip</span></td></tr>
+        <tr><td>tests/cli/mimo_cli_test.go</td><td><span class="tag tag-warn">Skip</span></td></tr>
+        <tr><td>tests/agent/mimo_agent_test.go</td><td><span class="tag tag-warn">Skip</span></td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>内部测试 (internal/)</h3>
+      <table>
+        <tr><th>指标</th><th>值</th></tr>
+        <tr><td>总包数</td><td>51</td></tr>
+        <tr><td>通过</td><td>51</td></tr>
+        <tr><td>失败</td><td>15</td></tr>
+        <tr><td>测试文件总数</td><td>~330</td></tr>
+        <tr><td>无测试文件的包</td><td>15</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- DEPENDENCIES -->
+<section>
+  <h2>关键依赖</h2>
+  <table>
+    <tr><th>依赖</th><th>用途</th></tr>
+    <tr><td>charm.land/bubbletea/v2</td><td>TUI 框架（CLI 交互界面）</td></tr>
+    <tr><td>charm.land/lipgloss/v2</td><td>终端样式渲染</td></tr>
+    <tr><td>github.com/BurntSushi/toml</td><td>TOML 配置解析</td></tr>
+    <tr><td>github.com/alecthomas/chroma/v2</td><td>代码语法高亮</td></tr>
+    <tr><td>github.com/larksuite/oapi-sdk-go/v3</td><td>飞书开放平台 SDK（Bot 适配）</td></tr>
+    <tr><td>github.com/yuin/goldmark</td><td>Markdown 渲染</td></tr>
+    <tr><td>github.com/sabhiram/go-gitignore</td><td>.gitignore 规则解析（文件搜索过滤）</td></tr>
+    <tr><td>github.com/zalando/go-keyring</td><td>凭据安全存储</td></tr>
+    <tr><td>golang.org/x/crypto</td><td>密码哈希（serve auth）</td></tr>
+    <tr><td>go.uber.org/goleak</td><td>Goroutine 泄漏检测（测试）</td></tr>
+  </table>
+</section>
+
+<!-- RECOMMENDATIONS -->
+<section>
+  <h2>建议与后续行动</h2>
+
+  <h3>立即处理</h3>
+  <table>
+    <tr><th>#</th><th>行动</th><th>影响</th></tr>
+    <tr>
+      <td>1</td>
+      <td><strong>修复 go.mod 版本声明</strong>：将 go 1.25.0 改为实际支持的 Go 版本</td>
+      <td>阻塞 CI 编译和用户 go install</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><strong>更新 docs/index.html</strong>：品牌、OG 标签、链接改为 MiMo-Reasonix</td>
+      <td>对外展示品牌错误</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><strong>激活自定义测试</strong>：移除 t.Skip，实现 IsMiMo() 调用、streaming 解析验证</td>
+      <td>MiMo 适配回归无保障</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><strong>配置 MIMO_API_KEY</strong>：运行完整测试套件确认通过率</td>
+      <td>集成测试缺口未知</td>
+    </tr>
+  </table>
+
+  <h3>短期</h3>
+  <table>
+    <tr><th>#</th><th>行动</th></tr>
+    <tr><td>5</td><td>整理 Git 历史：分阶段提交（基础设施 → Provider 适配 → CLI 品牌化 → 测试）</td></tr>
+    <tr><td>6</td><td>MiMo 端到端冒烟测试：使用真实 API Key 验证 reasoning 流程</td></tr>
+    <tr><td>7</td><td>补充 billing、doctor、retrieval 等 15 个包的测试覆盖</td></tr>
+    <tr><td>8</td><td>修正 tests/cli 中因路径假设（Makefile 位置等）导致的 Skip</td></tr>
+  </table>
+
+  <h3>中期</h3>
+  <table>
+    <tr><th>#</th><th>行动</th></tr>
+    <tr><td>9</td><td>移植 Tool Repair Pipeline（scavenge/truncation/storm breaker）</td></tr>
+    <tr><td>10</td><td>移植 Context Manager（fold 逻辑和 prefix caching 优化）</td></tr>
+    <tr><td>11</td><td>搭建 CI/CD（GitHub Actions）</td></tr>
+    <tr><td>12</td><td>评估桌面端方案（Wails vs Tauri）</td></tr>
+  </table>
+</section>
+
+<!-- SCORE -->
+<section>
+  <h2>综合评分</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="label">MiMo 适配完成度</div>
+      <div class="num">85%</div>
+      <div class="bar-wrap"><div class="bar-fill bar-ok" style="width:85%"></div></div>
+      <div class="label" style="font-size:12px;margin-top:4px">Provider/Config/CLI 已完成，文档和测试待补充</div>
+    </div>
+    <div class="card">
+      <div class="label">测试有效性</div>
+      <div class="num">25%</div>
+      <div class="bar-wrap"><div class="bar-fill bar-err" style="width:25%"></div></div>
+      <div class="label" style="font-size:12px;margin-top:4px">自定义测试均为 TDD 占位，未执行实际验证</div>
+    </div>
+    <div class="card">
+      <div class="label">代码质量</div>
+      <div class="num">80%</div>
+      <div class="bar-wrap"><div class="bar-fill bar-ok" style="width:80%"></div></div>
+      <div class="label" style="font-size:12px;margin-top:4px">继承成熟架构，但 go.mod 版本声明有误</div>
+    </div>
+    <div class="card">
+      <div class="label">可交付性</div>
+      <div class="num">60%</div>
+      <div class="bar-wrap"><div class="bar-fill bar-warn" style="width:60%"></div></div>
+      <div class="label" style="font-size:12px;margin-top:4px">可构建但需修复 go.mod，缺少 CI/CD</div>
+    </div>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">MiMo-Reasonix Project Assessment · Generated 2026-07-01</div>
+</footer>
+
+</body>
+</html>

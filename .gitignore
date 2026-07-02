@@ -1,0 +1,13 @@
+# User configuration (create from mimo-reasonix.example.toml)
+/mimo-reasonix.toml
+
+# Build output
+/bin/
+
+# IDE
+/.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db

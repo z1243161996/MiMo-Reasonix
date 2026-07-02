@@ -1,0 +1,248 @@
+name: "项目验收流程生成"
+description: "检查项目状态，生成完整的开发测试验收流程"
+
+agents_dir: "agency-agents-zh"
+
+llm:
+  provider: claude-code
+  max_tokens: 4096
+  timeout: 300000
+  retry: 2
+
+concurrency: 2
+
+steps:
+  - id: explore_project
+    role: "engineering/engineering-codebase-onboarding-engineer"
+    name: "代码库勘察员"
+    emoji: "🔍"
+    task: |
+      你是项目代码库入职引导工程师。请立即对当前工作目录下的项目进行全面勘察：
+
+      1. 识别项目类型（Web应用、API服务、CLI工具、库等）、技术栈（语言、框架、数据库）
+      2. 查看项目结构（目录布局、模块划分）
+      3. 检查 package.json / requirements.txt / Cargo.toml 等依赖文件，了解已安装的依赖
+      4. 检查是否存在 CI/CD 配置（.github/workflows、Jenkinsfile、.gitlab-ci.yml 等）
+      5. 检查是否存在测试目录和测试配置（jest.config、pytest.ini、.mocharc 等）
+      6. 检查是否有 Dockerfile、docker-compose.yml 等容器化配置
+      7. 检查 README.md 中的开发/测试/部署说明
+      8. 检查最近的 git 提交历史（最近 20 条），了解开发活跃度
+
+      输出格式要求（Markdown）：
+      ## 项目概况
+      - 项目名称/类型/技术栈
+      ## 项目结构
+      - 目录结构概览
+      ## 依赖与构建
+      - 关键依赖列表
+      - 构建/运行命令
+      ## 现有测试情况
+      - 测试框架/测试文件数量/覆盖率情况
+      ## CI/CD 配置
+      - 是否有自动化流水线
+      ## 最近开发动态
+      - 最近提交摘要
+      ## 项目健康度初步评估
+      - 开发成熟度判断（早期/成长期/成熟期）
+    output: project_overview
+
+  - id: code_quality_check
+    role: "engineering/engineering-code-reviewer"
+    name: "代码审查员"
+    emoji: "🔎"
+    task: |
+      你是专业代码审查专家。请对当前项目进行快速但全面的代码质量检查：
+
+      1. **代码规范检查**：查看是否有 linter 配置（eslint、ruff、golangci-lint 等），检查配置是否完整
+      2. **类型安全检查**：如果使用 TypeScript/Python 等语言，查看类型配置是否严格
+      3. **安全扫描**：检查是否有明显的安全问题（硬编码密钥、SQL注入风险、未授权访问等）
+      4. **依赖安全**：检查 lock 文件是否存在，是否有已知漏洞的依赖
+      5. **代码重复**：快速扫描是否有明显的代码重复模式
+      6. **错误处理**：抽查几个关键模块，检查错误处理是否完善
+      7. **文档覆盖**：检查关键模块是否有注释/文档
+      8. **API 接口**：如果有 API，检查是否有接口文档（Swagger/OpenAPI）
+
+      输出格式要求（Markdown）：
+      ## 代码质量评分
+      - 总体评分（1-10）及理由
+      ## 规范与配置
+      - Linter/Formatter 配置情况
+      ## 安全检查
+      - 发现的安全问题列表（严重/中等/轻微）
+      ## 代码结构问题
+      - 架构层面的改进建议
+      ## 测试质量
+      - 现有测试的质量评估
+      ## 必须修复项（阻塞验收）
+      - 列出必须在验收前修复的问题
+      ## 建议改进项（不阻塞验收）
+      - 可以在验收后优化的问题
+    output: code_quality_report
+
+  - id: design_test_cases
+    role: "testing/testing-api-tester"
+    name: "测试架构师"
+    emoji: "🧪"
+    depends_on:
+      - explore_project
+    task: |
+      你是资深测试专家。基于以下项目信息，设计一套完整的验收测试用例体系：
+
+      项目信息：
+      {{project_overview}}
+
+      请完成以下工作：
+
+      1. **测试策略设计**
+         - 确定需要的测试层级：单元测试、集成测试、端到端测试、性能测试
+         - 为每层确定测试工具和框架
+         - 确定测试数据管理策略
+
+      2. **功能验收测试用例**
+         - 根据项目类型，列出所有核心功能模块
+         - 为每个模块设计验收测试场景
+         - 标注测试优先级（P0/P1/P2）
+
+      3. **非功能测试用例**
+         - 性能测试场景（并发、响应时间、吞吐量）
+         - 安全测试场景（认证、授权、数据保护）
+         - 兼容性测试场景（如果适用）
+         - 可用性测试场景
+
+      4. **回归测试策略**
+         - 核心回归测试清单
+         - 冒烟测试清单
+
+      5. **测试数据与环境**
+         - 测试环境要求
+         - 测试数据准备方案
+
+      输出格式要求（Markdown），每个测试用例包含：用例编号、名称、前置条件、测试步骤、预期结果、优先级。
+    output: test_cases
+
+  - id: review_quality
+    role: "testing/testing-test-results-analyzer"
+    name: "质量分析师"
+    emoji: "📊"
+    depends_on:
+      - explore_project
+      - code_quality_check
+    task: |
+      你是测试结果分析专家。请综合以下两份报告，进行质量风险分析：
+
+      项目概况：
+      {{project_overview}}
+
+      代码质量报告：
+      {{code_quality_report}}
+
+      请完成以下分析：
+
+      1. **风险矩阵**
+         - 根据代码质量问题和项目现状，评估各模块的风险等级
+         - 高风险区域标注（红色）、中风险（黄色）、低风险（绿色）
+
+      2. **质量差距分析**
+         - 当前代码质量与可发布标准之间的差距
+         - 需要补充的测试覆盖区域
+
+      3. **验收前置条件**
+         - 列出必须满足才能进入验收的条件（Go/No-Go 标准）
+         - 每个条件的可验证指标
+
+      4. **测试覆盖率目标**
+         - 各层级测试应达到的覆盖率目标
+         - 当前覆盖率与目标的差距
+
+      5. **验收风险预警**
+         - 可能影响验收进度的风险项
+         - 建议的缓解措施
+
+      输出格式要求（Markdown），使用表格展示风险矩阵和差距分析。
+    output: quality_analysis
+
+  - id: generate_acceptance_plan
+    role: "project-management/project-manager-senior"
+    name: "高级项目经理"
+    emoji: "📋"
+    depends_on:
+      - explore_project
+      - code_quality_check
+      - design_test_cases
+      - review_quality
+    task: |
+      你是资深项目经理。请基于以下所有信息，生成一份完整的、可执行的开发测试验收流程文档：
+
+      项目概况：
+      {{project_overview}}
+
+      代码质量报告：
+      {{code_quality_report}}
+
+      测试用例设计：
+      {{test_cases}}
+
+      质量分析：
+      {{quality_analysis}}
+
+      请生成一份完整的验收流程文档，包含以下章节：
+
+      ## 一、项目验收概述
+      - 验收目标与范围
+      - 验收标准总则
+      - 各方角色与职责
+
+      ## 二、验收前置条件（Pre-condition Checklist）
+      - 代码冻结条件
+      - 环境准备要求
+      - 文档就绪要求
+      - 每项的检查方法和负责人
+
+      ## 三、开发验收阶段
+      - 代码审查流程与标准
+      - 静态分析检查清单
+      - 代码合并策略
+      - 验收标准
+
+      ## 四、测试验收阶段
+      - 冒烟测试流程（含具体用例）
+      - 功能测试流程（含核心测试用例清单，标注 P0/P1/P2）
+      - 集成测试流程
+      - 性能测试流程与基准指标
+      - 安全测试流程
+      - 兼容性测试流程（如适用）
+      - 回归测试流程
+
+      ## 五、缺陷管理流程
+      - 缺陷分级标准（致命/严重/一般/轻微）
+      - 缺陷修复 SLA
+      - 缺陷验收标准
+      - 阻塞问题升级机制
+
+      ## 六、验收评审流程
+      - 验收评审会议流程
+      - 验收报告模板
+      - 签字确认流程
+
+      ## 七、上线与发布
+      - 发布前检查清单
+      - 灰度发布策略（如适用）
+      - 回滚方案
+      - 发布后验证
+
+      ## 八、验收时间线
+      - 各阶段时间估算
+      - 里程碑节点
+      - 依赖关系与并行机会
+
+      ## 九、风险与应急预案
+      - 验收风险清单
+      - 应急处理预案
+
+      要求：
+      - 这是最终交付文档，必须完整、专业、可直接使用
+      - 将上述所有分析报告的关键发现融入对应章节
+      - 文档总长度 3000-5000 字
+      - 使用 Markdown 格式，层次清晰
+      - 所有检查项都要具体可操作，不要空泛的描述
+    output: final_acceptance_plan
