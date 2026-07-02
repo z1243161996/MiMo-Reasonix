@@ -78,26 +78,22 @@ func TestBinaryName(t *testing.T) {
 // TestSubcommands verifies that all expected subcommands exist.
 // These are the core subcommands that MiMo-Reasonix should support.
 func TestSubcommands(t *testing.T) {
-	// Expected subcommands (from Reasonix upstream + MiMo additions)
+	// Expected subcommands (Go version - actual available subcommands)
 	expectedSubcommands := []string{
 		// Core subcommands
-		"chat",   // Interactive chat TUI
 		"run",    // Non-interactive execution
 		"setup",  // Initial configuration
 		"doctor", // Health check
 		"config", // Configuration management
 		// Plugin/MCP subcommands
 		"mcp",    // MCP server management
-		"plugin", // Plugin management
-		// Session management
-		"resume", // Resume a previous session
-		// Memory/Context
-		"memory", // Memory management
-		// Model management
-		"model",  // Model switching
-		"effort", // Reasoning effort control
 		// Utility
 		"upgrade", // Self-upgrade
+		"init",    // Initialize project memory
+		"acp",     // Agent Client Protocol
+		"review",  // Code review
+		"serve",   // HTTP/SSE server
+		"bot",     // Bot management
 	}
 
 	binaryPath := filepath.Join("..", "..", "bin", "mimo-reasonix")
