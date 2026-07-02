@@ -7,7 +7,7 @@ var English = Messages{
 	WelcomeTitleFmt: "Welcome to %s",
 	NoConfigYet:     "No configuration found yet — let's set it up.",
 	StartingChatFmt: "Starting %s…",
-	SetKeyHint:      "Set your API key, then run `reasonix`.",
+	SetKeyHint:      "Set your API key, then run `mimo-reasonix`.",
 	ConfigLabel:     "config",
 	ModelsLabel:     "models",
 	ConfigNotFound:  "not found — using built-in defaults",
@@ -15,18 +15,18 @@ var English = Messages{
 	NoKey:           "no key",
 	Ready:           "ready",
 	GetStarted:      "Get started",
-	StepScaffold:    "scaffold reasonix.toml",
+	StepScaffold:    "scaffold mimo-reasonix.toml",
 	StepSetKey:      "set API key",
 
-	InitHint:       "Project memory (AGENTS.md) is generated in-session: run `reasonix`, then `/init` — the model analyzes the codebase and writes it. For configuration, use `reasonix setup`.",
-	StepSetKeyHint: "run `reasonix setup`, or export DEEPSEEK_API_KEY=…",
+	InitHint:       "Project memory (AGENTS.md) is generated in-session: run `mimo-reasonix`, then `/init` — the model analyzes the codebase and writes it. For configuration, use `mimo-reasonix setup`.",
+	StepSetKeyHint: "run `mimo-reasonix setup`, or export DEEPSEEK_API_KEY=…",
 	StepChatDesc:   "interactive session",
 	StepRunDesc:    "one-shot task",
-	HelpFooter:     "reasonix help · all commands",
+	HelpFooter:     "mimo-reasonix help · all commands",
 
 	ChatTip:           "Context is kept across turns. Type 'exit' or Ctrl-D to quit.",
 	TurnCancelled:     "cancelled — back to prompt",
-	NoSessionToResume: "no saved session to resume — start a new one with `reasonix`",
+	NoSessionToResume: "no saved session to resume — start a new one with `mimo-reasonix`",
 	ResumeRequiresTTY: "--resume needs an interactive terminal; pass --continue for the most recent session",
 	PickSessionLabel:  "Resume which session?",
 
@@ -82,7 +82,7 @@ var English = Messages{
 
 	OutputStyleNone:    "no output styles available",
 	OutputStyleHeader:  "output styles:",
-	OutputStyleHint:    "set agent.output_style in reasonix.toml to apply one (takes effect next session)",
+	OutputStyleHint:    "set agent.output_style in mimo-reasonix.toml to apply one (takes effect next session)",
 	ThemeHeader:        "themes:",
 	ThemeHint:          "switch with /theme <auto|light|dark|style>",
 	ThemeChangedFmt:    "theme switched to %s / %s",
@@ -155,7 +155,7 @@ var English = Messages{
 	SkillPickerStatusNotDir:      "not-directory",
 	SkillPickerStatusUnreadable:  "unreadable",
 	SlashPromptEmpty:             "the MCP prompt returned no content to send",
-	SlashMCPNone:                 "no MCP servers configured — add a [[plugins]] entry in reasonix.toml",
+	SlashMCPNone:                 "no MCP servers configured — add a [[plugins]] entry in mimo-reasonix.toml",
 	CtrlCQuitHint:                "press Ctrl+C again to quit",
 	CompHintSlash:                "↑/↓ move · Tab/Enter select · Esc close",
 	CompHintFile:                 "↑/↓ move · Tab/Enter open folder or pick file · Esc close",
@@ -275,12 +275,12 @@ var English = Messages{
 
 	SelectProvidersLabel:  "Select providers to enable",
 	EnterAPIKeysHeader:    "Enter API keys (Enter to skip and set later):",
-	MissingKeyIntro:       "reasonix.toml is ready — just an API key away.",
+	MissingKeyIntro:       "mimo-reasonix.toml is ready — just an API key away.",
 	WroteFileFmt:          "Wrote %s",
 	SetupComplete:         "Setup complete.",
 	SetupCancelled:        "setup cancelled.",
 	TryHintFmt:            "Try: %s",
-	NextHint:              "Next: set your API key (run `reasonix setup` or export DEEPSEEK_API_KEY=...), then run `reasonix run \"your task\"`.",
+	NextHint:              "Next: set your API key (run `mimo-reasonix setup` or export DEEPSEEK_API_KEY=...), then run `mimo-reasonix run \"your task\"`.",
 	ConfirmReconfigureFmt: "%s already exists. Reconfigure and overwrite?",
 	KeepingExisting:       "Keeping existing config.",
 	NotOverwritingFmt:     "%s already exists; not overwriting",
@@ -295,7 +295,7 @@ var English = Messages{
 	NoModelsAvailableFmt:       "%s: no models available, skipping",
 	CustomFetchEmpty:           "/models returned an empty list — falling back to manual entry",
 	AnthropicFetchEmpty:        "/models returned an empty list — Anthropic-compatible providers usually don't expose one, falling back to manual entry",
-	SkipStaleCustomEntryFmt:    "skipping stale %q entry from reasonix.toml (pointing at %s) — please remove it from [[providers]]",
+	SkipStaleCustomEntryFmt:    "skipping stale %q entry from mimo-reasonix.toml (pointing at %s) — please remove it from [[providers]]",
 	APIKeyAlreadySetFmt:        "reusing existing value for %s",
 	APIKeyResetPromptFmt:       "Re-enter %s?",
 
@@ -328,15 +328,15 @@ var English = Messages{
 	AnthropicSelectModelsLabel:     "Select models to enable for %s",
 
 	UnknownCommandFmt:         "unknown command %q",
-	UsageRunHint:              "usage: reasonix run [--model NAME] <task>",
+	UsageRunHint:              "usage: mimo-reasonix run [--model NAME] <task>",
 	ErrorPrefix:               "error:",
 	ReconfigureOnUnknownModel: "Configured model is no longer available — re-running setup.",
 	WriteConfigErr:            "write config:",
 	WriteEnvErr:               "write .env:",
 
 	ProviderErrBadRequest:          "Malformed request (HTTP 400): the request body was rejected. This is likely a bug — please report it if it persists.",
-	ProviderErrAuth:                "Authentication failed (HTTP 401): your API key is missing or unset. Add it to .env or run `reasonix setup`.",
-	ProviderErrAuthRejected:        "Authentication failed (HTTP 401): the server rejected your API key. It may be wrong or expired, or the provider hit a transient auth/quota issue — retried with backoff and still failed. Try again shortly, or check the key in .env / run `reasonix setup`.",
+	ProviderErrAuth:                "Authentication failed (HTTP 401): your API key is missing or unset. Add it to .env or run `mimo-reasonix setup`.",
+	ProviderErrAuthRejected:        "Authentication failed (HTTP 401): the server rejected your API key. It may be wrong or expired, or the provider hit a transient auth/quota issue — retried with backoff and still failed. Try again shortly, or check the key in .env / run `mimo-reasonix setup`.",
 	ProviderErrInsufficientBalance: "Insufficient balance (HTTP 402): your account is out of credit. Top up your account, then retry.",
 	ProviderErrUnprocessable:       "Invalid parameters (HTTP 422): a request parameter was rejected. This is likely a bug — please report it if it persists.",
 	ProviderErrRateLimited:         "Rate limit reached (HTTP 429): too many requests (TPM/RPM). Retried with backoff — slow down or try again shortly.",
@@ -377,32 +377,32 @@ var English = Messages{
 	UpgradeApplyFailed:         "failed to apply update: %v",
 	UpgradeSuccessFmt:          "Updated %s → %s",
 
-	UsageBody: `reasonix — a config- and plugin-driven coding agent (multi-model)
+	UsageBody: `mimo-reasonix — a config- and plugin-driven coding agent (multi-model)
 
 Usage:
-  reasonix [--model NAME] [-c|--continue] [--resume] [--yolo] [--dir PATH]   interactive session (multi-turn; -c resumes the latest, --resume picks one)
-  reasonix run  [--model NAME] [--max-steps N] [-c|--continue] [--resume PATH] <task>   run one task and exit
-  reasonix review [--base BRANCH] [--commit SHA] [--model NAME]  AI-powered code review on local diffs
-  reasonix serve [--model NAME] [--addr HOST:PORT] [--auth none|token|password] [--token STR] [--password STR] [--hash-password]  serve over HTTP+SSE (with optional auth)
-  reasonix acp [--model NAME]                           serve Agent Client Protocol over stdio (also: reasonix --acp)
-  reasonix setup [path]                                 interactive config wizard; writes reasonix.toml (+ .env)
-  reasonix config auto-plan [off|on]                    configure automatic plan mode
-  reasonix config memory-v5 [off|on|status]             configure Memory v5
-  reasonix config reasoning-language [auto|zh|en]        configure visible reasoning language
-  reasonix mcp <add|remove|list|import>                 manage MCP servers in reasonix.toml
-  reasonix init                                         show how to generate project memory (AGENTS.md)
-  reasonix doctor [--json]                              print redacted local diagnostics
-  reasonix bot start|doctor|weixin-login                multi-channel IM bot gateway
-  reasonix upgrade [--check] [--force]                   self-update to the latest release (also: reasonix update)
-  reasonix version
-  reasonix help
+  mimo-reasonix [--model NAME] [-c|--continue] [--resume] [--yolo] [--dir PATH]   interactive session (multi-turn; -c resumes the latest, --resume picks one)
+  mimo-reasonix run  [--model NAME] [--max-steps N] [-c|--continue] [--resume PATH] <task>   run one task and exit
+  mimo-reasonix review [--base BRANCH] [--commit SHA] [--model NAME]  AI-powered code review on local diffs
+  mimo-reasonix serve [--model NAME] [--addr HOST:PORT] [--auth none|token|password] [--token STR] [--password STR] [--hash-password]  serve over HTTP+SSE (with optional auth)
+  mimo-reasonix acp [--model NAME]                           serve Agent Client Protocol over stdio (also: mimo-reasonix --acp)
+  mimo-reasonix setup [path]                                 interactive config wizard; writes mimo-reasonix.toml (+ .env)
+  mimo-reasonix config auto-plan [off|on]                    configure automatic plan mode
+  mimo-reasonix config memory-v5 [off|on|status]             configure Memory v5
+  mimo-reasonix config reasoning-language [auto|zh|en]        configure visible reasoning language
+  mimo-reasonix mcp <add|remove|list|import>                 manage MCP servers in mimo-reasonix.toml
+  mimo-reasonix init                                         show how to generate project memory (AGENTS.md)
+  mimo-reasonix doctor [--json]                              print redacted local diagnostics
+  mimo-reasonix bot start|doctor|weixin-login                multi-channel IM bot gateway
+  mimo-reasonix upgrade [--check] [--force]                   self-update to the latest release (also: mimo-reasonix update)
+  mimo-reasonix version
+  mimo-reasonix help
 
 Examples:
-  reasonix
-  reasonix --continue
-  reasonix run "implement the TODOs in main.go"
-  reasonix run --model mimo-pro "add unit tests for this function"
-  echo "explain this code" | reasonix run
+  mimo-reasonix
+  mimo-reasonix --continue
+  mimo-reasonix run "implement the TODOs in main.go"
+  mimo-reasonix run --model mimo-pro "add unit tests for this function"
+  echo "explain this code" | mimo-reasonix run
 
 Configuration:
   Resolution: flag > ./mimo-reasonix.toml > ~/.mimo-reasonix/config.toml > built-in defaults

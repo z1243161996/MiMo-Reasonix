@@ -8,7 +8,7 @@ var ChineseTraditional = Messages{
 	WelcomeTitleFmt: "歡迎使用 %s",
 	NoConfigYet:     "還沒有設定 — 現在來設定一下吧。",
 	StartingChatFmt: "正在啟動 %s…",
-	SetKeyHint:      "設定好 API key 後執行 `reasonix`。",
+	SetKeyHint:      "設定好 API key 後執行 `mimo-reasonix`。",
 	ConfigLabel:     "設定",
 	ModelsLabel:     "模型",
 	ConfigNotFound:  "未找到 — 使用內建預設值",
@@ -16,18 +16,18 @@ var ChineseTraditional = Messages{
 	NoKey:           "未設定 key",
 	Ready:           "已就緒",
 	GetStarted:      "開始使用",
-	StepScaffold:    "生成 reasonix.toml",
+	StepScaffold:    "生成 mimo-reasonix.toml",
 	StepSetKey:      "設定 API key",
 
-	InitHint:       "專案記憶（AGENTS.md）在會話內由模型生成：執行 `reasonix`，然後 `/init` —— 模型會分析程式碼庫並寫入。設定請用 `reasonix setup`。",
-	StepSetKeyHint: "執行 `reasonix setup`，或 export DEEPSEEK_API_KEY=…",
+	InitHint:       "專案記憶（AGENTS.md）在會話內由模型生成：執行 `mimo-reasonix`，然後 `/init` —— 模型會分析程式碼庫並寫入。設定請用 `mimo-reasonix setup`。",
+	StepSetKeyHint: "執行 `mimo-reasonix setup`，或 export DEEPSEEK_API_KEY=…",
 	StepChatDesc:   "互動式會話",
 	StepRunDesc:    "執行單次任務",
-	HelpFooter:     "reasonix help · 檢視全部命令",
+	HelpFooter:     "mimo-reasonix help · 檢視全部命令",
 
 	ChatTip:           "對話上下文將跨輪保留。輸入 'exit' 或按 Ctrl-D 退出。",
 	TurnCancelled:     "已取消 — 回到提示符",
-	NoSessionToResume: "沒有可恢復的會話 — 用 `reasonix` 開一個新的",
+	NoSessionToResume: "沒有可恢復的會話 — 用 `mimo-reasonix` 開一個新的",
 	ResumeRequiresTTY: "--resume 需要互動式終端；用 --continue 直接恢復最近一次",
 	PickSessionLabel:  "恢復哪個會話？",
 
@@ -77,7 +77,7 @@ var ChineseTraditional = Messages{
 
 	OutputStyleNone:    "沒有可用的輸出風格",
 	OutputStyleHeader:  "輸出風格：",
-	OutputStyleHint:    "在 reasonix.toml 設定 agent.output_style 即可啟用（下次會話生效）",
+	OutputStyleHint:    "在 mimo-reasonix.toml 設定 agent.output_style 即可啟用（下次會話生效）",
 	ThemeHeader:        "主題：",
 	ThemeHint:          "使用 /theme <auto|light|dark|style> 切換",
 	ThemeChangedFmt:    "已切換主題為 %s / %s",
@@ -146,7 +146,7 @@ var ChineseTraditional = Messages{
 	SkillPickerStatusNotDir:      "非目錄",
 	SkillPickerStatusUnreadable:  "無權限",
 	SlashPromptEmpty:             "該 MCP prompt 沒有返回可傳送的內容",
-	SlashMCPNone:                 "沒有設定 MCP 伺服器 — 在 reasonix.toml 加一個 [[plugins]] 條目",
+	SlashMCPNone:                 "沒有設定 MCP 伺服器 — 在 mimo-reasonix.toml 加一個 [[plugins]] 條目",
 	CtrlCQuitHint:                "再按一次 Ctrl+C 退出",
 	CompHintSlash:                "↑/↓ 移動 · Tab/Enter 選中 · Esc 關閉",
 	CompHintFile:                 "↑/↓ 移動 · Tab/Enter 進入資料夾或選中檔案 · Esc 關閉",
@@ -256,12 +256,12 @@ var ChineseTraditional = Messages{
 
 	SelectProvidersLabel:  "選擇要啟用的 provider",
 	EnterAPIKeysHeader:    "輸入 API key（Enter 跳過、稍後再設）：",
-	MissingKeyIntro:       "reasonix.toml 已設定好 — 只差一個 API key 就可以開始。",
+	MissingKeyIntro:       "mimo-reasonix.toml 已設定好 — 只差一個 API key 就可以開始。",
 	WroteFileFmt:          "已寫入 %s",
 	SetupComplete:         "設定完成。",
 	SetupCancelled:        "設定已取消。",
 	TryHintFmt:            "試試: %s",
-	NextHint:              "下一步：設定 API key（執行 `reasonix setup` 或 export DEEPSEEK_API_KEY=...），然後執行 `reasonix run \"你的任務\"`。",
+	NextHint:              "下一步：設定 API key（執行 `mimo-reasonix setup` 或 export DEEPSEEK_API_KEY=...），然後執行 `mimo-reasonix run \"你的任務\"`。",
 	ConfirmReconfigureFmt: "%s 已存在。重新設定並覆蓋？",
 	KeepingExisting:       "保留原設定不變。",
 	NotOverwritingFmt:     "%s 已存在，不覆蓋",
@@ -276,7 +276,7 @@ var ChineseTraditional = Messages{
 	NoModelsAvailableFmt:       "%s: 沒有可用模型，跳過",
 	CustomFetchEmpty:           "/models 返回為空，回退到手動輸入",
 	AnthropicFetchEmpty:        "/models 返回為空 — Anthropic 相容服務通常不提供此端點，回退到手動輸入",
-	SkipStaleCustomEntryFmt:    "跳過 reasonix.toml 裡的舊 %q 條目（指向 %s）— 請手動從 [[providers]] 裡刪除",
+	SkipStaleCustomEntryFmt:    "跳過 mimo-reasonix.toml 裡的舊 %q 條目（指向 %s）— 請手動從 [[providers]] 裡刪除",
 	APIKeyAlreadySetFmt:        "復用已設定的 %s",
 	APIKeyResetPromptFmt:       "重新輸入 %s？",
 
@@ -309,14 +309,14 @@ var ChineseTraditional = Messages{
 	AnthropicSelectModelsLabel:     "選擇要啟用的 %s 模型",
 
 	UnknownCommandFmt:         "未知命令 %q",
-	UsageRunHint:              "用法：reasonix run [--model NAME] <task>",
+	UsageRunHint:              "用法：mimo-reasonix run [--model NAME] <task>",
 	ErrorPrefix:               "錯誤：",
 	ReconfigureOnUnknownModel: "設定的模型已不可用 —— 重新執行引導設定。",
 	WriteConfigErr:            "寫入設定失敗：",
 	WriteEnvErr:               "寫入 .env 失敗：",
 
 	ProviderErrBadRequest:          "請求格式錯誤 (HTTP 400)：請求體被拒絕，通常是程式缺陷。若持續出現請回報。",
-	ProviderErrAuth:                "認證失敗 (HTTP 401)：API key 缺失、錯誤或已過期。請檢查 .env 中的金鑰，或執行 `reasonix setup`。",
+	ProviderErrAuth:                "認證失敗 (HTTP 401)：API key 缺失、錯誤或已過期。請檢查 .env 中的金鑰，或執行 `mimo-reasonix setup`。",
 	ProviderErrInsufficientBalance: "餘額不足 (HTTP 402)：帳戶餘額不足，請前往儲值後重試。",
 	ProviderErrUnprocessable:       "參數錯誤 (HTTP 422)：某個請求參數被拒絕，通常是程式缺陷。若持續出現請回報。",
 	ProviderErrRateLimited:         "請求速率達到上限 (HTTP 429)：請求過於頻繁 (TPM/RPM)。已退避重試，請放慢速率或稍後再試。",
@@ -326,32 +326,32 @@ var ChineseTraditional = Messages{
 	SelectOneHint:  "(↑/↓ · Enter · q 取消)",
 	SelectManyHint: "(↑/↓ · Space · Enter · q)",
 
-	UsageBody: `reasonix — 由設定和插件驅動的 coding agent（多模型）
+	UsageBody: `mimo-reasonix — 由設定和插件驅動的 coding agent（多模型）
 
 用法：
-  reasonix [--model NAME] [-c|--continue] [--resume] [--yolo] [--dir PATH]   互動式會話（多輪；-c 恢復最近一次，--resume 選擇一個）
-  reasonix run  [--model NAME] [--max-steps N] [-c|--continue] [--resume PATH] <task>   執行單次任務後退出
-  reasonix review [--base BRANCH] [--commit SHA] [--model NAME]  AI 程式碼審查（基於本機 diff）
-  reasonix serve [--model NAME] [--addr HOST:PORT] [--auth none|token|password] [--token STR] [--password STR] [--hash-password]  透過 HTTP+SSE 提供服務（支援可選認證）
-  reasonix acp [--model NAME]                           透過 stdio 提供 Agent Client Protocol（也可用：reasonix --acp）
-  reasonix setup [path]                                 互動式設定精靈；生成 reasonix.toml（及 .env）
-  reasonix config auto-plan [off|on]                    設定自動計畫模式
-  reasonix config memory-v5 [off|on|status]             設定 Memory v5
-  reasonix config reasoning-language [auto|zh|en]        設定可見思考語言
-  reasonix mcp <add|remove|list|import>                 管理 reasonix.toml 裡的 MCP 伺服器
-  reasonix init                                         查看如何產生專案記憶（AGENTS.md）
-  reasonix doctor [--json]                              輸出脫敏的本機診斷資訊
-  reasonix bot start|doctor|weixin-login                多管道 IM bot 閘道
-  reasonix upgrade [--check] [--force]                   自更新至最新版本（也可用：reasonix update）
-  reasonix version
-  reasonix help
+  mimo-reasonix [--model NAME] [-c|--continue] [--resume] [--yolo] [--dir PATH]   互動式會話（多輪；-c 恢復最近一次，--resume 選擇一個）
+  mimo-reasonix run  [--model NAME] [--max-steps N] [-c|--continue] [--resume PATH] <task>   執行單次任務後退出
+  mimo-reasonix review [--base BRANCH] [--commit SHA] [--model NAME]  AI 程式碼審查（基於本機 diff）
+  mimo-reasonix serve [--model NAME] [--addr HOST:PORT] [--auth none|token|password] [--token STR] [--password STR] [--hash-password]  透過 HTTP+SSE 提供服務（支援可選認證）
+  mimo-reasonix acp [--model NAME]                           透過 stdio 提供 Agent Client Protocol（也可用：mimo-reasonix --acp）
+  mimo-reasonix setup [path]                                 互動式設定精靈；生成 mimo-reasonix.toml（及 .env）
+  mimo-reasonix config auto-plan [off|on]                    設定自動計畫模式
+  mimo-reasonix config memory-v5 [off|on|status]             設定 Memory v5
+  mimo-reasonix config reasoning-language [auto|zh|en]        設定可見思考語言
+  mimo-reasonix mcp <add|remove|list|import>                 管理 mimo-reasonix.toml 裡的 MCP 伺服器
+  mimo-reasonix init                                         查看如何產生專案記憶（AGENTS.md）
+  mimo-reasonix doctor [--json]                              輸出脫敏的本機診斷資訊
+  mimo-reasonix bot start|doctor|weixin-login                多管道 IM bot 閘道
+  mimo-reasonix upgrade [--check] [--force]                   自更新至最新版本（也可用：mimo-reasonix update）
+  mimo-reasonix version
+  mimo-reasonix help
 
 範例：
-  reasonix
-  reasonix --continue
-  reasonix run "把 main.go 裡的 TODO 實現掉"
-  reasonix run --model mimo-pro "給這個函式補單元測試"
-  echo "解釋這段程式碼" | reasonix run
+  mimo-reasonix
+  mimo-reasonix --continue
+  mimo-reasonix run "把 main.go 裡的 TODO 實現掉"
+  mimo-reasonix run --model mimo-pro "給這個函式補單元測試"
+  echo "解釋這段程式碼" | mimo-reasonix run
 
 設定：
   優先順序：flag > ./mimo-reasonix.toml > ~/.mimo-reasonix/config.toml > 內建預設值
@@ -377,7 +377,7 @@ var ChineseTraditional = Messages{
 	GoalCurrentFmt:             "目標：%s",
 	GoalSetFmt:                 "目標已設定 → %s",
 	GoalCleared:                "目標已清除",
-	ProviderErrAuthRejected:    "認證失敗 (HTTP 401)：服務端拒絕了你的 API key。可能是 key 錯誤或已過期，也可能是服務端出現瞬時鑑權/額度問題——已退避重試仍失敗。請稍後再試，或檢查 .env 中的金鑰 / 執行 `reasonix setup`。",
+	ProviderErrAuthRejected:    "認證失敗 (HTTP 401)：服務端拒絕了你的 API key。可能是 key 錯誤或已過期，也可能是服務端出現瞬時鑑權/額度問題——已退避重試仍失敗。請稍後再試，或檢查 .env 中的金鑰 / 執行 `mimo-reasonix setup`。",
 	SelectMoreAboveFmt:         "  ↑ 上方還有 %d 個",
 	SelectMoreBelowFmt:         "  ↓ 下方還有 %d 個",
 	SelectSearchHint:           "/ 搜尋 · 輸入關鍵詞過濾 · Esc 取消搜尋",

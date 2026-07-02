@@ -8,7 +8,7 @@ var Chinese = Messages{
 	WelcomeTitleFmt: "欢迎使用 %s",
 	NoConfigYet:     "还没有配置 — 现在来设置一下吧。",
 	StartingChatFmt: "正在启动 %s…",
-	SetKeyHint:      "设置好 API key 后运行 `reasonix`。",
+	SetKeyHint:      "设置好 API key 后运行 `mimo-reasonix`。",
 	ConfigLabel:     "配置",
 	ModelsLabel:     "模型",
 	ConfigNotFound:  "未找到 — 使用内置默认值",
@@ -16,18 +16,18 @@ var Chinese = Messages{
 	NoKey:           "未设置 key",
 	Ready:           "已就绪",
 	GetStarted:      "开始使用",
-	StepScaffold:    "生成 reasonix.toml",
+	StepScaffold:    "生成 mimo-reasonix.toml",
 	StepSetKey:      "设置 API key",
 
-	InitHint:       "项目记忆（AGENTS.md）在会话内由模型生成：运行 `reasonix`，然后 `/init` —— 模型会分析代码库并写入。配置请用 `reasonix setup`。",
-	StepSetKeyHint: "运行 `reasonix setup`，或 export DEEPSEEK_API_KEY=…",
+	InitHint:       "项目记忆（AGENTS.md）在会话内由模型生成：运行 `mimo-reasonix`，然后 `/init` —— 模型会分析代码库并写入。配置请用 `mimo-reasonix setup`。",
+	StepSetKeyHint: "运行 `mimo-reasonix setup`，或 export DEEPSEEK_API_KEY=…",
 	StepChatDesc:   "交互式会话",
 	StepRunDesc:    "执行单次任务",
-	HelpFooter:     "reasonix help · 查看全部命令",
+	HelpFooter:     "mimo-reasonix help · 查看全部命令",
 
 	ChatTip:           "对话上下文将跨轮保留。输入 'exit' 或按 Ctrl-D 退出。",
 	TurnCancelled:     "已取消 — 回到提示符",
-	NoSessionToResume: "没有可恢复的会话 — 用 `reasonix` 开一个新的",
+	NoSessionToResume: "没有可恢复的会话 — 用 `mimo-reasonix` 开一个新的",
 	ResumeRequiresTTY: "--resume 需要交互式终端；用 --continue 直接恢复最近一次",
 	PickSessionLabel:  "恢复哪个会话？",
 
@@ -83,7 +83,7 @@ var Chinese = Messages{
 
 	OutputStyleNone:    "没有可用的输出风格",
 	OutputStyleHeader:  "输出风格：",
-	OutputStyleHint:    "在 reasonix.toml 设置 agent.output_style 即可启用（下次会话生效）",
+	OutputStyleHint:    "在 mimo-reasonix.toml 设置 agent.output_style 即可启用（下次会话生效）",
 	ThemeHeader:        "主题：",
 	ThemeHint:          "使用 /theme <auto|light|dark|style> 切换",
 	ThemeChangedFmt:    "已切换主题为 %s / %s",
@@ -156,7 +156,7 @@ var Chinese = Messages{
 	SkillPickerStatusNotDir:      "非目录",
 	SkillPickerStatusUnreadable:  "无权限",
 	SlashPromptEmpty:             "该 MCP prompt 没有返回可发送的内容",
-	SlashMCPNone:                 "没有配置 MCP 服务器 — 在 reasonix.toml 加一个 [[plugins]] 条目",
+	SlashMCPNone:                 "没有配置 MCP 服务器 — 在 mimo-reasonix.toml 加一个 [[plugins]] 条目",
 	CtrlCQuitHint:                "再按一次 Ctrl+C 退出",
 	CompHintSlash:                "↑/↓ 移动 · Tab/Enter 选中 · Esc 关闭",
 	CompHintFile:                 "↑/↓ 移动 · Tab/Enter 进入文件夹或选中文件 · Esc 关闭",
@@ -276,12 +276,12 @@ var Chinese = Messages{
 
 	SelectProvidersLabel:  "选择要启用的 provider",
 	EnterAPIKeysHeader:    "输入 API key（回车跳过、稍后再设）：",
-	MissingKeyIntro:       "reasonix.toml 已配置好 — 只差一个 API key 就可以开始。",
+	MissingKeyIntro:       "mimo-reasonix.toml 已配置好 — 只差一个 API key 就可以开始。",
 	WroteFileFmt:          "已写入 %s",
 	SetupComplete:         "设置完成。",
 	SetupCancelled:        "设置已取消。",
 	TryHintFmt:            "试试: %s",
-	NextHint:              "下一步：设置 API key（运行 `reasonix setup` 或 export DEEPSEEK_API_KEY=...），然后运行 `reasonix run \"你的任务\"`。",
+	NextHint:              "下一步：设置 API key（运行 `mimo-reasonix setup` 或 export DEEPSEEK_API_KEY=...），然后运行 `mimo-reasonix run \"你的任务\"`。",
 	ConfirmReconfigureFmt: "%s 已存在。重新配置并覆盖？",
 	KeepingExisting:       "保留原配置不变。",
 	NotOverwritingFmt:     "%s 已存在，不覆盖",
@@ -296,7 +296,7 @@ var Chinese = Messages{
 	NoModelsAvailableFmt:       "%s: 没有可用模型，跳过",
 	CustomFetchEmpty:           "/models 返回为空，回退到手动输入",
 	AnthropicFetchEmpty:        "/models 返回为空 — Anthropic 兼容服务通常不提供此端点，回退到手动输入",
-	SkipStaleCustomEntryFmt:    "跳过 reasonix.toml 里的旧 %q 条目（指向 %s）— 请手动从 [[providers]] 里删除",
+	SkipStaleCustomEntryFmt:    "跳过 mimo-reasonix.toml 里的旧 %q 条目（指向 %s）— 请手动从 [[providers]] 里删除",
 	APIKeyAlreadySetFmt:        "复用已设置的 %s",
 	APIKeyResetPromptFmt:       "重新输入 %s？",
 
@@ -329,15 +329,15 @@ var Chinese = Messages{
 	AnthropicSelectModelsLabel:     "选择要启用的 %s 模型",
 
 	UnknownCommandFmt:         "未知命令 %q",
-	UsageRunHint:              "用法：reasonix run [--model NAME] <task>",
+	UsageRunHint:              "用法：mimo-reasonix run [--model NAME] <task>",
 	ErrorPrefix:               "错误：",
 	ReconfigureOnUnknownModel: "配置的模型已不可用 —— 重新运行引导配置。",
 	WriteConfigErr:            "写入配置失败：",
 	WriteEnvErr:               "写入 .env 失败：",
 
 	ProviderErrBadRequest:          "请求格式错误 (HTTP 400)：请求体被拒绝，通常是程序缺陷。若持续出现请反馈。",
-	ProviderErrAuth:                "认证失败 (HTTP 401)：未读到 API key（缺失或未设置）。请在 .env 中配置密钥，或运行 `reasonix setup`。",
-	ProviderErrAuthRejected:        "认证失败 (HTTP 401)：服务端拒绝了你的 API key。可能是 key 错误或已过期，也可能是服务端出现瞬时鉴权/额度问题——已退避重试仍失败。请稍后再试，或检查 .env 中的密钥 / 运行 `reasonix setup`。",
+	ProviderErrAuth:                "认证失败 (HTTP 401)：未读到 API key（缺失或未设置）。请在 .env 中配置密钥，或运行 `mimo-reasonix setup`。",
+	ProviderErrAuthRejected:        "认证失败 (HTTP 401)：服务端拒绝了你的 API key。可能是 key 错误或已过期，也可能是服务端出现瞬时鉴权/额度问题——已退避重试仍失败。请稍后再试，或检查 .env 中的密钥 / 运行 `mimo-reasonix setup`。",
 	ProviderErrInsufficientBalance: "余额不足 (HTTP 402)：账户余额不足，请前往充值后重试。",
 	ProviderErrUnprocessable:       "参数错误 (HTTP 422)：某个请求参数被拒绝，通常是程序缺陷。若持续出现请反馈。",
 	ProviderErrRateLimited:         "请求速率达到上限 (HTTP 429)：请求过于频繁 (TPM/RPM)。已退避重试，请放慢速率或稍后再试。",
@@ -378,32 +378,32 @@ var Chinese = Messages{
 	UpgradeApplyFailed:         "应用更新失败：%v",
 	UpgradeSuccessFmt:          "已更新 %s → %s",
 
-	UsageBody: `reasonix — 由配置和插件驱动的 coding agent（多模型）
+	UsageBody: `mimo-reasonix — 由配置和插件驱动的 coding agent（多模型）
 
 用法：
-  reasonix [--model NAME] [-c|--continue] [--resume] [--yolo] [--dir PATH]   交互式会话（多轮；-c 恢复最近一次，--resume 选择一个）
-  reasonix run  [--model NAME] [--max-steps N] [-c|--continue] [--resume PATH] <task>   执行单次任务后退出
-  reasonix review [--base BRANCH] [--commit SHA] [--model NAME]  AI 代码审查（基于本地 diff）
-  reasonix serve [--model NAME] [--addr HOST:PORT] [--auth none|token|password] [--token STR] [--password STR] [--hash-password]  通过 HTTP+SSE 提供服务（支持可选认证）
-  reasonix acp [--model NAME]                           通过 stdio 提供 Agent Client Protocol（也可用：reasonix --acp）
-  reasonix setup [path]                                 交互式配置向导；生成 reasonix.toml（及 .env）
-  reasonix config auto-plan [off|on]                    配置自动计划模式
-  reasonix config memory-v5 [off|on|status]             配置 Memory v5
-  reasonix config reasoning-language [auto|zh|en]        配置可见思考语言
-  reasonix mcp <add|remove|list|import>                 管理 reasonix.toml 里的 MCP 服务器
-  reasonix init                                         查看如何生成项目记忆（AGENTS.md）
-  reasonix doctor [--json]                              输出脱敏的本地诊断信息
-  reasonix bot start|doctor|weixin-login                多渠道 IM bot 网关
-  reasonix upgrade [--check] [--force]                   自更新到最新版本（也可用：reasonix update）
-  reasonix version
-  reasonix help
+  mimo-reasonix [--model NAME] [-c|--continue] [--resume] [--yolo] [--dir PATH]   交互式会话（多轮；-c 恢复最近一次，--resume 选择一个）
+  mimo-reasonix run  [--model NAME] [--max-steps N] [-c|--continue] [--resume PATH] <task>   执行单次任务后退出
+  mimo-reasonix review [--base BRANCH] [--commit SHA] [--model NAME]  AI 代码审查（基于本地 diff）
+  mimo-reasonix serve [--model NAME] [--addr HOST:PORT] [--auth none|token|password] [--token STR] [--password STR] [--hash-password]  通过 HTTP+SSE 提供服务（支持可选认证）
+  mimo-reasonix acp [--model NAME]                           通过 stdio 提供 Agent Client Protocol（也可用：mimo-reasonix --acp）
+  mimo-reasonix setup [path]                                 交互式配置向导；生成 mimo-reasonix.toml（及 .env）
+  mimo-reasonix config auto-plan [off|on]                    配置自动计划模式
+  mimo-reasonix config memory-v5 [off|on|status]             配置 Memory v5
+  mimo-reasonix config reasoning-language [auto|zh|en]        配置可见思考语言
+  mimo-reasonix mcp <add|remove|list|import>                 管理 mimo-reasonix.toml 里的 MCP 服务器
+  mimo-reasonix init                                         查看如何生成项目记忆（AGENTS.md）
+  mimo-reasonix doctor [--json]                              输出脱敏的本地诊断信息
+  mimo-reasonix bot start|doctor|weixin-login                多渠道 IM bot 网关
+  mimo-reasonix upgrade [--check] [--force]                   自更新到最新版本（也可用：mimo-reasonix update）
+  mimo-reasonix version
+  mimo-reasonix help
 
 示例：
-  reasonix
-  reasonix --continue
-  reasonix run "把 main.go 里的 TODO 实现掉"
-  reasonix run --model mimo-pro "给这个函数补单元测试"
-  echo "解释这段代码" | reasonix run
+  mimo-reasonix
+  mimo-reasonix --continue
+  mimo-reasonix run "把 main.go 里的 TODO 实现掉"
+  mimo-reasonix run --model mimo-pro "给这个函数补单元测试"
+  echo "解释这段代码" | mimo-reasonix run
 
 配置：
   优先级：flag > ./mimo-reasonix.toml > ~/.mimo-reasonix/config.toml > 内置默认值
