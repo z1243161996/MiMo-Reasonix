@@ -86,7 +86,7 @@ func TestSubcommands(t *testing.T) {
 		"doctor", // Health check
 		"config", // Configuration management
 		// Plugin/MCP subcommands
-		"mcp",    // MCP server management
+		"mcp", // MCP server management
 		// Utility
 		"upgrade", // Self-upgrade
 		"init",    // Initialize project memory
