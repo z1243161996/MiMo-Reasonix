@@ -1,120 +1,124 @@
 # MiMo-Reasonix
 
-MiMo-Reasonix is a Go rewrite of DeepSeek-Reasonix, adapted for MiMo model branding and configuration. It provides a CLI-based coding agent powered by MiMo models.
+[![CI](https://github.com/z1243161996/MiMo-Reasonix/actions/workflows/ci.yml/badge.svg)](https://github.com/z1243161996/MiMo-Reasonix/actions/workflows/ci.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/z1243161996/MiMo-Reasonix)](https://goreportcard.com/report/github.com/z1243161996/MiMo-Reasonix)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Installation
+**A config- and plugin-driven coding agent CLI powered by Xiaomi MiMo models.**
+
+MiMo-Reasonix is a Go rewrite of [DeepSeek-Reasonix](https://github.com/esengine/DeepSeek-Reasonix), adapted for Xiaomi MiMo model branding and configuration. It provides a high-performance CLI-based coding agent with support for multiple AI models, tool calling, and plugin systems.
+
+## ✨ Features
+
+- 🚀 **High Performance**: Static Go binary (~30MB), zero dependencies
+- 🤖 **Multi-Model Support**: MiMo, DeepSeek, Anthropic Claude, and OpenAI-compatible providers
+- 🔧 **Tool Calling**: Bash, file operations, web search, code analysis, and more
+- 🧠 **Context Management**: Intelligent token counting, history folding, and prefix caching
+- 🔌 **Plugin System**: MCP (Model Context Protocol) support for extending functionality
+- 💻 **Desktop App**: Wails-based GUI (coming soon)
+- 🌐 **HTTP/SSE Server**: Serve as an API endpoint
+- 📝 **Memory System**: Project memory and context persistence
+
+## 🚀 Quick Start
+
+### Installation
 
 ```bash
-go install mimo-reasonix@latest
+# Install from source
+go install github.com/z1243161996/MiMo-Reasonix/cmd/reasonix@latest
+
+# Or build from source
+git clone https://github.com/z1243161996/MiMo-Reasonix.git
+cd MiMo-Reasonix
+make build
 ```
 
-Or build from source:
-
-```bash
-git clone https://github.com/xiaomi/mimo-reasonix.git
-cd mimo-reasonix
-go build -o mimo-reasonix .
-```
-
-## Quick Start
+### Basic Usage
 
 ```bash
 # Set your API key
 export MIMO_API_KEY="your-api-key"
 
-# Run interactively
+# Start interactive chat
 mimo-reasonix
 
 # Run a specific task
 mimo-reasonix run "explain this codebase"
 
-# Start an HTTP server
+# Start HTTP server
 mimo-reasonix serve
+
+# Run configuration wizard
+mimo-reasonix setup
 ```
 
-## Configuration
+## 📖 Documentation
 
-MiMo-Reasonix looks for configuration in this order:
+- [Configuration Guide](docs/CONFIG_PATHS.md) - Complete configuration reference
+- [Desktop Evaluation](docs/DESKTOP_EVALUATION.md) - Desktop app framework comparison
+- [Benchmarks](benchmarks/README.md) - Performance benchmarks and profiling
+
+## ⚙️ Configuration
+
+MiMo-Reasonix uses TOML configuration with the following priority:
+
 1. Command-line flags
 2. `./mimo-reasonix.toml` (project-local)
 3. `~/.mimo-reasonix/config.toml` (user-global)
 4. Built-in defaults
 
-### Default Model
+### Minimal Configuration
 
-The default model is `mimo-v2.5`, which is MiMo's flagship reasoning model.
+```toml
+default_model = "xiaomi/mimo-v2.5"
+
+[[providers]]
+name        = "xiaomi"
+kind        = "openai"
+base_url    = "https://token-plan-cn.xiaomimimo.com/v1"
+models      = ["xiaomi/mimo-v2.5", "xiaomi/mimo-v2.5-pro", "xiaomi/mimo-v2-flash"]
+default     = "xiaomi/mimo-v2.5"
+api_key_env = "MIMO_API_KEY"
+context_window = 1000000
+```
 
 ### MiMo Model Pricing (per 1M tokens)
 
 | Model | Input | Output | Cached Input |
 |-------|-------|--------|--------------|
-| mimo-v2.5 | 7.0 CNY | 14.0 CNY | 0.7 CNY |
-| mimo-v2.5-pro | 3.0 CNY | 6.0 CNY | 0.025 CNY |
-| mimo-v2-flash | 0.70 CNY | 2.10 CNY | 0.07 CNY |
+| xiaomi/mimo-v2.5 | ¥7.0 | ¥14.0 | ¥0.7 |
+| xiaomi/mimo-v2.5-pro | ¥3.0 | ¥6.0 | ¥0.025 |
+| xiaomi/mimo-v2-flash | ¥0.70 | ¥2.10 | ¥0.07 |
 
-### Configuration Files
+## 🔧 Subcommands
 
-- **`mimo-reasonix.example.toml`** — Full annotated configuration with all options (this file is tracked in git)
-- **`mimo-reasonix.toml`** — Your project-local configuration (created from the example, git-ignored by default)
+| Command | Description |
+|---------|-------------|
+| `mimo-reasonix` | Start interactive chat session |
+| `mimo-reasonix run <task>` | Execute task non-interactively |
+| `mimo-reasonix serve` | Start HTTP+SSE server |
+| `mimo-reasonix setup` | Run configuration wizard |
+| `mimo-reasonix config` | Manage configuration settings |
+| `mimo-reasonix doctor` | Show diagnostic information |
+| `mimo-reasonix mcp` | Manage MCP servers |
+| `mimo-reasonix init` | Initialize project memory |
+| `mimo-reasonix version` | Show version information |
 
-To set up your configuration:
+## 🧪 Testing
 
-```bash
-# Copy the example to create your local config
-cp mimo-reasonix.example.toml mimo-reasonix.toml
-
-# Edit your local config
-vim mimo-reasonix.toml
-```
-
-**Minimal configuration example:**
-
-```toml
-default_model = "mimo-v2.5"
-
-[[providers]]
-name        = "mimo"
-kind        = "openai"
-base_url    = "https://token-plan-cn.xiaomimimo.com/v1"
-model       = "mimo-v2.5"
-api_key_env = "MIMO_API_KEY"
-```
-
-## Subcommands
-
-- `mimo-reasonix` — Start an interactive chat session
-- `mimo-reasonix run <task>` — Execute a task non-interactively
-- `mimo-reasonix serve` — Start an HTTP+SSE server
-- `mimo-reasonix setup` — Run the configuration wizard
-- `mimo-reasonix config` — Manage configuration settings
-- `mimo-reasonix init` — Initialize project memory
-- `mimo-reasonix version` — Show version information
-
-## Environment Variables
-
-- `MIMO_API_KEY` — API key for MiMo models
-- `DEEPSEEK_API_KEY` — API key for DeepSeek models (also supported)
-- `ANTHROPIC_API_KEY` — API key for Claude models (also supported)
-- `REASONIX_HOME` — Override the default config directory (`~/.mimo-reasonix`)
-
-## Testing
-
-### Running Tests
+### Run Tests
 
 ```bash
 # Run all tests
-go test ./...
+make test
 
-# Run tests with coverage report
-go test ./... -coverprofile=coverage.out
+# Run tests with coverage
+make test-coverage
 
-# Run tests for a specific package
+# Run specific package tests
 go test ./internal/provider/mimo/...
 go test ./internal/config/...
 go test ./internal/cli/...
-
-# View coverage report
-go tool cover -html=coverage.out
 ```
 
 ### Test Coverage
@@ -130,43 +134,106 @@ Current test coverage by package:
 | internal/provider/mimo | 83.3% |
 | internal/provider/anthropic | 89.2% |
 | internal/provider/openai | 85.4% |
-| internal/provider | 84.1% |
-| internal/command | 89.8% |
-| internal/planmode | 89.3% |
-| internal/diff | 98.4% |
-| internal/frontmatter | 96.6% |
 | internal/config | 79.5% |
 | internal/cli | 56.9% |
 
-### Writing Tests
+### Benchmarks
 
-Tests follow standard Go patterns:
-- Table-driven tests for multiple input scenarios
-- `t.TempDir()` for temporary test directories
-- `t.Setenv()` for environment variable isolation
-- Helper functions like `isolateUserConfig()` for test setup
+Run performance benchmarks:
 
-Example test structure:
-```go
-func TestIsMiMoModel(t *testing.T) {
-    tests := []struct {
-        name  string
-        model string
-        want  bool
-    }{
-        {"valid mimo-v2.5", "mimo-v2.5", true},
-        {"invalid empty string", "", false},
-    }
-    for _, tt := range tests {
-        t.Run(tt.name, func(t *testing.T) {
-            if got := IsMiMoModel(tt.model); got != tt.want {
-                t.Errorf("IsMiMoModel(%q) = %v, want %v", tt.model, got, tt.want)
-            }
-        })
-    }
-}
+```bash
+# Run all benchmarks
+make bench
+
+# Run CPU benchmarks
+make bench-cpu
+
+# Run memory benchmarks
+make bench-memory
 ```
 
-## License
+## 🏗️ Architecture
 
-See LICENSE file for details.
+```
+mimo-reasonix/
+├── cmd/                    # CLI entry points
+├── internal/               # Core packages (51 packages)
+│   ├── agent/              # Agent loop and orchestration
+│   ├── provider/           # AI model providers (MiMo, DeepSeek, Anthropic)
+│   ├── tool/               # Tool system and built-in tools
+│   ├── plugin/             # MCP plugin system
+│   ├── config/             # Configuration management
+│   ├── context/            # Context manager (token counting, folding)
+│   ├── repair/             # Tool repair pipeline
+│   └── ...
+├── benchmarks/             # Performance benchmarks
+├── desktop/                # Desktop app (Wails PoC)
+├── docs/                   # Documentation
+└── tests/                  # Integration tests
+```
+
+## 🔨 Development
+
+### Prerequisites
+
+- Go 1.23+
+- Make (optional)
+
+### Build
+
+```bash
+# Build binary
+make build
+
+# Build for multiple platforms
+make release
+```
+
+### Code Quality
+
+```bash
+# Run linter
+make lint
+
+# Format code
+gofmt -w .
+
+# Run vet
+go vet ./...
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+### Development Guidelines
+
+- Follow existing code patterns
+- Add tests for new functionality
+- Update documentation as needed
+- Run `make lint` before committing
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [DeepSeek-Reasonix](https://github.com/esengine/DeepSeek-Reasonix) - Original TypeScript implementation
+- [Xiaomi MiMo](https://github.com/XiaomiMiMo) - MiMo model series
+- [Go](https://golang.org/) - Programming language
+- [Wails](https://wails.io/) - Desktop app framework
+
+## 📞 Support
+
+- 🐛 [Report Bug](https://github.com/z1243161996/MiMo-Reasonix/issues)
+- 💡 [Request Feature](https://github.com/z1243161996/MiMo-Reasonix/issues)
+- 📖 [Documentation](https://github.com/z1243161996/MiMo-Reasonix/tree/main/docs)
+
+---
+
+**Made with ❤️ by [z1243161996](https://github.com/z1243161996)**
